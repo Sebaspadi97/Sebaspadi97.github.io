@@ -66,9 +66,12 @@ for (let k = 0; k < 66; k++) {
 <div class="dots" role="img" aria-label={label} data-dots>
   {noise.map((d) => <span class="dot dot--noise" style={d.style}></span>)}
   {letters.map((d) => <span class="dot dot--sp" style={d.style}></span>)}
+  <img class="dots-logo" src="/brand/isotipo-negativo.svg" alt="" width="325" height="286" loading="lazy" />
 </div>
 
 <script>
+  // Estados: is-scattered (puntos dispersos) → is-ordering (forman SP) → final (aparece el isotipo).
+  // Sin JavaScript o con movimiento reducido se muestra directamente el estado final.
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('[data-dots]').forEach((el) => {
     if (reduce || !('IntersectionObserver' in window)) return;
@@ -77,8 +80,10 @@ for (let k = 0; k < 66; k++) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            el.classList.remove('is-scattered');
             io.disconnect();
+            el.classList.add('is-ordering');
+            el.classList.remove('is-scattered');
+            window.setTimeout(() => el.classList.remove('is-ordering'), 2300);
           }
         });
       },
@@ -104,21 +109,39 @@ for (let k = 0; k < 66; k++) {
     aspect-ratio: 1;
     border-radius: 50%;
   }
+  /* Estado final: el isotipo real, sin los puntos de las letras */
   .dot--sp {
     left: var(--x1);
     top: var(--y1);
+    opacity: 0;
   }
+  .dots-logo {
+    position: absolute;
+    left: 40.5%;
+    top: 18.6%;
+    width: 53.6%;
+    height: auto;
+    opacity: 1;
+  }
+
+  /* Puntos dispersos */
   .dots.is-scattered .dot--sp {
     left: var(--x0);
     top: var(--y0);
     opacity: 0.55;
   }
+  /* Puntos ordenados formando SP */
+  .dots.is-ordering .dot--sp { opacity: 1; }
+  .dots.is-scattered .dots-logo,
+  .dots.is-ordering .dots-logo { opacity: 0; }
+
   @media (prefers-reduced-motion: no-preference) {
     .dot--sp {
       transition:
         left 1.4s cubic-bezier(0.22, 1, 0.36, 1) var(--delay),
         top 1.4s cubic-bezier(0.22, 1, 0.36, 1) var(--delay),
-        opacity 1.4s ease var(--delay);
+        opacity 0.8s ease;
     }
+    .dots-logo { transition: opacity 0.9s ease; }
   }
 </style>

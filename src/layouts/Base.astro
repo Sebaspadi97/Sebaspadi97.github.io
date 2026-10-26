@@ -26,6 +26,7 @@ const {
 const t = ui[lang];
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogLocale = lang === 'es' ? 'es_CO' : 'en_US';
+const ogImage = new URL(`/brand/og-${lang}.png`, Astro.site).href;
 
 // hreflang solo cuando la página existe en los dos idiomas
 const r = routes[pageKey] || {};
@@ -48,6 +49,9 @@ const showAlternates = alternates.length === 2;
 
     <meta name="theme-color" content="#183D32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Sebas Padilla Lab" />
@@ -55,7 +59,12 @@ const showAlternates = alternates.length === 2;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
     <meta property="og:locale" content={ogLocale} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={lang === 'es' ? 'Sebas Padilla Lab: De los datos a las decisiones.' : 'Sebas Padilla Lab: From data to decisions.'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>

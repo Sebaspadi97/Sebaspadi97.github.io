@@ -9,8 +9,13 @@ const otherLang = lang === 'es' ? 'en' : 'es';
 ---
 <header class:list={['site-header', `site-header--${theme}`]}>
   <nav class="nav container" aria-label={t.navLabel}>
-    <a class="brand" href={link('home', lang)} aria-label="Sebas Padilla Lab — Inicio">
-      SP<span class="brand-slash" aria-hidden="true">/</span>LAB
+    <a class="brand" href={link('home', lang)}>
+      <img
+        src={theme === 'dark' ? '/brand/logo-horizontal-negativo.svg' : '/brand/logo-horizontal.svg'}
+        alt={lang === 'es' ? 'Sebas Padilla Lab — Inicio' : 'Sebas Padilla Lab — Home'}
+        width="125"
+        height="46"
+      />
     </a>
 
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-label-open={t.menu} data-label-close={t.close}>
@@ -87,17 +92,19 @@ const otherLang = lang === 'es' ? 'en' : 'es';
   }
 
   .brand {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: 0.02em;
-    color: var(--carbon);
-    text-decoration: none;
-    padding: 8px 0;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 0;
+    border-radius: 6px;
   }
-  .brand-slash { color: var(--green); }
-  .site-header--dark .brand { color: var(--white); }
-  .site-header--dark .brand-slash { color: var(--mint); }
+  .brand img {
+    display: block;
+    height: 46px;
+    width: auto;
+  }
+  @media (max-width: 480px) {
+    .brand img { height: 40px; }
+  }
 
   .nav-menu {
     display: flex;
