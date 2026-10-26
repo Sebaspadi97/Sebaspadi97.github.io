@@ -1,0 +1,208 @@
+---
+// Menú editorial: SP/LAB (se reemplaza por el SVG del logo final), enlaces en
+// mayúsculas, página activa subrayada en dorado, ES/EN y "Hablemos" en píldora.
+import { ui, link } from '../i18n/index.js';
+
+const { lang = 'es', active = null, theme = 'light', altHref = '/' } = Astro.props;
+const t = ui[lang];
+const otherLang = lang === 'es' ? 'en' : 'es';
+---
+<header class:list={['site-header', `site-header--${theme}`]}>
+  <nav class="nav container" aria-label={t.navLabel}>
+    <a class="brand" href={link('home', lang)} aria-label="Sebas Padilla Lab — Inicio">
+      SP<span class="brand-slash" aria-hidden="true">/</span>LAB
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-label-open={t.menu} data-label-close={t.close}>
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      <span class="nav-toggle-text">{t.menu}</span>
+    </button>
+
+    <div class="nav-menu" id="nav-menu">
+      <ul class="nav-links">
+        {t.nav.map((item) => (
+          <li>
+            <a
+              href={link(item.key, lang)}
+              aria-current={active === item.key ? 'page' : undefined}
+              class:list={['nav-link', { 'is-active': active === item.key }]}
+            >{item.label}</a>
+          </li>
+        ))}
+      </ul>
+
+      <p class="nav-lang">
+        <span class="visually-hidden">{t.langLabel}: </span>
+        {lang === 'es'
+          ? <><span aria-current="true">ES</span> / <a href={altHref} hreflang={otherLang} lang={otherLang}>EN</a></>
+          : <><a href={altHref} hreflang={otherLang} lang={otherLang}>ES</a> / <span aria-current="true">EN</span></>}
+      </p>
+
+      <a class="pill nav-cta" href={link('contact', lang)}>{t.cta}</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.getElementById('nav-menu');
+  if (toggle && menu) {
+    const text = toggle.querySelector('.nav-toggle-text');
+    const setOpen = (open) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('is-open', open);
+      if (text) text.textContent = open ? toggle.dataset.labelClose : toggle.dataset.labelOpen;
+    };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 20;
+    border-bottom: 2px solid var(--carbon);
+    background: var(--white);
+  }
+  .site-header--dark {
+    background: var(--green-night);
+    border-bottom: 1px solid var(--green);
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    min-height: 76px;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--carbon);
+    text-decoration: none;
+    padding: 8px 0;
+  }
+  .brand-slash { color: var(--green); }
+  .site-header--dark .brand { color: var(--white); }
+  .site-header--dark .brand-slash { color: var(--mint); }
+
+  .nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 28px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-link {
+    color: var(--carbon);
+    text-decoration: none;
+    padding: 10px 0;
+  }
+  .nav-link:hover { color: var(--green); }
+  .nav-link.is-active {
+    color: var(--green);
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+  }
+  .site-header--dark .nav-link { color: var(--gray-light); }
+  .site-header--dark .nav-link:hover,
+  .site-header--dark .nav-link.is-active { color: var(--mint); }
+
+  .nav-lang { margin: 0; color: var(--slate); }
+  .nav-lang a { color: var(--slate); }
+  .nav-lang a:hover { color: var(--green); }
+  .nav-lang [aria-current] { color: var(--carbon); }
+  .site-header--dark .nav-lang,
+  .site-header--dark .nav-lang a { color: var(--on-dark-muted); }
+  .site-header--dark .nav-lang [aria-current] { color: var(--white); }
+
+  .nav-cta {
+    background: var(--carbon);
+    color: var(--white);
+    min-height: 44px;
+    padding: 0 20px;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+  }
+  .nav-cta:hover { background: var(--green); color: var(--white); }
+  .site-header--dark .nav-cta { background: var(--mint); color: var(--green-night); }
+  .site-header--dark .nav-cta:hover { background: var(--white); }
+
+  /* Botón de menú en pantallas pequeñas */
+  .nav-toggle {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid var(--carbon);
+    background: transparent;
+    color: var(--carbon);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .site-header--dark .nav-toggle { border-color: var(--mint); color: var(--white); }
+  .nav-toggle-bars,
+  .nav-toggle-bars::before,
+  .nav-toggle-bars::after {
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    position: relative;
+  }
+  .nav-toggle-bars::before,
+  .nav-toggle-bars::after { content: ''; position: absolute; left: 0; }
+  .nav-toggle-bars::before { top: -5px; }
+  .nav-toggle-bars::after { top: 5px; }
+
+  @media (max-width: 900px) {
+    .nav-toggle { display: inline-flex; }
+    .nav-menu {
+      display: none;
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 12px 0 20px;
+    }
+    .nav-menu.is-open { display: flex; }
+    .nav-links { flex-direction: column; gap: 4px; }
+    .nav-link { display: inline-block; font-size: 16px; padding: 8px 0; }
+  }
+</style>

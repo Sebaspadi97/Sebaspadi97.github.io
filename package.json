@@ -1,0 +1,21 @@
+{
+  "name": "sp-lab-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sitio web de Sebas Padilla Lab (SP Lab): De los datos a las decisiones.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "engines": {
+    "node": ">=20.3.0"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.0",
+    "@fontsource/montserrat": "^5.1.0",
+    "@fontsource/open-sans": "^5.1.0",
+    "astro": "^5.0.0"
+  }
+}

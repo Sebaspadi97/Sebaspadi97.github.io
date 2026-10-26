@@ -1,0 +1,38 @@
+---
+// Página temporal mientras se construye cada sección (se elimina al terminar la Fase 5).
+import { link } from '../i18n/index.js';
+const { lang = 'es', label, title } = Astro.props;
+const es = lang === 'es';
+---
+<section class="container soon">
+  <p class="eyebrow soon-label">{label}</p>
+  <h1 class="soon-title">{title}</h1>
+  <p class="soon-text">
+    {es
+      ? 'Esta página está en construcción. Ya tiene diseño y textos aprobados; pronto estará aquí.'
+      : 'This page is under construction. Its design and copy are approved; it will be here soon.'}
+  </p>
+  <a class="pill pill--primary" href={link('home', lang)}>{es ? 'Volver al inicio' : 'Back to home'}</a>
+</section>
+
+<style>
+  .soon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-top: clamp(56px, 8vw, 96px);
+    padding-bottom: clamp(72px, 10vw, 120px);
+    min-height: 50vh;
+  }
+  .soon-label { color: var(--slate); }
+  .soon-title {
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--green-deep);
+    max-width: 900px;
+  }
+  .soon-text { color: var(--slate); max-width: 620px; }
+</style>

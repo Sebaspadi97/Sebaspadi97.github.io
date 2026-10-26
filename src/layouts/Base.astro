@@ -1,0 +1,90 @@
+---
+// Plantilla común: <head>, menú, aviso de idioma, contenido y pie.
+import '@fontsource/montserrat/500.css';
+import '@fontsource/montserrat/600.css';
+import '@fontsource/montserrat/700.css';
+import '@fontsource/montserrat/800.css';
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '../styles/global.css';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { routes, alternate, spanishOnlyNotice, ui } from '../i18n/index.js';
+
+const {
+  lang = 'es',
+  pageKey = 'home',
+  title,
+  description,
+  active = null,
+  headerTheme = 'light',
+  footer = 'full',
+  noindex = false,
+} = Astro.props;
+
+const t = ui[lang];
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogLocale = lang === 'es' ? 'es_CO' : 'en_US';
+
+// hreflang solo cuando la página existe en los dos idiomas
+const r = routes[pageKey] || {};
+const alternates = ['es', 'en']
+  .filter((l) => r[l])
+  .map((l) => ({ lang: l, href: new URL(r[l], Astro.site).href }));
+const showAlternates = alternates.length === 2;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    {showAlternates && alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+    {showAlternates && <link rel="alternate" hreflang="x-default" href={alternates[0].href} />}
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <meta name="theme-color" content="#183D32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sebas Padilla Lab" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">{t.skip}</a>
+    <Header lang={lang} active={active} theme={headerTheme} altHref={alternate(pageKey, lang === 'es' ? 'en' : 'es')} />
+
+    {lang === 'es' && (
+      <p class="lang-notice" id="lang-notice" lang="en" hidden>{spanishOnlyNotice} <a href="/en/">Back to the English home</a></p>
+    )}
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <Footer lang={lang} variant={footer} />
+
+    {lang === 'es' && (
+      <script is:inline>
+        (function () {
+          try {
+            var p = new URLSearchParams(window.location.search);
+            if (p.get('from') === 'en') {
+              var n = document.getElementById('lang-notice');
+              if (n) n.hidden = false;
+            }
+          } catch (e) {}
+        })();
+      </script>
+    )}
+  </body>
+</html>

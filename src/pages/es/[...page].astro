@@ -1,0 +1,28 @@
+---
+// Rutas temporales en español para las páginas aún no construidas (ver src/data/pending.js).
+import Base from '../../layouts/Base.astro';
+import ComingSoon from '../../components/ComingSoon.astro';
+import { pending } from '../../data/pending.js';
+import { routes } from '../../i18n/index.js';
+
+export function getStaticPaths() {
+  return pending
+    .filter((p) => p.es && routes[p.key] && routes[p.key].es)
+    .map((p) => ({
+      params: { page: routes[p.key].es.replace(/^\/es\//, '').replace(/\/$/, '') },
+      props: { item: p },
+    }));
+}
+
+const { item } = Astro.props;
+---
+<Base
+  lang="es"
+  pageKey={item.key}
+  active={item.active}
+  title={`${item.es.title} · Sebas Padilla Lab`}
+  description="Sebas Padilla Lab: de los datos a las decisiones."
+  noindex
+>
+  <ComingSoon lang="es" label={item.es.label} title={item.es.title} />
+</Base>

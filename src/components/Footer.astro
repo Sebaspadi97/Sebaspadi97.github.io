@@ -1,0 +1,98 @@
+---
+// Pie oscuro con "SP Lab." grande, enlaces y línea de derechos.
+// variant="compact" se usa en la 404.
+import { ui, link } from '../i18n/index.js';
+import { site } from '../data/site.js';
+
+const { lang = 'es', variant = 'full' } = Astro.props;
+const t = ui[lang];
+const year = new Date().getFullYear();
+---
+{variant === 'compact' ? (
+  <footer class="footer footer--compact">
+    <div class="container footer-compact-inner">
+      <span class="footer-compact-brand">SP Lab<span class="dot">.</span> — {t.slogan}</span>
+      <span>
+        {lang === 'es' ? '¿Llegaste por un enlace roto? ' : 'Followed a broken link? '}
+        <a href={link('contact', lang)}>{lang === 'es' ? 'Avísame' : 'Let me know'}</a>
+      </span>
+    </div>
+  </footer>
+) : (
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-wordmark">SP Lab<span class="dot">.</span></span>
+        <span class="footer-slogan">{t.slogan}</span>
+      </div>
+      <ul class="footer-links">
+        <li><a href={site.linkedin} rel="me noopener">{t.footerLinks.linkedin}</a></li>
+        <li><a href={site.github} rel="me noopener">{t.footerLinks.github}</a></li>
+        <li><a href={link('contact', lang)}>{t.footerLinks.email}</a></li>
+        <li><a href={link('privacy', lang)}>{t.footerLinks.privacy}</a></li>
+        <li><a href={link('terms', lang)}>{t.footerLinks.terms}</a></li>
+      </ul>
+      <p class="footer-rights">{t.rights(year)} <a href={link('terms', lang)}>{t.rightsLink}</a>.</p>
+    </div>
+  </footer>
+)}
+
+<style>
+  .footer {
+    background: var(--green-night);
+    color: var(--white);
+  }
+  .footer a { color: var(--mint); }
+  .footer a:hover { color: var(--white); }
+  .dot { color: var(--mint); }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    padding-top: 64px;
+    padding-bottom: 48px;
+  }
+  .footer-brand { display: flex; flex-direction: column; gap: 8px; }
+  .footer-wordmark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(40px, 6vw, 56px);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .footer-slogan { color: var(--on-dark); font-size: 16px; }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+  }
+  .footer-links a { display: inline-block; padding: 10px 0; }
+
+  .footer-rights {
+    flex-basis: 100%;
+    font-size: 13px;
+    color: var(--on-dark-muted);
+  }
+  .footer-rights a { color: var(--on-dark-muted); }
+
+  .footer--compact { border-top: 1px solid var(--green); }
+  .footer-compact-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    font-size: 15px;
+    color: var(--on-dark);
+  }
+  .footer-compact-brand { font-family: var(--font-display); font-weight: 700; color: var(--white); }
+</style>

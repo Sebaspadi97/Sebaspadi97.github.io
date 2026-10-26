@@ -1,0 +1,443 @@
+---
+// Inicio (diseño aprobado "D · Combinada"): hero editorial, El método,
+// proyectos sobre fondo oscuro, franja Dato curioso, manifiesto + servicios
+// y Desde el Lab. Se usa en /es/ y /en/.
+import DotsSP from './DotsSP.astro';
+import { home } from '../data/home.js';
+import { link, hasLang, ui } from '../i18n/index.js';
+import { site } from '../data/site.js';
+
+const { lang = 'es' } = Astro.props;
+const c = home[lang];
+const t = ui[lang];
+const cvHref = site.cv[lang] || link('about', lang);
+const f = c.projects.featured;
+const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
+---
+<!-- Hero editorial -->
+<section class="hero container">
+  <div class="hero-meta eyebrow">
+    <span>{c.hero.metaLeft}</span>
+    <span>{c.hero.metaRight}</span>
+  </div>
+  <h1 class="hero-title">
+    {c.hero.headlineBefore}<span class="underline-gold">{c.hero.headlineMark}</span>{c.hero.headlineAfter}
+  </h1>
+  <div class="hero-grid">
+    <p class="hero-intro">{c.hero.intro}</p>
+    <div class="hero-side">
+      <p class="hero-sub">{c.hero.sub}</p>
+      <div class="actions">
+        <a class="pill pill--primary" href={link('projects', lang)}>{c.hero.primary}</a>
+        <a class="pill pill--outline" href={cvHref}>{c.hero.secondary}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- El método -->
+<section class="method" aria-labelledby="method-title">
+  <div class="container method-inner">
+    <div class="method-figure">
+      <DotsSP label={c.method.figure} />
+    </div>
+    <div class="method-text">
+      <div>
+        <p class="eyebrow method-label">{c.method.label}</p>
+        <h2 id="method-title" class="method-title">{c.method.title}</h2>
+      </div>
+      <ol class="method-steps">
+        {c.method.steps.map((s, idx) => (
+          <li>
+            <span class:list={['step-n', { 'step-n--gold': idx === c.method.steps.length - 1 }]}>{s.n}</span>
+            <p class="step-name">{s.name}</p>
+            <p class="step-text">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Proyectos -->
+<section class="projects" aria-labelledby="projects-title">
+  <div class="container projects-inner">
+    <div class="section-head">
+      <h2 id="projects-title" class="projects-title">{c.projects.title}</h2>
+      <a class="link-arrow link-arrow--mint" href={link('projects', lang)}>{c.projects.all} <span aria-hidden="true">→</span></a>
+    </div>
+
+    <div class="projects-grid">
+      <a class="card card--featured" href={link(f.key, lang)}>
+        <span class="eyebrow card-pillar">{f.pillar}</span>
+        <figure class="campaign-chart">
+          <svg viewBox="0 0 400 190" role="img" aria-label={f.chart.label}>
+            <line x1="200" y1="14" x2="200" y2="160" stroke="#2F8665" stroke-width="1.5" />
+            <rect x="34" y="34" width="166" height="40" rx="6" fill="#A9B5AE" />
+            <rect x="200" y="104" width="46" height="40" rx="6" fill="#8CCFAD" />
+            <text x="36" y="24" fill="#CFD8D2" font-size="13" font-family="Open Sans, sans-serif">{f.chart.all}</text>
+            <text x="190" y="59" fill="#11291F" font-size="14" font-weight="700" text-anchor="end" font-family="Montserrat, sans-serif">{f.chart.allValue}</text>
+            <text x="36" y="96" fill="#CFD8D2" font-size="13" font-family="Open Sans, sans-serif">{f.chart.model}</text>
+            <text x="256" y="129" fill="#F8FAF7" font-size="14" font-weight="700" font-family="Montserrat, sans-serif">{f.chart.modelValue}</text>
+            <circle cx="246" cy="124" r="5" fill="#D6A64F" />
+          </svg>
+          <figcaption>{f.chart.note}</figcaption>
+        </figure>
+        <span class="card-title card-title--lg">{f.title}</span>
+        <span class="card-question">{f.question}</span>
+        <span class="finding">{c.projects.findingLabel}: {f.finding}</span>
+      </a>
+
+      {c.projects.cards.map((p) => (
+        <a class="card" href={link(p.key, lang)}>
+          <span class="card-top">
+            <span class:list={['eyebrow', 'card-pillar', `tone-${p.pillarTone}`]}>{p.pillar}</span>
+            {spanishOnly(p.key) && <span class="tag tag--dark">{t.inSpanish}</span>}
+          </span>
+          <span class="card-title">{p.title}</span>
+          <span class="card-question card-question--muted">{p.question}</span>
+          <span class="finding">{c.projects.findingLabel}: {p.finding}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Dato curioso -->
+<section class="fact" aria-labelledby="fact-label">
+  <div class="container fact-inner">
+    <div class="fact-text">
+      <p id="fact-label" class="eyebrow fact-label">{c.fact.label}</p>
+      <p class="fact-figure">{c.fact.text}</p>
+      <p class="fact-source">{c.fact.source}</p>
+    </div>
+    <a class="pill pill--dark" href={link(c.fact.key, lang)}>{c.fact.button}</a>
+  </div>
+</section>
+
+<!-- Manifiesto y servicios -->
+<section class="manifesto">
+  <div class="container manifesto-inner">
+    <blockquote class="quote">
+      <p>“{c.manifesto.quote}”</p>
+      <p class="quote-sub">{c.manifesto.sub}</p>
+    </blockquote>
+    <div class="services">
+      <p class="eyebrow services-label">{c.services.label}</p>
+      <ul class="services-list">
+        {c.services.items.map((s) => (
+          <li>
+            <span class="service-name">{s.name}</span>
+            <span class="service-text">{s.text}</span>
+          </li>
+        ))}
+      </ul>
+      <a class="pill pill--primary" href={link('contact', lang)}>{c.services.button}</a>
+    </div>
+  </div>
+</section>
+
+<!-- Desde el Lab -->
+<section class="container lab" aria-labelledby="lab-title">
+  <div class="section-head section-head--rule">
+    <h2 id="lab-title" class="lab-title">{c.lab.title}</h2>
+    <a class="link-arrow" href={link('lab', lang)}>{c.lab.more} <span aria-hidden="true">→</span></a>
+  </div>
+  <ul class="lab-grid">
+    {c.lab.items.map((a) => (
+      <li>
+        <a class="lab-card" href={link(a.key, lang)}>
+          <span class:list={['lab-visual', `lab-visual--${a.tone}`]} aria-hidden="true">
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice">
+              {Array.from({ length: 40 }).map((_, k) => (
+                <circle cx={18 + (k % 10) * 32} cy={30 + Math.floor(k / 10) * 40} r={k === 23 ? 9 : 5} class={k === 23 ? 'pt pt--hit' : 'pt'} />
+              ))}
+            </svg>
+          </span>
+          <span class="lab-meta">
+            <span class:list={['eyebrow', 'lab-cat', `lab-cat--${a.tone}`]}>{a.category}</span>
+            {spanishOnly(a.key) && <span class="tag tag--light">{t.inSpanish}</span>}
+          </span>
+          <span class="lab-card-title">{a.title}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-top: clamp(40px, 7vw, 72px);
+    padding-bottom: clamp(56px, 8vw, 80px);
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 12px;
+    color: var(--slate);
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: 14px;
+  }
+  .hero-title {
+    font-weight: 800;
+    font-size: clamp(48px, 8.4vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    color: var(--green-deep);
+    max-width: 1100px;
+  }
+  .hero-title .underline-gold {
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.12em;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+    gap: 32px 40px;
+    padding-top: 12px;
+  }
+  .hero-intro { font-size: clamp(19px, 2vw, 22px); line-height: 1.5; }
+  .hero-side { display: flex; flex-direction: column; gap: 20px; }
+  .hero-sub { color: var(--slate); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* ---------- El método ---------- */
+  .method { background: var(--green-deep); color: var(--white); }
+  .method-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 56px;
+    padding-top: clamp(56px, 8vw, 88px);
+    padding-bottom: clamp(56px, 8vw, 88px);
+  }
+  .method-figure { flex: 0 1 560px; max-width: 100%; }
+  .method-text { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
+  .method-label { color: var(--mint); }
+  .method-title {
+    margin-top: 12px;
+    font-size: clamp(30px, 3.6vw, 44px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  .method-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 28px 36px;
+  }
+  .method-steps li { border-top: 1px solid var(--green-logo); padding-top: 14px; }
+  .step-n { font-family: var(--font-display); font-weight: 800; font-size: 34px; color: var(--mint); }
+  .step-n--gold { color: var(--gold); }
+  .step-name { margin-top: 2px; font-family: var(--font-display); font-weight: 600; }
+  .step-text { margin-top: 2px; color: var(--gray-light); font-size: 16px; }
+
+  /* ---------- Proyectos ---------- */
+  .projects { background: var(--green-night); color: var(--white); }
+  .projects-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-top: clamp(64px, 9vw, 96px);
+    padding-bottom: clamp(64px, 9vw, 96px);
+  }
+  .section-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .projects-title {
+    font-size: clamp(34px, 4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    max-width: 640px;
+  }
+  .link-arrow {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 0;
+  }
+  .link-arrow--mint { color: var(--mint); }
+  .link-arrow--mint:hover { color: var(--white); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+    gap: 24px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--green-logo);
+    color: var(--white);
+    text-decoration: none;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .card:hover { color: var(--white); border-color: var(--mint); transform: translateY(-2px); }
+  @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
+
+  .card--featured {
+    grid-row: span 2;
+    background: var(--green);
+    border-color: var(--green);
+    padding: 32px;
+    gap: 16px;
+    justify-content: space-between;
+  }
+  .card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .card-pillar { color: var(--mint); }
+  .tone-gold { color: var(--gold); }
+  .tone-mint { color: var(--mint); }
+  .card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.25;
+  }
+  .card-title--lg { font-size: clamp(24px, 2.4vw, 28px); line-height: 1.2; }
+  .card-question { color: var(--gray-light); }
+  .card-question--muted { color: var(--on-dark); font-size: 15px; }
+  .card .finding { margin-top: 4px; }
+  .tag--dark { color: var(--mint); }
+
+  .campaign-chart {
+    flex: 1;
+    margin: 0;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    background: var(--green-deep);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+  .campaign-chart figcaption { font-size: 13px; color: var(--on-dark-muted); }
+
+  /* ---------- Dato curioso ---------- */
+  .fact { background: var(--gold); color: var(--carbon); }
+  .fact-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+  .fact-text { flex: 1 1 520px; min-width: 0; }
+  .fact-label { font-weight: 700; letter-spacing: 0.14em; }
+  .fact-figure {
+    margin-top: 8px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(24px, 2.6vw, 30px);
+    line-height: 1.25;
+  }
+  .fact-source { margin-top: 6px; font-size: 14px; }
+
+  /* ---------- Manifiesto y servicios ---------- */
+  .manifesto { background: var(--paper); border-bottom: 1px solid var(--gray-light); }
+  .manifesto-inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+    gap: 56px;
+    align-items: start;
+    padding-top: clamp(64px, 8vw, 88px);
+    padding-bottom: clamp(64px, 8vw, 88px);
+  }
+  .quote { margin: 0; }
+  .quote p:first-child {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, 3.2vw, 38px);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--green-deep);
+  }
+  .quote-sub { margin-top: 16px; font-size: 16px; color: var(--slate); }
+
+  .services { display: flex; flex-direction: column; align-items: flex-start; }
+  .services-label { color: var(--green); padding-bottom: 12px; }
+  .services-list {
+    width: 100%;
+    margin: 0 0 24px;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .services-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 0;
+    border-top: 1px solid var(--gray-light);
+  }
+  .service-name { font-family: var(--font-display); font-weight: 700; font-size: 22px; }
+  .service-text { color: var(--slate); font-size: 16px; }
+
+  /* ---------- Desde el Lab ---------- */
+  .lab {
+    padding-top: clamp(64px, 8vw, 88px);
+    padding-bottom: clamp(64px, 8vw, 88px);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .section-head--rule { border-bottom: 2px solid var(--carbon); padding-bottom: 16px; }
+  .lab-title {
+    font-size: clamp(32px, 3.6vw, 44px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--green-deep);
+  }
+  .lab-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 40px;
+  }
+  .lab-card { display: flex; flex-direction: column; gap: 12px; color: var(--carbon); text-decoration: none; }
+  .lab-card:hover .lab-card-title { color: var(--green); }
+  .lab-visual {
+    display: block;
+    height: 200px;
+    border-radius: var(--radius-md);
+    background: var(--gray-light);
+    overflow: hidden;
+  }
+  .lab-visual svg { width: 100%; height: 100%; }
+  .lab-visual .pt { fill: #C9D2CB; }
+  .lab-visual--gold .pt--hit { fill: var(--gold); }
+  .lab-visual--green .pt--hit { fill: var(--green); }
+  .lab-visual--teal .pt--hit { fill: var(--teal); }
+  .lab-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .lab-cat { font-size: 12px; letter-spacing: 0.1em; }
+  .lab-cat--gold { color: var(--gold-text); }
+  .lab-cat--green { color: var(--green); }
+  .lab-cat--teal { color: var(--teal-text); }
+  .tag--light { color: var(--slate); }
+  .lab-card-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.25;
+    transition: color .2s ease;
+  }
+</style>

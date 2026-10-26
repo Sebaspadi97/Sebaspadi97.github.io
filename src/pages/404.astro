@@ -1,0 +1,71 @@
+---
+// 404 "Valor atípico" (diseño aprobado). GitHub Pages la sirve para cualquier ruta inexistente.
+import Base from '../layouts/Base.astro';
+import { link } from '../i18n/index.js';
+---
+<Base
+  lang="es"
+  pageKey="home"
+  title="Página no encontrada · Sebas Padilla Lab"
+  description="Este dato no está en la muestra."
+  headerTheme="dark"
+  footer="compact"
+  noindex
+>
+  <section class="nf">
+    <div class="container nf-inner">
+      <div class="nf-text">
+        <p class="eyebrow nf-label">Error 404 · Valor atípico</p>
+        <h1 class="nf-title">Este dato no está en la <span class="nf-mark">muestra</span>.</h1>
+        <p class="nf-sub">La página que buscas se movió, cambió de nombre o nunca existió. Pasa hasta en los mejores datasets.</p>
+        <div class="nf-actions">
+          <a class="pill pill--mint" href={link('home', 'es')}>Volver al inicio</a>
+          <a class="pill pill--ghost-dark" href={link('projects', 'es')}>Ver proyectos</a>
+          <a class="pill pill--ghost-dark" href={link('lab', 'es')}>Ir al Lab</a>
+        </div>
+        <p class="nf-en" lang="en">Page not found. <a href="/en/">Go to the English home</a>.</p>
+      </div>
+      <svg class="nf-figure" viewBox="0 0 460 360" aria-hidden="true">
+        <line x1="30" y1="320" x2="440" y2="320" stroke="#2F8665" stroke-width="1.5" />
+        <line x1="30" y1="320" x2="30" y2="30" stroke="#2F8665" stroke-width="1.5" />
+        <line x1="40" y1="300" x2="340" y2="170" stroke="#8CCFAD" stroke-width="2" stroke-dasharray="6 6" />
+        <g fill="#3E9B91">
+          <circle cx="60" cy="286" r="6" /><circle cx="82" cy="296" r="5" /><circle cx="100" cy="268" r="7" /><circle cx="122" cy="282" r="5" />
+          <circle cx="140" cy="252" r="6" /><circle cx="160" cy="262" r="5" /><circle cx="176" cy="236" r="7" /><circle cx="198" cy="246" r="5" />
+          <circle cx="214" cy="222" r="6" /><circle cx="236" cy="230" r="5" /><circle cx="252" cy="204" r="7" /><circle cx="276" cy="212" r="5" />
+          <circle cx="294" cy="188" r="6" /><circle cx="318" cy="196" r="5" />
+        </g>
+        <circle cx="400" cy="70" r="30" fill="#D6A64F" opacity="0.18" />
+        <circle cx="400" cy="70" r="14" fill="#D6A64F" stroke="#11291F" stroke-width="3" />
+        <path d="M386 82 C 340 110, 320 150, 330 176" fill="none" stroke="#F8FAF7" stroke-width="1" stroke-dasharray="3 5" />
+        <text x="372" y="40" text-anchor="end" font-family="Montserrat, sans-serif" font-weight="700" font-size="15" fill="#F8FAF7">tú estás aquí</text>
+      </svg>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { background: var(--green-night); color: var(--white); min-height: 70vh; }
+  .nf-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 56px;
+    padding-top: clamp(48px, 7vw, 64px);
+    padding-bottom: clamp(56px, 8vw, 80px);
+  }
+  .nf-text { flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 22px; }
+  .nf-label { color: var(--mint); letter-spacing: 0.14em; }
+  .nf-title {
+    font-weight: 800;
+    font-size: clamp(44px, 6vw, 72px);
+    line-height: 1.03;
+    letter-spacing: -0.03em;
+  }
+  .nf-mark { color: var(--gold); }
+  .nf-sub { max-width: 520px; font-size: 20px; color: var(--on-dark); }
+  .nf-actions { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px; }
+  .nf-en { font-size: 15px; color: var(--on-dark-muted); }
+  .nf-en a { color: var(--mint); }
+  .nf-figure { flex: 1 1 360px; max-width: 460px; width: 100%; height: auto; }
+</style>

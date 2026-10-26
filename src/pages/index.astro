@@ -1,0 +1,32 @@
+---
+// La raíz lleva a /es/ (idioma principal). Si el navegador está en inglés, a /en/.
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sebas Padilla Lab · De los datos a las decisiones</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={new URL('/es/', Astro.site).href} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      (function () {
+        var target = '/es/';
+        try {
+          var l = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+          if (/^en\b/i.test(l)) target = '/en/';
+        } catch (e) {}
+        window.location.replace(target);
+      })();
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=/es/" /></noscript>
+    <style>
+      body { margin: 0; background: #F8FAF7; color: #202824; font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; }
+      a { color: #245B45; }
+    </style>
+  </head>
+  <body>
+    <p><a href="/es/">Español</a> · <a href="/en/">English</a></p>
+  </body>
+</html>
