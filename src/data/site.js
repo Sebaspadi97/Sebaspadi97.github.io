@@ -7,7 +7,12 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/sebastianpadillacastano/',
   github: 'https://github.com/Sebaspadi97',
   photo: { webp: '/img/sebas-padilla.webp', jpg: '/img/sebas-padilla.jpg' },
-  // Pendiente: subir el CV en PDF a /public/cv/ y poner aquí la ruta.
-  // Mientras sea null, el botón "Descargar CV" lleva a Sobre mí.
-  cv: { es: null, en: null },
+  // CV en PDF generado con scripts/cv/generate-cv.mjs a partir de los textos de Sobre mí.
+  cv: { es: '/cv/sebas-padilla-cv-es.pdf', en: '/cv/sebas-padilla-cv-en.pdf' },
+  // Formulario de contacto (Web3Forms). La "access key" es pública por diseño: va en el HTML.
+  // Mientras sea null, el formulario abre el correo del visitante con el mensaje ya escrito.
+  form: { provider: 'web3forms', endpoint: 'https://api.web3forms.com/submit', accessKey: null },
+  // Enlace de agenda (Cal.com o Calendly). Mientras sea null, el botón "Agendar 20 minutos" no aparece.
+  agenda: null,
+  responseTime: { es: '2 días hábiles', en: '2 business days' },
 };

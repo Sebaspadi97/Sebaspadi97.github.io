@@ -705,6 +705,12 @@ export const cases = [
       },
       license: 'Tablas y gráficos bajo CC BY-SA 4.0, por derivar de una fuente CC BY-SA. Código con todos los derechos reservados.',
     },
+    // Solo título, pregunta y hallazgo en inglés (tarjetas y CV); el caso completo sigue en español.
+    en: {
+      title: 'Where to open a coffee shop in Bogotá',
+      question: 'Which districts have customers without too much competition?',
+      finding: 'only Suba and Usaquén beat the city average on both adults and businesses per coffee shop.',
+    },
   },
 ];
 

@@ -1,0 +1,402 @@
+---
+// Contacto (diseño aprobado): encabezado, tarjetas por tipo de visitante y bloque oscuro
+// con datos de contacto + formulario validado con dos casillas separadas sin premarcar
+// (autorización obligatoria y novedades opcional), según la Ley 1581 de 2012.
+import Base from '../../../layouts/Base.astro';
+import { link } from '../../../i18n/index.js';
+import { site } from '../../../data/site.js';
+
+const consentText = 'Autorizo el tratamiento de mis datos para responder este mensaje, según la política de privacidad.';
+const newsText = 'Quiero recibir por correo las novedades del Lab. Puedo darme de baja cuando quiera.';
+const motivos = [
+  ['trabajo', 'Oportunidad laboral'],
+  ['proyecto', 'Proyecto de datos'],
+  ['charla', 'Charla o colaboración'],
+  ['otro', 'Otro'],
+];
+const formReady = Boolean(site.form && site.form.accessKey);
+---
+<Base
+  lang="es"
+  pageKey="contact"
+  active="contact"
+  title="Contacto · Sebas Padilla Lab"
+  description="Escríbeme por una oportunidad laboral, un proyecto de datos o una idea para el Lab."
+>
+  <section class="container head">
+    <div class="head-meta eyebrow">
+      <span>Contacto</span>
+      <span>Bogotá · Respondo en {site.responseTime.es}</span>
+    </div>
+    <div class="head-grid">
+      <div class="head-text">
+        <h1 class="head-title">Cuéntame qué necesitas <span class="underline-gold">decidir</span>.</h1>
+        <p class="head-sub">Una oportunidad laboral, un proyecto de datos o una pregunta curiosa: todas empiezan con un mensaje.</p>
+      </div>
+      <svg class="head-figure" viewBox="0 0 420 300" aria-hidden="true">
+        <g fill="#3E9B91"><circle cx="30" cy="60" r="5" opacity="0.4" /><circle cx="60" cy="230" r="4" opacity="0.4" /><circle cx="80" cy="120" r="6" opacity="0.6" /><circle cx="120" cy="190" r="5" opacity="0.6" /><circle cx="140" cy="80" r="4" opacity="0.7" /></g>
+        <g fill="#245B45"><circle cx="180" cy="150" r="7" /><circle cx="200" cy="110" r="5" /><circle cx="210" cy="190" r="6" /><circle cx="240" cy="140" r="8" /></g>
+        <g stroke="#202824" stroke-width="1" stroke-dasharray="3 5" fill="none"><path d="M30 60 C 120 80, 220 130, 330 150" /><path d="M60 230 C 140 210, 240 170, 330 150" /></g>
+        <circle cx="330" cy="150" r="26" fill="#D6A64F" opacity="0.2" />
+        <circle cx="330" cy="150" r="13" fill="#D6A64F" stroke="#F8FAF7" stroke-width="3" />
+      </svg>
+    </div>
+  </section>
+
+  <section class="container who" aria-label="Para quién">
+    <ul class="who-grid">
+      <li class="who-card who-card--green">
+        <h2>¿Eres reclutador?</h2>
+        <p>Mi trayectoria y mi CV están en <a href={link('about', 'es')}>Sobre mí</a>. Escríbeme con el rol y te respondo con mi disponibilidad.</p>
+        <a class="who-link" href={site.cv.es} download>Descargar CV (PDF)</a>
+      </li>
+      <li class="who-card who-card--teal">
+        <h2>¿Tienes un proyecto?</h2>
+        <p>Cuéntame la decisión que quieres tomar y qué datos tienes. Con eso te propongo un primer enfoque.</p>
+      </li>
+      <li class="who-card who-card--gold">
+        <h2>¿Algo del Lab?</h2>
+        <p>Ideas para un dato curioso, preguntas sobre un análisis o una invitación a una charla: bienvenidas.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="talk" aria-labelledby="talk-title">
+    <div class="container talk-inner">
+      <div class="talk-info">
+        <h2 id="talk-title">Hablemos.</h2>
+        <dl>
+          <div><dt class="eyebrow">Correo</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+          <div><dt class="eyebrow">LinkedIn</dt><dd><a href={site.linkedin} rel="me noopener">linkedin.com/in/sebastianpadillacastano</a></dd></div>
+          <div><dt class="eyebrow">Ubicación</dt><dd>Bogotá, Colombia · abierto a trabajo remoto</dd></div>
+        </dl>
+        {site.agenda && <a class="pill pill--ghost-dark" href={site.agenda} rel="noopener" target="_blank">Agendar 20 minutos</a>}
+      </div>
+
+      <div class="form-card">
+        <form
+          id="contact-form"
+          novalidate
+          data-ready={formReady ? 'true' : 'false'}
+          data-endpoint={site.form.endpoint}
+          data-key={site.form.accessKey || ''}
+          data-email={site.email}
+          data-consent-text={consentText}
+          data-news-text={newsText}
+        >
+          <div class="row-2">
+            <div class="field">
+              <label for="f-name">Nombre</label>
+              <input id="f-name" name="nombre" type="text" autocomplete="name" required aria-describedby="e-name" />
+              <span class="err" id="e-name" hidden>Escribe tu nombre.</span>
+            </div>
+            <div class="field">
+              <label for="f-email">Correo</label>
+              <input id="f-email" name="correo" type="email" autocomplete="email" required aria-describedby="e-email" />
+              <span class="err" id="e-email" hidden>Escribe un correo válido.</span>
+            </div>
+          </div>
+
+          <fieldset class="field">
+            <legend>Motivo</legend>
+            <div class="motivos">
+              {motivos.map(([v, l], i) => (
+                <label class="chip-radio">
+                  <input type="radio" name="motivo" value={l} checked={i === 0} />
+                  <span>{l}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="f-msg">Mensaje</label>
+            <textarea id="f-msg" name="mensaje" rows="5" required minlength="10" aria-describedby="e-msg"></textarea>
+            <span class="err" id="e-msg" hidden>Cuéntame un poco más (mínimo 10 caracteres).</span>
+          </div>
+
+          <!-- Campo trampa contra spam: las personas no lo ven -->
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="field">
+            <label class="check">
+              <input id="f-consent" type="checkbox" name="autorizacion" aria-describedby="e-consent" />
+              <span>Autorizo el tratamiento de mis datos para responder este mensaje, según la <a href={link('privacy', 'es')}>política de privacidad</a>.</span>
+            </label>
+            <span class="err" id="e-consent" hidden>Necesito tu autorización para poder responderte.</span>
+          </div>
+
+          <label class="check">
+            <input id="f-news" type="checkbox" name="novedades" />
+            <span>{newsText}</span>
+          </label>
+
+          <button type="submit" class="pill pill--primary submit">Enviar mensaje</button>
+          <p class="form-note" data-note>
+            {formReady
+              ? null
+              : 'Al enviar se abrirá tu aplicación de correo con el mensaje listo para mandar.'}
+          </p>
+          <p class="err form-err" data-send-error hidden role="alert">No se pudo enviar el mensaje. Intenta de nuevo o escríbeme a <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+        </form>
+
+        <div class="sent" data-sent hidden role="status" tabindex="-1">
+          <span class="sent-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#202824" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7" /></svg>
+          </span>
+          <p class="sent-title" data-sent-title>¡Mensaje recibido!</p>
+          <p class="sent-text" data-sent-text>Te respondo en {site.responseTime.es} al correo que dejaste.</p>
+          <button type="button" class="pill pill--outline" data-reset>Enviar otro mensaje</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const sent = document.querySelector('[data-sent]');
+  if (form && sent) {
+    const $ = (id) => document.getElementById(id);
+    const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+    const show = (id, bad, input) => {
+      $(id).hidden = !bad;
+      if (input) input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+    };
+
+    const validate = () => {
+      const name = $('f-name'), email = $('f-email'), msg = $('f-msg'), consent = $('f-consent');
+      const errs = {
+        name: name.value.trim().length === 0,
+        email: !emailOk(email.value),
+        msg: msg.value.trim().length < 10,
+        consent: !consent.checked,
+      };
+      show('e-name', errs.name, name);
+      show('e-email', errs.email, email);
+      show('e-msg', errs.msg, msg);
+      show('e-consent', errs.consent, consent);
+      const first = [['name', name], ['email', email], ['msg', msg], ['consent', consent]].find(([k]) => errs[k]);
+      if (first) first[1].focus();
+      return !first;
+    };
+
+    const done = (name) => {
+      const first = name.trim().split(/\s+/)[0] || '';
+      document.querySelector('[data-sent-title]').textContent = first ? `¡Mensaje recibido, ${first}!` : '¡Mensaje recibido!';
+      form.hidden = true;
+      sent.hidden = false;
+      sent.focus();
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      document.querySelector('[data-send-error]').hidden = true;
+      if (!validate()) return;
+
+      const data = new FormData(form);
+      if (data.get('botcheck')) return;
+      const nombre = String(data.get('nombre')).trim();
+      const correo = String(data.get('correo')).trim();
+      const motivo = String(data.get('motivo'));
+      const mensaje = String(data.get('mensaje')).trim();
+      const novedades = $('f-news').checked;
+      const ahora = new Date();
+      const registro = `${ahora.toLocaleString('es-CO', { timeZone: 'America/Bogota' })} (hora de Bogotá)`;
+
+      if (form.dataset.ready === 'true') {
+        const btn = form.querySelector('.submit');
+        btn.disabled = true;
+        btn.textContent = 'Enviando…';
+        try {
+          const res = await fetch(form.dataset.endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+              access_key: form.dataset.key,
+              subject: `Contacto SP Lab · ${motivo} · ${nombre}`,
+              from_name: 'Sebas Padilla Lab',
+              replyto: correo,
+              nombre,
+              correo,
+              motivo,
+              mensaje,
+              autorizacion_tratamiento: `Sí — "${form.dataset.consentText}" — ${registro}`,
+              novedades_del_lab: novedades ? `Sí — "${form.dataset.newsText}" — ${registro}` : 'No',
+              pagina: window.location.href,
+            }),
+          });
+          const json = await res.json().catch(() => ({}));
+          if (!res.ok || json.success === false) throw new Error('send');
+          done(nombre);
+        } catch (err) {
+          document.querySelector('[data-send-error]').hidden = false;
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Enviar mensaje';
+        }
+        return;
+      }
+
+      // Sin proveedor configurado: abre el correo del visitante con el mensaje listo.
+      const body = [
+        mensaje,
+        '',
+        '—',
+        `Nombre: ${nombre}`,
+        `Correo: ${correo}`,
+        `Motivo: ${motivo}`,
+        `Autorización de tratamiento de datos: Sí (${registro})`,
+        `Novedades del Lab: ${novedades ? 'Sí' : 'No'}`,
+      ].join('\n');
+      const href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(`Contacto SP Lab · ${motivo}`)}&body=${encodeURIComponent(body)}`;
+      window.location.href = href;
+      document.querySelector('[data-sent-text]').textContent = 'Se abrió tu aplicación de correo con el mensaje listo: solo falta enviarlo. Te respondo en 2 días hábiles.';
+      document.querySelector('[data-sent-title]').textContent = 'Casi listo';
+      form.hidden = true;
+      sent.hidden = false;
+      sent.focus();
+    });
+
+    // Quita el error de un campo apenas se corrige
+    ['f-name', 'f-email', 'f-msg', 'f-consent'].forEach((id) => {
+      const el = $(id);
+      el.addEventListener('input', () => { if (el.getAttribute('aria-invalid') === 'true') validate(); });
+      el.addEventListener('change', () => { if (el.getAttribute('aria-invalid') === 'true') validate(); });
+    });
+
+    document.querySelector('[data-reset]').addEventListener('click', () => {
+      form.reset();
+      ['e-name', 'e-email', 'e-msg', 'e-consent'].forEach((id) => ($(id).hidden = true));
+      form.querySelectorAll('[aria-invalid]').forEach((el) => el.setAttribute('aria-invalid', 'false'));
+      document.querySelector('[data-sent-text]').textContent = 'Te respondo en 2 días hábiles al correo que dejaste.';
+      sent.hidden = true;
+      form.hidden = false;
+      $('f-name').focus();
+    });
+  }
+</script>
+
+<style>
+  .head { display: flex; flex-direction: column; gap: 24px; padding-top: clamp(40px, 6vw, 64px); padding-bottom: 48px; }
+  .head-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 12px;
+    color: var(--slate);
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: 14px;
+  }
+  .head-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 40px; }
+  .head-text { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+  .head-title {
+    font-weight: 800;
+    font-size: clamp(42px, 6.4vw, 80px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--green-deep);
+  }
+  .head-sub { max-width: 620px; font-size: clamp(18px, 1.8vw, 20px); color: var(--slate); }
+  .head-figure { flex: 1 1 280px; max-width: 420px; width: 100%; height: auto; }
+
+  .who { padding-bottom: 56px; }
+  .who-grid { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+  .who-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px;
+    background: var(--paper);
+    border: 1px solid var(--gray-light);
+    border-top: 4px solid var(--green);
+    border-radius: 0 0 16px 16px;
+  }
+  .who-card--teal { border-top-color: var(--teal); }
+  .who-card--gold { border-top-color: var(--gold); }
+  .who-card h2 { font-weight: 700; font-size: 19px; }
+  .who-card p { font-size: 16px; color: var(--slate); }
+  .who-link { margin-top: 4px; font-family: var(--font-display); font-weight: 600; font-size: 14px; }
+
+  .talk { background: var(--green-night); color: var(--white); }
+  .talk-inner { display: flex; flex-wrap: wrap; gap: 48px 56px; padding-top: clamp(64px, 8vw, 88px); padding-bottom: clamp(64px, 8vw, 88px); }
+  .talk-info { flex: 1 1 280px; display: flex; flex-direction: column; gap: 28px; align-items: flex-start; }
+  .talk-info h2 { font-size: clamp(34px, 4vw, 44px); font-weight: 800; letter-spacing: -0.02em; }
+  .talk-info dl { margin: 0; display: flex; flex-direction: column; gap: 20px; }
+  .talk-info dt { color: var(--mint); font-size: 12px; }
+  .talk-info dd { margin: 4px 0 0; font-size: 18px; word-break: break-word; }
+  .talk-info a { color: var(--white); }
+  .talk-info a:hover { color: var(--mint); }
+  .talk-info .pill { color: var(--white); }
+
+  .form-card {
+    flex: 999 1 560px;
+    min-width: 0;
+    background: var(--white);
+    color: var(--carbon);
+    border-radius: var(--radius-lg);
+    padding: clamp(24px, 4vw, 40px);
+  }
+  form { display: flex; flex-direction: column; gap: 20px; }
+  form[hidden] { display: none; }
+  .row-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 20px; }
+  .field { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .field > label,
+  legend { font-family: var(--font-display); font-size: 14px; font-weight: 600; padding: 0 0 2px; }
+  input[type='text'],
+  input[type='email'],
+  textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #C9D2CB;
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--carbon);
+    font-family: var(--font-body);
+    font-size: 16px;
+  }
+  textarea { resize: vertical; }
+  input[aria-invalid='true'],
+  textarea[aria-invalid='true'] { border-color: #A3332D; }
+  input:focus-visible,
+  textarea:focus-visible { outline: 3px solid var(--gold); outline-offset: 1px; }
+  .err { font-size: 13px; color: #A3332D; }
+  .err[hidden] { display: none; }
+
+  .motivos { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip-radio { position: relative; }
+  .chip-radio input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .chip-radio span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid var(--gray-light);
+    background: var(--paper);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .chip-radio input:checked + span { background: var(--green); border-color: var(--green); color: var(--white); }
+  .chip-radio input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+  .check { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; cursor: pointer; }
+  .check input { flex: 0 0 auto; width: 20px; height: 20px; margin-top: 3px; accent-color: var(--green); }
+  .check input[aria-invalid='true'] { outline: 2px solid #A3332D; outline-offset: 2px; }
+
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+  .submit { align-self: flex-start; min-height: 52px; padding: 0 32px; border: 0; font-size: 16px; }
+  .submit:disabled { opacity: 0.7; cursor: progress; }
+  .form-note { font-size: 13px; color: var(--slate); }
+  .form-note:empty { display: none; }
+
+  .sent { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; padding: 24px 0; }
+  .sent[hidden] { display: none; }
+  .sent:focus { outline: none; }
+  .sent-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; }
+  .sent-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(24px, 3vw, 30px); color: var(--green-deep); }
+  .sent-text { color: var(--slate); }
+</style>
