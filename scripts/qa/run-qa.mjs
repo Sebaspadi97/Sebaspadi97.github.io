@@ -30,6 +30,23 @@ for (const [vpName, vp] of Object.entries(viewports)) {
     page.on('console', (m) => { if (m.type() === 'error') consoleErrors.push(m.text()); });
     page.on('pageerror', (e) => consoleErrors.push(String(e)));
     page.on('response', (r) => { if (r.status() >= 400 && !r.url().includes('no-existe-qa')) failed.push(`${r.status()} ${r.url()}`); });
+    await page.addInitScript(() => {
+      window.__shifts = [];
+      new PerformanceObserver((list) => {
+        for (const e of list.getEntries()) {
+          if (e.hadRecentInput) continue;
+          window.__shifts.push({
+            value: Math.round(e.value * 1000) / 1000,
+            t: Math.round(e.startTime),
+            sources: (e.sources || []).map((s) => ({
+              node: s.node ? (s.node.outerHTML || s.node.nodeName || '').slice(0, 140) : null,
+              prev: [s.previousRect.y, s.previousRect.height].map(Math.round),
+              curr: [s.currentRect.y, s.currentRect.height].map(Math.round),
+            })),
+          });
+        }
+      }).observe({ type: 'layout-shift', buffered: true });
+    });
     const res = await page.goto(BASE + path, { waitUntil: 'networkidle' });
     await page.waitForTimeout(400);
     // carga las imágenes diferidas antes de medir
@@ -73,6 +90,7 @@ for (const [vpName, vp] of Object.entries(viewports)) {
         small,
       };
     });
+    const shifts = await page.evaluate(() => window.__shifts || []);
     const axe = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']).analyze();
     results.push({
       viewport: vpName,
@@ -81,6 +99,7 @@ for (const [vpName, vp] of Object.entries(viewports)) {
       ...layout,
       consoleErrors,
       failed,
+      shifts: shifts.filter((x) => x.value >= 0.005),
       axe: axe.violations.map((v) => ({
         id: v.id,
         impact: v.impact,
@@ -120,6 +139,7 @@ for (const path of key) {
         weight: r.audits['total-byte-weight'].displayValue,
       },
       failing,
+      shiftDetails: r.audits['layout-shifts']?.details?.items || [],
     });
     (await import('node:fs')).unlinkSync(file);
   } catch (e) {
