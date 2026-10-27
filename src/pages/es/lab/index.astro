@@ -1,0 +1,291 @@
+---
+// Lab (diseño aprobado): encabezado con la figura "el dato curioso siempre está fuera
+// de la curva", filtros por categoría, destacado, franja de datos curiosos, lista y cierre.
+import Base from '../../../layouts/Base.astro';
+import LabCover from '../../../components/LabCover.astro';
+import { posts, categories, curiosities, postMeta } from '../../../data/lab.js';
+import { link } from '../../../i18n/index.js';
+import { site } from '../../../data/site.js';
+
+const featured = posts.find((p) => p.featured);
+const catOptions = [['todos', 'Todo'], ...Object.entries(categories).map(([k, v]) => [k, v.plural])];
+const countLabel = (n) => `${n} ${n === 1 ? 'entrada' : 'entradas'}`;
+---
+<Base
+  lang="es"
+  pageKey="lab"
+  active="lab"
+  title="Lab · Sebas Padilla Lab"
+  description="Análisis cortos, datos curiosos y experimentos con modelos, con datos abiertos de Colombia."
+>
+  <section class="container head">
+    <div class="head-meta eyebrow">
+      <span>Cuaderno del Lab</span>
+      <span>Análisis · Datos curiosos · Experimentos · Notas</span>
+    </div>
+    <div class="head-grid">
+      <div class="head-text">
+        <h1 class="head-title">Preguntas <span class="underline-gold">curiosas</span>, respondidas con datos.</h1>
+        <p class="head-sub">Análisis cortos, datos sorprendentes y experimentos con modelos. Lo que aprendo en el camino, escrito para que cualquiera lo entienda.</p>
+      </div>
+      <svg class="head-figure" viewBox="0 0 440 340" aria-hidden="true">
+        <line x1="20" y1="300" x2="420" y2="300" stroke="#202824" stroke-width="1.5" />
+        <g fill="#245B45">
+          <circle cx="60" cy="286" r="9" /><circle cx="60" cy="264" r="9" />
+          <circle cx="90" cy="286" r="9" /><circle cx="90" cy="264" r="9" /><circle cx="90" cy="242" r="9" />
+          <circle cx="120" cy="286" r="9" /><circle cx="120" cy="264" r="9" /><circle cx="120" cy="242" r="9" /><circle cx="120" cy="220" r="9" /><circle cx="120" cy="198" r="9" />
+          <circle cx="150" cy="286" r="9" /><circle cx="150" cy="264" r="9" /><circle cx="150" cy="242" r="9" /><circle cx="150" cy="220" r="9" /><circle cx="150" cy="198" r="9" /><circle cx="150" cy="176" r="9" />
+          <circle cx="180" cy="286" r="9" /><circle cx="180" cy="264" r="9" /><circle cx="180" cy="242" r="9" /><circle cx="180" cy="220" r="9" />
+          <circle cx="210" cy="286" r="9" /><circle cx="210" cy="264" r="9" /><circle cx="210" cy="242" r="9" />
+          <circle cx="240" cy="286" r="9" /><circle cx="240" cy="264" r="9" />
+          <circle cx="270" cy="286" r="9" />
+        </g>
+        <g fill="#3E9B91" opacity="0.55"><circle cx="30" cy="286" r="9" /><circle cx="300" cy="286" r="9" /></g>
+        <circle cx="380" cy="286" r="22" fill="#D6A64F" opacity="0.2" />
+        <circle cx="380" cy="286" r="11" fill="#D6A64F" stroke="#F8FAF7" stroke-width="3" />
+        <path d="M380 270 C 380 200, 330 150, 270 120" fill="none" stroke="#202824" stroke-width="1" stroke-dasharray="3 5" />
+        <circle cx="270" cy="120" r="4" fill="#202824" />
+        <text x="210" y="84" font-family="Montserrat, sans-serif" font-weight="700" font-size="16" fill="#202824">el dato curioso</text>
+        <text x="210" y="106" font-family="Open Sans, sans-serif" font-size="14" fill="#66736C">siempre está fuera de la curva</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="container filters" aria-label="Filtros">
+    <div class="filter-row" role="group" aria-label="Filtrar por categoría" data-filters hidden>
+      {catOptions.map(([v, l]) => (
+        <button type="button" class="chip" data-cat-btn={v} aria-pressed={v === 'todos' ? 'true' : 'false'}>{l}</button>
+      ))}
+    </div>
+    <a class="rss-link" href="/es/lab/rss.xml">Suscribirse por RSS</a>
+  </section>
+
+  <section class="container featured-wrap" data-featured>
+    <a class="featured" href={link(featured.key, 'es')}>
+      <LabCover cover={featured.cover} size="md" decorative />
+      <span class="featured-text">
+        <span class={`eyebrow cat cat--${categories[featured.category].tone}`}>Destacado · {categories[featured.category].label}</span>
+        <span class="featured-title">{featured.title}</span>
+        <span class="featured-sub">{featured.sub}</span>
+        <span class="meta">{postMeta(featured)}</span>
+        <span class="read">Leer <span aria-hidden="true">→</span></span>
+      </span>
+    </a>
+  </section>
+
+  <section class="curious" aria-labelledby="curious-title" data-curious>
+    <div class="container curious-inner">
+      <div class="curious-head">
+        <h2 id="curious-title">Datos curiosos</h2>
+        <p>Un dato, una fuente abierta, un minuto de lectura.</p>
+      </div>
+      <ul class="curious-grid">
+        {curiosities.map((c) => (
+          <li>
+            <a class="curious-card" href={link(c.key, 'es')}>
+              <span class="c-n">{c.n}</span>
+              <span class="c-t">{c.text}</span>
+              <span class="c-s">Fuente: {c.source}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="container all" aria-labelledby="all-title">
+    <div class="all-head">
+      <h2 id="all-title">Todo el Lab</h2>
+      <span class="eyebrow" data-count>{countLabel(posts.length)}</span>
+    </div>
+    <p class="visually-hidden" aria-live="polite" data-live></p>
+    <ul class="post-list">
+      {posts.map((p) => (
+        <li data-post data-cat={p.category}>
+          <a class="post" href={link(p.key, 'es')}>
+            <span class={`eyebrow cat cat--${categories[p.category].tone}`}>{categories[p.category].label}</span>
+            <span class="post-main">
+              <span class="post-title">{p.title}</span>
+              <span class="post-sub">{p.sub}</span>
+            </span>
+            <span class="meta">{postMeta(p)}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="empty" data-empty hidden>Todavía no hay entradas en esta categoría.</p>
+  </section>
+
+  <section class="follow">
+    <div class="container follow-inner">
+      <div class="follow-text">
+        <p class="eyebrow follow-label">No te pierdas el próximo</p>
+        <h2>Cada publicación nueva sale primero en LinkedIn.</h2>
+      </div>
+      <div class="actions">
+        <a class="pill pill--mint" href={site.linkedin} rel="noopener">Seguir en LinkedIn</a>
+        <a class="pill pill--ghost-dark" href="/es/lab/rss.xml">RSS</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const group = document.querySelector('[data-filters]');
+  if (group) {
+    group.hidden = false;
+    const btns = Array.from(group.querySelectorAll('[data-cat-btn]'));
+    const items = Array.from(document.querySelectorAll('[data-post]'));
+    const featured = document.querySelector('[data-featured]');
+    const curious = document.querySelector('[data-curious]');
+    const empty = document.querySelector('[data-empty]');
+    const count = document.querySelector('[data-count]');
+    const live = document.querySelector('[data-live]');
+    const apply = (cat) => {
+      let n = 0;
+      items.forEach((li) => {
+        const show = cat === 'todos' || li.dataset.cat === cat;
+        li.hidden = !show;
+        if (show) n++;
+      });
+      btns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.catBtn === cat)));
+      if (featured) featured.hidden = cat !== 'todos';
+      if (curious) curious.hidden = !(cat === 'todos' || cat === 'curioso');
+      if (empty) empty.hidden = n !== 0;
+      const label = `${n} ${n === 1 ? 'entrada' : 'entradas'}`;
+      if (count) count.textContent = label;
+      if (live) live.textContent = n === 0 ? 'Todavía no hay entradas en esta categoría' : `Mostrando ${label}`;
+    };
+    btns.forEach((b) => b.addEventListener('click', () => apply(b.dataset.catBtn)));
+  }
+</script>
+
+<style>
+  .head { display: flex; flex-direction: column; gap: 24px; padding-top: clamp(40px, 6vw, 64px); padding-bottom: 40px; }
+  .head-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 12px;
+    color: var(--slate);
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: 14px;
+  }
+  .head-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 40px; }
+  .head-text { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+  .head-title {
+    font-weight: 800;
+    font-size: clamp(42px, 6.4vw, 80px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--green-deep);
+  }
+  .head-sub { max-width: 640px; font-size: clamp(18px, 1.8vw, 20px); color: var(--slate); }
+  .head-figure { flex: 1 1 300px; max-width: 440px; width: 100%; height: auto; }
+
+  .filters { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 40px; }
+  .filter-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .filter-row[hidden] { display: none; }
+  .chip {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 1px solid var(--gray-light);
+    background: var(--paper);
+    color: var(--carbon);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .chip:hover { border-color: var(--green); }
+  .chip[aria-pressed='true'] { background: var(--green); border-color: var(--green); color: var(--white); }
+  .rss-link { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--slate); padding: 10px 0; }
+
+  .cat { font-size: 12px; letter-spacing: 0.12em; }
+  .cat--green { color: var(--green); }
+  .cat--gold { color: var(--gold-text); }
+  .cat--teal { color: var(--teal-text); }
+  .cat--slate { color: var(--slate); }
+  .meta { font-size: 14px; color: var(--slate); }
+
+  .featured-wrap { padding-bottom: 72px; }
+  .featured-wrap[hidden] { display: none; }
+  .featured {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+    gap: 40px;
+    align-items: center;
+    color: var(--carbon);
+    text-decoration: none;
+  }
+  .featured-text { display: flex; flex-direction: column; gap: 14px; }
+  .featured-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--green-deep);
+  }
+  .featured:hover .featured-title { color: var(--green); }
+  .featured-sub { color: var(--slate); }
+  .read { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--green); }
+
+  .curious { background: var(--gold); color: var(--carbon); }
+  .curious[hidden] { display: none; }
+  .curious-inner { display: flex; flex-direction: column; gap: 28px; padding-top: 64px; padding-bottom: 64px; }
+  .curious-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; }
+  .curious-head h2 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; letter-spacing: -0.02em; }
+  .curious-head p { font-size: 15px; }
+  .curious-grid { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+  .curious-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px;
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    color: var(--carbon);
+    text-decoration: none;
+    transition: transform .2s ease;
+  }
+  .curious-card:hover { color: var(--carbon); transform: translateY(-2px); }
+  @media (prefers-reduced-motion: reduce) { .curious-card:hover { transform: none; } }
+  .c-n { font-family: var(--font-display); font-weight: 800; font-size: 48px; line-height: 1; color: var(--green-deep); }
+  .c-t { font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 1.35; }
+  .c-s { margin-top: auto; font-size: 13px; color: var(--slate); }
+
+  .all { display: flex; flex-direction: column; gap: 8px; padding-top: clamp(56px, 7vw, 72px); padding-bottom: clamp(72px, 9vw, 96px); }
+  .all-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; border-bottom: 2px solid var(--carbon); padding-bottom: 16px; }
+  .all-head h2 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; letter-spacing: -0.02em; color: var(--green-deep); }
+  .all-head .eyebrow { color: var(--slate); }
+  .post-list { margin: 0; padding: 0; list-style: none; }
+  .post-list li[hidden] { display: none; }
+  .post {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    align-items: baseline;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--gray-light);
+    color: var(--carbon);
+    text-decoration: none;
+  }
+  .post .cat { flex: 0 0 160px; }
+  .post-main { flex: 999 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .post-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px, 2vw, 24px); line-height: 1.25; }
+  .post:hover .post-title { color: var(--green); }
+  .post-sub { color: var(--slate); font-size: 16px; }
+  .post .meta { flex: 0 0 auto; }
+  .empty { padding: 40px 0; color: var(--slate); }
+  .empty[hidden] { display: none; }
+
+  .follow { background: var(--green-deep); color: var(--white); }
+  .follow-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px; padding-top: 80px; padding-bottom: 80px; }
+  .follow-text { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .follow-label { color: var(--mint); }
+  .follow h2 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+</style>

@@ -1,0 +1,269 @@
+---
+// Plantilla de artículo del Lab (diseño aprobado): ruta, categoría, título, bajada,
+// autor y compartir; portada; "En 30 segundos"; cuerpo; caja "Dato curioso";
+// cierre obligatorio "¿Y qué decisión tomaría?"; "Fuentes y método"; autor y "Sigue leyendo".
+import Base from '../../../layouts/Base.astro';
+import LabCover from '../../../components/LabCover.astro';
+import { posts, categories, postMeta, formatDate } from '../../../data/lab.js';
+import { cases, pillars } from '../../../data/cases.js';
+import { link, routes } from '../../../i18n/index.js';
+import { site } from '../../../data/site.js';
+import { inline } from '../../../lib/text.js';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({
+    params: { post: routes[p.key].es.replace('/es/lab/', '').replace(/\/$/, '') },
+    props: { p },
+  }));
+}
+
+const { p } = Astro.props;
+const cat = categories[p.category];
+const url = new URL(Astro.url.pathname, Astro.site).href;
+const shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+const others = posts.filter((x) => x.key !== p.key).slice(0, 2);
+const related = cases.find((c) => c.key === p.relatedCase);
+const isFact = p.category === 'curioso';
+---
+<Base lang="es" pageKey={p.key} active="lab" title={`${p.title} · Lab · Sebas Padilla Lab`} description={p.sub}>
+  <header class="container narrow a-head">
+    <nav class="crumbs" aria-label="Ruta"><a href={link('lab', 'es')}>Lab</a> <span aria-hidden="true">/</span> <span>{cat.plural}</span></nav>
+    <span class={`a-cat a-cat--${cat.tone}`}>{cat.label}</span>
+    <h1 class="a-title">{p.title}</h1>
+    <p class="a-sub">{p.sub}</p>
+    <div class="byline">
+      <div class="author">
+        <picture>
+          <source srcset={site.photo.webp} type="image/webp" />
+          <img src={site.photo.jpg} alt="" width="44" height="44" class="avatar" />
+        </picture>
+        <span class="author-text">
+          <span class="author-name">Sebas Padilla</span>
+          <span class="meta">{p.date ? <time datetime={p.date}>{formatDate(p.date)}</time> : null}{p.date ? ' · ' : ''}{p.minutes} min de lectura</span>
+        </span>
+      </div>
+      <div class="share">
+        <a class="share-btn" href={shareUrl} rel="noopener" target="_blank">Compartir en LinkedIn</a>
+        <button type="button" class="share-btn" data-copy={url}>Copiar enlace</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container cover-wrap">
+    <figure class="a-cover">
+      <LabCover cover={p.cover} size="lg" />
+      <figcaption>{p.cover.caption || `Fuente: ${p.cover.source}`}</figcaption>
+    </figure>
+  </div>
+
+  <article class="container narrow-text a-body">
+    {p.summary && (
+      <aside class="summary" aria-labelledby="sum-title">
+        <p id="sum-title" class="summary-label">En 30 segundos</p>
+        <ul>{p.summary.map((s) => <li>{s}</li>)}</ul>
+      </aside>
+    )}
+
+    {p.body.map((para) => <p set:html={inline(para)} />)}
+
+    {p.fact && (
+      <aside class="fact" aria-label="Dato curioso">
+        <span class="fact-label">Dato curioso</span>
+        <span class="fact-text"><strong>{p.fact.n}</strong> {p.fact.text}</span>
+        <span class="fact-source">Fuente: {p.fact.source}</span>
+      </aside>
+    )}
+
+    <section class="decide" aria-labelledby="decide-title">
+      <h2 id="decide-title">¿Y qué decisión tomaría?</h2>
+      <p>{p.decision}</p>
+      <p class="ask">{p.askReader}</p>
+    </section>
+
+    <section class="sources" aria-labelledby="src-title">
+      <h2 id="src-title" class="sources-label">Fuentes y método</h2>
+      <ol>
+        {p.sources.map((s) => <li>{s}</li>)}
+        <li>Código y datos del análisis: <a href={p.repo.url} rel="noopener">{p.repo.url.replace('https://', '')}</a>. {p.repo.note}</li>
+      </ol>
+    </section>
+
+    <div class="about-author">
+      <picture>
+        <source srcset={site.photo.webp} type="image/webp" />
+        <img src={site.photo.jpg} alt="" width="56" height="56" class="avatar avatar--lg" />
+      </picture>
+      <span class="about-text">
+        <span class="author-name">Sebas Padilla</span>
+        <span>Analista de inteligencia de negocios e ingeniero industrial. Escribo sobre datos, decisiones y lo que aprendo en la Maestría en Ciencia de Datos.</span>
+        <a href={link('about', 'es')}>Conocer más <span aria-hidden="true">→</span></a>
+      </span>
+    </div>
+  </article>
+
+  <section class="keep" aria-labelledby="keep-title">
+    <div class="container keep-inner">
+      <div class="keep-head">
+        <h2 id="keep-title">Sigue leyendo</h2>
+        <a href={link('lab', 'es')}>Volver al Lab <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="keep-grid">
+        {others.map((x) => (
+          <li>
+            <a class="keep-card" href={link(x.key, 'es')}>
+              <span class={`eyebrow k-cat k-cat--${categories[x.category].tone}`}>{categories[x.category].label}</span>
+              <span class="keep-title">{x.title}</span>
+              <span class="keep-meta">{postMeta(x)}</span>
+            </a>
+          </li>
+        ))}
+        {related && (
+          <li>
+            <a class="keep-card keep-card--case" href={link(related.key, 'es')}>
+              <span class="eyebrow k-cat k-cat--mint">Proyecto relacionado · {pillars[related.pillar].es}</span>
+              <span class="keep-title">{related.es.title}</span>
+              <span class="keep-meta keep-meta--light">Ver el caso <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+        )}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelectorAll('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const original = btn.textContent;
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy);
+        btn.textContent = 'Enlace copiado';
+      } catch (e) {
+        btn.textContent = 'No se pudo copiar';
+      }
+      window.setTimeout(() => { btn.textContent = original; }, 2000);
+    });
+  });
+</script>
+
+<style>
+  .narrow { max-width: 880px; }
+  .narrow-text { max-width: 720px; }
+
+  .a-head { display: flex; flex-direction: column; gap: 20px; padding-top: clamp(40px, 6vw, 56px); padding-bottom: 40px; }
+  .crumbs { font-size: 14px; color: var(--slate); }
+  .crumbs a { color: var(--slate); }
+  .a-cat {
+    align-self: flex-start;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+  }
+  .a-cat--green { color: var(--green); }
+  .a-cat--gold { color: var(--gold-text); }
+  .a-cat--teal { color: var(--teal-text); }
+  .a-cat--slate { color: var(--slate); }
+  .a-title {
+    font-weight: 800;
+    font-size: clamp(36px, 5.4vw, 60px);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    color: var(--green-deep);
+  }
+  .a-sub { font-size: clamp(19px, 2vw, 22px); line-height: 1.5; color: var(--slate); }
+  .byline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid var(--gray-light);
+    border-bottom: 1px solid var(--gray-light);
+    padding: 16px 0;
+  }
+  .author { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+  .avatar--lg { width: 56px; height: 56px; }
+  .author-text { display: flex; flex-direction: column; line-height: 1.35; }
+  .author-name { font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+  .meta { font-size: 14px; color: var(--slate); }
+  .share { display: flex; flex-wrap: wrap; gap: 10px; }
+  .share-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 16px;
+    border: 1px solid var(--gray-light);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--carbon);
+    font-family: var(--font-body);
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .share-btn:hover { border-color: var(--green); color: var(--green); }
+
+  .cover-wrap { max-width: 1120px; }
+  .a-cover { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .a-cover figcaption { font-size: 14px; color: var(--slate); }
+
+  .a-body { display: flex; flex-direction: column; gap: 24px; padding-top: 48px; padding-bottom: 72px; }
+  .a-body :global(strong) { font-weight: 600; }
+  .summary { background: var(--paper); border: 1px solid var(--gray-light); border-radius: 16px; padding: 24px 28px; }
+  .summary-label { margin: 0 0 10px; font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); }
+  .summary ul { margin: 0; padding-left: 20px; font-size: 17px; display: flex; flex-direction: column; gap: 6px; }
+
+  .fact { background: var(--gold); color: var(--carbon); border-radius: 16px; padding: 24px 28px; display: flex; flex-direction: column; gap: 6px; }
+  .fact-label { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  .fact-text { font-family: var(--font-display); font-weight: 600; font-size: 20px; line-height: 1.4; }
+  .fact-text strong { font-weight: 800; }
+  .fact-source { font-size: 14px; }
+
+  .decide { display: flex; flex-direction: column; gap: 14px; padding-top: 8px; }
+  .decide h2 { font-size: clamp(26px, 3vw, 30px); font-weight: 800; letter-spacing: -0.015em; color: var(--green-deep); }
+  .ask { font-family: var(--font-display); font-weight: 600; color: var(--green); }
+
+  .sources { border-top: 1px solid var(--gray-light); padding-top: 20px; font-size: 15px; color: var(--slate); display: flex; flex-direction: column; gap: 8px; }
+  .sources-label { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--carbon); }
+  .sources ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .sources a { word-break: break-word; }
+
+  .about-author { display: flex; gap: 16px; align-items: center; background: var(--paper); border: 1px solid var(--gray-light); border-radius: 16px; padding: 24px; }
+  .about-author picture { flex: 0 0 auto; }
+  .about-text { display: flex; flex-direction: column; gap: 2px; font-size: 16px; line-height: 1.5; }
+  .about-text > span:nth-child(2) { color: var(--slate); }
+  .about-text a { font-weight: 600; font-size: 15px; }
+
+  .keep { background: var(--green-night); color: var(--white); }
+  .keep-inner { display: flex; flex-direction: column; gap: 32px; padding-top: 72px; padding-bottom: 88px; }
+  .keep-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; }
+  .keep-head h2 { font-size: clamp(28px, 3vw, 36px); font-weight: 800; letter-spacing: -0.02em; }
+  .keep-head a { color: var(--mint); font-family: var(--font-display); font-weight: 600; font-size: 15px; }
+  .keep-head a:hover { color: var(--white); }
+  .keep-grid { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; }
+  .keep-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+    border: 1px solid var(--green-logo);
+    border-radius: var(--radius-lg);
+    color: var(--white);
+    text-decoration: none;
+  }
+  .keep-card:hover { color: var(--white); border-color: var(--mint); }
+  .keep-card--case { background: var(--green); border-color: var(--green); }
+  .k-cat { font-size: 12px; }
+  .k-cat--green, .k-cat--mint, .k-cat--teal, .k-cat--slate { color: var(--mint); }
+  .k-cat--gold { color: var(--gold); }
+  .keep-title { font-family: var(--font-display); font-weight: 700; font-size: 21px; line-height: 1.3; }
+  .keep-meta { margin-top: auto; font-size: 14px; color: var(--on-dark-muted); }
+  .keep-meta--light { color: var(--gray-light); }
+</style>

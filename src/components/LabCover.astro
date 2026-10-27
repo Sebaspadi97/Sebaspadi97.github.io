@@ -1,0 +1,69 @@
+---
+// Visual de una publicación del Lab: un gráfico del caso o, para los datos curiosos,
+// una tarjeta dorada con la cifra.
+import sizes from '../data/image-sizes.json';
+const { cover, size = 'md', decorative = false } = Astro.props;
+const dims = cover.src ? sizes[cover.src] || [1400, 933] : null;
+---
+{cover.src ? (
+  <span class:list={['cover', `cover--${size}`]}>
+    <img
+      src={cover.src}
+      alt={decorative ? '' : cover.alt}
+      width={dims[0]}
+      height={dims[1]}
+      loading={size === 'lg' ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  </span>
+) : (
+  <span class:list={['cover', 'cover--fact', `cover--${size}`]} aria-hidden={decorative ? 'true' : undefined}>
+    <span class="fact-n">{cover.figure}</span>
+    <span class="fact-t">{cover.text}</span>
+  </span>
+)}
+
+<style>
+  .cover {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--gray-light);
+  }
+  .cover img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .cover--sm { height: 200px; }
+  .cover--md { height: 340px; }
+  .cover--lg { height: auto; }
+  .cover--lg img { height: auto; object-fit: contain; }
+
+  .cover--fact {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--carbon);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: clamp(20px, 3vw, 40px);
+  }
+  .cover--lg.cover--fact { min-height: 320px; }
+  .fact-n {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(64px, 9vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--green-deep);
+  }
+  .cover--sm .fact-n { font-size: 64px; }
+  .fact-t {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(16px, 1.8vw, 22px);
+    line-height: 1.35;
+    max-width: 520px;
+  }
+  .cover--sm .fact-t { font-size: 15px; }
+</style>
