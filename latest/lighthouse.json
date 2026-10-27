@@ -8,11 +8,11 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.3 s",
+      "FCP": "1.2 s",
       "LCP": "1.7 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "1.3 s",
+      "SI": "1.2 s",
       "weight": "Total size was 153 KiB"
     },
     "failing": [
@@ -23,10 +23,10 @@
         "value": "6 resources found",
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
         ]
       },
       {
@@ -38,7 +38,8 @@
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
         ]
       }
-    ]
+    ],
+    "shiftDetails": []
   },
   {
     "path": "/en/",
@@ -66,8 +67,8 @@
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
         ]
       },
       {
@@ -79,7 +80,8 @@
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
         ]
       }
-    ]
+    ],
+    "shiftDetails": []
   },
   {
     "path": "/es/proyectos/",
@@ -106,9 +108,9 @@
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
         ]
       },
       {
@@ -120,54 +122,37 @@
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
         ]
       }
-    ]
+    ],
+    "shiftDetails": []
   },
   {
     "path": "/es/proyectos/abandono-de-clientes/",
     "scores": {
-      "performance": 92,
+      "performance": 100,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.3 s",
+      "FCP": "1.2 s",
       "LCP": "1.7 s",
       "TBT": "0 ms",
-      "CLS": "0.172",
-      "SI": "1.3 s",
+      "CLS": "0",
+      "SI": "1.2 s",
       "weight": "Total size was 150 KiB"
     },
     "failing": [
-      {
-        "id": "cumulative-layout-shift",
-        "title": "Cumulative Layout Shift",
-        "score": 0.69,
-        "value": "0.172",
-        "items": [
-          "{\"cumulativeLayoutShiftMainFrame\":0.17203882692897504,\"newEngineResultDiffered\":false}"
-        ]
-      },
-      {
-        "id": "layout-shifts",
-        "title": "Avoid large layout shifts",
-        "score": 0,
-        "value": "1 layout shift found",
-        "items": [
-          "<section class=\"facts\" aria-label=\"Ficha del proyecto\" data-astro-cid-zzz72t2a=\"\">"
-        ]
-      },
       {
         "id": "uses-long-cache-ttl",
         "title": "Serve static assets with an efficient cache policy",
         "score": 0.5,
         "value": "6 resources found",
         "items": [
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
         ]
       },
       {
@@ -179,7 +164,8 @@
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
         ]
       }
-    ]
+    ],
+    "shiftDetails": []
   },
   {
     "path": "/es/lab/",
@@ -190,11 +176,11 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "0.9 s",
+      "FCP": "1.0 s",
       "LCP": "1.4 s",
-      "TBT": "0 ms",
+      "TBT": "20 ms",
       "CLS": "0",
-      "SI": "0.9 s",
+      "SI": "1.0 s",
       "weight": "Total size was 125 KiB"
     },
     "failing": [
@@ -207,8 +193,8 @@
           "https://sebaspadi97.github.io/img/casos/emprendimiento/01_tasa_creacion_localidad-700.webp",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
         ]
       },
       {
@@ -220,7 +206,8 @@
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
         ]
       }
-    ]
+    ],
+    "shiftDetails": []
   },
   {
     "path": "/es/lab/donde-nacen-las-empresas-de-bogota/",
@@ -231,11 +218,11 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.0 s",
-      "LCP": "1.6 s",
-      "TBT": "0 ms",
+      "FCP": "1.1 s",
+      "LCP": "1.7 s",
+      "TBT": "30 ms",
       "CLS": "0",
-      "SI": "1.0 s",
+      "SI": "1.1 s",
       "weight": "Total size was 206 KiB"
     },
     "failing": [
@@ -261,7 +248,8 @@
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
         ]
       }
-    ]
+    ],
+    "shiftDetails": []
   },
   {
     "path": "/es/sobre-mi/",
@@ -274,7 +262,7 @@
     "metrics": {
       "FCP": "1.0 s",
       "LCP": "1.5 s",
-      "TBT": "0 ms",
+      "TBT": "40 ms",
       "CLS": "0",
       "SI": "1.0 s",
       "weight": "Total size was 138 KiB"
@@ -289,8 +277,8 @@
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
         ]
       },
       {
@@ -302,7 +290,8 @@
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
         ]
       }
-    ]
+    ],
+    "shiftDetails": []
   },
   {
     "path": "/es/contacto/",
@@ -313,11 +302,11 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.0 s",
+      "FCP": "1.1 s",
       "LCP": "1.4 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "1.0 s",
+      "SI": "1.1 s",
       "weight": "Total size was 106 KiB"
     },
     "failing": [
@@ -343,6 +332,7 @@
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
         ]
       }
-    ]
+    ],
+    "shiftDetails": []
   }
 ]
