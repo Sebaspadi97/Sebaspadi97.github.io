@@ -1,14 +1,17 @@
 ---
 // Visual de una publicación del Lab: un gráfico del caso o, para los datos curiosos,
 // una tarjeta dorada con la cifra.
-import sizes from '../data/image-sizes.json';
+import { dims as dimsOf, srcset } from '../lib/img.js';
 const { cover, size = 'md', decorative = false } = Astro.props;
-const dims = cover.src ? sizes[cover.src] || [1400, 933] : null;
+const dims = cover.src ? dimsOf(cover.src) : null;
+const sizesAttr = size === 'lg' ? '(max-width: 1160px) calc(100vw - 32px), 1120px' : size === 'md' ? '(max-width: 960px) calc(100vw - 32px), 600px' : '(max-width: 760px) calc(100vw - 32px), 400px';
 ---
 {cover.src ? (
   <span class:list={['cover', `cover--${size}`]}>
     <img
       src={cover.src}
+      srcset={srcset(cover.src)}
+      sizes={sizesAttr}
       alt={decorative ? '' : cover.alt}
       width={dims[0]}
       height={dims[1]}

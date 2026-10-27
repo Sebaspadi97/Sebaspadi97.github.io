@@ -6,7 +6,7 @@ export const site = {
   email: 'sebastianpadi97@outlook.com',
   linkedin: 'https://www.linkedin.com/in/sebastianpadillacastano/',
   github: 'https://github.com/Sebaspadi97',
-  photo: { webp: '/img/sebas-padilla.webp', jpg: '/img/sebas-padilla.jpg' },
+  photo: { webp: '/img/sebas-padilla.webp', jpg: '/img/sebas-padilla.jpg', smallWebp: '/img/sebas-padilla-112.webp', smallJpg: '/img/sebas-padilla-112.jpg' },
   // CV en PDF generado con scripts/cv/generate-cv.mjs a partir de los textos de Sobre mí.
   cv: { es: '/cv/sebas-padilla-cv-es.pdf', en: '/cv/sebas-padilla-cv-en.pdf' },
   // Formulario de contacto (Web3Forms). La "access key" es pública por diseño: va en el HTML.

@@ -6,13 +6,12 @@ import ChurnSimulator from '../../../components/ChurnSimulator.astro';
 import { cases, pillars, toolFilters } from '../../../data/cases.js';
 import { link } from '../../../i18n/index.js';
 import { site } from '../../../data/site.js';
-import sizes from '../../../data/image-sizes.json';
+import { dims, srcset } from '../../../lib/img.js';
 
 const featured = cases.find((c) => c.featured);
 const rest = cases.filter((c) => !c.featured);
 const n = cases.length;
 const countLabel = (k) => `${k} ${k === 1 ? 'proyecto' : 'proyectos'} · 3 pilares`;
-const dims = (src) => sizes[src] || [1400, 933];
 const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Learning'], ['mi', 'Market Intelligence']];
 ---
 <Base
@@ -96,7 +95,7 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
           <li data-card data-pillar={p.pillar} data-tools={p.tools.join('|')}>
             <a class="card" href={link(p.key, 'es')}>
               <span class="thumb">
-                <img src={p.thumb} alt="" loading="lazy" decoding="async" width={dims(p.thumb)[0]} height={dims(p.thumb)[1]} />
+                <img src={p.thumb} srcset={srcset(p.thumb)} sizes="(max-width: 760px) calc(100vw - 80px), 400px" alt="" loading="lazy" decoding="async" width={dims(p.thumb)[0]} height={dims(p.thumb)[1]} />
               </span>
               <span class={`eyebrow tone-${pillars[p.pillar].tone}`}>{pillars[p.pillar].es}</span>
               <span class="card-title">{p.es.title}</span>
@@ -230,7 +229,8 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
   }
   .featured-q { color: var(--gray-light); }
   .featured .meta { color: var(--on-dark); }
-  .read-more { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--mint); }
+  .read-more { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--mint-strong); display: inline-block; padding: 6px 0; }
+  .featured .tone-mint { color: var(--mint-strong); }
   .read-more:hover { color: var(--white); }
 
   .cards {

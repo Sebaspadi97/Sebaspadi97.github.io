@@ -9,5 +9,7 @@ export default defineConfig({
   integrations: [sitemap()],
   build: {
     format: 'directory',
+    // CSS en línea: evita una petición que bloquea el primer pintado.
+    inlineStylesheets: 'always',
   },
 });

@@ -34,8 +34,8 @@ const isFact = p.category === 'curioso';
     <div class="byline">
       <div class="author">
         <picture>
-          <source srcset={site.photo.webp} type="image/webp" />
-          <img src={site.photo.jpg} alt="" width="44" height="44" class="avatar" />
+          <source srcset={site.photo.smallWebp} type="image/webp" />
+          <img src={site.photo.smallJpg} alt="" width="44" height="44" class="avatar" />
         </picture>
         <span class="author-text">
           <span class="author-name">Sebas Padilla</span>
@@ -90,8 +90,8 @@ const isFact = p.category === 'curioso';
 
     <div class="about-author">
       <picture>
-        <source srcset={site.photo.webp} type="image/webp" />
-        <img src={site.photo.jpg} alt="" width="56" height="56" class="avatar avatar--lg" />
+        <source srcset={site.photo.smallWebp} type="image/webp" />
+        <img src={site.photo.smallJpg} alt="" width="56" height="56" class="avatar avatar--lg" />
       </picture>
       <span class="about-text">
         <span class="author-name">Sebas Padilla</span>
@@ -238,7 +238,7 @@ const isFact = p.category === 'curioso';
   .about-author picture { flex: 0 0 auto; }
   .about-text { display: flex; flex-direction: column; gap: 2px; font-size: 16px; line-height: 1.5; }
   .about-text > span:nth-child(2) { color: var(--slate); }
-  .about-text a { font-weight: 600; font-size: 15px; }
+  .about-text a { font-weight: 600; font-size: 15px; display: inline-block; padding: 4px 0; }
 
   .keep { background: var(--green-night); color: var(--white); }
   .keep-inner { display: flex; flex-direction: column; gap: 32px; padding-top: 72px; padding-bottom: 88px; }
@@ -263,6 +263,7 @@ const isFact = p.category === 'curioso';
   .k-cat { font-size: 12px; }
   .k-cat--green, .k-cat--mint, .k-cat--teal, .k-cat--slate { color: var(--mint); }
   .k-cat--gold { color: var(--gold); }
+  .keep-card--case .k-cat { color: var(--mint-strong); }
   .keep-title { font-family: var(--font-display); font-weight: 700; font-size: 21px; line-height: 1.3; }
   .keep-meta { margin-top: auto; font-size: 14px; color: var(--on-dark-muted); }
   .keep-meta--light { color: var(--gray-light); }

@@ -1,10 +1,9 @@
 ---
 // Pinta una lista de bloques de contenido de un caso (ver src/data/cases.js).
 import { inline } from '../lib/text.js';
-import sizes from '../data/image-sizes.json';
+import { dims, srcset } from '../lib/img.js';
 import ChurnSimulator from './ChurnSimulator.astro';
 const { blocks = [], tone = 'light', lang = 'es' } = Astro.props;
-const dims = (src) => sizes[src] || [1400, 933];
 ---
 <div class:list={['blocks', `blocks--${tone}`]}>
   {blocks.map((b) => {
@@ -43,7 +42,7 @@ const dims = (src) => sizes[src] || [1400, 933];
       return (
         <figure class="b-fig">
           <a href={b.fig.src} class="b-fig-link">
-            <img src={b.fig.src} alt={b.fig.alt} loading="lazy" decoding="async" width={dims(b.fig.src)[0]} height={dims(b.fig.src)[1]} />
+            <img src={b.fig.src} srcset={srcset(b.fig.src)} sizes="(max-width: 900px) calc(100vw - 32px), 820px" alt={b.fig.alt} loading="lazy" decoding="async" width={dims(b.fig.src)[0]} height={dims(b.fig.src)[1]} />
           </a>
           <figcaption>{b.fig.caption}</figcaption>
         </figure>

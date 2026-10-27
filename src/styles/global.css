@@ -22,6 +22,7 @@
 
   /* Acentos (≈15 %) */
   --mint: #8CCFAD;
+  --mint-strong: #A3DABE;   /* menta para texto sobre #245B45 (contraste 5,0:1) */
   --teal: #3E9B91;
   --teal-text: #2F7A73;      /* verde azulado con contraste para texto sobre claro */
   --gold: #D6A64F;           /* hallazgos y la decisión: usar poco */
@@ -60,6 +61,9 @@ img, svg { max-width: 100%; display: block; }
 
 a { color: var(--green); }
 a:hover { color: var(--green-deep); }
+
+/* Rutas de navegación: área táctil de al menos 24 px */
+.crumbs a { display: inline-block; padding: 4px 0; }
 
 :focus-visible {
   outline: 3px solid var(--gold);

@@ -284,7 +284,8 @@ const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
   .card--featured:hover { transform: none; border-color: var(--green); }
   .card-link { color: var(--white); text-decoration: none; }
   .card-link:hover { color: var(--mint); text-decoration: underline; }
-  .read-case { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--mint); }
+  .read-case { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--mint-strong); display: inline-block; padding: 6px 0; }
+  .card--featured .card-pillar { color: var(--mint-strong); }
   .read-case:hover { color: var(--white); }
   .card--featured {
     grid-row: span 2;
