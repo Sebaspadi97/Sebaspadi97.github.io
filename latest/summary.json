@@ -1,6 +1,6 @@
 {
   "base": "https://sebaspadi97.github.io",
-  "date": "2026-10-27T12:41:09.940Z",
+  "date": "2026-10-27T12:47:30.879Z",
   "pages": 21,
   "axeRules": {},
   "overflow": [],
@@ -11,7 +11,7 @@
   "failed": [],
   "brokenImgs": [],
   "smallTargets": [
-    "/es/contacto/ input \"\" 1x1 ; input \"\" 20x20 ; input \"\" 20x20",
+    "/es/contacto/ input \"\" 1x1",
     "/no-existe-qa/ a \"Avísame\" 58x20"
   ],
   "seo": [],
@@ -59,11 +59,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.2 s",
-        "LCP": "1.7 s",
-        "TBT": "0 ms",
+        "FCP": "1.0 s",
+        "LCP": "1.5 s",
+        "TBT": "30 ms",
         "CLS": "0",
-        "SI": "1.2 s",
+        "SI": "1.0 s",
         "weight": "Total size was 148 KiB"
       }
     },
@@ -93,12 +93,12 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.0 s",
+        "FCP": "0.9 s",
         "LCP": "1.4 s",
         "TBT": "20 ms",
         "CLS": "0",
-        "SI": "1.0 s",
-        "weight": "Total size was 125 KiB"
+        "SI": "0.9 s",
+        "weight": "Total size was 124 KiB"
       }
     },
     {
@@ -110,11 +110,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.1 s",
-        "LCP": "1.7 s",
-        "TBT": "30 ms",
+        "FCP": "1.0 s",
+        "LCP": "1.5 s",
+        "TBT": "40 ms",
         "CLS": "0",
-        "SI": "1.1 s",
+        "SI": "1.0 s",
         "weight": "Total size was 206 KiB"
       }
     },
@@ -144,11 +144,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.1 s",
+        "FCP": "1.0 s",
         "LCP": "1.4 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.1 s",
+        "SI": "1.0 s",
         "weight": "Total size was 106 KiB"
       }
     }

@@ -23,19 +23,10 @@
         "value": "6 resources found",
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
           "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
-        ]
-      },
-      {
-        "id": "unused-css-rules",
-        "title": "Reduce unused CSS",
-        "score": 0.5,
-        "value": "Potential savings of 10 KiB",
-        "items": [
-          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
         ]
       }
     ],
@@ -66,18 +57,9 @@
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
-        ]
-      },
-      {
-        "id": "unused-css-rules",
-        "title": "Reduce unused CSS",
-        "score": 0.5,
-        "value": "Potential savings of 10 KiB",
-        "items": [
-          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
         ]
       }
     ],
@@ -92,11 +74,11 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.2 s",
-      "LCP": "1.7 s",
-      "TBT": "0 ms",
+      "FCP": "1.0 s",
+      "LCP": "1.5 s",
+      "TBT": "30 ms",
       "CLS": "0",
-      "SI": "1.2 s",
+      "SI": "1.0 s",
       "weight": "Total size was 148 KiB"
     },
     "failing": [
@@ -108,18 +90,18 @@
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
         ]
       },
       {
         "id": "unused-css-rules",
         "title": "Reduce unused CSS",
         "score": 0.5,
-        "value": "Potential savings of 12 KiB",
+        "value": "Potential savings of 11 KiB",
         "items": [
-          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
+          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
       }
     ],
@@ -150,9 +132,9 @@
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
           "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
         ]
       },
       {
@@ -161,11 +143,71 @@
         "score": 0.5,
         "value": "Potential savings of 11 KiB",
         "items": [
-          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
+          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
       }
     ],
-    "shiftDetails": []
+    "shiftDetails": [
+      {
+        "node": {
+          "type": "node",
+          "lhId": "page-1-SPAN",
+          "path": "1,HTML,1,BODY,4,MAIN,0,ARTICLE,0,HEADER,1,DIV,1,SPAN",
+          "selector": "article.case > header.container > div.case-meta > span",
+          "boundingRect": {
+            "top": 164,
+            "bottom": 188,
+            "left": 203,
+            "right": 375,
+            "width": 172,
+            "height": 23
+          },
+          "snippet": "<span data-astro-cid-zzz72t2a=\"\">",
+          "nodeLabel": "oct 2026 · 3 min de lectura"
+        },
+        "score": 0.00010222952486112391,
+        "subItems": {
+          "type": "subitems",
+          "items": [
+            {
+              "extra": {
+                "type": "url",
+                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
+              },
+              "cause": "Web font loaded"
+            },
+            {
+              "extra": {
+                "type": "url",
+                "value": "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
+              },
+              "cause": "Web font loaded"
+            },
+            {
+              "extra": {
+                "type": "url",
+                "value": "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+              },
+              "cause": "Web font loaded"
+            },
+            {
+              "extra": {
+                "type": "url",
+                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
+              },
+              "cause": "Web font loaded"
+            },
+            {
+              "extra": {
+                "type": "url",
+                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
+              },
+              "cause": "Web font loaded"
+            }
+          ]
+        }
+      }
+    ]
   },
   {
     "path": "/es/lab/",
@@ -176,12 +218,12 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.0 s",
+      "FCP": "0.9 s",
       "LCP": "1.4 s",
       "TBT": "20 ms",
       "CLS": "0",
-      "SI": "1.0 s",
-      "weight": "Total size was 125 KiB"
+      "SI": "0.9 s",
+      "weight": "Total size was 124 KiB"
     },
     "failing": [
       {
@@ -201,9 +243,9 @@
         "id": "unused-css-rules",
         "title": "Reduce unused CSS",
         "score": 0.5,
-        "value": "Potential savings of 12 KiB",
+        "value": "Potential savings of 11 KiB",
         "items": [
-          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
+          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
       }
     ],
@@ -218,11 +260,11 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.1 s",
-      "LCP": "1.7 s",
-      "TBT": "30 ms",
+      "FCP": "1.0 s",
+      "LCP": "1.5 s",
+      "TBT": "40 ms",
       "CLS": "0",
-      "SI": "1.1 s",
+      "SI": "1.0 s",
       "weight": "Total size was 206 KiB"
     },
     "failing": [
@@ -233,8 +275,8 @@
         "value": "12 resources found",
         "items": [
           "https://sebaspadi97.github.io/img/casos/emprendimiento/01_tasa_creacion_localidad-700.webp",
-          "https://sebaspadi97.github.io/_astro/open-sans-math-400-normal.C76BUjK0.woff2",
           "https://sebaspadi97.github.io/_astro/open-sans-math-600-normal.DQ8cZjrd.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-math-400-normal.C76BUjK0.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
         ]
@@ -245,7 +287,7 @@
         "score": 0.5,
         "value": "Potential savings of 12 KiB",
         "items": [
-          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
+          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
       }
     ],
@@ -277,8 +319,8 @@
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
         ]
       },
       {
@@ -287,7 +329,7 @@
         "score": 0.5,
         "value": "Potential savings of 11 KiB",
         "items": [
-          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
+          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
       }
     ],
@@ -302,11 +344,11 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.1 s",
+      "FCP": "1.0 s",
       "LCP": "1.4 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "1.1 s",
+      "SI": "1.0 s",
       "weight": "Total size was 106 KiB"
     },
     "failing": [
@@ -329,7 +371,7 @@
         "score": 0.5,
         "value": "Potential savings of 12 KiB",
         "items": [
-          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:500; … } …"
+          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
       }
     ],
