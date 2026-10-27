@@ -1,0 +1,278 @@
+---
+// Sobre mí / About (diseño aprobado): hero con foto, mi historia, cifras, trayectoria
+// en fondo oscuro, formación, herramientas, cita + fuera de la oficina y cierre.
+import { about } from '../data/about.js';
+import { site } from '../data/site.js';
+import { link } from '../i18n/index.js';
+
+const { lang = 'es' } = Astro.props;
+const c = about[lang];
+const cv = site.cv[lang];
+---
+<section class="container hero">
+  <div class="hero-meta eyebrow">
+    <span>{c.metaLeft}</span>
+    <span>{c.metaRight}</span>
+  </div>
+  <div class="hero-grid">
+    <div class="hero-text">
+      <h1 class="hero-title">{c.headlineBefore}<span class="underline-gold">{c.headlineMark}</span>{c.headlineAfter}</h1>
+      <p class="hero-intro">{c.intro}</p>
+      <div class="actions">
+        {cv && <a class="pill pill--primary" href={cv} download>{c.cv}</a>}
+        <a class:list={['pill', cv ? 'pill--outline' : 'pill--primary']} href={site.linkedin} rel="me noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="photo-wrap">
+      <span class="photo-frame" aria-hidden="true"></span>
+      <picture>
+        <source srcset={site.photo.webp} type="image/webp" />
+        <img class="photo" src={site.photo.jpg} alt={c.photoAlt} width="400" height="400" loading="eager" />
+      </picture>
+      <span class="photo-dot" aria-hidden="true"></span>
+      <svg class="photo-dots" viewBox="0 0 420 460" aria-hidden="true">
+        <g fill="#3E9B91" opacity="0.5"><circle cx="18" cy="60" r="5" /><circle cx="40" cy="30" r="3" /><circle cx="16" cy="120" r="4" /><circle cx="402" cy="420" r="5" /><circle cx="384" cy="446" r="3" /></g>
+        <g fill="#8CCFAD"><circle cx="60" cy="16" r="4" /><circle cx="404" cy="380" r="4" /></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="story" aria-labelledby="story-title">
+  <div class="container story-inner">
+    <div class="story-head">
+      <p class="eyebrow label">{c.storyLabel}</p>
+      <h2 id="story-title">{c.storyTitle}</h2>
+    </div>
+    <div class="story-body">
+      {c.story.map((p) => <p>{p}</p>)}
+    </div>
+  </div>
+</section>
+
+<section class="container numbers" aria-label={c.numbersLabel}>
+  <ul class="numbers-grid">
+    {c.numbers.map((x) => (
+      <li class:list={[{ gold: x.gold }]}>
+        <span class="num">{x.n}</span>
+        <span class="num-t">{x.t}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<section class="exp" aria-labelledby="exp-title">
+  <div class="container exp-inner">
+    <div class="exp-head">
+      <h2 id="exp-title">{c.expTitle}</h2>
+      <p>{c.expSub}</p>
+    </div>
+    <ol class="exp-list">
+      {c.experience.map((e) => (
+        <li>
+          <div class="exp-role">
+            <span class="eyebrow period">{e.period}</span>
+            <h3>{e.role}</h3>
+            <span class="org">{e.org}</span>
+          </div>
+          <div class="exp-text">
+            <p>{e.text}</p>
+            <ul class="results">{e.results.map((r) => <li class="finding">{r}</li>)}</ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<section class="container edu" aria-labelledby="edu-title">
+  <div class="edu-head">
+    <p class="eyebrow label">{c.eduLabel}</p>
+    <h2 id="edu-title">{c.eduTitle}</h2>
+  </div>
+  <ul class="edu-list">
+    {c.education.map((e) => (
+      <li>
+        <span><strong>{e.name}</strong> · {e.org}</span>
+        <span class:list={['edu-period', { current: e.current }]}>{e.period}</span>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<section class="tools" aria-labelledby="tools-title">
+  <div class="container tools-inner">
+    <h2 id="tools-title">{c.toolsTitle}</h2>
+    <div class="tools-grid">
+      {c.tools.map((g) => (
+        <div class="tool-group">
+          <h3 class:list={['eyebrow', `tone-${g.tone}`]}>{g.group}</h3>
+          <ul class:list={['tool-list', `tool-list--${g.tone}`]}>
+            {g.items.map((i) => <li>{i}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="container beyond">
+  <blockquote class="quote"><p>“{c.quote}”</p></blockquote>
+  <aside class="outside" aria-labelledby="outside-title">
+    <h2 id="outside-title" class="eyebrow">{c.outsideLabel}</h2>
+    <p>{c.outside}</p>
+  </aside>
+</section>
+
+<section class="closing">
+  <div class="container closing-inner">
+    <div class="closing-text">
+      <h2>{c.closingTitle}</h2>
+      <p>{c.closingText}</p>
+    </div>
+    <div class="actions">
+      <a class="pill pill--mint" href={link('contact', lang)}>{c.closingCta}</a>
+      {cv && <a class="pill pill--ghost-dark" href={cv} download>{c.closingCv}</a>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .label { color: var(--green); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Hero */
+  .hero { display: flex; flex-direction: column; gap: 24px; padding-top: clamp(40px, 6vw, 64px); padding-bottom: clamp(56px, 7vw, 80px); }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 12px;
+    color: var(--slate);
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: 14px;
+  }
+  .hero-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 48px; }
+  .hero-text { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+  .hero-title {
+    font-weight: 800;
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--green-deep);
+  }
+  .hero-intro { max-width: 620px; font-size: clamp(18px, 1.8vw, 21px); line-height: 1.55; }
+
+  .photo-wrap { flex: 1 1 300px; max-width: 400px; position: relative; padding: 24px; margin: 0 auto; }
+  .photo-frame {
+    position: absolute;
+    inset: 40px 8px 8px 40px;
+    border: 2px solid var(--green);
+    border-radius: 24px;
+  }
+  .photo { position: relative; display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 24px; background: var(--gray-light); }
+  .photo-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 4px solid var(--white);
+  }
+  .photo-dots { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+  /* Mi historia */
+  .story { background: var(--paper); border-top: 1px solid var(--gray-light); border-bottom: 1px solid var(--gray-light); }
+  .story-inner { display: flex; flex-wrap: wrap; gap: 32px 56px; padding-top: clamp(64px, 8vw, 88px); padding-bottom: clamp(64px, 8vw, 88px); }
+  .story-head { flex: 1 1 280px; display: flex; flex-direction: column; gap: 10px; }
+  .story-head h2 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: var(--green-deep); }
+  .story-body { flex: 999 1 560px; min-width: 0; max-width: 760px; display: flex; flex-direction: column; gap: 20px; }
+
+  /* Cifras */
+  .numbers { padding-top: 72px; padding-bottom: 72px; }
+  .numbers-grid { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 32px; }
+  .numbers-grid li { border-top: 2px solid var(--green); padding-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .numbers-grid li.gold { border-top-color: var(--gold); }
+  .num { font-family: var(--font-display); font-weight: 800; font-size: clamp(42px, 4.6vw, 56px); line-height: 1; color: var(--green-deep); }
+  .num-t { font-size: 16px; color: var(--slate); }
+
+  /* Trayectoria */
+  .exp { background: var(--green-night); color: var(--white); }
+  .exp-inner { display: flex; flex-direction: column; gap: 40px; padding-top: clamp(72px, 9vw, 96px); padding-bottom: clamp(72px, 9vw, 96px); }
+  .exp-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; }
+  .exp-head h2 { font-size: clamp(34px, 4vw, 48px); font-weight: 800; letter-spacing: -0.02em; }
+  .exp-head p { font-size: 15px; color: var(--on-dark); }
+  .exp-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+  .exp-list > li {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 16px 40px;
+    padding: 32px 0;
+    border-top: 1px solid var(--green);
+  }
+  .exp-list > li:last-child { border-bottom: 1px solid var(--green); }
+  .exp-role { display: flex; flex-direction: column; gap: 4px; }
+  .period { color: var(--mint); }
+  .exp-role h3 { font-weight: 700; font-size: 22px; line-height: 1.3; }
+  .org { color: var(--on-dark); }
+  .exp-text { display: flex; flex-direction: column; gap: 12px; }
+  .exp-text p { color: var(--gray-light); font-size: 17px; }
+  .results { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* Formación */
+  .edu { display: flex; flex-wrap: wrap; gap: 32px 56px; padding-top: clamp(72px, 9vw, 96px); padding-bottom: clamp(72px, 9vw, 96px); }
+  .edu-head { flex: 1 1 280px; }
+  .edu-head h2 { margin-top: 10px; font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: var(--green-deep); }
+  .edu-list { flex: 999 1 560px; min-width: 0; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+  .edu-list li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding: 18px 0;
+    border-top: 1px solid var(--gray-light);
+  }
+  .edu-list li:first-child { border-top: 2px solid var(--carbon); }
+  .edu-list strong { font-family: var(--font-display); font-weight: 700; }
+  .edu-period { color: var(--slate); font-size: 15px; }
+  .edu-period.current { color: var(--green); font-weight: 600; }
+
+  /* Herramientas */
+  .tools { background: var(--paper); border-top: 1px solid var(--gray-light); border-bottom: 1px solid var(--gray-light); }
+  .tools-inner { display: flex; flex-direction: column; gap: 32px; padding-top: 80px; padding-bottom: 80px; }
+  .tools-inner > h2 { font-size: clamp(30px, 3.4vw, 40px); font-weight: 800; letter-spacing: -0.02em; color: var(--green-deep); }
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 32px; }
+  .tool-group { display: flex; flex-direction: column; gap: 12px; }
+  .tool-group h3 { font-weight: 700; }
+  .tone-green { color: var(--green); }
+  .tone-teal { color: var(--teal-text); }
+  .tone-gold { color: var(--gold-text); }
+  .tool-list { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tool-list li { border: 1px solid var(--green); color: var(--green-deep); font-size: 15px; padding: 6px 14px; border-radius: 999px; }
+  .tool-list--teal li { border-color: var(--teal); }
+  .tool-list--gold li { border-color: var(--gold); }
+
+  /* Cita y fuera de la oficina */
+  .beyond { display: flex; flex-wrap: wrap; align-items: center; gap: 40px 56px; padding-top: clamp(64px, 8vw, 88px); padding-bottom: clamp(64px, 8vw, 88px); }
+  .quote { flex: 999 1 560px; min-width: 0; margin: 0; }
+  .quote p {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--green-deep);
+  }
+  .outside { flex: 1 1 300px; display: flex; flex-direction: column; gap: 8px; padding: 24px; background: #FBF3E2; border-radius: 16px; }
+  .outside h2 { color: var(--gold-text); font-weight: 700; }
+  .outside p { font-size: 17px; }
+
+  /* Cierre */
+  .closing { background: var(--green-deep); color: var(--white); }
+  .closing-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px; padding-top: 80px; padding-bottom: 80px; }
+  .closing-text { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .closing h2 { font-size: clamp(32px, 3.6vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
+  .closing p { color: var(--gray-light); }
+</style>
