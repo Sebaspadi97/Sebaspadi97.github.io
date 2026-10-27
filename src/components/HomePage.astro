@@ -2,7 +2,7 @@
 // Inicio (diseño aprobado "D · Combinada"): hero editorial, El método,
 // proyectos sobre fondo oscuro, franja Dato curioso, manifiesto + servicios
 // y Desde el Lab. Se usa en /es/ y /en/.
-import DotsSP from './DotsSP.astro';
+import AnalyticsMotion from './AnalyticsMotion.astro';
 import ChurnSimulator from './ChurnSimulator.astro';
 import LabCover from './LabCover.astro';
 import { posts as labPosts } from '../data/lab.js';
@@ -43,7 +43,7 @@ const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
 <section class="method" aria-labelledby="method-title">
   <div class="container method-inner">
     <div class="method-figure">
-      <DotsSP label={c.method.figure} />
+      <AnalyticsMotion lang={lang} label={c.method.figure} />
     </div>
     <div class="method-text">
       <div>

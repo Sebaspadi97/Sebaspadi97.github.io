@@ -22,7 +22,7 @@ export const home = {
     method: {
       label: 'El método',
       title: 'Cada punto es un dato. Con método, forman una decisión.',
-      figure: 'Campo de puntos dispersos que se ordenan hasta formar las letras SP',
+      figure: 'Animación de puntos que pasan por escenas de analítica: datos y código, un modelo con su fórmula, un gráfico de barras, una torta y una proyección que termina en un punto dorado de decisión.',
       steps: [
         { n: '01', name: 'La pregunta', text: 'Qué necesita decidir el negocio.' },
         { n: '02', name: 'Los datos', text: 'Fuentes abiertas, sintéticas o autorizadas, limpias y documentadas.' },
@@ -120,7 +120,7 @@ export const home = {
     method: {
       label: 'The method',
       title: 'Every dot is a data point. With method, they become a decision.',
-      figure: 'A field of scattered dots that line up to form the letters SP',
+      figure: 'Animation of dots moving through analytics scenes: data and code, a model with its formula, a bar chart, a pie chart and a forecast that ends in a gold decision point.',
       steps: [
         { n: '01', name: 'The question', text: 'What the business needs to decide.' },
         { n: '02', name: 'The data', text: 'Open, synthetic or authorized sources, cleaned and documented.' },
