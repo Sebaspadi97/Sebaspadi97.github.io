@@ -1,0 +1,145 @@
+---
+// Plantilla de páginas legales (diseño aprobado): columna de 880 px, "En corto",
+// secciones numeradas con la norma en gris. Privacidad suma el checklist de cumplimiento;
+// Términos, la tabla de licencias.
+import { inline } from '../lib/text.js';
+import { legalUpdated, legalReviewPending } from '../data/legal.js';
+
+const { doc, checklist = null, licenses = null } = Astro.props;
+const n = (i) => String(i + 1).padStart(2, '0');
+const statusTone = (s) => (s === 'Aplicado' ? 'ok' : 'na');
+---
+<section class="legal-head">
+  <div class="legal-meta eyebrow">
+    <span>Legal</span>
+    <span>Última actualización: {legalUpdated}</span>
+  </div>
+  <h1>{doc.title}</h1>
+  <p class="lead">{doc.description}</p>
+  {legalReviewPending && (
+    <p class="review" role="note">Versión en revisión legal antes del lanzamiento del sitio.</p>
+  )}
+</section>
+
+<div class="legal-col">
+  <aside class="short" aria-labelledby="short-title">
+    <p id="short-title" class="eyebrow short-label">En corto</p>
+    <ul>{doc.short.map((s) => <li>{s}</li>)}</ul>
+  </aside>
+</div>
+
+<article class="legal-col legal-body">
+  {doc.sections.map((s, i) => (
+    <section class="sec" id={s.checklist ? 'cumplimiento' : undefined} aria-labelledby={`s-${i}`}>
+      <h2 id={`s-${i}`}><span class="sec-n">{n(i)} · </span>{s.title}</h2>
+      {s.body.map((p) => <p set:html={inline(p)} />)}
+      {s.list && <ul class="sec-list">{s.list.map((li) => <li set:html={inline(li)} />)}</ul>}
+
+      {s.licenses && licenses && (
+        <div class="licenses" role="table" aria-label="Licencias por tipo de contenido">
+          {licenses.map((l) => (
+            <div class="lic" role="row">
+              <div class="lic-what" role="rowheader">
+                <span class="lic-name">{l.what}</span>
+                <span class:list={['lic-tag', l.open ? 'lic-tag--open' : 'lic-tag--closed']}>{l.license}</span>
+              </div>
+              <p class="lic-text" role="cell">{l.text}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {s.after && s.after.map((p) => <p set:html={inline(p)} />)}
+
+      {s.checklist && checklist && (
+        <ol class="checklist">
+          {checklist.map((c, k) => (
+            <li class="check-item">
+              <div class="check-top">
+                <h3>{k + 1}. {c.title}</h3>
+                <span class:list={['status', `status--${statusTone(c.status)}`]}>{c.status}</span>
+              </div>
+              <p set:html={inline(c.body)} />
+              <p class="norm">Norma: {c.norm}</p>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      {s.norm && <p class="norm" set:html={`Norma: ${inline(s.norm)}`} />}
+    </section>
+  ))}
+</article>
+
+<style>
+  .legal-head,
+  .legal-col { max-width: 880px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+  .legal-head { display: flex; flex-direction: column; gap: 18px; padding-top: clamp(40px, 6vw, 56px); padding-bottom: 32px; }
+  .legal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 12px;
+    color: var(--slate);
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: 14px;
+  }
+  h1 { font-weight: 800; font-size: clamp(36px, 5vw, 60px); line-height: 1.05; letter-spacing: -0.03em; color: var(--green-deep); }
+  .lead { font-size: clamp(18px, 1.8vw, 20px); color: var(--slate); }
+  .review {
+    align-self: flex-start;
+    font-size: 14px;
+    color: var(--gold-text);
+    background: #FBF3E2;
+    border-radius: 999px;
+    padding: 6px 14px;
+  }
+
+  .short {
+    background: var(--green-deep);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .short-label { color: var(--mint); font-weight: 700; }
+  .short ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 17px; color: var(--gray-light); }
+
+  .legal-body { display: flex; flex-direction: column; gap: 36px; padding-top: 48px; padding-bottom: 88px; }
+  .sec { display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 24px; }
+  .sec h2 { font-size: clamp(22px, 2.4vw, 26px); font-weight: 800; color: var(--green-deep); }
+  .sec-n { color: var(--teal-text); }
+  .sec-list { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+  .sec :global(strong) { font-weight: 600; }
+  .norm { font-size: 14px; color: var(--slate); }
+
+  .checklist { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .check-item {
+    background: var(--paper);
+    border: 1px solid var(--gray-light);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .check-item p { font-size: 16px; }
+  .check-item .norm { font-size: 14px; }
+  .check-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+  .check-top h3 { font-weight: 700; font-size: 19px; }
+  .status { font-size: 13px; font-weight: 600; padding: 3px 12px; border-radius: 999px; }
+  .status--ok { background: #DDF1E6; color: var(--green-deep); }
+  .status--na { background: var(--gray-light); color: var(--carbon); }
+
+  .licenses { display: flex; flex-direction: column; border: 1px solid var(--gray-light); border-radius: 16px; overflow: hidden; background: var(--paper); }
+  .lic { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 8px 24px; padding: 18px 22px; border-top: 1px solid var(--gray-light); }
+  .lic:first-child { border-top: 0; }
+  .lic-what { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .lic-name { font-family: var(--font-display); font-weight: 700; }
+  .lic-tag { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; }
+  .lic-tag--open { background: #DDF1E6; color: var(--green-deep); }
+  .lic-tag--closed { background: var(--gray-light); color: var(--carbon); }
+  .lic-text { font-size: 15px; color: var(--carbon); grid-column: span 2; }
+  @media (max-width: 640px) { .lic-text { grid-column: auto; } }
+</style>

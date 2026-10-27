@@ -1,0 +1,8 @@
+---
+import Base from '../../../layouts/Base.astro';
+import LegalPage from '../../../components/LegalPage.astro';
+import { terms } from '../../../data/legal.js';
+---
+<Base lang="es" pageKey="terms" title="Términos de uso · Sebas Padilla Lab" description={terms.description}>
+  <LegalPage doc={terms} licenses={terms.licenses} />
+</Base>

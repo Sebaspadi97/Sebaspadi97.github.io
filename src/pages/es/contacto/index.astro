@@ -5,6 +5,7 @@
 import Base from '../../../layouts/Base.astro';
 import { link } from '../../../i18n/index.js';
 import { site } from '../../../data/site.js';
+import { POLICY_VERSION } from '../../../data/legal.js';
 
 const consentText = 'Autorizo el tratamiento de mis datos para responder este mensaje, según la política de privacidad.';
 const newsText = 'Quiero recibir por correo las novedades del Lab. Puedo darme de baja cuando quiera.';
@@ -83,6 +84,7 @@ const formReady = Boolean(site.form && site.form.accessKey);
           data-email={site.email}
           data-consent-text={consentText}
           data-news-text={newsText}
+          data-policy={POLICY_VERSION}
         >
           <div class="row-2">
             <div class="field">
@@ -224,6 +226,8 @@ const formReady = Boolean(site.form && site.form.accessKey);
               autorizacion_tratamiento: `Sí — "${form.dataset.consentText}" — ${registro}`,
               novedades_del_lab: novedades ? `Sí — "${form.dataset.newsText}" — ${registro}` : 'No',
               pagina: window.location.href,
+              formulario: 'Contacto (/es/contacto/)',
+              version_politica: form.dataset.policy,
             }),
           });
           const json = await res.json().catch(() => ({}));
@@ -248,6 +252,7 @@ const formReady = Boolean(site.form && site.form.accessKey);
         `Motivo: ${motivo}`,
         `Autorización de tratamiento de datos: Sí (${registro})`,
         `Novedades del Lab: ${novedades ? 'Sí' : 'No'}`,
+        `Versión de la política de privacidad: ${form.dataset.policy}`,
       ].join('\n');
       const href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(`Contacto SP Lab · ${motivo}`)}&body=${encodeURIComponent(body)}`;
       window.location.href = href;

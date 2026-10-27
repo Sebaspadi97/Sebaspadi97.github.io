@@ -1,0 +1,8 @@
+---
+import Base from '../../../layouts/Base.astro';
+import LegalPage from '../../../components/LegalPage.astro';
+import { privacy } from '../../../data/legal.js';
+---
+<Base lang="es" pageKey="privacy" title="Política de privacidad · Sebas Padilla Lab" description={privacy.description}>
+  <LegalPage doc={privacy} checklist={privacy.checklist} />
+</Base>
