@@ -27,7 +27,7 @@ const T = es
       captured: 'de los abandonos alcanzados',
       verdictWin: 'Elegir con el modelo gana',
       verdictMore: 'más que contactar a todos.',
-      verdictNone: 'Con estos supuestos no hay a quién contactar: ninguna campaña es rentable.',
+      verdictNone: 'Con estos supuestos ninguna campaña es rentable: lo mejor es no contactar a nadie. Contactar a todos perdería',
       loading: 'Cargando datos del simulador…',
       error: 'No se pudieron cargar los datos del simulador.',
     }
@@ -47,7 +47,7 @@ const T = es
       captured: 'of churners reached',
       verdictWin: 'Choosing with the model earns',
       verdictMore: 'more than contacting everyone.',
-      verdictNone: 'With these assumptions there is no one worth contacting: no campaign is profitable.',
+      verdictNone: 'With these assumptions no campaign is profitable: the best move is to contact no one. Contacting everyone would lose',
       loading: 'Loading simulator data…',
       error: 'The simulator data could not be loaded.',
     };
@@ -242,11 +242,11 @@ const uid = `sim-${variant}-${lang}`;
       out('cost').textContent = cop(cost);
       out('eff').textContent = es ? `${effIn.value} %` : `${effIn.value}%`;
       const r = compute(cost, eff);
-      out('model').textContent = r.k ? money(r.model) : (es ? 'COP 0' : 'COP 0');
+      out('model').textContent = r.k ? money(r.model) : 'COP 0';
       out('pct').textContent = pct((r.k / n) * 100);
       out('all').textContent = money(r.all);
       const verdict = root.querySelector<HTMLElement>('[data-verdict]')!;
-      if (!r.k) verdict.textContent = T.verdictNone;
+      if (!r.k || r.model <= 0) verdict.innerHTML = `${T.verdictNone} <strong>${moneyAbs(r.all)}</strong>.`;
       else verdict.innerHTML = `${T.verdictWin} <strong>${moneyAbs(r.model - r.all)}</strong> ${T.verdictMore} ${root.dataset.variant === 'full' ? `(${pct(r.captured)} ${T.captured})` : ''}`;
       drawBars(r);
       window.clearTimeout(timer);
