@@ -1,0 +1,187 @@
+{
+  "base": "https://sebaspadi97.github.io",
+  "date": "2026-10-27T12:28:42.489Z",
+  "pages": 21,
+  "axeRules": {
+    "color-contrast": {
+      "impact": "serious",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "pages": [
+        "desktop:/en/",
+        "desktop:/es/",
+        "desktop:/es/lab/bogota-abre-17-bares-al-dia/",
+        "desktop:/es/lab/donde-nacen-las-empresas-de-bogota/",
+        "desktop:/es/lab/llamar-a-todos-los-clientes/",
+        "desktop:/es/proyectos/",
+        "mobile:/en/",
+        "mobile:/es/",
+        "mobile:/es/lab/bogota-abre-17-bares-al-dia/",
+        "mobile:/es/lab/donde-nacen-las-empresas-de-bogota/",
+        "mobile:/es/lab/llamar-a-todos-los-clientes/",
+        "mobile:/es/proyectos/"
+      ],
+      "count": 18
+    }
+  },
+  "overflow": [],
+  "consoleErrors": [
+    "desktop:/no-existe-qa/ Failed to load resource: the server responded with a status of 404 ()",
+    "mobile:/no-existe-qa/ Failed to load resource: the server responded with a status of 404 ()"
+  ],
+  "failed": [],
+  "brokenImgs": [],
+  "smallTargets": [
+    "/en/projects/bogota-businesses/ a \"Projects\" 53x19",
+    "/en/projects/customer-churn/ a \"Projects\" 53x19",
+    "/en/projects/hospital-stay/ a \"Projects\" 53x19",
+    "/es/contacto/ a \"Descargar CV (PDF)\" 293x23 ; input \"\" 1x1 ; input \"\" 20x20 ; input \"\" 20x20",
+    "/es/lab/bogota-abre-17-bares-al-dia/ a \"Lab\" 24x19 ; a \"Conocer más →\" 221x23",
+    "/es/lab/donde-nacen-las-empresas-de-bogota/ a \"Lab\" 24x19 ; a \"Conocer más →\" 221x23",
+    "/es/lab/llamar-a-todos-los-clientes/ a \"Lab\" 24x19 ; a \"Conocer más →\" 221x23",
+    "/es/lab/rss/ a \"Lab\" 24x19",
+    "/es/proyectos/abandono-de-clientes/ a \"Proyectos\" 64x19",
+    "/es/proyectos/cafe-bogota/ a \"Proyectos\" 64x19",
+    "/es/proyectos/emprendimiento-bogota/ a \"Proyectos\" 64x19",
+    "/es/proyectos/estancia-hospitalaria/ a \"Proyectos\" 64x19",
+    "/no-existe-qa/ a \"Avísame\" 58x20"
+  ],
+  "seo": [],
+  "lighthouse": [
+    {
+      "path": "/es/",
+      "scores": {
+        "performance": 98,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "FCP": "1.5 s",
+        "LCP": "1.6 s",
+        "TBT": "0 ms",
+        "CLS": "0.067",
+        "SI": "1.5 s",
+        "weight": "Total size was 154 KiB"
+      }
+    },
+    {
+      "path": "/en/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "FCP": "1.5 s",
+        "LCP": "1.5 s",
+        "TBT": "0 ms",
+        "CLS": "0.011",
+        "SI": "1.5 s",
+        "weight": "Total size was 154 KiB"
+      }
+    },
+    {
+      "path": "/es/proyectos/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "FCP": "1.2 s",
+        "LCP": "1.3 s",
+        "TBT": "0 ms",
+        "CLS": "0.002",
+        "SI": "1.2 s",
+        "weight": "Total size was 181 KiB"
+      }
+    },
+    {
+      "path": "/es/proyectos/abandono-de-clientes/",
+      "scores": {
+        "performance": 92,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "FCP": "1.5 s",
+        "LCP": "1.5 s",
+        "TBT": "0 ms",
+        "CLS": "0.174",
+        "SI": "1.5 s",
+        "weight": "Total size was 152 KiB"
+      }
+    },
+    {
+      "path": "/es/lab/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "FCP": "1.4 s",
+        "LCP": "1.4 s",
+        "TBT": "0 ms",
+        "CLS": "0.002",
+        "SI": "1.4 s",
+        "weight": "Total size was 156 KiB"
+      }
+    },
+    {
+      "path": "/es/lab/donde-nacen-las-empresas-de-bogota/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "FCP": "1.0 s",
+        "LCP": "1.3 s",
+        "TBT": "0 ms",
+        "CLS": "0.014",
+        "SI": "1.0 s",
+        "weight": "Total size was 248 KiB"
+      }
+    },
+    {
+      "path": "/es/sobre-mi/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "FCP": "1.1 s",
+        "LCP": "1.1 s",
+        "TBT": "0 ms",
+        "CLS": "0.002",
+        "SI": "1.1 s",
+        "weight": "Total size was 138 KiB"
+      }
+    },
+    {
+      "path": "/es/contacto/",
+      "scores": {
+        "performance": 93,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "FCP": "1.4 s",
+        "LCP": "1.4 s",
+        "TBT": "0 ms",
+        "CLS": "0.165",
+        "SI": "1.4 s",
+        "weight": "Total size was 107 KiB"
+      }
+    }
+  ]
+}

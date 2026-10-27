@@ -1,0 +1,983 @@
+[
+  {
+    "viewport": "desktop",
+    "path": "/en/",
+    "status": 200,
+    "title": "Sebas Padilla Lab · From data to decisions",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": "article > .card-pillar.eyebrow",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow card-pillar\" data-astro-cid-jdovvxl7=\"\">Featured · Machine Learning</span>"
+          },
+          {
+            "target": ".read-case",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<a class=\"read-case\" href=\"/en/projects/customer-churn/\" data-astro-cid-jdovvxl7=\"\">Read the case <span aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</span></"
+          }
+        ],
+        "count": 2
+      }
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "path": "/en/about/",
+    "status": 200,
+    "title": "About · Sebas Padilla Lab",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/about/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/en/projects/bogota-businesses/",
+    "status": 200,
+    "title": "Where are Bogotá's new businesses born? · Sebas Padilla Lab",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/projects/bogota-businesses/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Projects\" 53x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/en/projects/customer-churn/",
+    "status": 200,
+    "title": "Which customers are about to leave? · Sebas Padilla Lab",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/projects/customer-churn/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Projects\" 53x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/en/projects/hospital-stay/",
+    "status": 200,
+    "title": "How many days does a patient have left in hospital? · Sebas Padilla Lab",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/projects/hospital-stay/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Projects\" 53x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/",
+    "status": 200,
+    "title": "Sebas Padilla Lab · De los datos a las decisiones",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": "article > .card-pillar.eyebrow",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow card-pillar\" data-astro-cid-jdovvxl7=\"\">Destacado · Machine Learning</span>"
+          },
+          {
+            "target": ".read-case",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<a class=\"read-case\" href=\"/es/proyectos/abandono-de-clientes/\" data-astro-cid-jdovvxl7=\"\">Leer el caso <span aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</s"
+          }
+        ],
+        "count": 2
+      }
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/contacto/",
+    "status": 200,
+    "title": "Contacto · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/contacto/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Descargar CV (PDF)\" 337x23",
+      "input \"\" 1x1",
+      "input \"\" 20x20",
+      "a \"política de privacidad\" 159x18",
+      "input \"\" 20x20"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/lab/",
+    "status": 200,
+    "title": "Lab · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/lab/bogota-abre-17-bares-al-dia/",
+    "status": 200,
+    "title": "Bogotá abre 17 bares al día · Lab · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/bogota-abre-17-bares-al-dia/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Lab\" 24x19",
+      "a \"Conocer más →\" 518x23"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".k-cat--mint",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Market Intelligence</span>"
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/lab/donde-nacen-las-empresas-de-bogota/",
+    "status": 200,
+    "title": "Dónde nacen las empresas de Bogotá, y quién las lidera · Lab · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/donde-nacen-las-empresas-de-bogota/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Lab\" 24x19",
+      "a \"Conocer más →\" 518x23"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".k-cat--mint",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Data</span>"
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/lab/llamar-a-todos-los-clientes/",
+    "status": 200,
+    "title": "¿Llamar a todos los clientes? El modelo dice que no · Lab · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/llamar-a-todos-los-clientes/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Lab\" 24x19",
+      "a \"Conocer más →\" 518x23"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".k-cat--mint",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Machine Learning</span>"
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/lab/rss/",
+    "status": 200,
+    "title": "Suscribirse al Lab por RSS · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/rss/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Lab\" 24x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/privacidad/",
+    "status": 200,
+    "title": "Política de privacidad · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/privacidad/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/proyectos/",
+    "status": 200,
+    "title": "Proyectos · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".featured-text > .tone-mint.eyebrow",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow tone-mint\" data-astro-cid-gsn4ozra=\"\">Destacado · Machine Learning</span>"
+          },
+          {
+            "target": ".read-more",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<a class=\"read-more\" href=\"/es/proyectos/abandono-de-clientes/\" data-astro-cid-gsn4ozra=\"\">Leer el caso <span aria-hidden=\"true\" data-astro-cid-gsn4ozra=\"\">→</s"
+          }
+        ],
+        "count": 2
+      }
+    ]
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/proyectos/abandono-de-clientes/",
+    "status": 200,
+    "title": "¿Qué clientes están por irse? · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/abandono-de-clientes/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Proyectos\" 64x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/proyectos/cafe-bogota/",
+    "status": 200,
+    "title": "¿Dónde abrir un café en Bogotá? · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/cafe-bogota/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Proyectos\" 64x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/proyectos/emprendimiento-bogota/",
+    "status": 200,
+    "title": "Radiografía del emprendimiento en Bogotá · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/emprendimiento-bogota/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Proyectos\" 64x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/proyectos/estancia-hospitalaria/",
+    "status": 200,
+    "title": "¿Cuántos días le quedan a un paciente en el hospital? · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/estancia-hospitalaria/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Proyectos\" 64x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/sobre-mi/",
+    "status": 200,
+    "title": "Sobre mí · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/sobre-mi/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/es/terminos/",
+    "status": 200,
+    "title": "Términos de uso · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/terminos/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "desktop",
+    "path": "/no-existe-qa/",
+    "status": 404,
+    "title": "Página no encontrada · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/404/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Avísame\" 58x20"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/en/",
+    "status": 200,
+    "title": "Sebas Padilla Lab · From data to decisions",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": "article > .card-pillar.eyebrow",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow card-pillar\" data-astro-cid-jdovvxl7=\"\">Featured · Machine Learning</span>"
+          },
+          {
+            "target": ".read-case",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<a class=\"read-case\" href=\"/en/projects/customer-churn/\" data-astro-cid-jdovvxl7=\"\">Read the case <span aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</span></"
+          }
+        ],
+        "count": 2
+      }
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "path": "/en/about/",
+    "status": 200,
+    "title": "About · Sebas Padilla Lab",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/about/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/en/projects/bogota-businesses/",
+    "status": 200,
+    "title": "Where are Bogotá's new businesses born? · Sebas Padilla Lab",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/projects/bogota-businesses/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Projects\" 53x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/en/projects/customer-churn/",
+    "status": 200,
+    "title": "Which customers are about to leave? · Sebas Padilla Lab",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/projects/customer-churn/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Projects\" 53x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/en/projects/hospital-stay/",
+    "status": 200,
+    "title": "How many days does a patient have left in hospital? · Sebas Padilla Lab",
+    "lang": "en",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/en/projects/hospital-stay/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Projects\" 53x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/",
+    "status": 200,
+    "title": "Sebas Padilla Lab · De los datos a las decisiones",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": "article > .card-pillar.eyebrow",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow card-pillar\" data-astro-cid-jdovvxl7=\"\">Destacado · Machine Learning</span>"
+          },
+          {
+            "target": ".read-case",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<a class=\"read-case\" href=\"/es/proyectos/abandono-de-clientes/\" data-astro-cid-jdovvxl7=\"\">Leer el caso <span aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</s"
+          }
+        ],
+        "count": 2
+      }
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/contacto/",
+    "status": 200,
+    "title": "Contacto · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/contacto/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Descargar CV (PDF)\" 293x23",
+      "input \"\" 1x1",
+      "input \"\" 20x20",
+      "input \"\" 20x20"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/lab/",
+    "status": 200,
+    "title": "Lab · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/lab/bogota-abre-17-bares-al-dia/",
+    "status": 200,
+    "title": "Bogotá abre 17 bares al día · Lab · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/bogota-abre-17-bares-al-dia/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Lab\" 24x19",
+      "a \"Conocer más →\" 221x23"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".k-cat--mint",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Market Intelligence</span>"
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/lab/donde-nacen-las-empresas-de-bogota/",
+    "status": 200,
+    "title": "Dónde nacen las empresas de Bogotá, y quién las lidera · Lab · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/donde-nacen-las-empresas-de-bogota/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Lab\" 24x19",
+      "a \"Conocer más →\" 221x23"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".k-cat--mint",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Data</span>"
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/lab/llamar-a-todos-los-clientes/",
+    "status": 200,
+    "title": "¿Llamar a todos los clientes? El modelo dice que no · Lab · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/llamar-a-todos-los-clientes/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Lab\" 24x19",
+      "a \"Conocer más →\" 221x23"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".k-cat--mint",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Machine Learning</span>"
+          }
+        ],
+        "count": 1
+      }
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/lab/rss/",
+    "status": 200,
+    "title": "Suscribirse al Lab por RSS · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/lab/rss/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Lab\" 24x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/privacidad/",
+    "status": 200,
+    "title": "Política de privacidad · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/privacidad/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/proyectos/",
+    "status": 200,
+    "title": "Proyectos · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".featured-text > .tone-mint.eyebrow",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"eyebrow tone-mint\" data-astro-cid-gsn4ozra=\"\">Destacado · Machine Learning</span>"
+          },
+          {
+            "target": ".read-more",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "html": "<a class=\"read-more\" href=\"/es/proyectos/abandono-de-clientes/\" data-astro-cid-gsn4ozra=\"\">Leer el caso <span aria-hidden=\"true\" data-astro-cid-gsn4ozra=\"\">→</s"
+          }
+        ],
+        "count": 2
+      }
+    ]
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/proyectos/abandono-de-clientes/",
+    "status": 200,
+    "title": "¿Qué clientes están por irse? · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/abandono-de-clientes/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Proyectos\" 64x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/proyectos/cafe-bogota/",
+    "status": 200,
+    "title": "¿Dónde abrir un café en Bogotá? · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/cafe-bogota/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Proyectos\" 64x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/proyectos/emprendimiento-bogota/",
+    "status": 200,
+    "title": "Radiografía del emprendimiento en Bogotá · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/emprendimiento-bogota/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Proyectos\" 64x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/proyectos/estancia-hospitalaria/",
+    "status": 200,
+    "title": "¿Cuántos días le quedan a un paciente en el hospital? · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/proyectos/estancia-hospitalaria/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Proyectos\" 64x19"
+    ],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/sobre-mi/",
+    "status": 200,
+    "title": "Sobre mí · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/sobre-mi/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/es/terminos/",
+    "status": 200,
+    "title": "Términos de uso · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/es/terminos/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [],
+    "consoleErrors": [],
+    "failed": [],
+    "axe": []
+  },
+  {
+    "viewport": "mobile",
+    "path": "/no-existe-qa/",
+    "status": 404,
+    "title": "Página no encontrada · Sebas Padilla Lab",
+    "lang": "es",
+    "h1": 1,
+    "description": true,
+    "canonical": "https://sebaspadi97.github.io/404/",
+    "overflow": false,
+    "wide": [],
+    "brokenImgs": [],
+    "small": [
+      "a \"Avísame\" 58x20"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "failed": [],
+    "axe": []
+  }
+]
