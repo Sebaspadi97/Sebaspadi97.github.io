@@ -3,6 +3,7 @@
 // proyectos sobre fondo oscuro, franja Dato curioso, manifiesto + servicios
 // y Desde el Lab. Se usa en /es/ y /en/.
 import DotsSP from './DotsSP.astro';
+import CampaignChart from './CampaignChart.astro';
 import { home } from '../data/home.js';
 import { link, hasLang, ui } from '../i18n/index.js';
 import { site } from '../data/site.js';
@@ -70,20 +71,7 @@ const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
     <div class="projects-grid">
       <a class="card card--featured" href={link(f.key, lang)}>
         <span class="eyebrow card-pillar">{f.pillar}</span>
-        <figure class="campaign-chart">
-          <svg viewBox="0 0 400 190" role="img" aria-label={f.chart.label}>
-            <line x1="200" y1="28" x2="200" y2="80" stroke="#2F8665" stroke-width="1.5" />
-            <line x1="200" y1="102" x2="200" y2="150" stroke="#2F8665" stroke-width="1.5" />
-            <rect x="34" y="34" width="166" height="40" rx="6" fill="#A9B5AE" />
-            <rect x="200" y="104" width="46" height="40" rx="6" fill="#8CCFAD" />
-            <text x="36" y="24" fill="#CFD8D2" font-size="13" font-family="Open Sans, sans-serif">{f.chart.all}</text>
-            <text x="190" y="59" fill="#11291F" font-size="14" font-weight="700" text-anchor="end" font-family="Montserrat, sans-serif">{f.chart.allValue}</text>
-            <text x="36" y="96" fill="#CFD8D2" font-size="13" font-family="Open Sans, sans-serif">{f.chart.model}</text>
-            <text x="256" y="129" fill="#F8FAF7" font-size="14" font-weight="700" font-family="Montserrat, sans-serif">{f.chart.modelValue}</text>
-            <circle cx="246" cy="124" r="5" fill="#D6A64F" />
-          </svg>
-          <figcaption>{f.chart.note}</figcaption>
-        </figure>
+        <CampaignChart chart={f.chart} />
         <span class="card-title card-title--lg">{f.title}</span>
         <span class="card-question">{f.question}</span>
         <span class="finding">{c.projects.findingLabel}: {f.finding}</span>
@@ -318,19 +306,6 @@ const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
   .card-question--muted { color: var(--on-dark); font-size: 15px; }
   .card .finding { margin-top: 4px; }
   .tag--dark { color: var(--mint); }
-
-  .campaign-chart {
-    flex: 1;
-    margin: 0;
-    padding: 20px;
-    border-radius: var(--radius-md);
-    background: var(--green-deep);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-  }
-  .campaign-chart figcaption { font-size: 13px; color: var(--on-dark-muted); }
 
   /* ---------- Dato curioso ---------- */
   .fact { background: var(--gold); color: var(--carbon); }

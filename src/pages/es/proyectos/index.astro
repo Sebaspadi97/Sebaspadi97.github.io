@@ -1,0 +1,287 @@
+---
+// Proyectos (diseño aprobado): encabezado con tres nubes de puntos que llevan al
+// punto dorado, filtros por pilar y herramienta, galería oscura y cierre.
+import Base from '../../../layouts/Base.astro';
+import CampaignChart from '../../../components/CampaignChart.astro';
+import { cases, pillars, toolFilters } from '../../../data/cases.js';
+import { home } from '../../../data/home.js';
+import { link } from '../../../i18n/index.js';
+import { site } from '../../../data/site.js';
+import sizes from '../../../data/image-sizes.json';
+
+const featured = cases.find((c) => c.featured);
+const rest = cases.filter((c) => !c.featured);
+const n = cases.length;
+const countLabel = (k) => `${k} ${k === 1 ? 'proyecto' : 'proyectos'} · 3 pilares`;
+const chart = home.es.projects.featured.chart;
+const dims = (src) => sizes[src] || [1400, 933];
+const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Learning'], ['mi', 'Market Intelligence']];
+---
+<Base
+  lang="es"
+  pageKey="projects"
+  active="projects"
+  title="Proyectos · Sebas Padilla Lab"
+  description="Casos de datos, machine learning e inteligencia de mercado: abandono de clientes, estancia hospitalaria, emprendimiento y cafés en Bogotá."
+>
+  <section class="container head">
+    <div class="head-meta eyebrow">
+      <span>Archivo de proyectos</span>
+      <span data-count>{countLabel(n)}</span>
+    </div>
+    <div class="head-grid">
+      <div class="head-text">
+        <h1 class="head-title">Problemas de negocio, <span class="underline-gold">resueltos</span> con datos.</h1>
+        <p class="head-sub">Cada proyecto parte de una pregunta de negocio y termina en una decisión recomendada. Uso datos abiertos o sintéticos y, en trabajos académicos, solo resultados agregados con autorización.</p>
+      </div>
+      <svg class="head-figure" viewBox="0 0 440 360" aria-hidden="true">
+        <g fill="#E7EBE7">
+          <circle cx="20" cy="20" r="2" /><circle cx="80" cy="20" r="2" /><circle cx="140" cy="20" r="2" /><circle cx="200" cy="20" r="2" /><circle cx="260" cy="20" r="2" /><circle cx="320" cy="20" r="2" /><circle cx="380" cy="20" r="2" /><circle cx="420" cy="20" r="2" />
+          <circle cx="20" cy="80" r="2" /><circle cx="20" cy="140" r="2" /><circle cx="20" cy="200" r="2" /><circle cx="20" cy="260" r="2" /><circle cx="20" cy="320" r="2" />
+          <circle cx="420" cy="80" r="2" /><circle cx="420" cy="140" r="2" /><circle cx="420" cy="200" r="2" /><circle cx="420" cy="260" r="2" /><circle cx="420" cy="320" r="2" />
+          <circle cx="80" cy="340" r="2" /><circle cx="140" cy="340" r="2" /><circle cx="200" cy="340" r="2" /><circle cx="260" cy="340" r="2" /><circle cx="320" cy="340" r="2" /><circle cx="380" cy="340" r="2" />
+        </g>
+        <g stroke="#202824" stroke-width="1" stroke-dasharray="3 5" fill="none">
+          <line x1="110" y1="250" x2="222" y2="196" /><line x1="304" y1="112" x2="222" y2="196" /><line x1="330" y1="272" x2="222" y2="196" />
+        </g>
+        <circle cx="110" cy="250" r="62" fill="#245B45" opacity="0.08" />
+        <g fill="#245B45">
+          <circle cx="84" cy="228" r="7" /><circle cx="108" cy="214" r="5" /><circle cx="128" cy="236" r="9" /><circle cx="96" cy="258" r="6" /><circle cx="122" cy="270" r="5" /><circle cx="74" cy="276" r="4" /><circle cx="142" cy="258" r="4" /><circle cx="104" cy="290" r="6" />
+        </g>
+        <circle cx="304" cy="112" r="58" fill="#3E9B91" opacity="0.1" />
+        <g fill="#3E9B91">
+          <circle cx="282" cy="94" r="6" /><circle cx="306" cy="80" r="4" /><circle cx="326" cy="100" r="8" /><circle cx="296" cy="120" r="9" /><circle cx="320" cy="138" r="5" /><circle cx="270" cy="128" r="4" /><circle cx="342" cy="124" r="4" />
+        </g>
+        <circle cx="330" cy="272" r="50" fill="#8CCFAD" opacity="0.2" />
+        <g fill="#8CCFAD">
+          <circle cx="312" cy="258" r="6" /><circle cx="334" cy="250" r="5" /><circle cx="350" cy="270" r="7" /><circle cx="324" cy="284" r="8" /><circle cx="344" cy="298" r="4" /><circle cx="300" cy="286" r="4" />
+        </g>
+        <circle cx="222" cy="196" r="22" fill="#D6A64F" opacity="0.2" />
+        <circle cx="222" cy="196" r="11" fill="#D6A64F" stroke="#F8FAF7" stroke-width="3" />
+      </svg>
+    </div>
+  </section>
+
+  <section class="container filters" aria-label="Filtros" data-filters hidden>
+    <div class="filter-row" role="group" aria-labelledby="f-pilar">
+      <span id="f-pilar" class="eyebrow filter-label">Pilar</span>
+      {pillarOptions.map(([v, l]) => (
+        <button type="button" class="chip" data-pillar-btn={v} aria-pressed={v === 'todos' ? 'true' : 'false'}>{l}</button>
+      ))}
+    </div>
+    <div class="filter-row" role="group" aria-labelledby="f-tool">
+      <span id="f-tool" class="eyebrow filter-label">Herramienta</span>
+      {toolFilters.map((tool) => (
+        <button type="button" class="chip" data-tool-btn={tool} aria-pressed="false">{tool}</button>
+      ))}
+    </div>
+  </section>
+
+  <section class="gallery" aria-label="Proyectos">
+    <div class="container gallery-inner">
+      <p class="visually-hidden" aria-live="polite" data-live></p>
+
+      <a class="featured" href={link(featured.key, 'es')} data-card data-pillar={featured.pillar} data-tools={featured.tools.join('|')}>
+        <CampaignChart chart={chart} />
+        <div class="featured-text">
+          <span class="eyebrow tone-mint">Destacado · {pillars[featured.pillar].es}</span>
+          <span class="featured-title">{featured.es.title}</span>
+          <span class="featured-q">{featured.es.question}</span>
+          <span class="finding">Hallazgo: {featured.es.finding}</span>
+          <span class="meta">{featured.tools.slice(0, 2).join(' · ')} · {featured.date.es} · {featured.es.dataTag}</span>
+          <span class="read-more">Leer el caso <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+
+      <ul class="cards">
+        {rest.map((p) => (
+          <li data-card data-pillar={p.pillar} data-tools={p.tools.join('|')}>
+            <a class="card" href={link(p.key, 'es')}>
+              <span class="thumb">
+                <img src={p.thumb} alt="" loading="lazy" decoding="async" width={dims(p.thumb)[0]} height={dims(p.thumb)[1]} />
+              </span>
+              <span class={`eyebrow tone-${pillars[p.pillar].tone}`}>{pillars[p.pillar].es}</span>
+              <span class="card-title">{p.es.title}</span>
+              <span class="card-q">{p.es.question}</span>
+              <span class="finding">Hallazgo: {p.es.finding}</span>
+              {p.team && <span class="team">{p.es.teamLine}</span>}
+              <span class="meta">{p.tools.join(' · ')} · {p.date.es} · {p.es.dataTag}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <p class="empty" data-empty hidden>Aún no hay proyectos con este filtro. Mientras tanto, hay novedades en el <a href={link('lab', 'es')}>Lab</a>.</p>
+    </div>
+  </section>
+
+  <section class="container closing">
+    <div class="closing-text">
+      <h2>¿Tienes un problema parecido?</h2>
+      <p>Cuéntame la decisión que necesitas tomar y vemos qué datos la pueden respaldar.</p>
+    </div>
+    <div class="actions">
+      <a class="pill pill--primary" href={link('contact', 'es')}>Hablemos</a>
+      <a class="pill pill--outline" href={site.github} rel="noopener">Ver el código en GitHub</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const root = document.querySelector('[data-filters]');
+  if (root) {
+    root.hidden = false;
+    const cards = Array.from(document.querySelectorAll('[data-card]'));
+    const pillarBtns = Array.from(root.querySelectorAll('[data-pillar-btn]'));
+    const toolBtns = Array.from(root.querySelectorAll('[data-tool-btn]'));
+    const empty = document.querySelector('[data-empty]');
+    const count = document.querySelector('[data-count]');
+    const live = document.querySelector('[data-live]');
+    let pillar = 'todos';
+    let tool = null;
+
+    const apply = () => {
+      let shown = 0;
+      cards.forEach((card) => {
+        const okPillar = pillar === 'todos' || card.dataset.pillar === pillar;
+        const okTool = !tool || (card.dataset.tools || '').split('|').includes(tool);
+        const show = okPillar && okTool;
+        card.hidden = !show;
+        if (show) shown++;
+      });
+      pillarBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pillarBtn === pillar)));
+      toolBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.toolBtn === tool)));
+      if (empty) empty.hidden = shown !== 0;
+      const label = `${shown} ${shown === 1 ? 'proyecto' : 'proyectos'} · 3 pilares`;
+      if (count) count.textContent = label;
+      if (live) live.textContent = shown === 0 ? 'Sin proyectos con este filtro' : `Mostrando ${shown} ${shown === 1 ? 'proyecto' : 'proyectos'}`;
+    };
+
+    pillarBtns.forEach((b) => b.addEventListener('click', () => { pillar = b.dataset.pillarBtn; apply(); }));
+    toolBtns.forEach((b) => b.addEventListener('click', () => { tool = tool === b.dataset.toolBtn ? null : b.dataset.toolBtn; apply(); }));
+  }
+</script>
+
+<style>
+  .head { display: flex; flex-direction: column; gap: 24px; padding-top: clamp(40px, 6vw, 64px); padding-bottom: 40px; }
+  .head-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 12px;
+    color: var(--slate);
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: 14px;
+  }
+  .head-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 40px; }
+  .head-text { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+  .head-title {
+    font-weight: 800;
+    font-size: clamp(42px, 6.4vw, 80px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--green-deep);
+  }
+  .head-sub { max-width: 640px; font-size: clamp(18px, 1.8vw, 20px); color: var(--slate); }
+  .head-figure { flex: 1 1 300px; max-width: 440px; width: 100%; height: auto; }
+
+  .filters { display: flex; flex-direction: column; gap: 14px; padding-bottom: 40px; }
+  .filters[hidden] { display: none; }
+  .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .filter-label { color: var(--slate); min-width: 120px; }
+  .chip {
+    min-height: 44px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 1px solid var(--gray-light);
+    background: var(--paper);
+    color: var(--carbon);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .chip:hover { border-color: var(--green); }
+  .chip[aria-pressed='true'] { background: var(--green); border-color: var(--green); color: var(--white); }
+
+  .gallery { background: var(--green-night); color: var(--white); }
+  .gallery-inner { display: flex; flex-direction: column; gap: 24px; padding-top: clamp(56px, 8vw, 80px); padding-bottom: clamp(64px, 9vw, 96px); }
+
+  .featured {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 32px;
+    align-items: stretch;
+    padding: clamp(24px, 3vw, 32px);
+    border-radius: var(--radius-lg);
+    background: var(--green);
+    color: var(--white);
+    text-decoration: none;
+  }
+  .featured[hidden] { display: none; }
+  .featured:hover { color: var(--white); }
+  .featured-text { display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+  .featured-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+  .featured-q { color: var(--gray-light); }
+  .featured .meta { color: var(--on-dark); }
+  .read-more { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--mint); }
+  .featured:hover .read-more { color: var(--white); }
+
+  .cards {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 24px;
+  }
+  .cards li[hidden] { display: none; }
+  .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--green-logo);
+    color: var(--white);
+    text-decoration: none;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .card:hover { color: var(--white); border-color: var(--mint); transform: translateY(-2px); }
+  @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
+  .thumb { display: block; height: 170px; border-radius: var(--radius-md); overflow: hidden; background: var(--white); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .tone-mint { color: var(--mint); }
+  .tone-gold { color: var(--gold); }
+  .card-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; }
+  .card-q { color: var(--on-dark); font-size: 15px; }
+  .card .finding { margin-top: 4px; }
+  .team { font-size: 13px; color: var(--on-dark); }
+  .meta { font-size: 13px; color: var(--on-dark-muted); margin-top: auto; }
+
+  .empty { padding: 48px 0; text-align: center; color: var(--on-dark); }
+  .empty[hidden] { display: none; }
+  .empty a { color: var(--mint); }
+
+  .closing {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding-top: clamp(64px, 8vw, 88px);
+    padding-bottom: clamp(64px, 8vw, 88px);
+  }
+  .closing-text { flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+  .closing h2 { font-size: clamp(32px, 3.6vw, 44px); font-weight: 800; letter-spacing: -0.02em; color: var(--green-deep); }
+  .closing p { color: var(--slate); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+</style>

@@ -1,0 +1,19 @@
+---
+import Base from '../../../layouts/Base.astro';
+import CaseStudy from '../../../components/CaseStudy.astro';
+import { cases } from '../../../data/cases.js';
+import { routes } from '../../../i18n/index.js';
+
+export function getStaticPaths() {
+  return cases.map((item) => ({
+    params: { caso: routes[item.key].es.replace('/es/proyectos/', '').replace(/\/$/, '') },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+const c = item.es;
+---
+<Base lang="es" pageKey={item.key} active="projects" title={`${c.title} · Sebas Padilla Lab`} description={c.description}>
+  <CaseStudy lang="es" item={item} />
+</Base>

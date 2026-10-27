@@ -1,0 +1,384 @@
+---
+// Plantilla de caso de estudio (diseño aprobado "Plantilla · Caso de estudio"):
+// encabezado con la pregunta, ficha, nota "Sobre los datos", 6 bloques con índice
+// lateral, decisión en fondo oscuro y cierre con más proyectos.
+import CaseBlocks from './CaseBlocks.astro';
+import { cases, pillars } from '../data/cases.js';
+import { link, hasLang, ui } from '../i18n/index.js';
+import { plain, readingMinutes } from '../lib/text.js';
+
+const { lang = 'es', item } = Astro.props;
+const c = item[lang];
+const t = ui[lang];
+const es = lang === 'es';
+const pillar = pillars[item.pillar][lang];
+
+const L = es
+  ? {
+      crumb: 'Proyectos',
+      read: 'min de lectura',
+      facts: 'Ficha del proyecto',
+      code: 'Código',
+      repo: 'Repositorio en GitHub',
+      about: 'Sobre los datos:',
+      toc: 'Contenido del caso',
+      sections: {
+        question: ['Pregunta', 'La pregunta de negocio'],
+        data: ['Datos', 'Los datos'],
+        approach: ['Enfoque', 'El enfoque'],
+        findings: ['Hallazgos', 'Los hallazgos'],
+        decision: ['Decisión', 'La decisión recomendada'],
+        limits: ['Limitaciones', 'Limitaciones y próximos pasos'],
+        team: ['Equipo', 'Equipo y mi rol'],
+      },
+      license: 'Licencias',
+      seeCode: 'Ver el código en GitHub',
+      prev: 'Proyecto anterior',
+      next: 'Proyecto siguiente',
+      more: (p) => `Más proyectos`,
+      cta: '¿Tienes un problema parecido?',
+      ctaBtn: 'Hablemos',
+    }
+  : {
+      crumb: 'Projects',
+      read: 'min read',
+      facts: 'Project facts',
+      code: 'Code',
+      repo: 'GitHub repository',
+      about: 'About the data:',
+      toc: 'Case contents',
+      sections: {
+        question: ['Question', 'The question'],
+        data: ['Data', 'The data'],
+        approach: ['Approach', 'The approach'],
+        findings: ['Findings', 'The findings'],
+        decision: ['Decision', 'The recommended decision'],
+        limits: ['Limitations', 'Limitations'],
+        team: ['Team', 'Team and my role'],
+      },
+      license: 'Licenses',
+      seeCode: 'See the code on GitHub',
+      prev: 'Previous project',
+      next: 'Next project',
+      more: () => 'More projects',
+      cta: 'Have a similar problem?',
+      ctaBtn: "Let's talk",
+    };
+
+const s = c.sections;
+const order = ['question', 'data', 'approach', 'findings', 'decision', 'limits'].concat(s.team ? ['team'] : []);
+const ids = { question: 'pregunta', data: 'datos', approach: 'enfoque', findings: 'hallazgos', decision: 'decision', limits: 'limitaciones', team: 'equipo' };
+
+// Minutos de lectura a partir de todo el texto del caso
+const texts = [];
+const collect = (blocks) =>
+  blocks.forEach((b) => {
+    ['lead', 'p'].forEach((k) => b[k] && texts.push(plain(b[k])));
+    ['ul', 'ol'].forEach((k) => b[k] && b[k].forEach((x) => texts.push(plain(x))));
+    if (b.table) b.table.rows.forEach((r) => texts.push(r.join(' ')));
+  });
+order.forEach((k) => collect(k === 'decision' ? [{ lead: s.decision.lead }, ...s.decision.blocks] : s[k]));
+const minutes = readingMinutes(texts);
+
+// Navegación entre proyectos y relacionados
+const idx = cases.findIndex((x) => x.key === item.key);
+const prev = cases[(idx - 1 + cases.length) % cases.length];
+const next = cases[(idx + 1) % cases.length];
+const titleOf = (x) => (x[lang] || x.es).title;
+const related = cases
+  .filter((x) => x.key !== item.key)
+  .sort((a, b) => (b.pillar === item.pillar) - (a.pillar === item.pillar))
+  .slice(0, 2);
+const inSpanish = (x) => lang === 'en' && !hasLang(x.key, 'en');
+---
+<article class="case">
+  <header class="container case-head">
+    <nav class="crumbs" aria-label={es ? 'Ruta' : 'Breadcrumb'}>
+      <a href={link('projects', lang)}>{L.crumb}</a> <span aria-hidden="true">/</span> <span>{pillar}</span>
+    </nav>
+    <div class="case-meta">
+      <span class="pillar-tag">{pillar}</span>
+      <span>{item.date[lang]} · {minutes} {L.read}</span>
+    </div>
+    <h1 class="case-title">{c.title}</h1>
+    <p class="case-question">{c.question}</p>
+  </header>
+
+  <section class="facts" aria-label={L.facts}>
+    <dl class="container facts-grid">
+      {c.facts.map(([k, v]) => (
+        <div>
+          <dt>{k}</dt>
+          <dd>{v}</dd>
+        </div>
+      ))}
+      <div>
+        <dt>{L.code}</dt>
+        <dd><a href={item.repo} rel="noopener">{L.repo}</a></dd>
+      </div>
+    </dl>
+  </section>
+
+  <div class="container">
+    <p class="about" role="note"><strong>{L.about}</strong> <span>{c.about}</span></p>
+  </div>
+
+  <div class="container case-body">
+    <aside class="toc" aria-label={L.toc}>
+      <ol>
+        {order.map((k, i) => (
+          <li><a href={`#${ids[k]}`} data-toc={ids[k]}>{String(i + 1).padStart(2, '0')} · {L.sections[k][0]}</a></li>
+        ))}
+      </ol>
+    </aside>
+
+    <div class="sections">
+      {order.map((k, i) => {
+        const n = String(i + 1).padStart(2, '0');
+        if (k === 'decision') {
+          return (
+            <section id={ids[k]} class="sec sec--decision" aria-labelledby={`h-${ids[k]}`}>
+              <span class="sec-n sec-n--gold">{n}</span>
+              <h2 id={`h-${ids[k]}`}>{L.sections[k][1]}</h2>
+              <p class="decision-lead">{s.decision.lead}</p>
+              <CaseBlocks blocks={s.decision.blocks} tone="dark" />
+            </section>
+          );
+        }
+        return (
+          <section id={ids[k]} class="sec" aria-labelledby={`h-${ids[k]}`}>
+            <span class="sec-n">{n}</span>
+            <h2 id={`h-${ids[k]}`}>{L.sections[k][1]}</h2>
+            <CaseBlocks blocks={s[k]} />
+          </section>
+        );
+      })}
+
+      <footer class="case-foot">
+        <p><strong>{L.license}:</strong> {c.license}</p>
+        <a class="pill pill--outline" href={item.repo} rel="noopener">{L.seeCode}</a>
+      </footer>
+    </div>
+  </div>
+
+  <section class="more" aria-label={L.more(pillar)}>
+    <div class="container more-inner">
+      <div class="prevnext">
+        <a href={link(prev.key, lang)}><span aria-hidden="true">←</span> <span class="visually-hidden">{L.prev}: </span>{titleOf(prev)}</a>
+        <a href={link(next.key, lang)}><span class="visually-hidden">{L.next}: </span>{titleOf(next)} <span aria-hidden="true">→</span></a>
+      </div>
+      <h2 class="more-title">{L.more(pillar)}</h2>
+      <div class="more-grid">
+        {related.map((x) => (
+          <a class="more-card" href={link(x.key, lang)}>
+            <span class="more-top">
+              <span class:list={['eyebrow', `tone-${pillars[x.pillar].tone}`]}>{pillars[x.pillar][lang]}</span>
+              {inSpanish(x) && <span class="tag">{t.inSpanish}</span>}
+            </span>
+            <span class="more-card-title">{titleOf(x)}</span>
+            <span class="more-card-q">{(x[lang] || x.es).question}</span>
+          </a>
+        ))}
+      </div>
+      <div class="cta">
+        <p>{L.cta}</p>
+        <a class="pill pill--mint" href={link('contact', lang)}>{L.ctaBtn}</a>
+      </div>
+    </div>
+  </section>
+</article>
+
+<script>
+  // Marca en el índice la sección que se está leyendo.
+  const links = Array.from(document.querySelectorAll('[data-toc]'));
+  if (links.length && 'IntersectionObserver' in window) {
+    const byId = new Map(links.map((a) => [a.dataset.toc, a]));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            links.forEach((a) => a.removeAttribute('aria-current'));
+            const a = byId.get(e.target.id);
+            if (a) a.setAttribute('aria-current', 'true');
+          }
+        });
+      },
+      { rootMargin: '-30% 0px -60% 0px' }
+    );
+    byId.forEach((_, id) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+</script>
+
+<style>
+  .case-head {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: clamp(32px, 5vw, 48px);
+    padding-bottom: clamp(40px, 5vw, 56px);
+  }
+  .crumbs { font-size: 14px; color: var(--slate); }
+  .crumbs a { color: var(--slate); }
+  .crumbs a:hover { color: var(--green); }
+  .case-meta { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; font-size: 14px; color: var(--slate); }
+  .pillar-tag {
+    background: var(--green);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .case-title {
+    font-weight: 800;
+    font-size: clamp(38px, 6vw, 76px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--green-deep);
+    max-width: 1100px;
+  }
+  .case-question {
+    max-width: 900px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.35;
+    color: var(--green);
+  }
+
+  .facts { border-top: 1px solid var(--gray-light); border-bottom: 1px solid var(--gray-light); background: var(--paper); }
+  .facts-grid {
+    margin: 0 auto;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 20px 28px;
+  }
+  .facts-grid dt {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+  .facts-grid dd { margin: 4px 0 0; font-size: 16px; line-height: 1.5; }
+
+  .about {
+    margin: 32px 0 0;
+    background: #EDF6F1;
+    border: 1px solid var(--mint);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--green-deep);
+  }
+  .about strong { font-family: var(--font-display); }
+
+  .case-body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 56px;
+    padding-top: 56px;
+    padding-bottom: 96px;
+  }
+  .toc { flex: 1 1 200px; max-width: 240px; position: sticky; top: 24px; }
+  .toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    border-left: 2px solid var(--gray-light);
+  }
+  .toc a { display: block; padding: 8px 16px; margin-left: -2px; border-left: 2px solid transparent; color: var(--slate); text-decoration: none; }
+  .toc a:hover,
+  .toc a[aria-current] { color: var(--green); border-left-color: var(--green); }
+  @media (max-width: 900px) {
+    .toc { display: none; }
+  }
+
+  .sections { flex: 999 1 560px; min-width: 0; max-width: 820px; display: flex; flex-direction: column; gap: 64px; }
+  .sec { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 24px; }
+  .sec h2 { font-size: clamp(26px, 3vw, 32px); font-weight: 800; letter-spacing: -0.015em; color: var(--green-deep); }
+  .sec-n { font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; color: var(--teal-text); }
+  .sec-n--gold { color: var(--gold); }
+
+  .sec--decision {
+    background: var(--green-deep);
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: clamp(24px, 4vw, 40px);
+    gap: 16px;
+  }
+  .sec--decision h2 { color: var(--white); }
+  .decision-lead {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(20px, 2.2vw, 24px);
+    line-height: 1.4;
+  }
+
+  .case-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 24px;
+    border-top: 1px solid var(--gray-light);
+    padding-top: 24px;
+    font-size: 15px;
+    color: var(--slate);
+  }
+  .case-foot p { flex: 1 1 360px; }
+  .case-foot strong { color: var(--carbon); }
+
+  .more { background: var(--green-night); color: var(--white); }
+  .more-inner { display: flex; flex-direction: column; gap: 32px; padding-top: 72px; padding-bottom: 88px; }
+  .prevnext { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+  .prevnext a { color: var(--on-dark); text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 15px; padding: 8px 0; }
+  .prevnext a:hover { color: var(--mint); }
+  .more-title { font-size: clamp(28px, 3vw, 36px); font-weight: 800; letter-spacing: -0.02em; }
+  .more-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; }
+  .more-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+    border: 1px solid var(--green-logo);
+    border-radius: var(--radius-lg);
+    color: var(--white);
+    text-decoration: none;
+    transition: border-color .2s ease;
+  }
+  .more-card:hover { color: var(--white); border-color: var(--mint); }
+  .more-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .more-top .tag { color: var(--mint); }
+  .tone-mint { color: var(--mint); }
+  .tone-gold { color: var(--gold); }
+  .more-card-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; }
+  .more-card-q { color: var(--on-dark); font-size: 15px; }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-top: 1px solid var(--green);
+    padding-top: 32px;
+  }
+  .cta p { font-family: var(--font-display); font-weight: 700; font-size: 24px; }
+</style>
