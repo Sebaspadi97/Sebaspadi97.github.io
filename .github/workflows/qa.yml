@@ -1,0 +1,49 @@
+name: Revisión de calidad
+
+# Audita el sitio publicado (accesibilidad con axe, velocidad y buenas prácticas con
+# Lighthouse, desbordes y enlaces) y guarda los reportes en la rama qa-reports.
+# Se ejecuta a mano desde la pestaña Actions o con un envío a la rama qa.
+on:
+  workflow_dispatch:
+  push:
+    branches: [qa]
+
+permissions:
+  contents: write
+
+jobs:
+  qa:
+    name: Auditar el sitio publicado
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar herramientas de auditoría
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.48.2 @axe-core/playwright@4.10.0 lighthouse@12.2.1
+          npx playwright install --with-deps chromium
+          echo "CHROME_PATH=$(node -e "console.log(require('playwright').chromium.executablePath())")" >> "$GITHUB_ENV"
+
+      - name: Auditar
+        run: node scripts/qa/run-qa.mjs https://sebaspadi97.github.io qa-out
+
+      - name: Guardar reportes en la rama qa-reports
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/qa && cp -r qa-out/. /tmp/qa/ 2>/dev/null || true
+          git fetch origin qa-reports || true
+          if git show-ref --verify --quiet refs/remotes/origin/qa-reports; then
+            git checkout -B qa-reports origin/qa-reports
+          else
+            git checkout --orphan qa-reports && git rm -rqf .
+          fi
+          rm -rf latest && mkdir -p latest && cp -r /tmp/qa/. latest/
+          git add latest
+          git commit -m "Reporte de calidad ${GITHUB_SHA::7}" || echo "Sin cambios"
+          git push origin qa-reports
