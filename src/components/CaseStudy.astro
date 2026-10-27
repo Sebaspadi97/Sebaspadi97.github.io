@@ -141,7 +141,7 @@ const inSpanish = (x) => lang === 'en' && !hasLang(x.key, 'en');
               <span class="sec-n sec-n--gold">{n}</span>
               <h2 id={`h-${ids[k]}`}>{L.sections[k][1]}</h2>
               <p class="decision-lead">{s.decision.lead}</p>
-              <CaseBlocks blocks={s.decision.blocks} tone="dark" />
+              <CaseBlocks blocks={s.decision.blocks} tone="dark" lang={lang} />
             </section>
           );
         }
@@ -149,7 +149,7 @@ const inSpanish = (x) => lang === 'en' && !hasLang(x.key, 'en');
           <section id={ids[k]} class="sec" aria-labelledby={`h-${ids[k]}`}>
             <span class="sec-n">{n}</span>
             <h2 id={`h-${ids[k]}`}>{L.sections[k][1]}</h2>
-            <CaseBlocks blocks={s[k]} />
+            <CaseBlocks blocks={s[k]} lang={lang} />
           </section>
         );
       })}

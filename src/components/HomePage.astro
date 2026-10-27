@@ -3,7 +3,7 @@
 // proyectos sobre fondo oscuro, franja Dato curioso, manifiesto + servicios
 // y Desde el Lab. Se usa en /es/ y /en/.
 import DotsSP from './DotsSP.astro';
-import CampaignChart from './CampaignChart.astro';
+import ChurnSimulator from './ChurnSimulator.astro';
 import LabCover from './LabCover.astro';
 import { posts as labPosts } from '../data/lab.js';
 import { home } from '../data/home.js';
@@ -72,13 +72,14 @@ const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
     </div>
 
     <div class="projects-grid">
-      <a class="card card--featured" href={link(f.key, lang)}>
+      <article class="card card--featured">
         <span class="eyebrow card-pillar">{f.pillar}</span>
-        <CampaignChart chart={f.chart} />
-        <span class="card-title card-title--lg">{f.title}</span>
+        <ChurnSimulator lang={lang} variant="card" />
+        <h3 class="card-title card-title--lg"><a class="card-link" href={link(f.key, lang)}>{f.title}</a></h3>
         <span class="card-question">{f.question}</span>
         <span class="finding">{c.projects.findingLabel}: {f.finding}</span>
-      </a>
+        <a class="read-case" href={link(f.key, lang)}>{lang === 'es' ? 'Leer el caso' : 'Read the case'} <span aria-hidden="true">→</span></a>
+      </article>
 
       {c.projects.cards.map((p) => (
         <a class="card" href={link(p.key, lang)}>
@@ -280,6 +281,11 @@ const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
   .card:hover { color: var(--white); border-color: var(--mint); transform: translateY(-2px); }
   @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
 
+  .card--featured:hover { transform: none; border-color: var(--green); }
+  .card-link { color: var(--white); text-decoration: none; }
+  .card-link:hover { color: var(--mint); text-decoration: underline; }
+  .read-case { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--mint); }
+  .read-case:hover { color: var(--white); }
   .card--featured {
     grid-row: span 2;
     background: var(--green);

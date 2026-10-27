@@ -2,9 +2,8 @@
 // Proyectos (diseño aprobado): encabezado con tres nubes de puntos que llevan al
 // punto dorado, filtros por pilar y herramienta, galería oscura y cierre.
 import Base from '../../../layouts/Base.astro';
-import CampaignChart from '../../../components/CampaignChart.astro';
+import ChurnSimulator from '../../../components/ChurnSimulator.astro';
 import { cases, pillars, toolFilters } from '../../../data/cases.js';
-import { home } from '../../../data/home.js';
 import { link } from '../../../i18n/index.js';
 import { site } from '../../../data/site.js';
 import sizes from '../../../data/image-sizes.json';
@@ -13,7 +12,6 @@ const featured = cases.find((c) => c.featured);
 const rest = cases.filter((c) => !c.featured);
 const n = cases.length;
 const countLabel = (k) => `${k} ${k === 1 ? 'proyecto' : 'proyectos'} · 3 pilares`;
-const chart = home.es.projects.featured.chart;
 const dims = (src) => sizes[src] || [1400, 933];
 const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Learning'], ['mi', 'Market Intelligence']];
 ---
@@ -81,17 +79,17 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
     <div class="container gallery-inner">
       <p class="visually-hidden" aria-live="polite" data-live></p>
 
-      <a class="featured" href={link(featured.key, 'es')} data-card data-pillar={featured.pillar} data-tools={featured.tools.join('|')}>
-        <CampaignChart chart={chart} />
+      <article class="featured" data-card data-pillar={featured.pillar} data-tools={featured.tools.join('|')}>
+        <ChurnSimulator lang="es" variant="card" />
         <div class="featured-text">
           <span class="eyebrow tone-mint">Destacado · {pillars[featured.pillar].es}</span>
-          <span class="featured-title">{featured.es.title}</span>
+          <h2 class="featured-title"><a href={link(featured.key, 'es')}>{featured.es.title}</a></h2>
           <span class="featured-q">{featured.es.question}</span>
           <span class="finding">Hallazgo: {featured.es.finding}</span>
           <span class="meta">{featured.tools.slice(0, 2).join(' · ')} · {featured.date.es} · {featured.es.dataTag}</span>
-          <span class="read-more">Leer el caso <span aria-hidden="true">→</span></span>
+          <a class="read-more" href={link(featured.key, 'es')}>Leer el caso <span aria-hidden="true">→</span></a>
         </div>
-      </a>
+      </article>
 
       <ul class="cards">
         {rest.map((p) => (
@@ -220,7 +218,8 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
     text-decoration: none;
   }
   .featured[hidden] { display: none; }
-  .featured:hover { color: var(--white); }
+  .featured-title a { color: var(--white); text-decoration: none; }
+  .featured-title a:hover { color: var(--mint); text-decoration: underline; }
   .featured-text { display: flex; flex-direction: column; justify-content: center; gap: 14px; }
   .featured-title {
     font-family: var(--font-display);
@@ -232,7 +231,7 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
   .featured-q { color: var(--gray-light); }
   .featured .meta { color: var(--on-dark); }
   .read-more { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--mint); }
-  .featured:hover .read-more { color: var(--white); }
+  .read-more:hover { color: var(--white); }
 
   .cards {
     margin: 0;

@@ -6,6 +6,7 @@
 //   { p }            párrafo               { lead }   frase destacada
 //   { ul } / { ol }  listas                 { table: { head, rows } }
 //   { fig: { src, alt, caption } }          { stats: [{ n, label }] }
+//   { sim: true }    simulador interactivo del caso de abandono
 // En los textos, **negrita** y *cursiva* se convierten en <strong> y <em>.
 
 const img = (slug, file) => `/img/casos/${slug}/${file}.webp`;
@@ -80,6 +81,7 @@ export const cases = [
           { fig: { src: img('abandono', '02_curva_captura'), alt: 'Curva de captura: contactando al 20 % de mayor riesgo se alcanza el 58 % de los clientes que abandonan.', caption: 'Curva de captura de abandonos' } },
           { p: '**Cuánto gana.** En los 5.000 clientes de prueba, contactar a todos pierde COP 10,2 millones. La regla “contactar si el valor esperado es mayor que 0” elige al 15,5 % y gana COP 2,8 millones, cerca del máximo posible en retrospectiva (COP 2,9 millones).' },
           { fig: { src: img('abandono', '03_curva_ganancia'), alt: 'Curva de ganancia: ordenando por valor esperado la campaña llega a COP 2,8 millones contactando al 16 %; contactar a todos termina en −COP 10,2 millones.', caption: 'Ganancia neta de la campaña según cuántos clientes se contactan' } },
+          { sim: true },
           { p: '**El valor importa tanto como el riesgo.** Con el mismo número de contactos, ordenar por valor esperado gana 2,5 veces más que ordenar solo por probabilidad (COP 2,8 millones frente a 1,1 millones).' },
           { p: '**La decisión depende más del costo del contacto que del modelo.** Con un contacto de COP 2.000 conviene llamar a la mitad de la base; con uno de COP 15.000 y efectividad del 15 %, ninguna campaña es rentable.' },
         ],
@@ -169,6 +171,7 @@ export const cases = [
           { fig: { src: img('abandono', '02_curva_captura'), alt: 'Capture curve: contacting the riskiest 20% reaches 58% of the customers who churn.', caption: 'Churn capture curve (chart labels in Spanish)' } },
           { p: '**How much it earns.** On the 5,000 test customers, contacting everyone loses COP 10.2 million. The rule "contact if expected value is above zero" selects 15.5% and earns COP 2.8 million, close to the best possible result in hindsight (COP 2.9 million).' },
           { fig: { src: img('abandono', '03_curva_ganancia'), alt: 'Profit curve: ranking by expected value peaks at COP 2.8 million contacting 16%; contacting everyone ends at minus COP 10.2 million.', caption: 'Net campaign profit by share of customers contacted (chart labels in Spanish)' } },
+          { sim: true },
           { p: '**Value matters as much as risk.** With the same number of contacts, ranking by expected value earns 2.5 times more than ranking by probability alone (COP 2.8 million vs. 1.1 million).' },
           { p: '**Contact cost matters more than the model.** At COP 2,000 per contact, it pays to reach half the base; at COP 15,000 with 15% effectiveness, no campaign is profitable.' },
         ],

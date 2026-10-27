@@ -2,11 +2,13 @@
 // Pinta una lista de bloques de contenido de un caso (ver src/data/cases.js).
 import { inline } from '../lib/text.js';
 import sizes from '../data/image-sizes.json';
-const { blocks = [], tone = 'light' } = Astro.props;
+import ChurnSimulator from './ChurnSimulator.astro';
+const { blocks = [], tone = 'light', lang = 'es' } = Astro.props;
 const dims = (src) => sizes[src] || [1400, 933];
 ---
 <div class:list={['blocks', `blocks--${tone}`]}>
   {blocks.map((b) => {
+    if (b.sim) return <ChurnSimulator lang={lang} variant="full" />;
     if (b.lead) return <p class="b-lead" set:html={inline(b.lead)} />;
     if (b.p) return <p set:html={inline(b.p)} />;
     if (b.ul) return <ul class="b-list">{b.ul.map((i) => <li set:html={inline(i)} />)}</ul>;
