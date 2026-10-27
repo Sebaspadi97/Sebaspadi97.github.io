@@ -1,0 +1,121 @@
+---
+// Página para suscribirse al RSS del Lab. Los navegadores no muestran los archivos
+// RSS como página (se ven como código XML), así que los botones "RSS" llegan aquí.
+import Base from '../../../layouts/Base.astro';
+import { link } from '../../../i18n/index.js';
+import { site } from '../../../data/site.js';
+
+const feed = new URL('/es/lab/rss.xml', Astro.site).href;
+const enc = encodeURIComponent(feed);
+const readers = [
+  { name: 'Feedly', href: `https://feedly.com/i/subscription/feed/${enc}` },
+  { name: 'Inoreader', href: `https://www.inoreader.com/?add_feed=${enc}` },
+  { name: 'NewsBlur', href: `https://www.newsblur.com/?url=${enc}` },
+];
+---
+<Base
+  lang="es"
+  pageKey="lab"
+  active="lab"
+  title="Suscribirse al Lab por RSS · Sebas Padilla Lab"
+  description="Recibe cada publicación nueva del Lab en tu lector de RSS."
+>
+  <section class="container rss">
+    <nav class="crumbs" aria-label="Ruta"><a href={link('lab', 'es')}>Lab</a> <span aria-hidden="true">/</span> <span>RSS</span></nav>
+    <h1 class="title">Recibe el Lab en tu <span class="underline-gold">lector</span>.</h1>
+    <p class="sub">El RSS te avisa de cada publicación nueva sin depender de redes sociales ni de correos. Copia la dirección en tu lector favorito o ábrelo directo con uno de estos botones.</p>
+
+    <div class="feed-box">
+      <label for="feed-url" class="eyebrow">Dirección del RSS</label>
+      <div class="feed-row">
+        <input id="feed-url" type="text" value={feed} readonly />
+        <button type="button" class="pill pill--primary" data-copy={feed}>Copiar</button>
+      </div>
+      <p class="feed-status" role="status" aria-live="polite" data-status></p>
+    </div>
+
+    <div class="readers">
+      <p class="eyebrow">Abrir en un lector</p>
+      <div class="actions">
+        {readers.map((r) => (
+          <a class="pill pill--outline" href={r.href} rel="noopener" target="_blank">{r.name}</a>
+        ))}
+      </div>
+    </div>
+
+    <div class="help">
+      <h2>¿Primera vez con RSS?</h2>
+      <ol>
+        <li>Abre un lector gratuito, como Feedly o Inoreader, en la web o en el celular.</li>
+        <li>Busca la opción “Añadir” o “Follow” y pega la dirección de arriba.</li>
+        <li>Cada vez que publique algo nuevo en el Lab, aparecerá en tu lector.</li>
+      </ol>
+      <p>¿Prefieres no instalar nada? Cada publicación nueva sale primero en <a href={site.linkedin} rel="noopener">LinkedIn</a>.</p>
+      <p class="raw"><a href="/es/lab/rss.xml">Ver el archivo RSS</a> (se ve como código: es normal, está hecho para los lectores).</p>
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelectorAll('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const status = document.querySelector('[data-status]');
+      const input = document.getElementById('feed-url');
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy);
+        if (status) status.textContent = 'Dirección copiada. Pégala en tu lector de RSS.';
+      } catch (e) {
+        if (input) { input.focus(); input.select(); }
+        if (status) status.textContent = 'Selecciona la dirección y cópiala con Ctrl+C.';
+      }
+    });
+  });
+</script>
+
+<style>
+  .rss { max-width: 880px; display: flex; flex-direction: column; gap: 28px; padding-top: clamp(40px, 6vw, 64px); padding-bottom: clamp(72px, 9vw, 96px); }
+  .crumbs { font-size: 14px; color: var(--slate); }
+  .crumbs a { color: var(--slate); }
+  .title {
+    font-weight: 800;
+    font-size: clamp(38px, 5.4vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--green-deep);
+  }
+  .sub { font-size: clamp(18px, 1.8vw, 20px); color: var(--slate); max-width: 680px; }
+
+  .feed-box {
+    background: var(--paper);
+    border: 1px solid var(--gray-light);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .feed-box .eyebrow { color: var(--green); }
+  .feed-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .feed-row input {
+    flex: 1 1 320px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 0 16px;
+    border: 1px solid var(--gray-light);
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--carbon);
+    font-family: var(--font-body);
+    font-size: 15px;
+  }
+  .feed-status { font-size: 14px; color: var(--green); min-height: 1.4em; }
+
+  .readers { display: flex; flex-direction: column; gap: 12px; }
+  .readers .eyebrow { color: var(--slate); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .help { border-top: 1px solid var(--gray-light); padding-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .help h2 { font-size: 24px; font-weight: 800; color: var(--green-deep); }
+  .help ol { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
+  .raw { font-size: 15px; color: var(--slate); }
+</style>
