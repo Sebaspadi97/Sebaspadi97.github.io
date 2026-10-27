@@ -14,26 +14,7 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": "article > .card-pillar.eyebrow",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow card-pillar\" data-astro-cid-jdovvxl7=\"\">Featured · Machine Learning</span>"
-          },
-          {
-            "target": ".read-case",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<a class=\"read-case\" href=\"/en/projects/customer-churn/\" data-astro-cid-jdovvxl7=\"\">Read the case <span aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</span></"
-          }
-        ],
-        "count": 2
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "desktop",
@@ -64,9 +45,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Projects\" 53x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -83,9 +62,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Projects\" 53x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -102,9 +79,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Projects\" 53x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -124,26 +99,7 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": "article > .card-pillar.eyebrow",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow card-pillar\" data-astro-cid-jdovvxl7=\"\">Destacado · Machine Learning</span>"
-          },
-          {
-            "target": ".read-case",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<a class=\"read-case\" href=\"/es/proyectos/abandono-de-clientes/\" data-astro-cid-jdovvxl7=\"\">Leer el caso <span aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</s"
-          }
-        ],
-        "count": 2
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "desktop",
@@ -158,7 +114,6 @@
     "wide": [],
     "brokenImgs": [],
     "small": [
-      "a \"Descargar CV (PDF)\" 337x23",
       "input \"\" 1x1",
       "input \"\" 20x20",
       "a \"política de privacidad\" 159x18",
@@ -197,27 +152,10 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Lab\" 24x19",
-      "a \"Conocer más →\" 518x23"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": ".k-cat--mint",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Market Intelligence</span>"
-          }
-        ],
-        "count": 1
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "desktop",
@@ -231,27 +169,10 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Lab\" 24x19",
-      "a \"Conocer más →\" 518x23"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": ".k-cat--mint",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Data</span>"
-          }
-        ],
-        "count": 1
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "desktop",
@@ -265,27 +186,10 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Lab\" 24x19",
-      "a \"Conocer más →\" 518x23"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": ".k-cat--mint",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Machine Learning</span>"
-          }
-        ],
-        "count": 1
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "desktop",
@@ -299,9 +203,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Lab\" 24x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -338,26 +240,7 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": ".featured-text > .tone-mint.eyebrow",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow tone-mint\" data-astro-cid-gsn4ozra=\"\">Destacado · Machine Learning</span>"
-          },
-          {
-            "target": ".read-more",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<a class=\"read-more\" href=\"/es/proyectos/abandono-de-clientes/\" data-astro-cid-gsn4ozra=\"\">Leer el caso <span aria-hidden=\"true\" data-astro-cid-gsn4ozra=\"\">→</s"
-          }
-        ],
-        "count": 2
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "desktop",
@@ -371,9 +254,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Proyectos\" 64x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -390,9 +271,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Proyectos\" 64x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -409,9 +288,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Proyectos\" 64x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -428,9 +305,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Proyectos\" 64x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -505,26 +380,7 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": "article > .card-pillar.eyebrow",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow card-pillar\" data-astro-cid-jdovvxl7=\"\">Featured · Machine Learning</span>"
-          },
-          {
-            "target": ".read-case",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<a class=\"read-case\" href=\"/en/projects/customer-churn/\" data-astro-cid-jdovvxl7=\"\">Read the case <span aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</span></"
-          }
-        ],
-        "count": 2
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "mobile",
@@ -555,9 +411,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Projects\" 53x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -574,9 +428,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Projects\" 53x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -593,9 +445,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Projects\" 53x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -615,26 +465,7 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": "article > .card-pillar.eyebrow",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow card-pillar\" data-astro-cid-jdovvxl7=\"\">Destacado · Machine Learning</span>"
-          },
-          {
-            "target": ".read-case",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<a class=\"read-case\" href=\"/es/proyectos/abandono-de-clientes/\" data-astro-cid-jdovvxl7=\"\">Leer el caso <span aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</s"
-          }
-        ],
-        "count": 2
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "mobile",
@@ -649,7 +480,6 @@
     "wide": [],
     "brokenImgs": [],
     "small": [
-      "a \"Descargar CV (PDF)\" 293x23",
       "input \"\" 1x1",
       "input \"\" 20x20",
       "input \"\" 20x20"
@@ -687,27 +517,10 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Lab\" 24x19",
-      "a \"Conocer más →\" 221x23"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": ".k-cat--mint",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Market Intelligence</span>"
-          }
-        ],
-        "count": 1
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "mobile",
@@ -721,27 +534,10 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Lab\" 24x19",
-      "a \"Conocer más →\" 221x23"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": ".k-cat--mint",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Data</span>"
-          }
-        ],
-        "count": 1
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "mobile",
@@ -755,27 +551,10 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Lab\" 24x19",
-      "a \"Conocer más →\" 221x23"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": ".k-cat--mint",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow k-cat k-cat--mint\" data-astro-cid-dfqqi6xc=\"\">Proyecto relacionado · Machine Learning</span>"
-          }
-        ],
-        "count": 1
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "mobile",
@@ -789,9 +568,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Lab\" 24x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -828,26 +605,7 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "axe": [
-      {
-        "id": "color-contrast",
-        "impact": "serious",
-        "help": "Elements must meet minimum color contrast ratio thresholds",
-        "nodes": [
-          {
-            "target": ".featured-text > .tone-mint.eyebrow",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<span class=\"eyebrow tone-mint\" data-astro-cid-gsn4ozra=\"\">Destacado · Machine Learning</span>"
-          },
-          {
-            "target": ".read-more",
-            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.38 (foreground color: #8ccfad, background color: #245b45, font size: 11.3pt (15px), font weight: normal). Expected contrast ratio of 4.5:1",
-            "html": "<a class=\"read-more\" href=\"/es/proyectos/abandono-de-clientes/\" data-astro-cid-gsn4ozra=\"\">Leer el caso <span aria-hidden=\"true\" data-astro-cid-gsn4ozra=\"\">→</s"
-          }
-        ],
-        "count": 2
-      }
-    ]
+    "axe": []
   },
   {
     "viewport": "mobile",
@@ -861,9 +619,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Proyectos\" 64x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -880,9 +636,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Proyectos\" 64x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -899,9 +653,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Proyectos\" 64x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
@@ -918,9 +670,7 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [
-      "a \"Proyectos\" 64x19"
-    ],
+    "small": [],
     "consoleErrors": [],
     "failed": [],
     "axe": []
