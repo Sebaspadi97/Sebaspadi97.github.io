@@ -1,419 +1,483 @@
 ---
-// Inicio (diseño aprobado "D · Combinada"): hero editorial, El método,
-// proyectos sobre fondo oscuro, franja Dato curioso, manifiesto + servicios
-// y Desde el Lab. Se usa en /es/ y /en/.
-import AnalyticsMotion from './AnalyticsMotion.astro';
+// Inicio (rediseño A + C, 28 oct 2026): cuaderno de laboratorio con una historia guiada por el
+// scroll en "El método". Portada con muestra viva y hallazgo, método fijo, carril de proyectos,
+// dato curioso con contador, manifiesto con servicios accionables y Desde el Lab.
+// Se usa en /es/ y /en/; los textos están en src/data/home.js.
+import LiveSample from './LiveSample.astro';
+import MethodScrolly from './MethodScrolly.astro';
 import ChurnSimulator from './ChurnSimulator.astro';
 import LabCover from './LabCover.astro';
 import { posts as labPosts, cases } from '../lib/contenido.js';
 import { home } from '../data/home.js';
 import { link, hasLang, ui } from '../i18n/index.js';
 import { site } from '../data/site.js';
+import { dims, srcset } from '../lib/img.js';
 
 const { lang = 'es' } = Astro.props;
+const es = lang === 'es';
 const c = home[lang];
 const t = ui[lang];
 const cvHref = site.cv[lang] || link('about', lang);
 const f = c.projects.featured;
 const labPost = (key) => labPosts.find((x) => x.key === key);
+const caseOf = (key) => cases.find((x) => x.key === key);
 const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
 // Si un proyecto o artículo deja de publicarse, su tarjeta desaparece del Inicio.
-const published = (key) => cases.some((x) => x.key === key) || labPosts.some((x) => x.key === key);
+const published = (key) => Boolean(caseOf(key) || labPost(key));
 const cards = c.projects.cards.filter((p) => published(p.key));
 const labItems = c.lab.items.filter((a) => published(a.key));
+const L = es
+  ? { fig: 'Proyectos', prev: 'Proyecto anterior', next: 'Proyecto siguiente', rail: 'Proyectos destacados', read: 'Leer el caso', count: 'proyectos, de la pregunta a la decisión.', notebook: 'Cuaderno', manifesto: 'Manifiesto', readPost: 'Leer', services: 'Servicios' }
+  : { fig: 'Projects', prev: 'Previous project', next: 'Next project', rail: 'Featured projects', read: 'Read the case', count: 'projects, from the question to the decision.', notebook: 'Notebook', manifesto: 'Manifesto', readPost: 'Read', services: 'Services' };
+const quoteWords = c.manifesto.quote.split(' ');
 ---
-<!-- Hero editorial -->
-<section class="hero container">
-  <div class="hero-meta eyebrow">
-    <span>{c.hero.metaLeft}</span>
-    <span>{c.hero.metaRight}</span>
-  </div>
-  <h1 class="hero-title">
-    {c.hero.headlineBefore}<span class="underline-gold">{c.hero.headlineMark}</span>{c.hero.headlineAfter}
-  </h1>
-  <div class="hero-grid">
-    <p class="hero-intro">{c.hero.intro}</p>
-    <div class="hero-side">
-      <p class="hero-sub">{c.hero.sub}</p>
-      <div class="actions">
-        <a class="pill pill--primary" href={link('projects', lang)}>{c.hero.primary}</a>
-        <a class="pill pill--outline" href={cvHref}>{c.hero.secondary}</a>
+<!-- Portada -->
+<section class="hero paper-grid" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero-meta">
+      <span>{c.hero.metaLeft}</span>
+      <span>{c.hero.metaRight}</span>
+    </div>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1 id="hero-title" class="hero-title">
+          {c.hero.headlineBefore}<span class="mark">{c.hero.headlineMark}</span>{c.hero.headlineAfter}
+        </h1>
+        <p class="hero-intro">{c.hero.intro}</p>
+        <p class="hero-sub">{c.hero.sub}</p>
+        <div class="actions">
+          <a class="pill pill--primary" href={link('projects', lang)}>{c.hero.primary} <span class="arr" aria-hidden="true">→</span></a>
+          <a class="pill pill--outline" href={cvHref}>{c.hero.secondary}</a>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <LiveSample lang={lang} title={c.hero.figure} hint={c.hero.figureHint} label={c.hero.figureLabel} />
+        <aside class="proof" aria-label={c.hero.proof}>
+          <span class="proof-k">{c.hero.proof}</span>
+          <span class="proof-nums"><span class="proof-win">{f.chart.modelValue}</span> <span class="proof-lose"><span class="visually-hidden">{es ? 'frente a' : 'versus'} </span>{f.chart.allValue}</span></span>
+          <span class="proof-text">{c.hero.proofText}</span>
+          <a class="proof-link" href={link(f.key, lang)}>{c.hero.proofLink} <span class="arr" aria-hidden="true">→</span></a>
+        </aside>
       </div>
     </div>
   </div>
 </section>
 
 <!-- El método -->
-<section class="method" aria-labelledby="method-title">
-  <div class="container method-inner">
-    <div class="method-figure">
-      <AnalyticsMotion lang={lang} label={c.method.figure} />
-    </div>
-    <div class="method-text">
-      <div>
-        <p class="eyebrow method-label">{c.method.label}</p>
-        <h2 id="method-title" class="method-title">{c.method.title}</h2>
-      </div>
-      <ol class="method-steps">
-        {c.method.steps.map((s, idx) => (
-          <li>
-            <span class:list={['step-n', { 'step-n--gold': idx === c.method.steps.length - 1 }]}>{s.n}</span>
-            <p class="step-name">{s.name}</p>
-            <p class="step-text">{s.text}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </div>
-</section>
+<MethodScrolly lang={lang} fig={c.method.label} title={c.method.title} hint={c.method.hint} label={c.method.figure} steps={c.method.steps} />
 
 <!-- Proyectos -->
 <section class="projects" aria-labelledby="projects-title">
-  <div class="container projects-inner">
-    <div class="section-head">
-      <h2 id="projects-title" class="projects-title">{c.projects.title}</h2>
-      <a class="link-arrow link-arrow--mint" href={link('projects', lang)}>{c.projects.all} <span aria-hidden="true">→</span></a>
-    </div>
-
-    <div class="projects-grid">
-      <article class="card card--featured">
-        <span class="eyebrow card-pillar">{f.pillar}</span>
-        <ChurnSimulator lang={lang} variant="card" />
-        <h3 class="card-title card-title--lg"><a class="card-link" href={link(f.key, lang)}>{f.title}</a></h3>
-        <span class="card-question">{f.question}</span>
-        <span class="finding">{c.projects.findingLabel}: {f.finding}</span>
-        <a class="read-case" href={link(f.key, lang)}>{lang === 'es' ? 'Leer el caso' : 'Read the case'} <span aria-hidden="true">→</span></a>
-      </article>
-
-      {cards.map((p) => (
-        <a class="card" href={link(p.key, lang)}>
-          <span class="card-top">
-            <span class:list={['eyebrow', 'card-pillar', `tone-${p.pillarTone}`]}>{p.pillar}</span>
-            {spanishOnly(p.key) && <span class="tag tag--dark">{t.inSpanish}</span>}
-          </span>
-          <span class="card-title">{p.title}</span>
-          <span class="card-question card-question--muted">{p.question}</span>
-          <span class="finding">{c.projects.findingLabel}: {p.finding}</span>
-        </a>
-      ))}
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <p class="fig"><span><b>Fig. 02</b> · {L.fig}</span></p>
+        <h2 id="projects-title" class="sec-title">{c.projects.title}</h2>
+      </div>
+      <div class="rail-ctl">
+        <a class="link-more" href={link('projects', lang)}>{c.projects.all} <span class="arr" aria-hidden="true">→</span></a>
+        <button type="button" class="rail-btn" data-rail-prev aria-label={L.prev} aria-controls="rail" hidden>←</button>
+        <button type="button" class="rail-btn" data-rail-next aria-label={L.next} aria-controls="rail" hidden>→</button>
+      </div>
     </div>
   </div>
+
+  <ul class="rail" id="rail" aria-label={L.rail} data-rail>
+    <li class="rail-item rail-item--lg">
+      <article class="pcard pcard--feat">
+        <div class="feat-body">
+          <span class="ptag ptag--dark">{f.pillar}</span>
+          <h3 class="pcard-title"><a href={link(f.key, lang)}>{f.title}</a></h3>
+          <p class="pcard-q">{f.question}</p>
+          <p class="finding finding--lg"><strong>{c.projects.findingLabel}:</strong> {f.finding}</p>
+          <a class="pcard-more" href={link(f.key, lang)}>{L.read} <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+        <div class="feat-viz">
+          <ChurnSimulator lang={lang} variant="card" />
+        </div>
+      </article>
+    </li>
+    {cards.map((p) => {
+      const cs = caseOf(p.key);
+      return (
+        <li class="rail-item">
+          <article class="pcard">
+            <div class="pcard-cover">
+              {cs?.thumb && <img src={cs.thumb} srcset={srcset(cs.thumb)} sizes="(max-width: 760px) 82vw, 560px" alt="" loading="lazy" decoding="async" width={dims(cs.thumb)[0]} height={dims(cs.thumb)[1]} />}
+              <p class="finding finding--cover"><strong>{c.projects.findingLabel}:</strong> {p.finding}</p>
+            </div>
+            <div class="pcard-body">
+              <span class="pcard-top">
+                <span class:list={['ptag', `ptag--${p.pillarTone}`]}>{p.pillar}</span>
+                {spanishOnly(p.key) && <span class="tag">{t.inSpanish}</span>}
+              </span>
+              <h3 class="pcard-title"><a class="stretched" href={link(p.key, lang)}>{p.title}</a></h3>
+              <p class="pcard-q">{p.question}</p>
+              <span class="pcard-more" aria-hidden="true">{L.read} <span class="arr">→</span></span>
+            </div>
+          </article>
+        </li>
+      );
+    })}
+    <li class="rail-item">
+      <a class="pcard pcard--end" href={link('projects', lang)}>
+        <span class="end-n" aria-hidden="true">{cases.length}</span>
+        <span class="end-text">{cases.length} {L.count}</span>
+        <span class="pcard-more">{c.projects.all} <span class="arr" aria-hidden="true">→</span></span>
+      </a>
+    </li>
+  </ul>
+  <div class="container"><div class="rail-bar" aria-hidden="true"><span data-rail-bar></span></div></div>
 </section>
 
 <!-- Dato curioso -->
 <section class="fact" aria-labelledby="fact-label">
-  <div class="container fact-inner">
-    <div class="fact-text">
-      <p id="fact-label" class="eyebrow fact-label">{c.fact.label}</p>
-      <p class="fact-figure">{c.fact.text}</p>
+  <div class="container fact-grid">
+    <p class="counter rv" aria-hidden="true"><span data-count={c.fact.figure}>{c.fact.figure}</span><small>{c.fact.figureLabel}</small></p>
+    <div class="fact-copy rv" style="--i:1">
+      <p id="fact-label" class="fig fig--ink"><span>{c.fact.label}</span></p>
+      <p class="fact-text">{c.fact.text}</p>
       <p class="fact-source">{c.fact.source}</p>
+      <a class="pill pill--dark" href={link(c.fact.key, lang)}>{c.fact.button} <span class="arr" aria-hidden="true">→</span></a>
     </div>
-    <a class="pill pill--dark" href={link(c.fact.key, lang)}>{c.fact.button}</a>
   </div>
 </section>
 
 <!-- Manifiesto y servicios -->
-<section class="manifesto">
-  <div class="container manifesto-inner">
-    <blockquote class="quote">
-      <p>“{c.manifesto.quote}”</p>
-      <p class="quote-sub">{c.manifesto.sub}</p>
-    </blockquote>
-    <div class="services">
-      <p class="eyebrow services-label">{c.services.label}</p>
-      <ul class="services-list">
-        {c.services.items.map((s) => (
-          <li>
-            <span class="service-name">{s.name}</span>
-            <span class="service-text">{s.text}</span>
-          </li>
-        ))}
-      </ul>
-      <a class="pill pill--primary" href={link('contact', lang)}>{c.services.button}</a>
+<section class="manifesto" aria-labelledby="quote-title">
+  <div class="container">
+    <p class="fig fig--dark"><span><b>Fig. 03</b> · {L.manifesto}</span></p>
+    <h2 id="quote-title" class="quote" aria-label={c.manifesto.quote} data-words>
+      {quoteWords.map((w) => <span class:list={['w', { gold: /^decisi/i.test(w) }]} aria-hidden="true">{w} </span>)}
+    </h2>
+    <p class="quote-sub">{c.manifesto.sub}</p>
+
+    <h3 class="visually-hidden">{L.services}</h3>
+    <p class="fig fig--dark services-label"><span>{c.services.label}</span></p>
+    <ul class="svc-list">
+      {c.services.items.map((s, i) => (
+        <li class="rv" style={`--i:${i}`}>
+          <a class="svc" href={link(s.key, lang) + (s.query || '')}>
+            <span class="svc-name">{s.name}</span>
+            <span class="svc-text">{s.text}</span>
+            <span class="svc-cta">{s.cta} <span class="arr" aria-hidden="true">→</span></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="svc-foot">
+      <a class="pill pill--mint" href={link('contact', lang) + '?motivo=proyecto'}>{c.services.button} <span class="arr" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
 
 <!-- Desde el Lab -->
-<section class="container lab" aria-labelledby="lab-title">
-  <div class="section-head section-head--rule">
-    <h2 id="lab-title" class="lab-title">{c.lab.title}</h2>
-    <a class="link-arrow" href={link('lab', lang)}>{c.lab.more} <span aria-hidden="true">→</span></a>
+<section class="lab paper-grid" aria-labelledby="lab-title">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <p class="fig"><span><b>Fig. 04</b> · {L.notebook}</span></p>
+        <h2 id="lab-title" class="sec-title">{c.lab.title}</h2>
+      </div>
+      <a class="link-more" href={link('lab', lang)}>{c.lab.more} <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+    <ul class="lab-grid">
+      {labItems.map((a, i) => (
+        <li class="rv" style={`--i:${i}`}>
+          <article class="pcard pcard--lab">
+            <div class="pcard-cover pcard-cover--lab">{labPost(a.key) && <LabCover cover={labPost(a.key).cover} size="sm" decorative />}</div>
+            <div class="pcard-body">
+              <span class="pcard-top">
+                <span class:list={['ptag', `ptag--${a.tone}`]}>{a.category}</span>
+                {spanishOnly(a.key) && <span class="tag">{t.inSpanish}</span>}
+              </span>
+              <h3 class="pcard-title pcard-title--sm"><a class="stretched" href={link(a.key, lang)}>{a.title}</a></h3>
+              <span class="pcard-more" aria-hidden="true">{L.readPost} <span class="arr">→</span></span>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
   </div>
-  <ul class="lab-grid">
-    {labItems.map((a) => (
-      <li>
-        <a class="lab-card" href={link(a.key, lang)}>
-          <span class="lab-visual">{labPost(a.key) && <LabCover cover={labPost(a.key).cover} size="sm" decorative />}</span>
-          <span class="lab-meta">
-            <span class:list={['eyebrow', 'lab-cat', `lab-cat--${a.tone}`]}>{a.category}</span>
-            {spanishOnly(a.key) && <span class="tag tag--light">{t.inSpanish}</span>}
-          </span>
-          <span class="lab-card-title">{a.title}</span>
-        </a>
-      </li>
-    ))}
-  </ul>
 </section>
 
-<style>
-  /* ---------- Hero ---------- */
-  .hero {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    padding-top: clamp(40px, 7vw, 72px);
-    padding-bottom: clamp(56px, 8vw, 80px);
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Carril de proyectos: flechas y barra de avance
+  const rail = document.querySelector<HTMLElement>('[data-rail]');
+  const prev = document.querySelector<HTMLButtonElement>('[data-rail-prev]');
+  const next = document.querySelector<HTMLButtonElement>('[data-rail-next]');
+  const bar = document.querySelector<HTMLElement>('[data-rail-bar]');
+  if (rail && prev && next && bar) {
+    prev.hidden = next.hidden = false;
+    const update = () => {
+      const max = rail.scrollWidth - rail.clientWidth;
+      const seen = rail.clientWidth / rail.scrollWidth;
+      const p = max > 0 ? rail.scrollLeft / max : 1;
+      bar.style.setProperty('--rp', String(seen + p * (1 - seen)));
+      prev.disabled = rail.scrollLeft < 8;
+      next.disabled = rail.scrollLeft > max - 8;
+    };
+    const step = () => (rail.querySelector('.rail-item:not(.rail-item--lg)')?.getBoundingClientRect().width || 400) + 20;
+    prev.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: reduce ? 'auto' : 'smooth' }));
+    next.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: reduce ? 'auto' : 'smooth' }));
+    rail.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   }
+
+  // Contador del dato curioso (el número final ya está en la página)
+  const count = document.querySelector<HTMLElement>('[data-count]');
+  if (count && !reduce && 'IntersectionObserver' in window) {
+    const target = Number(count.dataset.count);
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const tick = (t: number) => {
+        const k = Math.min(1, (t - t0) / 1200);
+        count.textContent = String(Math.round(target * (1 - Math.pow(1 - k, 3))));
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.5 });
+    if (count.getBoundingClientRect().top > window.innerHeight) { count.textContent = '0'; io.observe(count); }
+  }
+
+  // Manifiesto: las palabras se encienden al bajar
+  const quote = document.querySelector<HTMLElement>('[data-words]');
+  if (quote) {
+    const words = [...quote.querySelectorAll('.w')];
+    if (reduce) words.forEach((w) => w.classList.add('on'));
+    else {
+      quote.classList.add('is-live');
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const r = quote.getBoundingClientRect();
+        const p = (window.innerHeight * 0.85 - r.top) / (r.height + window.innerHeight * 0.35);
+        const n = Math.round(Math.max(0, Math.min(1, p)) * words.length);
+        words.forEach((w, i) => w.classList.toggle('on', i < n));
+      };
+      window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+      update();
+    }
+  }
+</script>
+
+<style>
+  /* ---------- Portada ---------- */
+  .hero { padding-top: clamp(28px, 5vw, 56px); padding-bottom: clamp(56px, 8vw, 104px); border-bottom: 1px solid var(--gray-light); overflow: hidden; }
   .hero-meta {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 8px 12px;
-    color: var(--slate);
-    border-bottom: 1px solid var(--gray-light);
-    padding-bottom: 14px;
-  }
-  .hero-title {
-    font-weight: 800;
-    font-size: clamp(48px, 8.4vw, 104px);
-    line-height: 0.98;
-    letter-spacing: -0.035em;
-    color: var(--green-deep);
-    max-width: 1100px;
-  }
-  .hero-title .underline-gold {
-    text-decoration-thickness: 0.1em;
-    text-underline-offset: 0.12em;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
-    gap: 32px 40px;
-    padding-top: 12px;
-  }
-  .hero-intro { font-size: clamp(19px, 2vw, 22px); line-height: 1.5; }
-  .hero-side { display: flex; flex-direction: column; gap: 20px; }
-  .hero-sub { color: var(--slate); }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-
-  /* ---------- El método ---------- */
-  .method { background: var(--green-deep); color: var(--white); }
-  .method-inner {
-    display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 56px;
-    padding-top: clamp(56px, 8vw, 88px);
-    padding-bottom: clamp(56px, 8vw, 88px);
+    gap: 8px 24px;
+    padding-bottom: 18px;
+    margin-bottom: clamp(28px, 4vw, 48px);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate);
   }
-  .method-figure { flex: 0 1 560px; max-width: 100%; }
-  .method-text { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 32px; }
-  .method-label { color: var(--mint); }
-  .method-title {
-    margin-top: 12px;
-    font-size: clamp(30px, 3.6vw, 44px);
-    font-weight: 800;
-    line-height: 1.08;
-    letter-spacing: -0.02em;
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero-text { display: flex; flex-direction: column; gap: 18px; }
+  .hero-title { font-weight: 800; font-size: clamp(44px, 6.6vw, 92px); line-height: 0.98; letter-spacing: -0.035em; color: var(--green-deep); text-wrap: balance; margin-bottom: 10px; }
+  .mark { position: relative; color: var(--green); white-space: nowrap; }
+  .mark::after { content: ''; position: absolute; left: 0; right: 0.08em; bottom: -0.02em; height: 0.085em; background: var(--gold); border-radius: 4px; transform-origin: left; animation: draw 1s .35s var(--ease-out) both; }
+  @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .hero-intro { font-size: clamp(18px, 1.6vw, 21px); line-height: 1.55; max-width: 60ch; }
+  .hero-sub { color: var(--slate); max-width: 60ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+  .hero-figure { position: relative; }
+  .proof {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: min(320px, 88%);
+    margin: -72px -12px 0 auto;
+    padding: 18px 20px 12px;
+    border-radius: var(--radius-md);
+    background: var(--green-night);
+    color: var(--on-dark);
+    box-shadow: 0 24px 40px -24px rgba(17, 41, 31, 0.7);
   }
-  .method-steps {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-    gap: 28px 36px;
+  .proof-k { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint-strong); }
+  .proof-nums { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+  .proof-win { font-weight: 800; font-size: 28px; color: var(--white); white-space: nowrap; }
+  .proof-lose { font-weight: 700; font-size: 15px; color: var(--on-dark-muted); white-space: nowrap; text-decoration: line-through; text-decoration-color: rgba(214, 166, 79, 0.8); }
+  .proof-text { font-size: 14px; line-height: 1.5; }
+  .proof-link { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--mint-strong); text-decoration: none; }
+  .proof-link:hover { color: var(--white); }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-figure { max-width: 560px; }
+    .proof { margin-right: 8px; }
   }
-  .method-steps li { border-top: 1px solid var(--green-logo); padding-top: 14px; }
-  .step-n { font-family: var(--font-display); font-weight: 800; font-size: 34px; color: var(--mint); }
-  .step-n--gold { color: var(--gold); }
-  .step-name { margin-top: 2px; font-family: var(--font-display); font-weight: 600; }
-  .step-text { margin-top: 2px; color: var(--gray-light); font-size: 16px; }
+  @media (max-width: 520px) {
+    .actions .pill { flex: 1 1 100%; }
+    .proof { width: calc(100% - 16px); }
+  }
+
+  /* ---------- Encabezados de sección ---------- */
+  .sec-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: clamp(28px, 4vw, 44px); }
+  .sec-head .sec-title { margin-top: 16px; max-width: 17ch; }
+  .link-more { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--green); text-decoration: none; }
+  .link-more:hover { text-decoration: underline; text-underline-offset: 5px; }
 
   /* ---------- Proyectos ---------- */
-  .projects { background: var(--green-night); color: var(--white); }
-  .projects-inner {
+  .projects { padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(56px, 7vw, 96px); }
+  .rail-ctl { display: flex; align-items: center; gap: 10px; }
+  .rail-btn { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--green); background: transparent; color: var(--green); font: 700 18px/1 var(--font-display); cursor: pointer; transition: background .2s ease, color .2s ease, opacity .2s ease; }
+  .rail-btn:hover:not(:disabled) { background: var(--green); color: var(--white); }
+  .rail-btn:disabled { opacity: 0.3; cursor: default; }
+  .rail-btn[hidden] { display: none; }
+  .rail {
     display: flex;
-    flex-direction: column;
-    gap: 40px;
-    padding-top: clamp(64px, 9vw, 96px);
-    padding-bottom: clamp(64px, 9vw, 96px);
+    gap: 20px;
+    margin: 0;
+    padding: 4px var(--gutter) 24px;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--gutter);
+    scrollbar-width: none;
   }
-  .section-head {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 16px;
+  .rail::-webkit-scrollbar { display: none; }
+  @media (min-width: 1360px) {
+    .rail { padding-left: calc((100vw - var(--container)) / 2 + var(--gutter)); scroll-padding-left: calc((100vw - var(--container)) / 2 + var(--gutter)); }
   }
-  .projects-title {
-    font-size: clamp(34px, 4vw, 48px);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    max-width: 640px;
-  }
-  .link-arrow {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 15px;
-    padding: 10px 0;
-  }
-  .link-arrow--mint { color: var(--mint); }
-  .link-arrow--mint:hover { color: var(--white); }
+  .rail-item { flex: 0 0 min(540px, 82vw); scroll-snap-align: start; display: flex; min-width: 0; }
+  .rail-item--lg { flex-basis: min(880px, 88vw); }
+  .rail-bar { height: 3px; border-radius: 3px; background: var(--gray-light); overflow: hidden; }
+  .rail-bar span { display: block; height: 100%; background: var(--gold); transform-origin: left; transform: scaleX(var(--rp, 0.3)); transition: transform .15s linear; }
 
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  @media (min-width: 900px) {
-    .projects-grid { grid-template-columns: 1.15fr 1fr; }
-  }
-  .card {
+  .pcard {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 28px;
+    width: 100%;
+    background: var(--paper);
+    border: 1px solid var(--gray-light);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--green-logo);
-    color: var(--white);
+    overflow: hidden;
+    color: var(--carbon);
     text-decoration: none;
-    transition: border-color .2s ease, transform .2s ease;
+    transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s ease;
   }
-  .card:hover { color: var(--white); border-color: var(--mint); transform: translateY(-2px); }
-  @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
+  .pcard:hover { transform: translateY(-4px); box-shadow: 0 28px 48px -32px rgba(17, 41, 31, 0.45); border-color: var(--line); }
+  .pcard-cover { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--gray-light); background: var(--paper); }
+  .pcard-cover img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .6s var(--ease-out); }
+  .pcard:hover .pcard-cover img { transform: scale(1.035); }
+  .finding--cover { position: absolute; left: 16px; right: 16px; bottom: 16px; max-width: 46ch; padding: 10px 14px; border-radius: 10px; font-family: var(--font-display); box-shadow: 0 12px 24px -16px rgba(17, 41, 31, 0.6); }
+  .finding--lg { font-family: var(--font-display); font-size: 14px; padding: 10px 14px; border-radius: 10px; }
+  .pcard-body { display: flex; flex-direction: column; gap: 10px; padding: 22px 24px 24px; }
+  .pcard-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .ptag { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); }
+  .ptag--mint, .ptag--teal { color: var(--teal-text); }
+  .ptag--gold { color: var(--gold-text); }
+  .ptag--green { color: var(--green); }
+  .ptag--dark { color: var(--mint-strong); }
+  .pcard-title { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; color: var(--green-deep); }
+  .pcard-title--sm { font-size: 22px; }
+  .pcard-title a { color: inherit; text-decoration: none; }
+  .stretched::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  .pcard-q { color: var(--slate); font-size: 16px; }
+  .pcard-more { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--green); text-decoration: none; }
+  .pcard .tag { color: var(--slate); }
 
-  .card--featured:hover { transform: none; border-color: var(--green); }
-  .card-link { color: var(--white); text-decoration: none; }
-  .card-link:hover { color: var(--mint); text-decoration: underline; }
-  .read-case { font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--mint-strong); display: inline-block; padding: 6px 0; }
-  .card--featured .card-pillar { color: var(--mint-strong); }
-  .read-case:hover { color: var(--white); }
-  .card--featured {
-    grid-row: span 2;
-    background: var(--green);
-    border-color: var(--green);
-    padding: 32px;
-    gap: 16px;
-    justify-content: space-between;
+  .pcard--feat { background: var(--green-deep); border-color: var(--green-deep); color: var(--on-dark); }
+  .pcard--feat:hover { border-color: var(--green-deep); }
+  .feat-body, .feat-viz { min-width: 0; }
+  .pcard--feat { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .feat-body { display: flex; flex-direction: column; gap: 12px; padding: 26px; }
+  .feat-body .pcard-title { color: var(--white); }
+  .feat-body .pcard-title a:hover { color: var(--mint); text-decoration: underline; }
+  .feat-body .pcard-q { color: var(--on-dark-muted); }
+  .feat-body .pcard-more { color: var(--mint-strong); }
+  .feat-viz { display: flex; padding: 20px; border-left: 1px solid rgba(140, 207, 173, 0.16); background:
+    linear-gradient(rgba(140, 207, 173, 0.05) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(140, 207, 173, 0.05) 1px, transparent 1px) 0 0 / 24px 24px; }
+  .feat-viz :global(.sim--card) { background: transparent; padding: 0; }
+  @media (max-width: 760px) {
+    .pcard--feat { grid-template-columns: 1fr; }
+    .feat-viz { border-left: 0; border-top: 1px solid rgba(140, 207, 173, 0.16); }
   }
-  .card-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .card-pillar { color: var(--mint); }
-  .tone-gold { color: var(--gold); }
-  .tone-mint { color: var(--mint); }
-  .card-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 1.25;
-  }
-  .card-title--lg { font-size: clamp(24px, 2.4vw, 28px); line-height: 1.2; }
-  .card-question { color: var(--gray-light); }
-  .card-question--muted { color: var(--on-dark); font-size: 15px; }
-  .card .finding { margin-top: 4px; }
-  .tag--dark { color: var(--mint); }
+
+  .pcard--end { justify-content: flex-end; gap: 10px; padding: 28px; min-height: 320px; background: var(--green); border-color: var(--green); color: var(--white); }
+  .pcard--end:hover { color: var(--white); border-color: var(--green); }
+  .end-n { font-family: var(--font-display); font-weight: 800; font-size: clamp(64px, 8vw, 104px); line-height: 0.9; color: var(--mint); }
+  .end-text { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; }
+  .pcard--end .pcard-more { color: var(--gold); }
 
   /* ---------- Dato curioso ---------- */
-  .fact { background: var(--gold); color: var(--carbon); }
-  .fact-inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding-top: 56px;
-    padding-bottom: 56px;
-  }
-  .fact-text { flex: 1 1 520px; min-width: 0; }
-  .fact-label { font-weight: 700; letter-spacing: 0.14em; }
-  .fact-figure {
-    margin-top: 8px;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(24px, 2.6vw, 30px);
-    line-height: 1.25;
-  }
-  .fact-source { margin-top: 6px; font-size: 14px; }
+  .fact { position: relative; overflow: hidden; background: var(--gold); color: var(--carbon); padding-top: clamp(56px, 7vw, 96px); padding-bottom: clamp(56px, 7vw, 96px); }
+  .fact::after { content: ''; position: absolute; inset: 0; pointer-events: none; background:
+    linear-gradient(rgba(32, 40, 36, 0.06) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(32, 40, 36, 0.06) 1px, transparent 1px) 0 0 / 24px 24px; }
+  .fact-grid { position: relative; z-index: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); align-items: center; }
+  .counter { display: flex; align-items: flex-start; gap: 8px; font-family: var(--font-display); font-weight: 800; font-size: clamp(120px, 18vw, 240px); line-height: 0.8; letter-spacing: -0.05em; color: var(--green-deep); font-variant-numeric: tabular-nums; }
+  .counter small { font-size: 0.14em; letter-spacing: 0.02em; line-height: 1.2; margin-top: 0.4em; max-width: 6ch; }
+  .fact-copy { display: flex; flex-direction: column; gap: 16px; max-width: 46ch; }
+  .fact-text { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.3; }
+  .fact-source { font-size: 14px; color: #3B4640; }
+  .fact .pill { align-self: flex-start; }
+  @media (max-width: 760px) { .fact-grid { grid-template-columns: 1fr; } }
 
   /* ---------- Manifiesto y servicios ---------- */
-  .manifesto { background: var(--paper); border-bottom: 1px solid var(--gray-light); }
-  .manifesto-inner {
+  .manifesto { background: var(--green-deep); color: var(--on-dark); padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(64px, 8vw, 112px); }
+  .quote { margin: 22px 0 0; max-width: 16ch; font-weight: 800; font-size: clamp(36px, 6vw, 84px); line-height: 1.04; letter-spacing: -0.03em; color: var(--white); }
+  .quote .gold { color: var(--gold); }
+  .quote.is-live .w { color: rgba(207, 216, 210, 0.28); transition: color .35s var(--ease-out); }
+  .quote.is-live .w.on { color: var(--white); }
+  .quote.is-live .w.on.gold { color: var(--gold); }
+  .quote-sub { margin-top: 28px; font-size: 19px; max-width: 52ch; }
+  .services-label { margin-top: clamp(56px, 7vw, 88px); }
+  .svc-list { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid rgba(140, 207, 173, 0.22); }
+  .svc {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-    gap: 56px;
-    align-items: start;
-    padding-top: clamp(64px, 8vw, 88px);
-    padding-bottom: clamp(64px, 8vw, 88px);
+    grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) auto;
+    align-items: center;
+    gap: 16px 40px;
+    padding: 28px 12px;
+    border-bottom: 1px solid rgba(140, 207, 173, 0.22);
+    color: inherit;
+    text-decoration: none;
   }
-  .quote { margin: 0; }
-  .quote p:first-child {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(30px, 3.2vw, 38px);
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    color: var(--green-deep);
-  }
-  .quote-sub { margin-top: 16px; font-size: 16px; color: var(--slate); }
-
-  .services { display: flex; flex-direction: column; align-items: flex-start; }
-  .services-label { color: var(--green); padding-bottom: 12px; }
-  .services-list {
-    width: 100%;
-    margin: 0 0 24px;
-    padding: 0;
-    list-style: none;
-    border-bottom: 1px solid var(--gray-light);
-  }
-  .services-list li {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 20px 0;
-    border-top: 1px solid var(--gray-light);
-  }
-  .service-name { font-family: var(--font-display); font-weight: 700; font-size: 22px; }
-  .service-text { color: var(--slate); font-size: 16px; }
+  .svc::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--green); transform: scaleY(0); transform-origin: bottom; transition: transform .4s var(--ease-out); }
+  .svc:hover::before, .svc:focus-visible::before { transform: scaleY(1); }
+  .svc:hover { color: inherit; }
+  .svc-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 2.4vw, 30px); color: var(--white); }
+  .svc-text { font-size: 16px; }
+  .svc-cta { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.06em; color: var(--mint-strong); white-space: nowrap; }
+  .svc-foot { margin-top: 36px; }
+  @media (max-width: 760px) { .svc { grid-template-columns: 1fr; gap: 8px; } }
+  @media (prefers-reduced-motion: reduce) { .svc::before { transition: none; } }
 
   /* ---------- Desde el Lab ---------- */
-  .lab {
-    padding-top: clamp(64px, 8vw, 88px);
-    padding-bottom: clamp(64px, 8vw, 88px);
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-  .section-head--rule { border-bottom: 2px solid var(--carbon); padding-bottom: 16px; }
-  .lab-title {
-    font-size: clamp(32px, 3.6vw, 44px);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--green-deep);
-  }
-  .lab-grid {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-    gap: 40px;
-  }
-  .lab-card { display: flex; flex-direction: column; gap: 12px; color: var(--carbon); text-decoration: none; }
-  .lab-card:hover .lab-card-title { color: var(--green); }
-  .lab-visual { display: block; }
-  .lab-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .lab-cat { font-size: 12px; letter-spacing: 0.1em; }
-  .lab-cat--gold { color: var(--gold-text); }
-  .lab-cat--green { color: var(--green); }
-  .lab-cat--teal { color: var(--teal-text); }
-  .tag--light { color: var(--slate); }
-  .lab-card-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 1.25;
-    transition: color .2s ease;
+  .lab { padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(72px, 9vw, 120px); }
+  .lab-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .lab-grid > li { display: flex; }
+  .pcard-cover--lab { aspect-ratio: 4 / 3; }
+  .pcard-cover--lab :global(.cover) { height: 100%; border-radius: 0; }
+  .pcard-cover--lab :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .6s var(--ease-out); }
+  .pcard--lab:hover .pcard-cover--lab :global(img) { transform: scale(1.035); }
+  @media (max-width: 900px) { .lab-grid { grid-template-columns: 1fr; } .pcard-cover--lab { aspect-ratio: 16 / 9; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mark::after { animation: none; }
+    .pcard, .pcard-cover img, .rail-btn { transition: none; }
+    .pcard:hover { transform: none; }
+    .pcard:hover .pcard-cover img, .pcard--lab:hover .pcard-cover--lab :global(img) { transform: none; }
   }
 </style>

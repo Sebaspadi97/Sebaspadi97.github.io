@@ -87,6 +87,29 @@ const showAlternates = alternates.length === 2;
 
     <Footer lang={lang} variant={footer} />
 
+    <script>
+      // Aparición suave al hacer scroll: solo para lo que está fuera de la primera pantalla
+      // (así la página completa se ve aunque no haya JavaScript) y nunca con movimiento reducido.
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('rv-in');
+              e.target.classList.remove('rv-pre');
+              io.unobserve(e.target);
+            }),
+          { rootMargin: '0px 0px -8% 0px' }
+        );
+        document.querySelectorAll('.rv').forEach((el) => {
+          if (el.getBoundingClientRect().top > window.innerHeight) {
+            el.classList.add('rv-pre');
+            io.observe(el);
+          }
+        });
+      }
+    </script>
+
     {lang === 'es' && (
       <script is:inline>
         (function () {

@@ -1,0 +1,124 @@
+---
+// "Fig. 00 · Muestra en vivo" del Inicio: 40 puntos con tendencia y un punto dorado (la decisión).
+// Los puntos se apartan del cursor y vuelven a su lugar. Sin JavaScript o con movimiento
+// reducido se ve el mismo dibujo, quieto (SVG de respaldo).
+const { label = '', title = '', hint = '', lang = 'es' } = Astro.props;
+
+let seed = 11;
+const rnd = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const pts = Array.from({ length: 40 }, (_, i) => {
+  if (i === 39) return [0.9, 0.16];
+  const x = 0.1 + rnd() * 0.74;
+  const y = Math.min(0.9, Math.max(0.22, 0.86 - (x - 0.1) * 0.7 + (rnd() - 0.5) * 0.28));
+  return [Math.round(x * 1000) / 1000, Math.round(y * 1000) / 1000];
+});
+const W = 500, H = 400;
+const decision = lang === 'es' ? 'DECISIÓN' : 'DECISION';
+---
+<figure class="live" data-live>
+  <figcaption class="live-bar"><span>{title}</span><span>{hint}</span></figcaption>
+  <div class="live-plot">
+    <svg class="live-static" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label}>
+      <line x1={W * 0.08} y1={H * 0.92} x2={W * 0.95} y2={H * 0.92} class="ax" />
+      <line x1={W * 0.08} y1={H * 0.92} x2={W * 0.08} y2={H * 0.08} class="ax" />
+      <line x1={W * 0.1} y1={H * 0.86} x2={W * 0.9} y2={H * 0.3} class="trend" />
+      <text x={W * 0.12} y={H * 0.14} class="formula">f(x) = β₀ + β₁·x</text>
+      {pts.map(([x, y], i) => (
+        <circle cx={x * W} cy={y * H} r={i === 39 ? 8 : 5.5} class:list={[i === 39 ? 'gold' : i % 5 === 0 ? 'deep' : 'dot']} />
+      ))}
+      <circle cx={0.9 * W} cy={0.16 * H} r="15" class="ring" />
+      <text x={0.9 * W - 22} y={0.16 * H + 4} class="dec">{decision}</text>
+    </svg>
+    <canvas class="live-canvas" aria-hidden="true" data-points={JSON.stringify(pts)} data-decision={decision}></canvas>
+  </div>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-live]').forEach((fig) => {
+    const cv = fig.querySelector<HTMLCanvasElement>('canvas')!;
+    const ctx = cv.getContext('2d');
+    if (!ctx || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const css = getComputedStyle(document.documentElement);
+    const C = (n: string) => css.getPropertyValue(n).trim();
+    const col = { green: C('--green'), deep: C('--green-deep'), gold: C('--gold'), goldText: C('--gold-text'), line: C('--line'), slate: C('--slate') };
+    const base: [number, number][] = JSON.parse(cv.dataset.points || '[]');
+    const label = cv.dataset.decision || '';
+    const P = base.map(([x, y], i) => ({ bx: x, by: y, x, y, vx: 0, vy: 0, ph: (i * 1.7) % 6.28 }));
+    let W = 0, H = 0, d = 1, ptr: { x: number; y: number } | null = null, on = false, raf = 0;
+
+    const fit = () => {
+      const r = cv.getBoundingClientRect();
+      d = Math.min(window.devicePixelRatio || 1, 2);
+      W = cv.width = Math.round(r.width * d);
+      H = cv.height = Math.round(r.height * d);
+    };
+    const draw = (t: number) => {
+      ctx.clearRect(0, 0, W, H);
+      ctx.strokeStyle = col.line; ctx.lineWidth = d;
+      ctx.beginPath(); ctx.moveTo(W * .08, H * .92); ctx.lineTo(W * .95, H * .92); ctx.moveTo(W * .08, H * .92); ctx.lineTo(W * .08, H * .08); ctx.stroke();
+      ctx.setLineDash([5 * d, 6 * d]); ctx.strokeStyle = col.green; ctx.globalAlpha = .45;
+      ctx.beginPath(); ctx.moveTo(W * .1, H * .86); ctx.lineTo(W * .9, H * .3); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+      ctx.fillStyle = col.slate; ctx.font = `${12 * d}px ui-monospace, Menlo, monospace`;
+      ctx.fillText('f(x) = β₀ + β₁·x', W * .12, H * .14);
+      const R = Math.max(4, W / 95);
+      P.forEach((p, i) => {
+        let tx = p.bx + Math.sin(t / 1400 + p.ph) * .006, ty = p.by + Math.cos(t / 1700 + p.ph) * .008;
+        if (ptr && i !== 39) {
+          const dx = p.x - ptr.x, dy = (p.y - ptr.y) * (H / W), dist = Math.hypot(dx, dy);
+          if (dist < .14) { const f = (.14 - dist) / .14; tx += (dx / (dist || 1)) * f * .09; ty += (dy / (dist || 1)) * f * .09 * (W / H); }
+        }
+        p.vx = (p.vx + (tx - p.x) * .08) * .78; p.vy = (p.vy + (ty - p.y) * .08) * .78;
+        p.x += p.vx; p.y += p.vy;
+        ctx.beginPath(); ctx.arc(p.x * W, p.y * H, i === 39 ? R * 1.5 : R, 0, 6.283);
+        ctx.fillStyle = i === 39 ? col.gold : i % 5 === 0 ? col.deep : col.green;
+        ctx.globalAlpha = i === 39 ? 1 : .85; ctx.fill(); ctx.globalAlpha = 1;
+      });
+      const g = P[39], pulse = (Math.sin(t / 500) + 1) / 2;
+      ctx.beginPath(); ctx.arc(g.x * W, g.y * H, R * (2.4 + pulse * 1.2), 0, 6.283);
+      ctx.strokeStyle = col.gold; ctx.globalAlpha = .5 - pulse * .3; ctx.lineWidth = 2 * d; ctx.stroke(); ctx.globalAlpha = 1;
+      ctx.fillStyle = col.goldText; ctx.font = `700 ${11 * d}px Montserrat, sans-serif`; ctx.textAlign = 'right';
+      ctx.fillText(label, g.x * W - R * 3, g.y * H + 4 * d); ctx.textAlign = 'left';
+    };
+    const loop = (t: number) => { draw(t); if (on) raf = requestAnimationFrame(loop); };
+    const start = () => { cancelAnimationFrame(raf); if (on) raf = requestAnimationFrame(loop); };
+
+    fit();
+    fig.classList.add('is-live');
+    cv.addEventListener('pointermove', (e) => { const r = cv.getBoundingClientRect(); ptr = { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height }; });
+    cv.addEventListener('pointerleave', () => { ptr = null; });
+    new IntersectionObserver(([en]) => { on = en.isIntersecting && !document.hidden; start(); }).observe(cv);
+    document.addEventListener('visibilitychange', () => { on = !document.hidden && cv.getBoundingClientRect().bottom > 0; start(); });
+    window.addEventListener('resize', fit);
+  });
+</script>
+
+<style>
+  .live { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 30px 60px -40px rgba(17, 41, 31, 0.45); }
+  .live-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--gray-light);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+  .live-plot { position: relative; aspect-ratio: 5 / 4; }
+  .live-static, .live-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .live-canvas { touch-action: pan-y; opacity: 0; }
+  .is-live .live-canvas { opacity: 1; }
+  .is-live .live-static { visibility: hidden; }
+  .ax { stroke: var(--line); stroke-width: 1; }
+  .trend { stroke: var(--green); stroke-width: 1; stroke-dasharray: 5 6; opacity: 0.45; }
+  .formula { font-family: ui-monospace, Menlo, monospace; font-size: 12px; fill: var(--slate); }
+  .dot { fill: var(--green); opacity: 0.85; }
+  .deep { fill: var(--green-deep); opacity: 0.85; }
+  .gold { fill: var(--gold); }
+  .ring { fill: none; stroke: var(--gold); stroke-width: 2; opacity: 0.4; }
+  .dec { font-family: var(--font-display); font-weight: 700; font-size: 11px; fill: var(--gold-text); text-anchor: end; }
+</style>

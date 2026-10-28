@@ -1,5 +1,5 @@
 ---
-// Pie oscuro con "SP Lab." grande, enlaces y línea de derechos.
+// Pie oscuro: eslogan grande con "Hablemos" y el CV, navegación, redes, legal y derechos.
 // variant="compact" se usa en la 404.
 import { ui, link } from '../i18n/index.js';
 import { site } from '../data/site.js';
@@ -20,18 +20,41 @@ const year = new Date().getFullYear();
   </footer>
 ) : (
   <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="footer-wordmark">SP Lab<span class="dot">.</span></span>
-        <span class="footer-slogan">{t.slogan}</span>
+    <div class="container">
+      <div class="footer-cta">
+        <p class="footer-slogan-big">{t.slogan.replace(/\.$/, '')}<span class="dot">.</span></p>
+        <div class="footer-actions">
+          <a class="pill pill--mint" href={link('contact', lang)}>{t.cta} <span class="arr" aria-hidden="true">→</span></a>
+          {site.cv[lang] && <a class="pill pill--ghost-dark" href={site.cv[lang]}>{lang === 'es' ? 'Descargar CV' : 'Download CV'}</a>}
+        </div>
       </div>
-      <ul class="footer-links">
-        <li><a href={site.linkedin} rel="me noopener">{t.footerLinks.linkedin}</a></li>
-        <li><a href={site.github} rel="me noopener">{t.footerLinks.github}</a></li>
-        <li><a href={link('contact', lang)}>{t.footerLinks.email}</a></li>
-        <li><a href={link('privacy', lang)}>{t.footerLinks.privacy}</a></li>
-        <li><a href={link('terms', lang)}>{t.footerLinks.terms}</a></li>
-      </ul>
+      <div class="footer-cols">
+        <div class="footer-brand">
+          <img src="/brand/logo-horizontal-negativo.svg" alt="Sebas Padilla Lab" width="150" height="55" loading="lazy" />
+          <p>{lang === 'es' ? 'Casos de Data, Machine Learning y Market Intelligence, de la pregunta de negocio a la decisión.' : 'Data, Machine Learning and Market Intelligence case studies, from the business question to the decision.'}</p>
+        </div>
+        <nav aria-label={lang === 'es' ? 'Sitio' : 'Site'}>
+          <h2 class="footer-h">{lang === 'es' ? 'Sitio' : 'Site'}</h2>
+          <ul class="footer-list">
+            {t.nav.map((item) => <li><a href={link(item.key, lang)}>{item.label}</a></li>)}
+          </ul>
+        </nav>
+        <div>
+          <h2 class="footer-h">{lang === 'es' ? 'Conecta' : 'Connect'}</h2>
+          <ul class="footer-list">
+            <li><a href={site.linkedin} rel="me noopener">{t.footerLinks.linkedin}</a></li>
+            <li><a href={site.github} rel="me noopener">{t.footerLinks.github}</a></li>
+            <li><a href={link('contact', lang)}>{t.footerLinks.email}</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="footer-h">Legal</h2>
+          <ul class="footer-list">
+            <li><a href={link('privacy', lang)}>{t.footerLinks.privacy}</a></li>
+            <li><a href={link('terms', lang)}>{t.footerLinks.terms}</a></li>
+          </ul>
+        </div>
+      </div>
       <p class="footer-rights">{t.rights(year)} <a href={link('terms', lang)}>{t.rightsLink}</a>.</p>
     </div>
   </footer>
@@ -46,42 +69,61 @@ const year = new Date().getFullYear();
   .footer a:hover { color: var(--white); }
   .dot { color: var(--mint); }
 
-  .footer-inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 24px;
-    padding-top: 64px;
-    padding-bottom: 48px;
+  .footer-cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 32px;
+    padding-top: clamp(72px, 9vw, 120px);
+    padding-bottom: clamp(48px, 6vw, 80px);
+    border-bottom: 1px solid rgba(140, 207, 173, 0.2);
   }
-  .footer-brand { display: flex; flex-direction: column; gap: 8px; }
-  .footer-wordmark {
+  .footer-slogan-big {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(40px, 6vw, 56px);
-    letter-spacing: -0.03em;
-    line-height: 1;
+    font-size: clamp(40px, 7vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    max-width: 14ch;
+    text-wrap: balance;
   }
-  .footer-slogan { color: var(--on-dark); font-size: 16px; }
-
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 24px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: 15px;
+  .footer-slogan-big .dot { color: var(--gold); }
+  .footer-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .footer .pill--mint { color: var(--green-night); }
+  .footer .pill--ghost-dark { color: var(--white); }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    padding-top: 48px;
+    padding-bottom: 40px;
   }
-  .footer-links a { display: inline-block; padding: 10px 0; }
-
+  .footer-brand img { width: 150px; height: auto; }
+  .footer-brand p { margin-top: 16px; font-size: 15px; color: var(--on-dark-muted); max-width: 34ch; }
+  .footer-h {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint-strong);
+    margin-bottom: 10px;
+  }
+  .footer-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: 16px; }
+  .footer-list a { display: inline-block; padding: 7px 0; color: var(--on-dark); text-decoration: none; }
+  .footer-list a:hover { color: var(--mint); text-decoration: underline; text-underline-offset: 4px; }
   .footer-rights {
-    flex-basis: 100%;
+    padding-top: 24px;
+    padding-bottom: 32px;
+    border-top: 1px solid rgba(140, 207, 173, 0.12);
     font-size: 13px;
     color: var(--on-dark-muted);
   }
   .footer-rights a { color: var(--on-dark-muted); }
+  @media (max-width: 900px) {
+    .footer-cta { grid-template-columns: 1fr; }
+    .footer-cols { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
 
   .footer--compact { border-top: 1px solid var(--green); }
   .footer-compact-inner {

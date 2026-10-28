@@ -20,6 +20,7 @@ const T = es
       all: 'Contactar a todos',
       contacts: 'de la base',
       reset: 'Volver a los supuestos del caso',
+      try: 'Pruébalo: cambia los supuestos',
       note: 'Datos sintéticos de 5.000 clientes de prueba · margen 25 %',
       chartTitle: 'Ganancia según cuántos clientes se contactan',
       chartX: '% de clientes contactados (ordenados por valor esperado)',
@@ -40,6 +41,7 @@ const T = es
       all: 'Contact everyone',
       contacts: 'of the base',
       reset: 'Back to the case assumptions',
+      try: 'Try it: change the assumptions',
       note: 'Synthetic data for 5,000 test customers · 25% margin',
       chartTitle: 'Profit by number of customers contacted',
       chartX: '% of customers contacted (ranked by expected value)',
@@ -56,6 +58,7 @@ const uid = `sim-${variant}-${lang}`;
 <div class:list={['sim', `sim--${variant}`]} data-sim data-lang={lang} data-variant={variant} data-src="/data/sim-abandono.json" data-i18n={JSON.stringify(T)}>
   {variant === 'full' && <h3 class="sim-title">{T.title}</h3>}
 
+  {variant === 'full' && (
   <div class="sim-controls" data-controls hidden>
     <div class="sim-control">
       <div class="sim-label-row">
@@ -73,6 +76,7 @@ const uid = `sim-${variant}-${lang}`;
       {variant === 'full' && <p class="sim-help" id={`${uid}-effhelp`}>{T.effHelp}</p>}
     </div>
   </div>
+  )}
 
   <div class="sim-results" aria-live="polite" data-results>
     <div class="sim-kpi sim-kpi--model">
@@ -111,6 +115,29 @@ const uid = `sim-${variant}-${lang}`;
   <p class="sim-verdict" data-verdict>
     {T.verdictWin} <strong>{es ? 'COP 13,0 M' : 'COP 13.0M'}</strong> {T.verdictMore}
   </p>
+
+  {variant === 'card' && (
+    <details class="sim-try" data-try hidden>
+      <summary>{T.try}</summary>
+  <div class="sim-controls" data-controls hidden>
+    <div class="sim-control">
+      <div class="sim-label-row">
+        <label for={`${uid}-cost`}>{T.cost}</label>
+        <output for={`${uid}-cost`} data-out="cost">COP 5.000</output>
+      </div>
+      <input id={`${uid}-cost`} type="range" min="1000" max="20000" step="500" value="5000" data-in="cost" />
+    </div>
+    <div class="sim-control">
+      <div class="sim-label-row">
+        <label for={`${uid}-eff`}>{T.eff}</label>
+        <output for={`${uid}-eff`} data-out="eff">25 %</output>
+      </div>
+      <input id={`${uid}-eff`} type="range" min="5" max="50" step="1" value="25" data-in="eff" aria-describedby={`${uid}-effhelp`} />
+      {variant === 'full' && <p class="sim-help" id={`${uid}-effhelp`}>{T.effHelp}</p>}
+    </div>
+  </div>
+    </details>
+  )}
 
   <div class="sim-foot">
     <span class="sim-note">{T.note}</span>
@@ -159,6 +186,7 @@ const uid = `sim-${variant}-${lang}`;
     const out = (k: string) => root.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
     const resetBtn = root.querySelector<HTMLButtonElement>('[data-reset]')!;
     root.querySelector<HTMLElement>('[data-controls]')!.hidden = false;
+    root.querySelector<HTMLElement>('[data-try]')?.removeAttribute('hidden');
     resetBtn.hidden = false;
 
     const compute = (cost: number, eff: number) => {
@@ -348,4 +376,34 @@ const uid = `sim-${variant}-${lang}`;
   .sim-reset:disabled { opacity: 0.45; cursor: default; }
   .sim-status { font-size: 13px; }
   .sim-status[hidden] { display: none; }
+  .sim-try { border-top: 1px solid rgba(140, 207, 173, 0.18); padding-top: 6px; }
+  .sim-try[hidden] { display: none; }
+  .sim-try summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--gold);
+  }
+  .sim-try summary::-webkit-details-marker { display: none; }
+  .sim-try summary::before {
+    content: '+';
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    font-size: 16px;
+    line-height: 1;
+    transition: transform .25s var(--ease-out);
+  }
+  .sim-try[open] summary::before { transform: rotate(45deg); }
+  .sim-try .sim-controls { margin-top: 8px; }
+  @media (prefers-reduced-motion: reduce) { .sim-try summary::before { transition: none; } }
 </style>

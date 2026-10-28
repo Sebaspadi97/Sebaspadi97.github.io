@@ -1,13 +1,13 @@
 ---
-// Menú editorial: SP/LAB (se reemplaza por el SVG del logo final), enlaces en
-// mayúsculas, página activa subrayada en dorado, ES/EN y "Hablemos" en píldora.
+// Menú editorial fijo: logo, enlaces en mayúsculas, página activa subrayada en dorado,
+// ES/EN y "Hablemos". Al bajar se compacta y una línea dorada muestra el avance de lectura.
 import { ui, link } from '../i18n/index.js';
 
 const { lang = 'es', active = null, theme = 'light', altHref = '/' } = Astro.props;
 const t = ui[lang];
 const otherLang = lang === 'es' ? 'en' : 'es';
 ---
-<header class:list={['site-header', `site-header--${theme}`]}>
+<header class:list={['site-header', `site-header--${theme}`]} data-header>
   <nav class="nav container" aria-label={t.navLabel}>
     <a class="brand" href={link('home', lang)}>
       <img
@@ -46,6 +46,7 @@ const otherLang = lang === 'es' ? 'en' : 'es';
       <a class="pill nav-cta" href={link('contact', lang)}>{t.cta}</a>
     </div>
   </nav>
+  <span class="read-progress" aria-hidden="true"></span>
 </header>
 
 <script>
@@ -57,7 +58,11 @@ const otherLang = lang === 'es' ? 'en' : 'es';
       toggle.setAttribute('aria-expanded', String(open));
       menu.classList.toggle('is-open', open);
       if (text) text.textContent = open ? toggle.dataset.labelClose : toggle.dataset.labelOpen;
+      if (open) menu.querySelector('a')?.focus();
     };
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('a') && toggle.getAttribute('aria-expanded') === 'true') setOpen(false);
+    });
     toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
@@ -66,17 +71,47 @@ const otherLang = lang === 'es' ? 'en' : 'es';
       }
     });
   }
+
+  // Menú compacto y avance de lectura (un solo manejador de scroll, con requestAnimationFrame)
+  const header = document.querySelector('[data-header]');
+  if (header) {
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+      header.classList.toggle('is-scrolled', y > 24);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      header.style.setProperty('--p', max > 0 ? (y / max).toFixed(4) : '0');
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
 </script>
 
 <style>
   .site-header {
-    position: relative;
-    z-index: 20;
-    border-bottom: 2px solid var(--carbon);
-    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--gray-light);
+    background: rgba(248, 250, 247, 0.9);
+    -webkit-backdrop-filter: saturate(1.4) blur(12px);
+    backdrop-filter: saturate(1.4) blur(12px);
+    transition: box-shadow .25s ease;
+  }
+  .site-header.is-scrolled { box-shadow: 0 6px 24px -18px rgba(17, 41, 31, 0.5); }
+  .read-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--gold);
+    transform-origin: left;
+    transform: scaleX(var(--p, 0));
   }
   .site-header--dark {
-    background: var(--green-night);
+    background: rgba(17, 41, 31, 0.92);
     border-bottom: 1px solid var(--green);
   }
 
@@ -86,10 +121,12 @@ const otherLang = lang === 'es' ? 'en' : 'es';
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    min-height: 76px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    min-height: var(--header-h);
+    transition: min-height .3s var(--ease-out), padding .3s var(--ease-out);
   }
+  .is-scrolled .nav { min-height: 60px; padding-top: 7px; padding-bottom: 7px; }
 
   .brand {
     display: inline-flex;
@@ -101,6 +138,11 @@ const otherLang = lang === 'es' ? 'en' : 'es';
     display: block;
     height: 46px;
     width: auto;
+    transition: height .3s var(--ease-out);
+  }
+  .is-scrolled .brand img { height: 40px; }
+  @media (prefers-reduced-motion: reduce) {
+    .nav, .brand img, .site-header { transition: none; }
   }
   @media (max-width: 480px) {
     .brand img { height: 40px; }
@@ -128,18 +170,27 @@ const otherLang = lang === 'es' ? 'en' : 'es';
   }
 
   .nav-link {
+    position: relative;
     color: var(--carbon);
     text-decoration: none;
     padding: 10px 0;
   }
-  .nav-link:hover { color: var(--green); }
-  .nav-link.is-active {
-    color: var(--green);
-    text-decoration: underline;
-    text-decoration-color: var(--gold);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4px;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s var(--ease-out);
   }
+  .nav-link:hover { color: var(--green); }
+  .nav-link:hover::after,
+  .nav-link.is-active::after { transform: scaleX(1); }
+  .nav-link.is-active { color: var(--green); }
   .site-header--dark .nav-link { color: var(--gray-light); }
   .site-header--dark .nav-link:hover,
   .site-header--dark .nav-link.is-active { color: var(--mint); }
@@ -209,6 +260,8 @@ const otherLang = lang === 'es' ? 'en' : 'es';
       padding: 12px 0 20px;
     }
     .nav-menu.is-open { display: flex; }
+    .nav-link::after { display: none; }
+    .nav-link.is-active { text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 3px; text-underline-offset: 6px; }
     .nav-links { flex-direction: column; gap: 4px; }
     .nav-link { display: inline-block; font-size: 16px; padding: 8px 0; }
   }

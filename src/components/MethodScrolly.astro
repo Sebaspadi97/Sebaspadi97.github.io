@@ -1,0 +1,236 @@
+---
+// "El método" guiado por el scroll: el lienzo queda fijo y 40 puntos pasan por cuatro escenas,
+// una por paso (pregunta → datos → hallazgo → decisión). Es la única sección fija del sitio.
+// Sin JavaScript o con movimiento reducido: los pasos se leen en lista y el dibujo muestra
+// la escena final (SVG de respaldo).
+const { lang = 'es', label = '', title = '', hint = '', fig = '', steps = [] } = Astro.props;
+const es = lang === 'es';
+const N = 40;
+
+let seed = 5;
+const rnd = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+const r3 = (n) => Math.round(n * 1000) / 1000;
+const S0 = Array.from({ length: N }, (_, i) => (i === 39 ? [0.74, 0.66] : [r3(0.12 + rnd() * 0.76), r3(0.2 + rnd() * 0.66)]));
+const S1 = Array.from({ length: N }, (_, i) => [r3(0.14 + (i % 8) * (0.72 / 7)), r3(0.36 + Math.floor(i / 8) * (0.48 / 4))]);
+const S2 = (() => {
+  const h = [5, 7, 12, 9, 7], xs = [0.2, 0.35, 0.5, 0.65, 0.8], out = [];
+  [0, 1, 3, 4, 2].forEach((c) => { for (let k = 0; k < h[c]; k++) out.push([xs[c], r3(0.84 - k * 0.054)]); });
+  return out;
+})();
+const S3 = (() => {
+  const out = [];
+  for (let i = 0; i < 33; i++) out.push([r3(0.08 + i * (0.54 / 32)), r3(0.72 - i * 0.009 + Math.sin(i * 0.85) * 0.035)]);
+  for (let k = 1; k <= 7; k++) out.push([r3(0.62 + k * 0.042), r3(0.43 - k * 0.028)]);
+  return out;
+})();
+const scenes = [S0, S1, S2, S3];
+const code = es
+  ? ['# ¿qué necesita decidir el negocio?', 'df = pd.read_csv("datos_abiertos.csv")', 'df.groupby("zona").size()', 'model.predict(futuro)']
+  : ['# what does the business need to decide?', 'df = pd.read_csv("open_data.csv")', 'df.groupby("area").size()', 'model.predict(future)'];
+const words = es ? { finding: 'HALLAZGO', today: 'HOY', decision: 'DECISIÓN' } : { finding: 'FINDING', today: 'TODAY', decision: 'DECISION' };
+const names = steps.map((s) => `${s.n} · ${s.name}`);
+const W = 640, H = 480;
+---
+<section class="method" aria-labelledby="method-title" data-method>
+  <div class="container">
+    <div class="method-head">
+      <div>
+        <p class="fig fig--dark"><span><b>Fig. 01</b> · {fig}</span></p>
+        <h2 id="method-title" class="method-title">{title}</h2>
+      </div>
+      <p class="method-hint" aria-hidden="true">{hint}</p>
+    </div>
+
+    <div class="scrolly">
+      <div class="stage">
+        <div class="stage-frame">
+          <div class="stage-plot">
+            <svg class="stage-static" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label}>
+              <text x={W * 0.06} y={H * 0.1} class="code">{code[3]}</text>
+              <polygon points={`${W * 0.62},${H * 0.43} ${W * 0.94},${H * 0.1} ${W * 0.94},${H * 0.42}`} class="fan" />
+              <line x1={W * 0.62} y1={H * 0.16} x2={W * 0.62} y2={H * 0.9} class="today" />
+              <text x={W * 0.62 + 6} y={H * 0.19} class="lbl">{words.today}</text>
+              <text x={W * 0.91} y={H * 0.31} class="lbl lbl--gold">{words.decision}</text>
+              {S3.map(([x, y], i) => <circle cx={x * W} cy={y * H} r={i === 39 ? 9 : 5.5} class={i === 39 ? 'g' : 'm'} />)}
+            </svg>
+            <canvas class="stage-canvas" aria-hidden="true"
+              data-scenes={JSON.stringify(scenes)}
+              data-code={JSON.stringify(code)}
+              data-words={JSON.stringify(words)}></canvas>
+          </div>
+          <div class="stage-foot" aria-hidden="true">
+            <span data-scene-name>{names[names.length - 1]}</span>
+            <span class="ticks">{steps.map(() => <i class="on"></i>)}</span>
+          </div>
+        </div>
+      </div>
+
+      <ol class="steps" data-names={JSON.stringify(names)}>
+        {steps.map((s, i) => (
+          <li class:list={['step', { 'is-last': i === steps.length - 1 }]}>
+            <span class="step-n" aria-hidden="true">{s.n}</span>
+            <h3 class="step-name">{s.name}</h3>
+            <p class="step-text">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-method]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv = root?.querySelector<HTMLCanvasElement>('canvas');
+  const ctx = cv?.getContext('2d');
+  if (root && cv && ctx && !reduce) {
+    root.classList.add('is-live');
+    const css = getComputedStyle(document.documentElement);
+    const mint = css.getPropertyValue('--mint').trim(), gold = css.getPropertyValue('--gold').trim();
+    const SC: [number, number][][] = JSON.parse(cv.dataset.scenes || '[]');
+    const code: string[] = JSON.parse(cv.dataset.code || '[]');
+    const words = JSON.parse(cv.dataset.words || '{}');
+    const steps = [...root.querySelectorAll<HTMLElement>('.step')];
+    const names: string[] = JSON.parse(root.querySelector<HTMLElement>('.steps')!.dataset.names || '[]');
+    const sceneName = root.querySelector<HTMLElement>('[data-scene-name]')!;
+    const ticks = [...root.querySelectorAll('.ticks i')];
+    const last = SC.length - 1;
+    let W = 0, H = 0, d = 1, lastStep = -1, visible = false, ticking = false;
+
+    const hex = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+    const mixCol = (a: string, b: string, t: number) => { const A = hex(a), B = hex(b); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(',')})`; };
+    const smooth = (t: number) => t * t * (3 - 2 * t);
+    const fit = () => { const r = cv.getBoundingClientRect(); d = Math.min(window.devicePixelRatio || 1, 2); W = cv.width = Math.round(r.width * d); H = cv.height = Math.round(r.height * d); };
+
+    const overlay = (k: number, a: number) => {
+      if (a <= 0) return;
+      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = mint; ctx.strokeStyle = mint; ctx.lineWidth = d;
+      ctx.font = `${13 * d}px ui-monospace, Menlo, monospace`; ctx.fillText(code[k], W * .06, H * .1);
+      if (k === 0) {
+        ctx.globalAlpha = a * .14; ctx.font = `800 ${H * .62}px Montserrat, sans-serif`; ctx.textAlign = 'center'; ctx.fillText('?', W * .5, H * .76); ctx.textAlign = 'left';
+      } else if (k === 2) {
+        ctx.globalAlpha = a * .4; ctx.beginPath(); ctx.moveTo(W * .12, H * .88); ctx.lineTo(W * .88, H * .88); ctx.stroke();
+        ctx.globalAlpha = a; ctx.fillStyle = gold; ctx.font = `700 ${11 * d}px Montserrat, sans-serif`; ctx.textAlign = 'center';
+        ctx.fillText(words.finding, W * .5, H * (.84 - 11 * .054) - 18 * d); ctx.textAlign = 'left';
+      } else if (k === 3) {
+        ctx.globalAlpha = a * .14; ctx.beginPath(); ctx.moveTo(W * .62, H * .43); ctx.lineTo(W * .94, H * .1); ctx.lineTo(W * .94, H * .42); ctx.closePath(); ctx.fill();
+        ctx.globalAlpha = a * .6; ctx.setLineDash([4 * d, 5 * d]); ctx.beginPath(); ctx.moveTo(W * .62, H * .16); ctx.lineTo(W * .62, H * .9); ctx.stroke(); ctx.setLineDash([]);
+        ctx.globalAlpha = a; ctx.font = `700 ${10 * d}px Montserrat, sans-serif`; ctx.fillText(words.today, W * .62 + 6 * d, H * .19);
+        ctx.fillStyle = gold; ctx.font = `700 ${11 * d}px Montserrat, sans-serif`; ctx.textAlign = 'right'; ctx.fillText(words.decision, W * .91, H * .31); ctx.textAlign = 'left';
+      }
+      ctx.restore();
+    };
+
+    const draw = (t: number) => {
+      ctx.clearRect(0, 0, W, H);
+      const i0 = Math.min(last - 1, Math.floor(t));
+      const f = smooth(Math.min(1, Math.max(0, (t - i0 - 0.2) / 0.6)));
+      const A = SC[i0], B = SC[i0 + 1];
+      for (let k = 0; k <= last; k++) overlay(k, 1 - Math.abs(t - k) * 1.8);
+      const R = Math.max(3.5, W / 110), goldT = Math.min(1, Math.max(0, t - 1.4));
+      for (let i = 0; i < A.length; i++) {
+        const x = A[i][0] + (B[i][0] - A[i][0]) * f, y = A[i][1] + (B[i][1] - A[i][1]) * f;
+        ctx.beginPath(); ctx.arc(x * W, y * H, i === A.length - 1 ? R * (1 + goldT * 0.6) : R, 0, 6.283);
+        ctx.fillStyle = i === A.length - 1 ? mixCol(mint, gold, goldT) : mint;
+        ctx.globalAlpha = i === A.length - 1 ? 1 : 0.9; ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      const s = Math.round(t);
+      if (s !== lastStep) {
+        lastStep = s;
+        sceneName.textContent = names[s] || '';
+        ticks.forEach((el, i) => el.classList.toggle('on', i <= s));
+        steps.forEach((el, i) => el.classList.toggle('is-active', i === s));
+      }
+    };
+
+    const progress = () => {
+      const anchor = window.innerHeight * (window.innerWidth <= 900 ? 0.72 : 0.55);
+      const c = steps.map((el) => { const r = el.getBoundingClientRect(); return r.top + r.height / 2; });
+      if (anchor <= c[0]) return 0;
+      for (let i = 0; i < last; i++) if (anchor <= c[i + 1]) return i + (anchor - c[i]) / (c[i + 1] - c[i]);
+      return last;
+    };
+    const frame = () => { ticking = false; if (visible) draw(progress()); };
+    new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) frame(); }, { rootMargin: '200px 0px' }).observe(root);
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
+    window.addEventListener('resize', () => { fit(); frame(); });
+    fit();
+    draw(progress());
+  }
+</script>
+
+<style>
+  .method { background: var(--green-night); color: var(--on-dark); padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(48px, 6vw, 96px); }
+  .method-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px; padding-bottom: clamp(32px, 4vw, 48px); }
+  .method-title { margin-top: 18px; color: var(--white); font-weight: 800; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -0.025em; max-width: 18ch; text-wrap: balance; }
+  .method-hint { font-size: 14px; color: var(--on-dark-muted); max-width: 30ch; text-align: right; }
+
+  .scrolly { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 80px); }
+  .stage { align-self: start; }
+  .stage-frame {
+    border: 1px solid rgba(140, 207, 173, 0.22);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background:
+      linear-gradient(rgba(140, 207, 173, 0.06) 1px, transparent 1px) -1px -1px / 32px 32px,
+      linear-gradient(90deg, rgba(140, 207, 173, 0.06) 1px, transparent 1px) -1px -1px / 32px 32px,
+      var(--green-deep);
+  }
+  .stage-plot { position: relative; aspect-ratio: 4 / 3; }
+  .stage-static, .stage-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .stage-canvas { opacity: 0; }
+  .is-live .stage-canvas { opacity: 1; }
+  .is-live .stage-static { visibility: hidden; }
+  .code { font-family: ui-monospace, Menlo, monospace; font-size: 13px; fill: var(--mint); }
+  .fan { fill: var(--mint); opacity: 0.14; }
+  .today { stroke: var(--mint); stroke-dasharray: 4 5; opacity: 0.6; }
+  .lbl { font-family: var(--font-display); font-weight: 700; font-size: 10px; fill: var(--mint); }
+  .lbl--gold { fill: var(--gold); font-size: 11px; text-anchor: end; }
+  .m { fill: var(--mint); opacity: 0.9; }
+  .g { fill: var(--gold); }
+  .stage-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 18px;
+    border-top: 1px solid rgba(140, 207, 173, 0.18);
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint-strong);
+  }
+  .ticks { display: flex; gap: 6px; }
+  .ticks i { width: 22px; height: 4px; border-radius: 4px; background: rgba(140, 207, 173, 0.25); transition: background .3s ease; }
+  .ticks i.on { background: var(--gold); }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 28px; }
+  .step { display: flex; flex-direction: column; gap: 10px; }
+  .step-n { font-family: var(--font-display); font-weight: 800; font-size: clamp(48px, 6vw, 80px); line-height: 1; color: var(--mint); font-variant-numeric: tabular-nums; }
+  .step.is-last .step-n { color: var(--gold); }
+  .step-name { color: var(--white); font-size: clamp(24px, 2.6vw, 34px); font-weight: 700; }
+  .step-text { font-size: 18px; max-width: 34ch; }
+
+  /* Con JavaScript y sin movimiento reducido: escenario fijo y pasos largos */
+  .is-live .stage { position: sticky; top: calc(var(--header-h) + 24px); }
+  .is-live .step { min-height: 72vh; justify-content: center; opacity: 0.38; transition: opacity .4s var(--ease-out); }
+  .is-live .step:last-child { min-height: 80vh; }
+  .is-live .step.is-active { opacity: 1; }
+  .is-live .step-n { color: transparent; -webkit-text-stroke: 1.5px var(--mint); }
+  .is-live .step.is-last .step-n { -webkit-text-stroke-color: var(--gold); }
+  .is-live .step.is-active .step-n { color: var(--mint); }
+  .is-live .step.is-active.is-last .step-n { color: var(--gold); }
+
+  @media (max-width: 900px) {
+    .method-head { grid-template-columns: 1fr; }
+    .method-hint { text-align: left; }
+    .scrolly { grid-template-columns: 1fr; gap: 32px; }
+    .stage-plot { aspect-ratio: 16 / 10; }
+    .is-live .stage { top: 60px; z-index: 2; padding-top: 8px; background: var(--green-night); }
+    .is-live .step { min-height: 62vh; justify-content: flex-end; padding-bottom: 12vh; }
+    .is-live .step:last-child { min-height: 70vh; }
+  }
+</style>
