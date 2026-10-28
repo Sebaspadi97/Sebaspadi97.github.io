@@ -261,3 +261,6 @@ a:hover .arr, button:hover .arr { transform: translateX(4px); }
   .arr { transition: none; }
   a:hover .arr, button:hover .arr { transform: none; }
 }
+
+/* Franja de encabezado de página con papel milimetrado */
+.band { border-bottom: 1px solid var(--gray-light); }

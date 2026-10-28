@@ -25,6 +25,7 @@ const related = cases.find((c) => c.key === p.relatedCase);
 const isFact = p.category === 'curioso';
 ---
 <Base lang="es" pageKey={p.key} active="lab" title={`${p.title} · Lab · Sebas Padilla Lab`} description={p.sub}>
+  <div class="band paper-grid">
   <header class="container narrow a-head">
     <nav class="crumbs" aria-label="Ruta"><a href={link('lab', 'es')}>Lab</a> <span aria-hidden="true">/</span> <span>{cat.plural}</span></nav>
     <span class={`a-cat a-cat--${cat.tone}`}>{cat.label}</span>
@@ -47,6 +48,7 @@ const isFact = p.category === 'curioso';
       </div>
     </div>
   </header>
+  </div>
 
   <div class="container cover-wrap">
     <figure class="a-cover">

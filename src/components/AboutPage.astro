@@ -9,7 +9,8 @@ const { lang = 'es' } = Astro.props;
 const c = about[lang];
 const cv = site.cv[lang];
 ---
-<section class="container hero">
+<div class="band paper-grid">
+  <section class="container hero">
   <div class="hero-meta eyebrow">
     <span>{c.metaLeft}</span>
     <span>{c.metaRight}</span>
@@ -37,6 +38,7 @@ const cv = site.cv[lang];
     </div>
   </div>
 </section>
+  </div>
 
 <section class="story" aria-labelledby="story-title">
   <div class="container story-inner">
@@ -52,14 +54,38 @@ const cv = site.cv[lang];
 
 <section class="container numbers" aria-label={c.numbersLabel}>
   <ul class="numbers-grid">
-    {c.numbers.map((x) => (
-      <li class:list={[{ gold: x.gold }]}>
-        <span class="num">{x.n}</span>
+    {c.numbers.map((x, i) => (
+      <li class:list={['rv', { gold: x.gold }]} style={`--i:${i}`}>
+        <span class="num" data-num>{x.n}</span>
         <span class="num-t">{x.t}</span>
       </li>
     ))}
   </ul>
 </section>
+
+<script>
+  // Las cifras cuentan hasta su valor al aparecer (el valor final ya está en la página)
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    document.querySelectorAll<HTMLElement>('[data-num]').forEach((el) => {
+      const m = (el.textContent || '').match(/^(\D*)(\d+)(.*)$/);
+      if (!m || el.getBoundingClientRect().top < window.innerHeight) return;
+      const [, pre, num, post] = m;
+      const target = Number(num);
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        const t0 = performance.now();
+        const tick = (t: number) => {
+          const k = Math.min(1, (t - t0) / 1100);
+          el.textContent = pre + Math.round(target * (1 - Math.pow(1 - k, 3))) + post;
+          if (k < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }, { threshold: 0.6 });
+      io.observe(el);
+    });
+  }
+</script>
 
 <section class="exp" aria-labelledby="exp-title">
   <div class="container exp-inner">
@@ -68,8 +94,8 @@ const cv = site.cv[lang];
       <p>{c.expSub}</p>
     </div>
     <ol class="exp-list">
-      {c.experience.map((e) => (
-        <li>
+      {c.experience.map((e, i) => (
+        <li class:list={['rv', { now: i === 0 }]}>
           <div class="exp-role">
             <span class="eyebrow period">{e.period}</span>
             <h3>{e.role}</h3>
@@ -213,6 +239,23 @@ const cv = site.cv[lang];
     border-top: 1px solid var(--green);
   }
   .exp-list > li:last-child { border-bottom: 1px solid var(--green); }
+  /* Línea de tiempo: un nodo por etapa; el actual en dorado */
+  .exp-list { position: relative; }
+  .exp-list::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: rgba(140, 207, 173, 0.28); }
+  .exp-list > li { position: relative; padding-left: 44px; border-top-color: transparent; }
+  .exp-list > li:last-child { border-bottom-color: transparent; }
+  .exp-list > li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 38px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--green-night);
+    border: 3px solid var(--mint);
+  }
+  .exp-list > li.now::before { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 0 6px rgba(214, 166, 79, 0.2); }
   .exp-role { display: flex; flex-direction: column; gap: 4px; }
   .period { color: var(--mint); }
   .exp-role h3 { font-weight: 700; font-size: 22px; line-height: 1.3; }

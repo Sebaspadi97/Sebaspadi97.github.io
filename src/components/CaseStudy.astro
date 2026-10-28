@@ -67,6 +67,7 @@ const related = cases
 const inSpanish = (x) => lang === 'en' && !hasLang(x.key, 'en');
 ---
 <article class="case">
+  <div class="band paper-grid">
   <header class="container case-head">
     <nav class="crumbs" aria-label={es ? 'Ruta' : 'Breadcrumb'}>
       <a href={link('projects', lang)}>{L.crumb}</a> <span aria-hidden="true">/</span> <span>{pillar}</span>
@@ -78,6 +79,7 @@ const inSpanish = (x) => lang === 'en' && !hasLang(x.key, 'en');
     <h1 class="case-title">{c.title}</h1>
     <p class="case-question">{c.question}</p>
   </header>
+  </div>
 
   <section class="facts" aria-label={L.facts}>
     <dl class="container facts-grid">

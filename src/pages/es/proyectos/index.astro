@@ -21,6 +21,7 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
   title="Proyectos · Sebas Padilla Lab"
   description="Casos de datos, machine learning e inteligencia de mercado: abandono de clientes, estancia hospitalaria, emprendimiento y cafés en Bogotá."
 >
+  <div class="band paper-grid">
   <section class="container head">
     <div class="head-meta eyebrow">
       <span>Archivo de proyectos</span>
@@ -58,6 +59,7 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
       </svg>
     </div>
   </section>
+  </div>
 
   <section class="container filters" aria-label="Filtros" data-filters hidden>
     <div class="filter-row" role="group" aria-labelledby="f-pilar">
@@ -79,13 +81,6 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
       <p class="visually-hidden" aria-live="polite" data-live></p>
 
       <article class="featured" data-card data-pillar={featured.pillar} data-tools={featured.tools.join('|')}>
-        {featured.simulator ? (
-          <ChurnSimulator lang="es" variant="card" />
-        ) : (
-          <span class="thumb thumb--featured">
-            <img src={featured.thumb} srcset={srcset(featured.thumb)} sizes="(max-width: 760px) calc(100vw - 80px), 560px" alt="" decoding="async" width={dims(featured.thumb)[0]} height={dims(featured.thumb)[1]} />
-          </span>
-        )}
         <div class="featured-text">
           <span class="eyebrow tone-mint">Destacado · {pillars[featured.pillar].es}</span>
           <h2 class="featured-title"><a href={link(featured.key, 'es')}>{featured.es.title}</a></h2>
@@ -94,11 +89,18 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
           <span class="meta">{featured.tools.slice(0, 2).join(' · ')} · {featured.date.es} · {featured.es.dataTag}</span>
           <a class="read-more" href={link(featured.key, 'es')}>Leer el caso <span aria-hidden="true">→</span></a>
         </div>
+        {featured.simulator ? (
+          <ChurnSimulator lang="es" variant="card" />
+        ) : (
+          <span class="thumb thumb--featured">
+            <img src={featured.thumb} srcset={srcset(featured.thumb)} sizes="(max-width: 760px) calc(100vw - 80px), 560px" alt="" decoding="async" width={dims(featured.thumb)[0]} height={dims(featured.thumb)[1]} />
+          </span>
+        )}
       </article>
 
       <ul class="cards">
-        {rest.map((p) => (
-          <li data-card data-pillar={p.pillar} data-tools={p.tools.join('|')}>
+        {rest.map((p, i) => (
+          <li class="rv" style={`--i:${i % 3}`} data-card data-pillar={p.pillar} data-tools={p.tools.join('|')}>
             <a class="card" href={link(p.key, 'es')}>
               <span class="thumb">
                 <img src={p.thumb} srcset={srcset(p.thumb)} sizes="(max-width: 760px) calc(100vw - 80px), 400px" alt="" loading="lazy" decoding="async" width={dims(p.thumb)[0]} height={dims(p.thumb)[1]} />
@@ -258,13 +260,15 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
     border: 1px solid var(--green-logo);
     color: var(--white);
     text-decoration: none;
-    transition: border-color .2s ease, transform .2s ease;
+    transition: border-color .3s ease, transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
   }
-  .card:hover { color: var(--white); border-color: var(--mint); transform: translateY(-2px); }
+  .card:hover { color: var(--white); border-color: var(--mint); transform: translateY(-4px); box-shadow: 0 28px 48px -32px rgba(0, 0, 0, 0.6); }
   @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
-  .thumb { display: block; height: 170px; border-radius: var(--radius-md); overflow: hidden; background: var(--white); }
-  .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
-  .thumb--featured { height: auto; aspect-ratio: 16 / 10; }
+  .thumb { display: block; aspect-ratio: 16 / 10; border-radius: var(--radius-md); overflow: hidden; background: var(--white); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .6s var(--ease-out); }
+  .card:hover .thumb img { transform: scale(1.035); }
+  @media (prefers-reduced-motion: reduce) { .thumb img { transition: none; } .card:hover .thumb img { transform: none; } }
+
   .tone-mint { color: var(--mint); }
   .tone-gold { color: var(--gold); }
   .card-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; }

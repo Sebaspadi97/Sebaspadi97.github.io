@@ -18,6 +18,7 @@ const countLabel = (n) => `${n} ${n === 1 ? 'entrada' : 'entradas'}`;
   title="Lab · Sebas Padilla Lab"
   description="Análisis cortos, datos curiosos y experimentos con modelos, con datos abiertos de Colombia."
 >
+  <div class="band paper-grid">
   <section class="container head">
     <div class="head-meta eyebrow">
       <span>Cuaderno del Lab</span>
@@ -50,6 +51,7 @@ const countLabel = (n) => `${n} ${n === 1 ? 'entrada' : 'entradas'}`;
       </svg>
     </div>
   </section>
+  </div>
 
   <section class="container filters" aria-label="Filtros">
     <div class="filter-row" role="group" aria-label="Filtrar por categoría" data-filters hidden>
@@ -81,7 +83,7 @@ const countLabel = (n) => `${n} ${n === 1 ? 'entrada' : 'entradas'}`;
       </div>
       <ul class="curious-grid">
         {curiosities.map((c) => (
-          <li>
+          <li class="rv">
             <a class="curious-card" href={link(c.key, 'es')}>
               <span class="c-n">{c.n}</span>
               <span class="c-t">{c.text}</span>
@@ -101,7 +103,7 @@ const countLabel = (n) => `${n} ${n === 1 ? 'entrada' : 'entradas'}`;
     <p class="visually-hidden" aria-live="polite" data-live></p>
     <ul class="post-list">
       {posts.map((p) => (
-        <li data-post data-cat={p.category}>
+        <li class="rv" data-post data-cat={p.category}>
           <a class="post" href={link(p.key, 'es')}>
             <span class={`eyebrow cat cat--${categories[p.category].tone}`}>{categories[p.category].label}</span>
             <span class="post-main">

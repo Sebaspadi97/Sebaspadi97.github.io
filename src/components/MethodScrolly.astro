@@ -50,7 +50,7 @@ const W = 640, H = 480;
               <polygon points={`${W * 0.62},${H * 0.43} ${W * 0.94},${H * 0.1} ${W * 0.94},${H * 0.42}`} class="fan" />
               <line x1={W * 0.62} y1={H * 0.16} x2={W * 0.62} y2={H * 0.9} class="today" />
               <text x={W * 0.62 + 6} y={H * 0.19} class="lbl">{words.today}</text>
-              <text x={W * 0.91} y={H * 0.31} class="lbl lbl--gold">{words.decision}</text>
+              <text x={W * 0.94} y={H * 0.5} class="lbl lbl--gold">{words.decision}</text>
               {S3.map(([x, y], i) => <circle cx={x * W} cy={y * H} r={i === 39 ? 9 : 5.5} class={i === 39 ? 'g' : 'm'} />)}
             </svg>
             <canvas class="stage-canvas" aria-hidden="true"
@@ -116,7 +116,7 @@ const W = 640, H = 480;
         ctx.globalAlpha = a * .14; ctx.beginPath(); ctx.moveTo(W * .62, H * .43); ctx.lineTo(W * .94, H * .1); ctx.lineTo(W * .94, H * .42); ctx.closePath(); ctx.fill();
         ctx.globalAlpha = a * .6; ctx.setLineDash([4 * d, 5 * d]); ctx.beginPath(); ctx.moveTo(W * .62, H * .16); ctx.lineTo(W * .62, H * .9); ctx.stroke(); ctx.setLineDash([]);
         ctx.globalAlpha = a; ctx.font = `700 ${10 * d}px Montserrat, sans-serif`; ctx.fillText(words.today, W * .62 + 6 * d, H * .19);
-        ctx.fillStyle = gold; ctx.font = `700 ${11 * d}px Montserrat, sans-serif`; ctx.textAlign = 'right'; ctx.fillText(words.decision, W * .91, H * .31); ctx.textAlign = 'left';
+        ctx.fillStyle = gold; ctx.font = `700 ${11 * d}px Montserrat, sans-serif`; ctx.textAlign = 'right'; ctx.fillText(words.decision, W * .94, H * .5); ctx.textAlign = 'left';
       }
       ctx.restore();
     };

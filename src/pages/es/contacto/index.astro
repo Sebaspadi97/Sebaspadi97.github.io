@@ -24,6 +24,7 @@ const formReady = Boolean(site.form && site.form.accessKey);
   title="Contacto · Sebas Padilla Lab"
   description="Escríbeme por una oportunidad laboral, un proyecto de datos o una idea para el Lab."
 >
+  <div class="band paper-grid">
   <section class="container head">
     <div class="head-meta eyebrow">
       <span>Contacto</span>
@@ -43,19 +44,20 @@ const formReady = Boolean(site.form && site.form.accessKey);
       </svg>
     </div>
   </section>
+  </div>
 
   <section class="container who" aria-label="Para quién">
     <ul class="who-grid">
-      <li class="who-card who-card--green">
+      <li class="who-card who-card--green rv" style="--i:0">
         <h2>¿Eres reclutador?</h2>
         <p>Mi trayectoria y mi CV están en <a href={link('about', 'es')}>Sobre mí</a>. Escríbeme con el rol y te respondo con mi disponibilidad.</p>
         <a class="who-link" href={site.cv.es} download>Descargar CV (PDF)</a>
       </li>
-      <li class="who-card who-card--teal">
+      <li class="who-card who-card--teal rv" style="--i:1">
         <h2>¿Tienes un proyecto?</h2>
         <p>Cuéntame la decisión que quieres tomar y qué datos tienes. Con eso te propongo un primer enfoque.</p>
       </li>
-      <li class="who-card who-card--gold">
+      <li class="who-card who-card--gold rv" style="--i:2">
         <h2>¿Algo del Lab?</h2>
         <p>Ideas para un dato curioso, preguntas sobre un análisis o una invitación a una charla: bienvenidas.</p>
       </li>
