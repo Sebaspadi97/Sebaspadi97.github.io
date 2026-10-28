@@ -31,6 +31,9 @@ jobs:
       - name: Auditar
         run: node scripts/qa/run-qa.mjs https://sebaspadi97.github.io qa-out
 
+      - name: Capturas de página completa
+        run: node scripts/qa/screens.mjs https://sebaspadi97.github.io qa-out/screens
+
       - name: Guardar reportes en la rama qa-reports
         if: always()
         run: |
