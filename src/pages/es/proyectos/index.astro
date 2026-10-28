@@ -3,13 +3,13 @@
 // punto dorado, filtros por pilar y herramienta, galería oscura y cierre.
 import Base from '../../../layouts/Base.astro';
 import ChurnSimulator from '../../../components/ChurnSimulator.astro';
-import { cases, pillars, toolFilters } from '../../../data/cases.js';
+import { cases, pillars, toolFilters } from '../../../lib/contenido.js';
 import { link } from '../../../i18n/index.js';
 import { site } from '../../../data/site.js';
 import { dims, srcset } from '../../../lib/img.js';
 
-const featured = cases.find((c) => c.featured);
-const rest = cases.filter((c) => !c.featured);
+const featured = cases.find((c) => c.featured) || cases[0];
+const rest = cases.filter((c) => c !== featured);
 const n = cases.length;
 const countLabel = (k) => `${k} ${k === 1 ? 'proyecto' : 'proyectos'} · 3 pilares`;
 const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Learning'], ['mi', 'Market Intelligence']];
@@ -79,7 +79,13 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
       <p class="visually-hidden" aria-live="polite" data-live></p>
 
       <article class="featured" data-card data-pillar={featured.pillar} data-tools={featured.tools.join('|')}>
-        <ChurnSimulator lang="es" variant="card" />
+        {featured.simulator ? (
+          <ChurnSimulator lang="es" variant="card" />
+        ) : (
+          <span class="thumb thumb--featured">
+            <img src={featured.thumb} srcset={srcset(featured.thumb)} sizes="(max-width: 760px) calc(100vw - 80px), 560px" alt="" decoding="async" width={dims(featured.thumb)[0]} height={dims(featured.thumb)[1]} />
+          </span>
+        )}
         <div class="featured-text">
           <span class="eyebrow tone-mint">Destacado · {pillars[featured.pillar].es}</span>
           <h2 class="featured-title"><a href={link(featured.key, 'es')}>{featured.es.title}</a></h2>
@@ -258,6 +264,7 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
   @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
   .thumb { display: block; height: 170px; border-radius: var(--radius-md); overflow: hidden; background: var(--white); }
   .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .thumb--featured { height: auto; aspect-ratio: 16 / 10; }
   .tone-mint { color: var(--mint); }
   .tone-gold { color: var(--gold); }
   .card-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; }

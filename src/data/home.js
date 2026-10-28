@@ -35,7 +35,7 @@ export const home = {
       all: 'Todos los proyectos',
       findingLabel: 'Hallazgo',
       featured: {
-        key: 'caseChurn',
+        key: 'abandono-de-clientes',
         pillar: 'Destacado · Machine Learning',
         title: '¿Qué clientes están por irse?',
         question: '¿A quién conviene llamar antes de que deje de comprar?',
@@ -52,7 +52,7 @@ export const home = {
       },
       cards: [
         {
-          key: 'caseBusiness',
+          key: 'emprendimiento-bogota',
           pillar: 'Data',
           pillarTone: 'mint',
           title: 'Radiografía del emprendimiento en Bogotá',
@@ -60,7 +60,7 @@ export const home = {
           finding: 'Los bares son la actividad n.º 1: 1.503 nuevos en el primer trimestre de 2026.',
         },
         {
-          key: 'caseCoffee',
+          key: 'cafe-bogota',
           pillar: 'Market Intelligence',
           pillarTone: 'gold',
           title: '¿Dónde abrir un café en Bogotá?',
@@ -74,7 +74,7 @@ export const home = {
       text: 'En Bogotá se registraron unos 17 bares nuevos por día entre enero y marzo de 2026.',
       source: 'Fuente: Dinámica Empresarial, Datos Abiertos Bogotá, corte marzo de 2026.',
       button: 'Ver el análisis',
-      key: 'labBars',
+      key: 'bogota-abre-17-bares-al-dia',
     },
     manifesto: {
       quote: 'Un dato sin decisión es solo una cifra.',
@@ -93,9 +93,9 @@ export const home = {
       title: 'Desde el Lab',
       more: 'Más artículos',
       items: [
-        { key: 'labBars', category: 'Dato curioso', tone: 'gold', title: 'Bogotá abre 17 bares al día' },
-        { key: 'labBusiness', category: 'Análisis', tone: 'green', title: 'Dónde nacen las empresas de Bogotá, y quién las lidera' },
-        { key: 'labChurn', category: 'Experimento', tone: 'teal', title: '¿Llamar a todos los clientes? El modelo dice que no' },
+        { key: 'bogota-abre-17-bares-al-dia', category: 'Dato curioso', tone: 'gold', title: 'Bogotá abre 17 bares al día' },
+        { key: 'donde-nacen-las-empresas-de-bogota', category: 'Análisis', tone: 'green', title: 'Dónde nacen las empresas de Bogotá, y quién las lidera' },
+        { key: 'llamar-a-todos-los-clientes', category: 'Experimento', tone: 'teal', title: '¿Llamar a todos los clientes? El modelo dice que no' },
       ],
     },
   },
@@ -133,7 +133,7 @@ export const home = {
       all: 'All projects',
       findingLabel: 'Finding',
       featured: {
-        key: 'caseChurn',
+        key: 'abandono-de-clientes',
         pillar: 'Featured · Machine Learning',
         title: 'Which customers are about to leave?',
         question: 'Who should you contact before they stop buying?',
@@ -150,7 +150,7 @@ export const home = {
       },
       cards: [
         {
-          key: 'caseBusiness',
+          key: 'emprendimiento-bogota',
           pillar: 'Data',
           pillarTone: 'mint',
           title: "Where are Bogotá's new businesses born?",
@@ -158,7 +158,7 @@ export const home = {
           finding: 'Bars are the No. 1 activity: 1,503 new ones in the first quarter of 2026.',
         },
         {
-          key: 'caseCoffee',
+          key: 'cafe-bogota',
           pillar: 'Market Intelligence',
           pillarTone: 'gold',
           title: 'Where to open a coffee shop in Bogotá',
@@ -172,7 +172,7 @@ export const home = {
       text: 'Bogotá registered about 17 new bars a day between January and March 2026.',
       source: 'Source: Business Dynamics, Bogotá Open Data, March 2026 release.',
       button: 'See the analysis (in Spanish)',
-      key: 'labBars',
+      key: 'bogota-abre-17-bares-al-dia',
     },
     manifesto: {
       quote: 'A data point without a decision is just a number.',
@@ -191,9 +191,9 @@ export const home = {
       title: 'From the Lab',
       more: 'More articles (in Spanish)',
       items: [
-        { key: 'labBars', category: 'Fun fact', tone: 'gold', title: 'Bogotá opens 17 bars a day' },
-        { key: 'labBusiness', category: 'Analysis', tone: 'green', title: "Where Bogotá's businesses are born, and who leads them" },
-        { key: 'labChurn', category: 'Experiment', tone: 'teal', title: 'Call every customer? The model says no' },
+        { key: 'bogota-abre-17-bares-al-dia', category: 'Fun fact', tone: 'gold', title: 'Bogotá opens 17 bars a day' },
+        { key: 'donde-nacen-las-empresas-de-bogota', category: 'Analysis', tone: 'green', title: "Where Bogotá's businesses are born, and who leads them" },
+        { key: 'llamar-a-todos-los-clientes', category: 'Experiment', tone: 'teal', title: 'Call every customer? The model says no' },
       ],
     },
   },

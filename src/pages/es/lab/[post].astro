@@ -4,15 +4,14 @@
 // cierre obligatorio "¿Y qué decisión tomaría?"; "Fuentes y método"; autor y "Sigue leyendo".
 import Base from '../../../layouts/Base.astro';
 import LabCover from '../../../components/LabCover.astro';
-import { posts, categories, postMeta, formatDate } from '../../../data/lab.js';
-import { cases, pillars } from '../../../data/cases.js';
-import { link, routes } from '../../../i18n/index.js';
+import { posts, categories, postMeta, formatDate, cases, pillars } from '../../../lib/contenido.js';
+import { link } from '../../../i18n/index.js';
+import '../../../styles/contenido.css';
 import { site } from '../../../data/site.js';
-import { inline } from '../../../lib/text.js';
 
 export function getStaticPaths() {
   return posts.map((p) => ({
-    params: { post: routes[p.key].es.replace('/es/lab/', '').replace(/\/$/, '') },
+    params: { post: p.key },
     props: { p },
   }));
 }
@@ -64,7 +63,7 @@ const isFact = p.category === 'curioso';
       </aside>
     )}
 
-    {p.body.map((para) => <p set:html={inline(para)} />)}
+    <Fragment set:html={p.html} />
 
     {p.fact && (
       <aside class="fact" aria-label="Dato curioso">
@@ -77,14 +76,14 @@ const isFact = p.category === 'curioso';
     <section class="decide" aria-labelledby="decide-title">
       <h2 id="decide-title">¿Y qué decisión tomaría?</h2>
       <p>{p.decision}</p>
-      <p class="ask">{p.askReader}</p>
+      {p.askReader && <p class="ask">{p.askReader}</p>}
     </section>
 
     <section class="sources" aria-labelledby="src-title">
       <h2 id="src-title" class="sources-label">Fuentes y método</h2>
       <ol>
         {p.sources.map((s) => <li>{s}</li>)}
-        <li>Código y datos del análisis: <a href={p.repo.url} rel="noopener">{p.repo.url.replace('https://', '')}</a>. {p.repo.note}</li>
+        {p.repo && <li>Código y datos del análisis: <a href={p.repo.url} rel="noopener">{p.repo.url.replace('https://', '')}</a>. {p.repo.note}</li>}
       </ol>
     </section>
 

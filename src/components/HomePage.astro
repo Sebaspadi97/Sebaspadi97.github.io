@@ -5,7 +5,7 @@
 import AnalyticsMotion from './AnalyticsMotion.astro';
 import ChurnSimulator from './ChurnSimulator.astro';
 import LabCover from './LabCover.astro';
-import { posts as labPosts } from '../data/lab.js';
+import { posts as labPosts, cases } from '../lib/contenido.js';
 import { home } from '../data/home.js';
 import { link, hasLang, ui } from '../i18n/index.js';
 import { site } from '../data/site.js';
@@ -17,6 +17,10 @@ const cvHref = site.cv[lang] || link('about', lang);
 const f = c.projects.featured;
 const labPost = (key) => labPosts.find((x) => x.key === key);
 const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
+// Si un proyecto o artículo deja de publicarse, su tarjeta desaparece del Inicio.
+const published = (key) => cases.some((x) => x.key === key) || labPosts.some((x) => x.key === key);
+const cards = c.projects.cards.filter((p) => published(p.key));
+const labItems = c.lab.items.filter((a) => published(a.key));
 ---
 <!-- Hero editorial -->
 <section class="hero container">
@@ -81,7 +85,7 @@ const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
         <a class="read-case" href={link(f.key, lang)}>{lang === 'es' ? 'Leer el caso' : 'Read the case'} <span aria-hidden="true">→</span></a>
       </article>
 
-      {c.projects.cards.map((p) => (
+      {cards.map((p) => (
         <a class="card" href={link(p.key, lang)}>
           <span class="card-top">
             <span class:list={['eyebrow', 'card-pillar', `tone-${p.pillarTone}`]}>{p.pillar}</span>
@@ -137,7 +141,7 @@ const spanishOnly = (key) => lang === 'en' && !hasLang(key, 'en');
     <a class="link-arrow" href={link('lab', lang)}>{c.lab.more} <span aria-hidden="true">→</span></a>
   </div>
   <ul class="lab-grid">
-    {c.lab.items.map((a) => (
+    {labItems.map((a) => (
       <li>
         <a class="lab-card" href={link(a.key, lang)}>
           <span class="lab-visual">{labPost(a.key) && <LabCover cover={labPost(a.key).cover} size="sm" decorative />}</span>

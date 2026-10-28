@@ -1,5 +1,5 @@
 // RSS del Lab (/es/lab/rss.xml). Se genera al compilar, sin dependencias.
-import { posts, categories } from '../../../data/lab.js';
+import { posts, categories } from '../../../lib/contenido.js';
 import { routes } from '../../../i18n/index.js';
 
 const esc = (s) =>

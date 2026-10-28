@@ -2,10 +2,12 @@
 // Plantilla de caso de estudio (diseño aprobado "Plantilla · Caso de estudio"):
 // encabezado con la pregunta, ficha, nota "Sobre los datos", 6 bloques con índice
 // lateral, decisión en fondo oscuro y cierre con más proyectos.
-import CaseBlocks from './CaseBlocks.astro';
-import { cases, pillars } from '../data/cases.js';
+// El texto del caso viene del Markdown (src/content/proyectos/); cada "## Título" es una sección.
+import ChurnSimulator from './ChurnSimulator.astro';
+import { cases, pillars } from '../lib/contenido.js';
+import { SIM_SLOT_RE } from '../lib/markdown-plugins.mjs';
 import { link, hasLang, ui } from '../i18n/index.js';
-import { plain, readingMinutes } from '../lib/text.js';
+import '../styles/contenido.css';
 
 const { lang = 'es', item } = Astro.props;
 const c = item[lang];
@@ -22,15 +24,6 @@ const L = es
       repo: 'Repositorio en GitHub',
       about: 'Sobre los datos:',
       toc: 'Contenido del caso',
-      sections: {
-        question: ['Pregunta', 'La pregunta de negocio'],
-        data: ['Datos', 'Los datos'],
-        approach: ['Enfoque', 'El enfoque'],
-        findings: ['Hallazgos', 'Los hallazgos'],
-        decision: ['Decisión', 'La decisión recomendada'],
-        limits: ['Limitaciones', 'Limitaciones y próximos pasos'],
-        team: ['Equipo', 'Equipo y mi rol'],
-      },
       license: 'Licencias',
       seeCode: 'Ver el código en GitHub',
       prev: 'Proyecto anterior',
@@ -47,15 +40,6 @@ const L = es
       repo: 'GitHub repository',
       about: 'About the data:',
       toc: 'Case contents',
-      sections: {
-        question: ['Question', 'The question'],
-        data: ['Data', 'The data'],
-        approach: ['Approach', 'The approach'],
-        findings: ['Findings', 'The findings'],
-        decision: ['Decision', 'The recommended decision'],
-        limits: ['Limitations', 'Limitations'],
-        team: ['Team', 'Team and my role'],
-      },
       license: 'Licenses',
       seeCode: 'See the code on GitHub',
       prev: 'Previous project',
@@ -65,20 +49,11 @@ const L = es
       ctaBtn: "Let's talk",
     };
 
-const s = c.sections;
-const order = ['question', 'data', 'approach', 'findings', 'decision', 'limits'].concat(s.team ? ['team'] : []);
-const ids = { question: 'pregunta', data: 'datos', approach: 'enfoque', findings: 'hallazgos', decision: 'decision', limits: 'limitaciones', team: 'equipo' };
-
-// Minutos de lectura a partir de todo el texto del caso
-const texts = [];
-const collect = (blocks) =>
-  blocks.forEach((b) => {
-    ['lead', 'p'].forEach((k) => b[k] && texts.push(plain(b[k])));
-    ['ul', 'ol'].forEach((k) => b[k] && b[k].forEach((x) => texts.push(plain(x))));
-    if (b.table) b.table.rows.forEach((r) => texts.push(r.join(' ')));
-  });
-order.forEach((k) => collect(k === 'decision' ? [{ lead: s.decision.lead }, ...s.decision.blocks] : s[k]));
-const minutes = readingMinutes(texts);
+const toc = c.sections;
+const minutes = c.minutes;
+// El simulador va donde el Markdown dice ```simulador
+const [bodyBefore, bodyAfter = ''] = c.html.split(SIM_SLOT_RE);
+const hasSim = item.simulator && c.html.match(SIM_SLOT_RE);
 
 // Navegación entre proyectos y relacionados
 const idx = cases.findIndex((x) => x.key === item.key);
@@ -98,7 +73,7 @@ const inSpanish = (x) => lang === 'en' && !hasLang(x.key, 'en');
     </nav>
     <div class="case-meta">
       <span class="pillar-tag">{pillar}</span>
-      <span>{item.date[lang]} · {minutes} {L.read}</span>
+      <span>{c.date} · {minutes} {L.read}</span>
     </div>
     <h1 class="case-title">{c.title}</h1>
     <p class="case-question">{c.question}</p>
@@ -126,33 +101,16 @@ const inSpanish = (x) => lang === 'en' && !hasLang(x.key, 'en');
   <div class="container case-body">
     <aside class="toc" aria-label={L.toc}>
       <ol>
-        {order.map((k, i) => (
-          <li><a href={`#${ids[k]}`} data-toc={ids[k]}>{String(i + 1).padStart(2, '0')} · {L.sections[k][0]}</a></li>
+        {toc.map((x, i) => (
+          <li><a href={`#${x.id}`} data-toc={x.id}>{String(i + 1).padStart(2, '0')} · {x.short}</a></li>
         ))}
       </ol>
     </aside>
 
     <div class="sections">
-      {order.map((k, i) => {
-        const n = String(i + 1).padStart(2, '0');
-        if (k === 'decision') {
-          return (
-            <section id={ids[k]} class="sec sec--decision" aria-labelledby={`h-${ids[k]}`}>
-              <span class="sec-n sec-n--gold">{n}</span>
-              <h2 id={`h-${ids[k]}`}>{L.sections[k][1]}</h2>
-              <p class="decision-lead">{s.decision.lead}</p>
-              <CaseBlocks blocks={s.decision.blocks} tone="dark" lang={lang} />
-            </section>
-          );
-        }
-        return (
-          <section id={ids[k]} class="sec" aria-labelledby={`h-${ids[k]}`}>
-            <span class="sec-n">{n}</span>
-            <h2 id={`h-${ids[k]}`}>{L.sections[k][1]}</h2>
-            <CaseBlocks blocks={s[k]} lang={lang} />
-          </section>
-        );
-      })}
+      <Fragment set:html={bodyBefore} />
+      {hasSim && <div class="sim-wrap"><ChurnSimulator lang={lang} variant="full" /></div>}
+      <Fragment set:html={bodyAfter} />
 
       <footer class="case-foot">
         <p><strong>{L.license}:</strong> {c.license}</p>
@@ -312,25 +270,7 @@ const inSpanish = (x) => lang === 'en' && !hasLang(x.key, 'en');
   }
 
   .sections { flex: 999 1 560px; min-width: 0; max-width: 820px; display: flex; flex-direction: column; gap: 64px; }
-  .sec { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 24px; }
-  .sec h2 { font-size: clamp(26px, 3vw, 32px); font-weight: 800; letter-spacing: -0.015em; color: var(--green-deep); }
-  .sec-n { font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; color: var(--teal-text); }
-  .sec-n--gold { color: var(--gold); }
-
-  .sec--decision {
-    background: var(--green-deep);
-    color: var(--white);
-    border-radius: var(--radius-lg);
-    padding: clamp(24px, 4vw, 40px);
-    gap: 16px;
-  }
-  .sec--decision h2 { color: var(--white); }
-  .decision-lead {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(20px, 2.2vw, 24px);
-    line-height: 1.4;
-  }
+  
 
   .case-foot {
     display: flex;

@@ -1,16 +1,11 @@
 ---
+// English version of a case: one per file in src/content/proyectos/en/.
 import Base from '../../../layouts/Base.astro';
 import CaseStudy from '../../../components/CaseStudy.astro';
-import { cases } from '../../../data/cases.js';
-import { routes } from '../../../i18n/index.js';
+import { cases } from '../../../lib/contenido.js';
 
 export function getStaticPaths() {
-  return cases
-    .filter((item) => item.en && routes[item.key].en)
-    .map((item) => ({
-      params: { slug: routes[item.key].en.replace('/en/projects/', '').replace(/\/$/, '') },
-      props: { item },
-    }));
+  return cases.filter((item) => item.en).map((item) => ({ params: { slug: item.enSlug }, props: { item } }));
 }
 
 const { item } = Astro.props;

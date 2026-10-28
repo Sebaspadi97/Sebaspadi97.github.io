@@ -3,11 +3,11 @@
 // de la curva", filtros por categoría, destacado, franja de datos curiosos, lista y cierre.
 import Base from '../../../layouts/Base.astro';
 import LabCover from '../../../components/LabCover.astro';
-import { posts, categories, curiosities, postMeta } from '../../../data/lab.js';
+import { posts, categories, curiosities, postMeta } from '../../../lib/contenido.js';
 import { link } from '../../../i18n/index.js';
 import { site } from '../../../data/site.js';
 
-const featured = posts.find((p) => p.featured);
+const featured = posts.find((p) => p.featured) || posts[0];
 const catOptions = [['todos', 'Todo'], ...Object.entries(categories).map(([k, v]) => [k, v.plural])];
 const countLabel = (n) => `${n} ${n === 1 ? 'entrada' : 'entradas'}`;
 ---

@@ -15,15 +15,13 @@ export const routes = {
   privacy: { es: '/es/privacidad/' },
   terms: { es: '/es/terminos/' },
 
-  caseChurn: { es: '/es/proyectos/abandono-de-clientes/', en: '/en/projects/customer-churn/' },
-  caseHospital: { es: '/es/proyectos/estancia-hospitalaria/', en: '/en/projects/hospital-stay/' },
-  caseBusiness: { es: '/es/proyectos/emprendimiento-bogota/', en: '/en/projects/bogota-businesses/' },
-  caseCoffee: { es: '/es/proyectos/cafe-bogota/' },
-
-  labBars: { es: '/es/lab/bogota-abre-17-bares-al-dia/' },
-  labBusiness: { es: '/es/lab/donde-nacen-las-empresas-de-bogota/' },
-  labChurn: { es: '/es/lab/llamar-a-todos-los-clientes/' },
+  // Los proyectos y artículos se registran solos al leer src/content/ (ver src/lib/contenido.js).
 };
+
+/** Registra la dirección de un proyecto o artículo. */
+export function registerRoute(key, paths) {
+  routes[key] = paths;
+}
 
 /** ¿La ruta existe en ese idioma? */
 export function hasLang(key, lang) {

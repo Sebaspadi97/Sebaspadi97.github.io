@@ -1,0 +1,27 @@
+name: Prueba de compilación
+
+# Compila cualquier rama distinta de main sin publicar, para revisar cambios antes de unirlos.
+on:
+  push:
+    branches-ignore: [main, qa, qa-reports]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Compilar sin publicar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sitio
+          path: dist
+          retention-days: 3

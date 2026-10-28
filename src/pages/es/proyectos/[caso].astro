@@ -1,14 +1,11 @@
 ---
+// Un caso por cada archivo de src/content/proyectos/es/ (la dirección es el nombre del archivo).
 import Base from '../../../layouts/Base.astro';
 import CaseStudy from '../../../components/CaseStudy.astro';
-import { cases } from '../../../data/cases.js';
-import { routes } from '../../../i18n/index.js';
+import { cases } from '../../../lib/contenido.js';
 
 export function getStaticPaths() {
-  return cases.map((item) => ({
-    params: { caso: routes[item.key].es.replace('/es/proyectos/', '').replace(/\/$/, '') },
-    props: { item },
-  }));
+  return cases.map((item) => ({ params: { caso: item.key }, props: { item } }));
 }
 
 const { item } = Astro.props;

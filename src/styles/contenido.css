@@ -1,0 +1,95 @@
+/* Contenido escrito en Markdown (casos y artículos): secciones, frases destacadas,
+   cifras, tablas y figuras. Lo generan los complementos de src/lib/markdown-plugins.mjs. */
+
+.sec { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 24px; }
+.sec h2 { font-size: clamp(26px, 3vw, 32px); font-weight: 800; letter-spacing: -0.015em; color: var(--green-deep); }
+.sec-n { font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1; color: var(--teal-text); }
+.sec-n--gold { color: var(--gold); }
+.sec--decision {
+  background: var(--green-deep);
+  color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 4vw, 40px);
+  gap: 16px;
+}
+.sec--decision h2 { color: var(--white); }
+.decision-lead {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: 1.4;
+}
+.blocks h3 { font-size: 20px; font-weight: 700; color: var(--green-deep); margin-top: 8px; }
+.blocks--dark h3 { color: var(--white); }
+.blocks a { color: var(--green); }
+.blocks--dark a { color: var(--mint-strong); }
+.blocks p, .blocks ul, .blocks ol { margin: 0; }
+.blocks .b-lead, .blocks .decision-lead { margin: 0; }
+
+.blocks { display: flex; flex-direction: column; gap: 18px; }
+.blocks strong { font-weight: 600; color: inherit; }
+
+.b-lead {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(20px, 2vw, 23px);
+  line-height: 1.4;
+  color: var(--green);
+}
+.blocks--dark .b-lead { color: var(--white); }
+
+.b-list { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; }
+.b-list li::marker { color: var(--green); font-weight: 600; }
+.blocks--dark .b-list { color: var(--gray-light); }
+.blocks--dark .b-list li::marker { color: var(--gold); }
+
+.b-stats {
+  margin: 4px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+  gap: 16px;
+}
+.b-stats div { border-top: 2px solid var(--green); padding-top: 10px; display: flex; flex-direction: column-reverse; }
+.b-stats dt { font-size: 14px; color: var(--slate); }
+.b-stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(24px, 2.6vw, 30px);
+  line-height: 1.2;
+  color: var(--green-deep);
+}
+
+.b-table {
+  overflow-x: auto;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+}
+.b-table:focus-visible { outline-offset: 2px; }
+.b-table table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+.b-table th,
+.b-table td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--gray-light); }
+.b-table thead th {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+  background: var(--white);
+  white-space: nowrap;
+}
+.b-table tbody th { font-weight: 400; }
+.b-table tbody tr:last-child th,
+.b-table tbody tr:last-child td { border-bottom: 0; }
+.blocks--dark .b-table { background: var(--green-night); border-color: var(--green); }
+.blocks--dark .b-table table { color: var(--gray-light); }
+.blocks--dark .b-table th,
+.blocks--dark .b-table td { border-color: var(--green); }
+.blocks--dark .b-table thead th { background: transparent; color: var(--mint); }
+
+.b-fig { margin: 8px 0; display: flex; flex-direction: column; gap: 10px; }
+.b-fig-link { display: block; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--gray-light); }
+.b-fig img { width: 100%; height: auto; }
+.b-fig figcaption { font-size: 14px; color: var(--slate); }

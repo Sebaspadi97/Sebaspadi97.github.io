@@ -17,7 +17,10 @@ const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 
 const { about } = await import(pathToFileURL(resolve(root, 'src/data/about.js')).href);
-const { cases, pillars } = await import(pathToFileURL(resolve(root, 'src/data/cases.js')).href);
+// Proyectos publicados: se leen del JSON que genera el sitio (dist/ si existe, o el sitio en línea).
+const { readFileSync: rf, existsSync } = await import('node:fs');
+const local = resolve(root, 'dist/datos/proyectos.json');
+const listado = existsSync(local) ? JSON.parse(rf(local, 'utf8')) : await (await fetch('https://sebaspadi97.github.io/datos/proyectos.json')).json();
 const { site } = await import(pathToFileURL(resolve(root, 'src/data/site.js')).href);
 
 const SITE_URL = 'sebaspadi97.github.io';
@@ -60,9 +63,10 @@ function html(lang) {
   const a = about[lang];
   const t = L[lang];
   const profile = [a.intro, a.story[1], a.quote];
-  const projects = cases.map((c) => {
+  // El CV es de una página: entran los 4 primeros según el campo "orden".
+  const projects = listado.proyectos.slice(0, 4).map((c) => {
     const x = c[lang] || c.es;
-    return { pillar: pillars[c.pillar][lang], title: x.title, q: x.question, finding: x.finding, team: c.team, repo: c.repo.replace('https://', '') };
+    return { pillar: c.pilarNombre[lang], title: x.titulo, q: x.pregunta, finding: x.hallazgo, team: c.equipo, repo: c.repo.replace('https://', '') };
   });
 
   return `<!doctype html>
