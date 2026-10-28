@@ -1,6 +1,6 @@
 {
   "base": "https://sebaspadi97.github.io",
-  "date": "2026-10-28T22:48:22.170Z",
+  "date": "2026-10-28T22:53:51.746Z",
   "pages": 21,
   "axeRules": {},
   "overflow": [],
@@ -42,11 +42,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.3 s",
-        "LCP": "1.6 s",
+        "FCP": "1.1 s",
+        "LCP": "1.7 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.3 s",
+        "SI": "1.1 s",
         "weight": "Total size was 158 KiB"
       }
     },
@@ -59,11 +59,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.1 s",
+        "FCP": "1.2 s",
         "LCP": "1.7 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.1 s",
+        "SI": "1.2 s",
         "weight": "Total size was 149 KiB"
       }
     },
@@ -94,7 +94,7 @@
       },
       "metrics": {
         "FCP": "1.1 s",
-        "LCP": "1.5 s",
+        "LCP": "1.4 s",
         "TBT": "0 ms",
         "CLS": "0",
         "SI": "1.1 s",
@@ -110,11 +110,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.2 s",
-        "LCP": "1.5 s",
+        "FCP": "1.0 s",
+        "LCP": "1.4 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.2 s",
+        "SI": "1.0 s",
         "weight": "Total size was 208 KiB"
       }
     },
@@ -128,7 +128,7 @@
       },
       "metrics": {
         "FCP": "1.1 s",
-        "LCP": "1.6 s",
+        "LCP": "1.5 s",
         "TBT": "0 ms",
         "CLS": "0",
         "SI": "1.1 s",
@@ -144,11 +144,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.1 s",
+        "FCP": "1.0 s",
         "LCP": "1.4 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.1 s",
+        "SI": "1.0 s",
         "weight": "Total size was 107 KiB"
       }
     }

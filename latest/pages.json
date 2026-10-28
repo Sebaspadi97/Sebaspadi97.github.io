@@ -143,25 +143,7 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [
-      {
-        "value": 0.007,
-        "t": 189,
-        "sources": [
-          {
-            "node": "<a class=\"rss-link\" href=\"/es/lab/rss/\" data-astro-cid-n45vofzs=\"\">Suscribirse por RSS</a>",
-            "prev": [
-              612,
-              43
-            ],
-            "curr": [
-              613,
-              43
-            ]
-          }
-        ]
-      }
-    ],
+    "shifts": [],
     "axe": []
   },
   {
