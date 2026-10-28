@@ -14,7 +14,69 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.014,
+        "t": 548,
+        "sources": [
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              19,
+              44
+            ],
+            "curr": [
+              19,
+              44
+            ]
+          },
+          {
+            "node": "<section class=\"method\" aria-labelledby=\"method-title\" data-astro-cid-jdovvxl7=\"\"> <div class=\"container method-inner\" data-astro-cid-jdovvx",
+            "prev": [
+              701,
+              199
+            ],
+            "curr": [
+              672,
+              228
+            ]
+          },
+          {
+            "node": "#text",
+            "prev": [
+              311,
+              127
+            ],
+            "curr": [
+              309,
+              127
+            ]
+          },
+          {
+            "node": "#text",
+            "prev": [
+              468,
+              63
+            ],
+            "curr": [
+              465,
+              63
+            ]
+          },
+          {
+            "node": "<div class=\"actions\" data-astro-cid-jdovvxl7=\"\"> <a class=\"pill pill--primary\" href=\"/es/proyectos/?from=en\" data-astro-cid-jdovvxl7=\"\">Expl",
+            "prev": [
+              573,
+              48
+            ],
+            "curr": [
+              544,
+              48
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
