@@ -1,0 +1,195 @@
+# Configuración de Pages CMS (https://app.pagescms.org): editor web del sitio.
+# Cada cambio que se guarda ahí es un commit en este repositorio y el sitio se publica solo.
+# Las imágenes se suben a public/img y en el sitio quedan como /img/…
+
+media:
+  input: public/img
+  output: /img
+
+content:
+  # ---------------- Proyectos ----------------
+  - name: proyectos
+    label: Proyectos (español)
+    type: collection
+    path: src/content/proyectos/es
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      fields: [titulo, pilar, orden, publicar]
+      primary: titulo
+      sort: [orden, titulo]
+    fields:
+      - { name: titulo, label: Título (pregunta del caso), type: string, required: true }
+      - { name: pregunta, label: Pregunta de negocio (subtítulo), type: string, required: true }
+      - { name: hallazgo, label: Hallazgo en una frase, type: text, required: true }
+      - { name: descripcion, label: Descripción para buscadores y redes, type: text, required: true }
+      - name: pilar
+        label: Pilar
+        type: select
+        required: true
+        options:
+          values:
+            - { name: data, label: Data }
+            - { name: ml, label: Machine Learning }
+            - { name: mi, label: Market Intelligence }
+      - { name: herramientas, label: Herramientas, type: string, list: true, required: true }
+      - { name: fecha, label: "Fecha (ej.: oct 2026)", type: string, required: true }
+      - { name: repo, label: Repositorio en GitHub, type: string, required: true }
+      - name: portada
+        label: Portada (gráfico principal)
+        type: image
+        required: true
+        options:
+          path: public/img/casos
+      - { name: destacado, label: Destacado en Proyectos, type: boolean, default: false }
+      - { name: orden, label: "Orden (1 = primero)", type: number, default: 99 }
+      - { name: publicar, label: Publicado, type: boolean, default: true }
+      - { name: etiquetaDatos, label: "Tipo de datos (ej.: datos abiertos)", type: string }
+      - { name: lineaEquipo, label: Línea de equipo (si es trabajo en equipo), type: string }
+      - { name: simulador, label: Tiene simulador interactivo, type: boolean, default: false }
+      - name: ficha
+        label: Ficha del proyecto
+        type: object
+        list: true
+        fields:
+          - { name: dato, label: Dato, type: string }
+          - { name: valor, label: Valor, type: string }
+      - { name: sobreLosDatos, label: Nota "Sobre los datos", type: text, required: true }
+      - { name: licencia, label: Licencias, type: text, required: true }
+      - name: ingles
+        label: Tarjeta en inglés (solo si no hay versión completa en inglés)
+        type: object
+        fields:
+          - { name: titulo, label: Title, type: string }
+          - { name: pregunta, label: Question, type: string }
+          - { name: hallazgo, label: Finding, type: text }
+      - { name: origen, label: "Origen (lo llena la sincronización; no editar)", type: string, readonly: true }
+      - name: body
+        label: "Texto del caso (cada '## Título' es una sección; ver la guía en CONTENIDO.md)"
+        type: code
+        options:
+          format: markdown
+
+  - name: projects
+    label: Proyectos (inglés)
+    type: collection
+    path: src/content/proyectos/en
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      fields: [titulo, es, publicar]
+      primary: titulo
+    fields:
+      - { name: es, label: "Dirección del proyecto en español que traduce (ej.: abandono-de-clientes)", type: string, required: true }
+      - { name: titulo, label: Title, type: string, required: true }
+      - { name: pregunta, label: Question, type: string, required: true }
+      - { name: hallazgo, label: Finding, type: text, required: true }
+      - { name: descripcion, label: Description, type: text, required: true }
+      - name: pilar
+        label: Pillar
+        type: select
+        required: true
+        options:
+          values:
+            - { name: data, label: Data }
+            - { name: ml, label: Machine Learning }
+            - { name: mi, label: Market Intelligence }
+      - { name: herramientas, label: Tools, type: string, list: true, required: true }
+      - { name: fecha, label: "Date (e.g. Oct 2026)", type: string, required: true }
+      - { name: repo, label: GitHub repository, type: string, required: true }
+      - { name: portada, label: Cover, type: image, required: true }
+      - { name: orden, label: Order, type: number, default: 99 }
+      - { name: publicar, label: Published, type: boolean, default: true }
+      - { name: etiquetaDatos, label: Data label, type: string }
+      - { name: lineaEquipo, label: Team line, type: string }
+      - { name: simulador, label: Has simulator, type: boolean, default: false }
+      - name: ficha
+        label: Project facts
+        type: object
+        list: true
+        fields:
+          - { name: dato, label: Label, type: string }
+          - { name: valor, label: Value, type: string }
+      - { name: sobreLosDatos, label: About the data, type: text, required: true }
+      - { name: licencia, label: Licenses, type: text, required: true }
+      - name: body
+        label: Case text (Markdown)
+        type: code
+        options:
+          format: markdown
+
+  # ---------------- Lab ----------------
+  - name: lab
+    label: Lab (artículos)
+    type: collection
+    path: src/content/lab
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      fields: [titulo, categoria, fecha, publicar]
+      primary: titulo
+      sort: [fecha]
+    fields:
+      - { name: titulo, label: Título, type: string, required: true }
+      - name: categoria
+        label: Categoría
+        type: select
+        required: true
+        options:
+          values:
+            - { name: analisis, label: Análisis }
+            - { name: curioso, label: Dato curioso }
+            - { name: experimento, label: Experimento }
+            - { name: nota, label: Nota }
+      - { name: destacado, label: Destacado en el Lab, type: boolean, default: false }
+      - { name: fecha, label: "Fecha de publicación (AAAA-MM-DD; vacía = sin fecha)", type: string }
+      - { name: minutos, label: Minutos de lectura, type: number, required: true }
+      - { name: bajada, label: Bajada, type: text, required: true }
+      - name: portada
+        label: Portada (un gráfico, o una cifra para los datos curiosos)
+        type: object
+        fields:
+          - { name: imagen, label: Imagen, type: image }
+          - { name: alt, label: Texto alternativo de la imagen, type: text }
+          - { name: pie, label: Pie de la imagen, type: text }
+          - { name: cifra, label: "Cifra (si no hay imagen, ej.: 17)", type: string }
+          - { name: texto, label: Frase de la cifra, type: text }
+          - { name: fuente, label: Fuente de la cifra, type: string }
+      - { name: resumen, label: En 30 segundos (3 ideas), type: string, list: true }
+      - name: dato
+        label: Caja "Dato curioso" (opcional)
+        type: object
+        fields:
+          - { name: cifra, label: Cifra, type: string }
+          - { name: texto, label: Texto, type: text }
+          - { name: fuente, label: Fuente, type: string }
+      - { name: decision, label: "¿Y qué decisión tomaría?", type: text, required: true }
+      - { name: preguntaAlLector, label: Pregunta al lector, type: string }
+      - { name: fuentes, label: Fuentes y método, type: text, list: true }
+      - name: repo
+        label: Repositorio
+        type: object
+        fields:
+          - { name: url, label: Dirección, type: string }
+          - { name: nota, label: Nota de licencia, type: string }
+      - { name: casoRelacionado, label: "Proyecto relacionado (dirección, ej.: cafe-bogota)", type: string }
+      - { name: publicar, label: Publicado, type: boolean, default: true }
+      - name: body
+        label: Texto del artículo (Markdown)
+        type: code
+        options:
+          format: markdown
+
+  - name: datos-curiosos
+    label: Datos curiosos (franja dorada del Lab)
+    type: file
+    path: src/content/datos-curiosos.json
+    list: true
+    fields:
+      - { name: cifra, label: Cifra, type: string, required: true }
+      - { name: texto, label: Frase, type: text, required: true }
+      - { name: fuente, label: Fuente, type: string, required: true }
+      - { name: articulo, label: "Artículo al que lleva (dirección)", type: string, required: true }

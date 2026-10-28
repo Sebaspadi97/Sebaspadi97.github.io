@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -20,8 +20,11 @@ jobs:
           node-version: 22
       - run: npm install --no-audit --no-fund
       - run: npm run build
-      - uses: actions/upload-artifact@v4
-        with:
-          name: sitio
-          path: dist
-          retention-days: 3
+      - name: Guardar el resultado en la rama prueba-dist (para revisarlo)
+        run: |
+          cd dist
+          git init -q -b prueba-dist
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "Compilación de ${GITHUB_REF_NAME} ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" prueba-dist
