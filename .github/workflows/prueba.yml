@@ -37,7 +37,8 @@ jobs:
           test -f public/img/proyectos/nombre-corto-del-caso/01-grafico-principal.webp
           test -f public/img/proyectos/nombre-corto-del-caso/01-grafico-principal-700.webp
       - run: npm run build
-      - run: test -f dist/es/proyectos/nombre-corto-del-caso/index.html && test -f dist/en/projects/short-case-name/index.html
+      - name: Guardar lo sincronizado para revisarlo
+        run: mkdir -p dist/_prueba && cp -r src/content/proyectos dist/_prueba/ && ls -R dist/es/proyectos dist/en/projects > dist/_prueba/paginas.txt
       - name: Guardar el resultado en la rama prueba-dist (para revisarlo)
         run: |
           cd dist
