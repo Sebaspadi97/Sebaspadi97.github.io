@@ -64,7 +64,7 @@ Técnicamente el sitio está sano: 0 violaciones de axe, Lighthouse 98–100 en 
 | R9 | El simulador recalcula y reordena 5.000 clientes en cada evento `input` | Frontend, Performance | `ChurnSimulator.astro` | Agrupar en `requestAnimationFrame` (hoy ~1 ms: no urgente) |
 | R10 | Página `/es/` con CLS 0,067 (único 98 en rendimiento) | Performance | `HomePage.astro`, `AnalyticsMotion.astro` | Reservar alto fijo del lienzo de la animación |
 | R11 | README desactualizado (menciona páginas "en construcción" y la "figura de puntos SP") | Repo Maintainer | `README.md` | Actualizar estructura y comandos de QA |
-| R12 | Enlace "Avísame" de la 404 mide 58×20 px | A11y | `404.astro` | Padding vertical para llegar a 24 px mínimo (ideal 44 px) |
+| R12 | Enlace "Avísame" de la 404 mide 58×20 px (cumple por la excepción de enlace dentro de frase de WCAG 2.5.8) | A11y | `404.astro` | Opcional: padding vertical para llegar a 24 px |
 | R13 | El menú móvil no devuelve el foco ni lo atrapa al abrir; Escape sí funciona | A11y | `Header.astro` | Mover foco al primer enlace al abrir; cerrar al salir con Tab |
 | R14 | Al agregar animaciones nuevas, mantener la regla actual: solo `transform`/`opacity`, ≤ 600 ms para revelados, y todo desactivado con `prefers-reduced-motion` | A11y, Performance | global | Centralizar en `Reveal` y en tokens `--ease-out`, `--dur-*` |
 | R15 | Monitoreo: no hay alerta si el formulario de Web3Forms empieza a fallar | Production Readiness | `es/contacto/index.astro` | Revisión mensual en el panel de Web3Forms; el mensaje de error ya ofrece el correo como respaldo |
@@ -416,7 +416,7 @@ No hay trabajo en scroll hoy. El rediseño debe mantenerlo así: nada de listene
 ### Recomendaciones
 | # | Problema | Criterio WCAG | Solución |
 |---|---|---|---|
-| A1 | "Avísame" (404) de 58×20 px | 2.5.8 Tamaño del objetivo | Altura ≥ 24 px |
+| A1 | "Avísame" (404) de 58×20 px; cumple por la excepción de enlace en línea | 2.5.8 Tamaño del objetivo | Opcional: altura ≥ 24 px |
 | A2 | Menú móvil: el foco no entra al abrir | 2.4.3 Orden del foco | Enfocar el primer enlace al abrir |
 | A3 | Nuevas animaciones del rediseño | 2.3.3 / 2.2.2 | Todas con `prefers-reduced-motion` y botón de pausa si duran > 5 s (como AnalyticsMotion) |
 | A4 | Contadores animados | 4.1.3 | El número final en el DOM desde el inicio; animar solo la presentación (`aria-hidden` en la versión animada) |
