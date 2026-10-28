@@ -19,6 +19,11 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
+      - name: Probar la sincronización de proyectos (sin guardar)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          OWNER: ${{ github.repository_owner }}
+        run: node scripts/sync/sincronizar-proyectos.mjs
       - run: npm run build
       - name: Guardar el resultado en la rama prueba-dist (para revisarlo)
         run: |

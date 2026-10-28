@@ -79,7 +79,7 @@ function table(t) {
   const walk = (n, inBody) => {
     (n.children || []).forEach((c) => {
       if (c.type !== 'element') return;
-      if (c.tagName === 'th') c.properties.scope = 'col';
+      if (c.tagName === 'th' && !c.properties.scope) c.properties.scope = 'col';
       if (c.tagName === 'tr' && inBody) {
         const first = c.children.find((x) => x.type === 'element');
         if (first && first.tagName === 'td') {

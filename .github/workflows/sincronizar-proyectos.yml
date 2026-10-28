@@ -1,0 +1,61 @@
+name: Sincronizar proyectos
+
+# Trae al sitio los proyectos que viven en su propio repositorio (tema "sp-lab" + sp-lab/caso.md
+# con "publicar: true"). Corre cada día, a mano desde la pestaña Actions, o cuando un
+# repositorio de proyecto lo avisa (repository_dispatch "proyecto-actualizado").
+# Si algo no compila, no publica nada y la ejecución queda en rojo (GitHub avisa por correo).
+on:
+  schedule:
+    - cron: '17 11 * * *' # 6:17 a. m. en Bogotá
+  workflow_dispatch:
+  repository_dispatch:
+    types: [proyecto-actualizado]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: sincronizar
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Leer los repositorios de proyectos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Instalar dependencias
+        run: npm install --no-audit --no-fund
+
+      - name: Sincronizar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+        run: node scripts/sync/sincronizar-proyectos.mjs
+
+      - name: ¿Hubo cambios?
+        id: diff
+        run: |
+          git add -A src/content public/img/proyectos
+          if git diff --cached --quiet; then echo "cambios=no" >> "$GITHUB_OUTPUT"; else echo "cambios=si" >> "$GITHUB_OUTPUT"; git diff --cached --stat; fi
+
+      - name: Comprobar que el sitio compila
+        if: steps.diff.outputs.cambios == 'si'
+        run: npm run build
+
+      - name: Guardar y publicar
+        if: steps.diff.outputs.cambios == 'si'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -qm "Sincronizar proyectos desde sus repositorios"
+          git push origin HEAD:main
+          gh workflow run deploy.yml --ref main

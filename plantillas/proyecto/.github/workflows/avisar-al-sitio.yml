@@ -1,0 +1,25 @@
+name: Avisar al sitio
+
+# Opcional: cuando cambia sp-lab/, le pide al sitio que sincronice de inmediato
+# (sin esto, el sitio igual lo lee una vez al día).
+# Requiere un secreto SITIO_TOKEN en este repositorio: un token de GitHub de grano fino
+# con permiso "Contents: Read and write" solo sobre Sebaspadi97/Sebaspadi97.github.io.
+on:
+  push:
+    branches: [main]
+    paths: ['sp-lab/**', 'graficos/**']
+  workflow_dispatch:
+
+jobs:
+  avisar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pedir la sincronización
+        env:
+          TOKEN: ${{ secrets.SITIO_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then echo "Sin SITIO_TOKEN: el sitio sincronizará en su revisión diaria."; exit 0; fi
+          curl -fsS -X POST -H "Authorization: Bearer $TOKEN" -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/Sebaspadi97/Sebaspadi97.github.io/dispatches \
+            -d '{"event_type":"proyecto-actualizado"}'
+          echo "Aviso enviado."
