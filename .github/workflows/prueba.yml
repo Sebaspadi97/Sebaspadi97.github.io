@@ -24,7 +24,20 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           OWNER: ${{ github.repository_owner }}
         run: node scripts/sync/sincronizar-proyectos.mjs
+      - name: Probar un proyecto de ejemplo traído con la plantilla
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          OWNER: ${{ github.repository_owner }}
+          PRUEBA_PLANTILLA: '1'
+          PRUEBA_REPO: ${{ github.event.repository.name }}
+          PRUEBA_REF: ${{ github.ref_name }}
+        run: |
+          node scripts/sync/sincronizar-proyectos.mjs
+          test -f src/content/proyectos/es/nombre-corto-del-caso.md
+          test -f public/img/proyectos/nombre-corto-del-caso/01-grafico-principal.webp
+          test -f public/img/proyectos/nombre-corto-del-caso/01-grafico-principal-700.webp
       - run: npm run build
+      - run: test -f dist/es/proyectos/nombre-corto-del-caso/index.html && test -f dist/en/projects/short-case-name/index.html
       - name: Guardar el resultado en la rama prueba-dist (para revisarlo)
         run: |
           cd dist

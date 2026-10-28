@@ -20,6 +20,9 @@ import sharp from 'sharp';
 const OWNER = process.env.OWNER || process.env.GITHUB_REPOSITORY_OWNER || 'Sebaspadi97';
 const TOPIC = process.env.TOPIC || 'sp-lab';
 const TOKEN = process.env.GITHUB_TOKEN;
+// Solo para la prueba automática: leer la plantilla de este mismo repositorio como si fuera un proyecto.
+const PRUEBA = process.env.PRUEBA_PLANTILLA === '1';
+const BASE_DIR = PRUEBA ? 'plantillas/proyecto/sp-lab' : 'sp-lab';
 const API = 'https://api.github.com';
 const DIRS = { es: 'src/content/proyectos/es', en: 'src/content/proyectos/en' };
 const IMG = 'public/img/proyectos';
@@ -61,7 +64,7 @@ function readLocal(file) {
 async function copyImage(repo, ref, ref_path, slug, done) {
   if (/^https?:/.test(ref_path)) return ref_path;
   const clean = ref_path.split(/[?#]/)[0];
-  const repoPath = clean.startsWith('/') ? clean.slice(1) : posix.normalize(posix.join('sp-lab', clean));
+  const repoPath = clean.startsWith('/') ? clean.slice(1) : posix.normalize(posix.join(BASE_DIR, clean));
   if (done.has(repoPath)) return done.get(repoPath);
   const buf = await raw(repo, repoPath, ref);
   if (!buf) throw new Error(`no encontré la imagen ${repoPath}`);
@@ -91,7 +94,7 @@ const write = (file, data, body) => writeFileSync(file, `---\n${yaml.dump(data, 
 const repos = [];
 for (let page = 1; ; page++) {
   const list = await api(`/users/${OWNER}/repos?per_page=100&page=${page}&sort=updated`);
-  repos.push(...list.filter((r) => !r.archived && (r.topics || []).includes(TOPIC)));
+  repos.push(...list.filter((r) => !r.archived && (PRUEBA ? r.name === process.env.PRUEBA_REPO : (r.topics || []).includes(TOPIC))));
   if (list.length < 100) break;
 }
 console.log(`Repositorios con el tema "${TOPIC}": ${repos.map((r) => r.name).join(', ') || 'ninguno'}`);
@@ -100,14 +103,15 @@ console.log(`Repositorios con el tema "${TOPIC}": ${repos.map((r) => r.name).joi
 const keep = { es: new Set(), en: new Set() };
 const failed = new Set(); // repos con error: se deja la última versión buena
 for (const repo of repos) {
-  const ref = repo.default_branch;
+  const ref = PRUEBA ? process.env.PRUEBA_REF || repo.default_branch : repo.default_branch;
   try {
-    const esRaw = await raw(repo.name, 'sp-lab/caso.md', ref);
+    const esRaw = await raw(repo.name, `${BASE_DIR}/caso.md`, ref);
     if (!esRaw) {
       report.omitidos.push(`${repo.name}: no tiene sp-lab/caso.md`);
       continue;
     }
     const es = parse(esRaw.toString('utf8'));
+    if (PRUEBA) es.data.publicar = true;
     if (es.data.publicar !== true) {
       report.omitidos.push(`${repo.name}: "publicar" no está en true`);
       continue;
@@ -131,7 +135,7 @@ for (const repo of repos) {
     keep.es.add(slug);
     (prev ? report.actualizados : report.agregados).push(`${slug} ← ${repo.name}`);
 
-    const enRaw = await raw(repo.name, 'sp-lab/caso.en.md', ref);
+    const enRaw = await raw(repo.name, `${BASE_DIR}/caso.en.md`, ref);
     if (enRaw) {
       const en = parse(enRaw.toString('utf8'));
       if (en.data.publicar !== false) {
