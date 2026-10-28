@@ -12,29 +12,27 @@ Código del sitio de Sebas Padilla Lab (SP Lab): casos de Data, Machine Learning
 
 | Carpeta | Qué contiene |
 |---|---|
-| `src/pages/` | Páginas: `/es/`, `/en/`, `404` y rutas temporales "en construcción" |
-| `src/components/` | Menú, pie, Inicio, figura de puntos SP |
-| `src/data/` | Textos de las páginas, datos generales y lista de páginas pendientes |
-| `src/i18n/` | Rutas por idioma y textos comunes |
-| `src/styles/global.css` | Paleta, tipografía y botones de la marca |
-| `.github/workflows/deploy.yml` | Compila y publica en GitHub Pages en cada envío a `main` |
+| `src/content/proyectos/es/`, `en/` | Un archivo Markdown por proyecto (español e inglés) |
+| `src/content/lab/` | Un archivo Markdown por artículo del Lab |
+| `src/content/datos-curiosos.json` | Franja de datos curiosos del Lab |
+| `src/data/` | Textos de Inicio, Sobre mí, páginas legales y datos generales |
+| `src/components/`, `src/pages/`, `src/layouts/` | Plantillas y páginas |
+| `src/lib/` | Lectura del contenido, complementos del Markdown, imágenes |
+| `public/img/` | Imágenes (`casos/` a mano, `proyectos/` traídas por la sincronización) |
+| `plantillas/proyecto/` | Estructura estándar para el repositorio de un proyecto nuevo |
+| `reviews/` | Auditorías del sitio |
+| `.pages.yml` | Configuración del editor web (Pages CMS) |
 
-## Correr en local
+## Actualizar el contenido
 
-Requiere Node.js 20.3 o superior.
+Ver **[CONTENIDO.md](CONTENIDO.md)**: editor web (Pages CMS), edición en GitHub y publicación
+automática de proyectos desde su propio repositorio.
 
-```bash
-npm install
-npm run dev      # http://localhost:4321
-npm run build    # genera dist/
-```
+## Flujos de GitHub Actions
 
-## Licencia
-
-© 2026 Sebastián Padilla Castaño. Todos los derechos reservados. Ver [LICENSE](LICENSE) y los Términos de uso del sitio.
-
----
-
-### English summary
-
-Source code for the Sebas Padilla Lab website (*From data to decisions*), a static Astro site published on GitHub Pages with Spanish (`/es/`) and English (`/en/`) routes. All rights reserved; see LICENSE.
+| Flujo | Cuándo corre | Qué hace |
+|---|---|---|
+| Publicar en GitHub Pages (`deploy.yml`) | Cada cambio en `main` | Compila y publica |
+| Sincronizar proyectos (`sincronizar-proyectos.yml`) | Cada día 6:17 a. m., a mano o por aviso | Trae proyectos con el tema `sp-lab` |
+| Prueba de compilación (`prueba.yml`) | Cambios en otras ramas | Compila sin publicar y prueba la sincronización |
+| Revisión de calidad (`qa.yml`) | A mano o envío a la rama `qa` | axe, Lighthouse y capturas; reportes en `qa-reports` |
