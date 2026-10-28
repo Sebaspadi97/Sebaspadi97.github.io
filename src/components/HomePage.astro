@@ -52,12 +52,12 @@ const quoteWords = c.manifesto.quote.split(' ');
       </div>
       <div class="hero-figure">
         <LiveSample lang={lang} title={c.hero.figure} hint={c.hero.figureHint} label={c.hero.figureLabel} />
-        <aside class="proof" aria-label={c.hero.proof}>
+        <div class="proof">
           <span class="proof-k">{c.hero.proof}</span>
           <span class="proof-nums"><span class="proof-win">{f.chart.modelValue}</span> <span class="proof-lose"><span class="visually-hidden">{es ? 'frente a' : 'versus'} </span>{f.chart.allValue}</span></span>
           <span class="proof-text">{c.hero.proofText}</span>
           <a class="proof-link" href={link(f.key, lang)}>{c.hero.proofLink} <span class="arr" aria-hidden="true">→</span></a>
-        </aside>
+        </div>
       </div>
     </div>
   </div>
@@ -390,7 +390,7 @@ const quoteWords = c.manifesto.quote.split(' ');
   .pcard-title a { color: inherit; text-decoration: none; }
   .stretched::after { content: ''; position: absolute; inset: 0; z-index: 1; }
   .pcard-q { color: var(--slate); font-size: 16px; }
-  .pcard-more { display: inline-flex; align-items: center; gap: 8px; margin-top: 4px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--green); text-decoration: none; }
+  .pcard-more { display: inline-flex; align-items: center; gap: 8px; min-height: 32px; margin-top: 4px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--green); text-decoration: none; }
   .pcard .tag { color: var(--slate); }
 
   .pcard--feat { background: var(--green-deep); border-color: var(--green-deep); color: var(--on-dark); }
@@ -415,7 +415,7 @@ const quoteWords = c.manifesto.quote.split(' ');
   .pcard--end:hover { color: var(--white); border-color: var(--green); }
   .end-n { font-family: var(--font-display); font-weight: 800; font-size: clamp(64px, 8vw, 104px); line-height: 0.9; color: var(--mint); }
   .end-text { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; }
-  .pcard--end .pcard-more { color: var(--gold); }
+  .pcard--end .pcard-more { color: var(--mint-strong); }
 
   /* ---------- Dato curioso ---------- */
   .fact { position: relative; overflow: hidden; background: var(--gold); color: var(--carbon); padding-top: clamp(56px, 7vw, 96px); padding-bottom: clamp(56px, 7vw, 96px); }
