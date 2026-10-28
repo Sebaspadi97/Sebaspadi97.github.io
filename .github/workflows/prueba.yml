@@ -3,7 +3,7 @@ name: Prueba de compilación
 # Compila cualquier rama distinta de main sin publicar, para revisar cambios antes de unirlos.
 on:
   push:
-    branches-ignore: [main, qa, qa-reports, prueba-dist]
+    branches-ignore: [main, qa, qa-reports, prueba-dist, lockfile]
   workflow_dispatch:
 
 permissions:
