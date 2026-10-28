@@ -1,6 +1,6 @@
 {
   "base": "https://sebaspadi97.github.io",
-  "date": "2026-10-28T21:59:33.530Z",
+  "date": "2026-10-28T22:08:04.110Z",
   "pages": 21,
   "axeRules": {},
   "overflow": [],
@@ -20,16 +20,16 @@
       "path": "/es/",
       "scores": {
         "performance": 100,
-        "accessibility": 96,
+        "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.2 s",
+        "FCP": "1.3 s",
         "LCP": "1.6 s",
         "TBT": "0 ms",
-        "CLS": "0.002",
-        "SI": "1.2 s",
+        "CLS": "0",
+        "SI": "1.3 s",
         "weight": "Total size was 158 KiB"
       }
     },
@@ -37,7 +37,7 @@
       "path": "/en/",
       "scores": {
         "performance": 100,
-        "accessibility": 96,
+        "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
@@ -59,28 +59,28 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.2 s",
+        "FCP": "1.1 s",
         "LCP": "1.7 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.2 s",
+        "SI": "1.1 s",
         "weight": "Total size was 149 KiB"
       }
     },
     {
       "path": "/es/proyectos/abandono-de-clientes/",
       "scores": {
-        "performance": 92,
+        "performance": 100,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.1 s",
+        "FCP": "1.2 s",
         "LCP": "1.4 s",
         "TBT": "0 ms",
-        "CLS": "0.177",
-        "SI": "1.1 s",
+        "CLS": "0",
+        "SI": "1.2 s",
         "weight": "Total size was 152 KiB"
       }
     },
@@ -93,11 +93,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.0 s",
+        "FCP": "1.1 s",
         "LCP": "1.4 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.0 s",
+        "SI": "1.1 s",
         "weight": "Total size was 126 KiB"
       }
     },
@@ -111,7 +111,7 @@
       },
       "metrics": {
         "FCP": "1.1 s",
-        "LCP": "1.4 s",
+        "LCP": "1.7 s",
         "TBT": "0 ms",
         "CLS": "0",
         "SI": "1.1 s",
@@ -144,11 +144,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.1 s",
+        "FCP": "1.0 s",
         "LCP": "1.4 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.1 s",
+        "SI": "1.0 s",
         "weight": "Total size was 107 KiB"
       }
     }
