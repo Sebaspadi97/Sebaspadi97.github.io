@@ -124,9 +124,7 @@ const otherLang = lang === 'es' ? 'en' : 'es';
     padding-top: 12px;
     padding-bottom: 12px;
     min-height: var(--header-h);
-    transition: min-height .3s var(--ease-out), padding .3s var(--ease-out);
   }
-  .is-scrolled .nav { min-height: 60px; padding-top: 7px; padding-bottom: 7px; }
 
   .brand {
     display: inline-flex;
@@ -138,9 +136,11 @@ const otherLang = lang === 'es' ? 'en' : 'es';
     display: block;
     height: 46px;
     width: auto;
-    transition: height .3s var(--ease-out);
+    transform-origin: left center;
+    transition: transform .3s var(--ease-out);
   }
-  .is-scrolled .brand img { height: 40px; }
+  /* Al bajar, el logo se reduce sin cambiar la altura del menú (no mueve el contenido) */
+  .is-scrolled .brand img { transform: scale(0.87); }
   @media (prefers-reduced-motion: reduce) {
     .nav, .brand img, .site-header { transition: none; }
   }
