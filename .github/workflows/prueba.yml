@@ -3,7 +3,7 @@ name: Prueba de compilación
 # Compila cualquier rama distinta de main sin publicar, para revisar cambios antes de unirlos.
 on:
   push:
-    branches-ignore: [main, qa, qa-reports, prueba-dist, lockfile]
+    branches-ignore: [main, qa, qa-reports, prueba-dist]
   workflow_dispatch:
 
 permissions:
@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --no-audit --no-fund
+      - run: npm ci --no-audit --no-fund
       - name: Probar la sincronización de proyectos (sin guardar)
         env:
           GITHUB_TOKEN: ${{ github.token }}

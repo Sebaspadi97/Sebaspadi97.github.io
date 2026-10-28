@@ -28,7 +28,7 @@ jobs:
           node-version: 22
 
       - name: Instalar dependencias
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Compilar con Astro
         run: npm run build

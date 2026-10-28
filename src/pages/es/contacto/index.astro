@@ -292,27 +292,6 @@ const formReady = Boolean(site.form && site.form.accessKey);
 </script>
 
 <style>
-  .head { display: flex; flex-direction: column; gap: 24px; padding-top: clamp(40px, 6vw, 64px); padding-bottom: 48px; }
-  .head-meta {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 8px 12px;
-    color: var(--slate);
-    border-bottom: 1px solid var(--gray-light);
-    padding-bottom: 14px;
-  }
-  .head-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 40px; }
-  .head-text { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
-  .head-title {
-    font-weight: 800;
-    font-size: clamp(42px, 6.4vw, 80px);
-    line-height: 1.02;
-    letter-spacing: -0.035em;
-    color: var(--green-deep);
-  }
-  .head-sub { max-width: 620px; font-size: clamp(18px, 1.8vw, 20px); color: var(--slate); }
-  .head-figure { flex: 1 1 280px; max-width: 420px; width: 100%; height: auto; }
 
   .who { padding-bottom: 56px; }
   .who-grid { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }

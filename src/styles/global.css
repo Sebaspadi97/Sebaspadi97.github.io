@@ -264,3 +264,44 @@ a:hover .arr, button:hover .arr { transform: translateX(4px); }
 
 /* Franja de encabezado de página con papel milimetrado */
 .band { border-bottom: 1px solid var(--gray-light); }
+
+/* ---------- Encabezado de página (Proyectos, Lab, Contacto) ---------- */
+.head { display: flex; flex-direction: column; gap: 24px; padding-top: clamp(40px, 6vw, 64px); padding-bottom: 40px; }
+.head-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 12px;
+  color: var(--slate);
+  border-bottom: 1px solid var(--gray-light);
+  padding-bottom: 14px;
+}
+.head-grid { display: flex; flex-wrap: wrap; align-items: center; gap: 40px; }
+.head-text { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px; }
+.head-title {
+  font-weight: 800;
+  font-size: clamp(42px, 6.4vw, 80px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--green-deep);
+  text-wrap: balance;
+}
+.head-sub { max-width: 640px; font-size: clamp(18px, 1.8vw, 20px); color: var(--slate); }
+.head-figure { flex: 1 1 300px; max-width: 440px; width: 100%; height: auto; }
+
+/* ---------- Chips de filtro (botones con aria-pressed) ---------- */
+.chip {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--gray-light);
+  background: var(--paper);
+  color: var(--carbon);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.chip:hover { border-color: var(--green); }
+.chip[aria-pressed='true'] { background: var(--green); border-color: var(--green); color: var(--white); }
