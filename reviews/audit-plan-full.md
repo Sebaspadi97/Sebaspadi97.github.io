@@ -447,3 +447,27 @@ No hay trabajo en scroll hoy. El rediseño debe mantenerlo así: nada de listene
 - Foco: CONCERNS menores
 - Contraste: PASS
 - Movimiento: PASS
+
+---
+
+## Estado de los hallazgos (actualizado el 28 de octubre de 2026)
+
+| # | Hallazgo | Estado | Cómo se resolvió |
+|---|---|---|---|
+| C1 | Héroes sin prueba de trabajo | Resuelto | Inicio con muestra viva y tarjeta de hallazgo; encabezados con papel milimetrado |
+| C2 | Tarjetas sin gráfico legible | Resuelto | Portadas 16:10 con el gráfico real y el hallazgo encima |
+| C3 | Simulador antes del título | Resuelto | Texto primero; controles detrás de "Pruébalo" |
+| C4 | Estilos repetidos y breakpoints sueltos | Parcial | Encabezados de página y chips movidos a `global.css`; tokens nuevos; quedan estilos propios de cada página |
+| C5 | Dependencias sin bloqueo | Resuelto | `package-lock.json` y `npm ci` en los flujos; versiones exactas en `package.json` |
+| R1 | Menú no fijo | Resuelto | Menú fijo sin saltos de diseño |
+| R2 | Sin progreso de lectura | Resuelto | Línea dorada de avance en el menú |
+| R3 | Pie sin CTA | Resuelto | Pie con eslogan, "Hablemos", CV y navegación |
+| R4 | Servicios no accionables | Resuelto | Cada servicio lleva a Contacto (motivo marcado) o a un caso |
+| R5 | Cifras sin animación | Resuelto | Contadores en Inicio y Sobre mí (valor final en el HTML) |
+| R7 | Trayectoria plana | Resuelto | Línea de tiempo con nodo dorado en el cargo actual |
+| R10 | CLS en Inicio | Resuelto | CLS 0 en todas las páginas |
+| R11 | README desactualizado | Resuelto | README, CONTENIDO.md y DISENO.md |
+| R13 | Foco del menú móvil | Resuelto | El foco va al primer enlace al abrir |
+| R16 | QA solo manual | Resuelto | La revisión de calidad corre sola después de cada publicación |
+
+Verificación final en vivo: axe 0 problemas; Lighthouse 100/100/100/100 en las 8 páginas clave; CLS 0.

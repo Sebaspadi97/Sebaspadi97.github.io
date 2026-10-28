@@ -2,11 +2,14 @@ name: Revisión de calidad
 
 # Audita el sitio publicado (accesibilidad con axe, velocidad y buenas prácticas con
 # Lighthouse, desbordes y enlaces) y guarda los reportes en la rama qa-reports.
-# Se ejecuta a mano desde la pestaña Actions o con un envío a la rama qa.
+# Se ejecuta sola después de cada publicación, a mano desde la pestaña Actions o con un envío a la rama qa.
 on:
   workflow_dispatch:
   push:
     branches: [qa]
+  workflow_run:
+    workflows: ['Publicar en GitHub Pages']
+    types: [completed]
 
 permissions:
   contents: write
@@ -14,6 +17,7 @@ permissions:
 jobs:
   qa:
     name: Auditar el sitio publicado
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
