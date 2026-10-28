@@ -16,42 +16,9 @@
     "failed": [],
     "shifts": [
       {
-        "value": 0.014,
-        "t": 548,
+        "value": 0.009,
+        "t": 779,
         "sources": [
-          {
-            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
-            "prev": [
-              19,
-              44
-            ],
-            "curr": [
-              19,
-              44
-            ]
-          },
-          {
-            "node": "<section class=\"method\" aria-labelledby=\"method-title\" data-astro-cid-jdovvxl7=\"\"> <div class=\"container method-inner\" data-astro-cid-jdovvx",
-            "prev": [
-              701,
-              199
-            ],
-            "curr": [
-              672,
-              228
-            ]
-          },
-          {
-            "node": "#text",
-            "prev": [
-              311,
-              127
-            ],
-            "curr": [
-              309,
-              127
-            ]
-          },
           {
             "node": "#text",
             "prev": [
@@ -72,6 +39,17 @@
             "curr": [
               544,
               48
+            ]
+          },
+          {
+            "node": "<section class=\"method\" aria-labelledby=\"method-title\" data-astro-cid-jdovvxl7=\"\"> <div class=\"container method-inner\" data-astro-cid-jdovvx",
+            "prev": [
+              701,
+              199
+            ],
+            "curr": [
+              672,
+              228
             ]
           }
         ]
