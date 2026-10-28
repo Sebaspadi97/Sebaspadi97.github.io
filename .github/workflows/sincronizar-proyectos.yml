@@ -42,7 +42,7 @@ jobs:
       - name: ¿Hubo cambios?
         id: diff
         run: |
-          git add -A src/content public/img/proyectos
+          git add -A src/content public/img
           if git diff --cached --quiet; then echo "cambios=no" >> "$GITHUB_OUTPUT"; else echo "cambios=si" >> "$GITHUB_OUTPUT"; git diff --cached --stat; fi
 
       - name: Comprobar que el sitio compila
