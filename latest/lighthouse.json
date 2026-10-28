@@ -3,19 +3,39 @@
     "path": "/es/",
     "scores": {
       "performance": 100,
-      "accessibility": 100,
+      "accessibility": 96,
       "best-practices": 100,
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.2 s",
-      "LCP": "1.7 s",
-      "TBT": "0 ms",
+      "FCP": "1.3 s",
+      "LCP": "1.6 s",
+      "TBT": "10 ms",
       "CLS": "0",
-      "SI": "1.2 s",
-      "weight": "Total size was 153 KiB"
+      "SI": "1.3 s",
+      "weight": "Total size was 158 KiB"
     },
     "failing": [
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.46,
+        "value": "260 ms",
+        "items": []
+      },
+      {
+        "id": "color-contrast",
+        "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "value": "",
+        "items": [
+          "<span class=\"step-n\" aria-hidden=\"true\" data-astro-cid-vnweamdt=\"\">",
+          "<p class=\"step-text\" data-astro-cid-vnweamdt=\"\">",
+          "<span class=\"step-n\" aria-hidden=\"true\" data-astro-cid-vnweamdt=\"\">",
+          "<p class=\"step-text\" data-astro-cid-vnweamdt=\"\">",
+          "<span class=\"step-n\" aria-hidden=\"true\" data-astro-cid-vnweamdt=\"\">"
+        ]
+      },
       {
         "id": "uses-long-cache-ttl",
         "title": "Serve static assets with an efficient cache policy",
@@ -23,10 +43,19 @@
         "value": "6 resources found",
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+        ]
+      },
+      {
+        "id": "unused-css-rules",
+        "title": "Reduce unused CSS",
+        "score": 0.5,
+        "value": "Potential savings of 11 KiB",
+        "items": [
+          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
       }
     ],
@@ -36,19 +65,39 @@
     "path": "/en/",
     "scores": {
       "performance": 100,
-      "accessibility": 100,
+      "accessibility": 96,
       "best-practices": 100,
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.3 s",
+      "FCP": "1.2 s",
       "LCP": "1.7 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "1.3 s",
-      "weight": "Total size was 153 KiB"
+      "SI": "1.2 s",
+      "weight": "Total size was 158 KiB"
     },
     "failing": [
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.55,
+        "value": "230 ms",
+        "items": []
+      },
+      {
+        "id": "color-contrast",
+        "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "value": "",
+        "items": [
+          "<span class=\"step-n\" aria-hidden=\"true\" data-astro-cid-vnweamdt=\"\">",
+          "<p class=\"step-text\" data-astro-cid-vnweamdt=\"\">",
+          "<span class=\"step-n\" aria-hidden=\"true\" data-astro-cid-vnweamdt=\"\">",
+          "<p class=\"step-text\" data-astro-cid-vnweamdt=\"\">",
+          "<span class=\"step-n\" aria-hidden=\"true\" data-astro-cid-vnweamdt=\"\">"
+        ]
+      },
       {
         "id": "uses-long-cache-ttl",
         "title": "Serve static assets with an efficient cache policy",
@@ -58,8 +107,17 @@
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+        ]
+      },
+      {
+        "id": "unused-css-rules",
+        "title": "Reduce unused CSS",
+        "score": 0.5,
+        "value": "Potential savings of 11 KiB",
+        "items": [
+          "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
       }
     ],
@@ -74,12 +132,12 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.0 s",
-      "LCP": "1.5 s",
+      "FCP": "1.1 s",
+      "LCP": "1.7 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "1.0 s",
-      "weight": "Total size was 148 KiB"
+      "SI": "1.1 s",
+      "weight": "Total size was 149 KiB"
     },
     "failing": [
       {
@@ -88,18 +146,18 @@
         "score": 0.5,
         "value": "6 resources found",
         "items": [
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
         ]
       },
       {
         "id": "unused-css-rules",
         "title": "Reduce unused CSS",
         "score": 0.5,
-        "value": "Potential savings of 11 KiB",
+        "value": "Potential savings of 12 KiB",
         "items": [
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
@@ -117,13 +175,20 @@
     },
     "metrics": {
       "FCP": "1.2 s",
-      "LCP": "1.7 s",
+      "LCP": "1.6 s",
       "TBT": "0 ms",
       "CLS": "0",
       "SI": "1.2 s",
-      "weight": "Total size was 150 KiB"
+      "weight": "Total size was 152 KiB"
     },
     "failing": [
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.76,
+        "value": "170 ms",
+        "items": []
+      },
       {
         "id": "uses-long-cache-ttl",
         "title": "Serve static assets with an efficient cache policy",
@@ -132,9 +197,9 @@
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
         ]
       },
       {
@@ -158,12 +223,12 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "0.9 s",
+      "FCP": "1.1 s",
       "LCP": "1.4 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "0.9 s",
-      "weight": "Total size was 125 KiB"
+      "SI": "1.1 s",
+      "weight": "Total size was 126 KiB"
     },
     "failing": [
       {
@@ -175,15 +240,15 @@
           "https://sebaspadi97.github.io/img/casos/emprendimiento/01_tasa_creacion_localidad-700.webp",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
         ]
       },
       {
         "id": "unused-css-rules",
         "title": "Reduce unused CSS",
         "score": 0.5,
-        "value": "Potential savings of 11 KiB",
+        "value": "Potential savings of 12 KiB",
         "items": [
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
@@ -200,14 +265,21 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.0 s",
-      "LCP": "1.6 s",
+      "FCP": "1.1 s",
+      "LCP": "1.7 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "1.0 s",
-      "weight": "Total size was 207 KiB"
+      "SI": "1.1 s",
+      "weight": "Total size was 209 KiB"
     },
     "failing": [
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.86,
+        "value": "140 ms",
+        "items": []
+      },
       {
         "id": "uses-long-cache-ttl",
         "title": "Serve static assets with an efficient cache policy",
@@ -215,8 +287,8 @@
         "value": "12 resources found",
         "items": [
           "https://sebaspadi97.github.io/img/casos/emprendimiento/01_tasa_creacion_localidad-700.webp",
-          "https://sebaspadi97.github.io/_astro/open-sans-math-600-normal.DQ8cZjrd.woff2",
           "https://sebaspadi97.github.io/_astro/open-sans-math-400-normal.C76BUjK0.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-math-600-normal.DQ8cZjrd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
         ]
@@ -242,14 +314,30 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.0 s",
-      "LCP": "1.5 s",
+      "FCP": "1.1 s",
+      "LCP": "1.6 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "1.0 s",
-      "weight": "Total size was 138 KiB"
+      "SI": "2.0 s",
+      "weight": "Total size was 140 KiB"
     },
     "failing": [
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.87,
+        "value": "140 ms",
+        "items": []
+      },
+      {
+        "id": "server-response-time",
+        "title": "Reduce initial server response time",
+        "score": 0,
+        "value": "Root document took 870 ms",
+        "items": [
+          "https://sebaspadi97.github.io/es/sobre-mi/"
+        ]
+      },
       {
         "id": "uses-long-cache-ttl",
         "title": "Serve static assets with an efficient cache policy",
@@ -284,12 +372,12 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.0 s",
+      "FCP": "1.1 s",
       "LCP": "1.4 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "1.0 s",
-      "weight": "Total size was 106 KiB"
+      "SI": "1.1 s",
+      "weight": "Total size was 107 KiB"
     },
     "failing": [
       {
@@ -299,8 +387,8 @@
         "value": "5 resources found",
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
           "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
           "https://sebaspadi97.github.io/brand/logo-horizontal.svg"
         ]

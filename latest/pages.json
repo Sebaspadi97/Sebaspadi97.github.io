@@ -11,51 +11,80 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [],
+    "small": [
+      "a \"Read the case →\" 387x23"
+    ],
     "consoleErrors": [],
     "failed": [],
     "shifts": [
       {
-        "value": 0.009,
-        "t": 779,
+        "value": 0.011,
+        "t": 1911,
         "sources": [
           {
-            "node": "#text",
+            "node": "<a class=\"brand\" href=\"/en/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Home\" width=\"125\" he",
             "prev": [
-              468,
-              63
-            ],
-            "curr": [
-              465,
-              63
-            ]
-          },
-          {
-            "node": "<div class=\"actions\" data-astro-cid-jdovvxl7=\"\"> <a class=\"pill pill--primary\" href=\"/es/proyectos/?from=en\" data-astro-cid-jdovvxl7=\"\">Expl",
-            "prev": [
-              573,
+              7,
               48
             ],
             "curr": [
-              544,
-              48
+              12,
+              54
             ]
           },
           {
-            "node": "<section class=\"method\" aria-labelledby=\"method-title\" data-astro-cid-jdovvxl7=\"\"> <div class=\"container method-inner\" data-astro-cid-jdovvx",
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
             "prev": [
-              701,
-              199
+              9,
+              44
             ],
             "curr": [
-              672,
-              228
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <!-- Portada --><section class=\"hero paper-grid\" aria-labelledby=\"hero-title\" data-astro-cid-jdovvxl7=\"\"> <div class=",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
             ]
           }
         ]
       }
     ],
-    "axe": []
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".pcard--end > .pcard-more",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.54 (foreground color: #d6a64f, background color: #245b45, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"pcard-more\" data-astro-cid-jdovvxl7=\"\">All projects <span class=\"arr\" aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</span></span>"
+          }
+        ],
+        "count": 1
+      },
+      {
+        "id": "landmark-complementary-is-top-level",
+        "impact": "moderate",
+        "help": "Aside should not be contained in another landmark",
+        "nodes": [
+          {
+            "target": "aside",
+            "summary": "Fix any of the following:\n  The complementary landmark is contained in another landmark.",
+            "html": "<aside class=\"proof\" aria-label=\"Finding · Featured case\" data-astro-cid-jdovvxl7=\"\">"
+          }
+        ],
+        "count": 1
+      }
+    ]
   },
   {
     "viewport": "desktop",
@@ -72,7 +101,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1694,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/en/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Home\" width=\"125\" he",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-63cywwwr=\"\"> <section class=\"container hero\" data-astro-cid-63cywwwr=\"\"> ",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -90,7 +159,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1740,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/en/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Home\" width=\"125\" he",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -108,7 +217,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1772,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/en/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Home\" width=\"125\" he",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -126,7 +275,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1755,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/en/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Home\" width=\"125\" he",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -141,11 +330,80 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [],
+    "small": [
+      "a \"Leer el caso →\" 387x23"
+    ],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
-    "axe": []
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1698,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <!-- Portada --><section class=\"hero paper-grid\" aria-labelledby=\"hero-title\" data-astro-cid-jdovvxl7=\"\"> <div class=",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".pcard--end > .pcard-more",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.54 (foreground color: #d6a64f, background color: #245b45, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"pcard-more\" data-astro-cid-jdovvxl7=\"\">Todos los proyectos <span class=\"arr\" aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</span></span>"
+          }
+        ],
+        "count": 1
+      },
+      {
+        "id": "landmark-complementary-is-top-level",
+        "impact": "moderate",
+        "help": "Aside should not be contained in another landmark",
+        "nodes": [
+          {
+            "target": "aside",
+            "summary": "Fix any of the following:\n  The complementary landmark is contained in another landmark.",
+            "html": "<aside class=\"proof\" aria-label=\"Hallazgo · Caso destacado\" data-astro-cid-jdovvxl7=\"\">"
+          }
+        ],
+        "count": 1
+      }
+    ]
   },
   {
     "viewport": "desktop",
@@ -165,7 +423,47 @@
     ],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1645,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-qai6f6s5=\"\"> <section class=\"container head\" data-astro-cid-qai6f6s5=\"\"> ",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -183,7 +481,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1682,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-n45vofzs=\"\"> <section class=\"container head\" data-astro-cid-n45vofzs=\"\"> ",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -201,7 +539,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1825,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-dfqqi6xc=\"\"> <header class=\"container narrow a-head\" data-astro-cid-dfqqi",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -219,7 +597,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1651,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-dfqqi6xc=\"\"> <header class=\"container narrow a-head\" data-astro-cid-dfqqi",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -237,7 +655,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1785,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-dfqqi6xc=\"\"> <header class=\"container narrow a-head\" data-astro-cid-dfqqi",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -255,7 +713,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1641,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <section class=\"container rss\" data-astro-cid-hlspe5wh=\"\"> <nav class=\"crumbs\" aria-label=\"Ruta\" data-astro-cid-hlspe",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -273,7 +771,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1668,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <section class=\"legal-head\" data-astro-cid-m7mnfkc2=\"\"> <div class=\"legal-meta eyebrow\" data-astro-cid-m7mnfkc2=\"\"> <",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -291,7 +829,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1715,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-gsn4ozra=\"\"> <section class=\"container head\" data-astro-cid-gsn4ozra=\"\"> ",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -309,7 +887,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1698,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -327,7 +945,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1775,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -345,7 +1003,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1709,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -363,7 +1061,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1695,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -381,7 +1119,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1667,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-63cywwwr=\"\"> <section class=\"container hero\" data-astro-cid-63cywwwr=\"\"> ",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -399,7 +1177,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.011,
+        "t": 1635,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              54
+            ]
+          },
+          {
+            "node": "<div class=\"nav-menu\" id=\"nav-menu\" data-astro-cid-3ef6ksr2=\"\"> <ul class=\"nav-links\" data-astro-cid-3ef6ksr2=\"\"> <li data-astro-cid-3ef6ksr",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              17,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <section class=\"legal-head\" data-astro-cid-m7mnfkc2=\"\"> <div class=\"legal-meta eyebrow\" data-astro-cid-m7mnfkc2=\"\"> <",
+            "prev": [
+              63,
+              837
+            ],
+            "curr": [
+              79,
+              821
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -436,11 +1254,80 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [],
+    "small": [
+      "a \"Read the case →\" 276x23"
+    ],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
-    "axe": []
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1795,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/en/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Home\" width=\"125\" he",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menu\" data-label-close=\"Close\" data",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <!-- Portada --><section class=\"hero paper-grid\" aria-labelledby=\"hero-title\" data-astro-cid-jdovvxl7=\"\"> <div class=",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".pcard--end > .pcard-more",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.54 (foreground color: #d6a64f, background color: #245b45, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"pcard-more\" data-astro-cid-jdovvxl7=\"\">All projects <span class=\"arr\" aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</span></span>"
+          }
+        ],
+        "count": 1
+      },
+      {
+        "id": "landmark-complementary-is-top-level",
+        "impact": "moderate",
+        "help": "Aside should not be contained in another landmark",
+        "nodes": [
+          {
+            "target": "aside",
+            "summary": "Fix any of the following:\n  The complementary landmark is contained in another landmark.",
+            "html": "<aside class=\"proof\" aria-label=\"Finding · Featured case\" data-astro-cid-jdovvxl7=\"\">"
+          }
+        ],
+        "count": 1
+      }
+    ]
   },
   {
     "viewport": "mobile",
@@ -475,7 +1362,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1645,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/en/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Home\" width=\"125\" he",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menu\" data-label-close=\"Close\" data",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -493,7 +1420,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1676,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/en/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Home\" width=\"125\" he",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menu\" data-label-close=\"Close\" data",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -511,7 +1478,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1646,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/en/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Home\" width=\"125\" he",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menu\" data-label-close=\"Close\" data",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -526,11 +1533,40 @@
     "overflow": false,
     "wide": [],
     "brokenImgs": [],
-    "small": [],
+    "small": [
+      "a \"Leer el caso →\" 276x23"
+    ],
     "consoleErrors": [],
     "failed": [],
     "shifts": [],
-    "axe": []
+    "axe": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "help": "Elements must meet minimum color contrast ratio thresholds",
+        "nodes": [
+          {
+            "target": ".pcard--end > .pcard-more",
+            "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.54 (foreground color: #d6a64f, background color: #245b45, font size: 10.5pt (14px), font weight: bold). Expected contrast ratio of 4.5:1",
+            "html": "<span class=\"pcard-more\" data-astro-cid-jdovvxl7=\"\">Todos los proyectos <span class=\"arr\" aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">→</span></span>"
+          }
+        ],
+        "count": 1
+      },
+      {
+        "id": "landmark-complementary-is-top-level",
+        "impact": "moderate",
+        "help": "Aside should not be contained in another landmark",
+        "nodes": [
+          {
+            "target": "aside",
+            "summary": "Fix any of the following:\n  The complementary landmark is contained in another landmark.",
+            "html": "<aside class=\"proof\" aria-label=\"Hallazgo · Caso destacado\" data-astro-cid-jdovvxl7=\"\">"
+          }
+        ],
+        "count": 1
+      }
+    ]
   },
   {
     "viewport": "mobile",
@@ -549,7 +1585,47 @@
     ],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1646,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-qai6f6s5=\"\"> <section class=\"container head\" data-astro-cid-qai6f6s5=\"\"> ",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -585,7 +1661,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1800,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-dfqqi6xc=\"\"> <header class=\"container narrow a-head\" data-astro-cid-dfqqi",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -639,7 +1755,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1633,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <section class=\"container rss\" data-astro-cid-hlspe5wh=\"\"> <nav class=\"crumbs\" aria-label=\"Ruta\" data-astro-cid-hlspe",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -693,7 +1849,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1685,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -711,7 +1907,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1650,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -729,7 +1965,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1644,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -747,7 +2023,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1636,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <article class=\"case\" data-astro-cid-zzz72t2a=\"\"> <div class=\"band paper-grid\" data-astro-cid-zzz72t2a=\"\"> <header cl",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -765,7 +2081,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1633,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <div class=\"band paper-grid\" data-astro-cid-63cywwwr=\"\"> <section class=\"container hero\" data-astro-cid-63cywwwr=\"\"> ",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -783,7 +2139,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1678,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal.svg\" alt=\"Sebas Padilla Lab — Inicio\" width=\"125\" ",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <section class=\"legal-head\" data-astro-cid-m7mnfkc2=\"\"> <div class=\"legal-meta eyebrow\" data-astro-cid-m7mnfkc2=\"\"> <",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -805,7 +2201,47 @@
       "Failed to load resource: the server responded with a status of 404 ()"
     ],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.012,
+        "t": 1591,
+        "sources": [
+          {
+            "node": "<a class=\"brand\" href=\"/es/\" data-astro-cid-3ef6ksr2=\"\"> <img src=\"/brand/logo-horizontal-negativo.svg\" alt=\"Sebas Padilla Lab — Inicio\" wid",
+            "prev": [
+              7,
+              48
+            ],
+            "curr": [
+              12,
+              48
+            ]
+          },
+          {
+            "node": "<button class=\"nav-toggle\" type=\"button\" aria-expanded=\"false\" aria-controls=\"nav-menu\" data-label-open=\"Menú\" data-label-close=\"Cerrar\" dat",
+            "prev": [
+              9,
+              44
+            ],
+            "curr": [
+              14,
+              44
+            ]
+          },
+          {
+            "node": "<main id=\"contenido\">  <section class=\"nf\" data-astro-cid-zetdm5md=\"\"> <div class=\"container nf-inner\" data-astro-cid-zetdm5md=\"\"> <div clas",
+            "prev": [
+              63,
+              749
+            ],
+            "curr": [
+              73,
+              739
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   }
 ]

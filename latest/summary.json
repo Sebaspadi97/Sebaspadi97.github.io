@@ -1,8 +1,31 @@
 {
   "base": "https://sebaspadi97.github.io",
-  "date": "2026-10-28T21:27:43.658Z",
+  "date": "2026-10-28T21:52:27.902Z",
   "pages": 21,
-  "axeRules": {},
+  "axeRules": {
+    "color-contrast": {
+      "impact": "serious",
+      "help": "Elements must meet minimum color contrast ratio thresholds",
+      "pages": [
+        "desktop:/en/",
+        "desktop:/es/",
+        "mobile:/en/",
+        "mobile:/es/"
+      ],
+      "count": 4
+    },
+    "landmark-complementary-is-top-level": {
+      "impact": "moderate",
+      "help": "Aside should not be contained in another landmark",
+      "pages": [
+        "desktop:/en/",
+        "desktop:/es/",
+        "mobile:/en/",
+        "mobile:/es/"
+      ],
+      "count": 4
+    }
+  },
   "overflow": [],
   "consoleErrors": [
     "desktop:/no-existe-qa/ Failed to load resource: the server responded with a status of 404 ()",
@@ -11,6 +34,8 @@
   "failed": [],
   "brokenImgs": [],
   "smallTargets": [
+    "/en/ a \"Read the case →\" 276x23",
+    "/es/ a \"Leer el caso →\" 276x23",
     "/es/contacto/ input \"\" 1x1",
     "/no-existe-qa/ a \"Avísame\" 58x20"
   ],
@@ -20,7 +45,24 @@
       "path": "/es/",
       "scores": {
         "performance": 100,
-        "accessibility": 100,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "FCP": "1.3 s",
+        "LCP": "1.6 s",
+        "TBT": "10 ms",
+        "CLS": "0",
+        "SI": "1.3 s",
+        "weight": "Total size was 158 KiB"
+      }
+    },
+    {
+      "path": "/en/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 96,
         "best-practices": 100,
         "seo": 100
       },
@@ -30,24 +72,7 @@
         "TBT": "0 ms",
         "CLS": "0",
         "SI": "1.2 s",
-        "weight": "Total size was 153 KiB"
-      }
-    },
-    {
-      "path": "/en/",
-      "scores": {
-        "performance": 100,
-        "accessibility": 100,
-        "best-practices": 100,
-        "seo": 100
-      },
-      "metrics": {
-        "FCP": "1.3 s",
-        "LCP": "1.7 s",
-        "TBT": "0 ms",
-        "CLS": "0",
-        "SI": "1.3 s",
-        "weight": "Total size was 153 KiB"
+        "weight": "Total size was 158 KiB"
       }
     },
     {
@@ -59,12 +84,12 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.0 s",
-        "LCP": "1.5 s",
+        "FCP": "1.1 s",
+        "LCP": "1.7 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.0 s",
-        "weight": "Total size was 148 KiB"
+        "SI": "1.1 s",
+        "weight": "Total size was 149 KiB"
       }
     },
     {
@@ -77,11 +102,11 @@
       },
       "metrics": {
         "FCP": "1.2 s",
-        "LCP": "1.7 s",
+        "LCP": "1.6 s",
         "TBT": "0 ms",
         "CLS": "0",
         "SI": "1.2 s",
-        "weight": "Total size was 150 KiB"
+        "weight": "Total size was 152 KiB"
       }
     },
     {
@@ -93,12 +118,12 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "0.9 s",
+        "FCP": "1.1 s",
         "LCP": "1.4 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "0.9 s",
-        "weight": "Total size was 125 KiB"
+        "SI": "1.1 s",
+        "weight": "Total size was 126 KiB"
       }
     },
     {
@@ -110,12 +135,12 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.0 s",
-        "LCP": "1.6 s",
+        "FCP": "1.1 s",
+        "LCP": "1.7 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.0 s",
-        "weight": "Total size was 207 KiB"
+        "SI": "1.1 s",
+        "weight": "Total size was 209 KiB"
       }
     },
     {
@@ -127,12 +152,12 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.0 s",
-        "LCP": "1.5 s",
+        "FCP": "1.1 s",
+        "LCP": "1.6 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.0 s",
-        "weight": "Total size was 138 KiB"
+        "SI": "2.0 s",
+        "weight": "Total size was 140 KiB"
       }
     },
     {
@@ -144,12 +169,12 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.0 s",
+        "FCP": "1.1 s",
         "LCP": "1.4 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.0 s",
-        "weight": "Total size was 106 KiB"
+        "SI": "1.1 s",
+        "weight": "Total size was 107 KiB"
       }
     }
   ]
