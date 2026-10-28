@@ -62,7 +62,7 @@ function readLocal(file) {
 
 /** Copia una imagen del repo al sitio en WebP (original ≤1400 px y versión de 700 px). */
 async function copyImage(repo, ref, ref_path, slug, done) {
-  if (/^https?:/.test(ref_path)) return ref_path;
+  if (/^https?:/.test(ref_path) || [...done.values()].includes(ref_path)) return ref_path; // externa o ya copiada
   const clean = ref_path.split(/[?#]/)[0];
   const repoPath = clean.startsWith('/') ? clean.slice(1) : posix.normalize(posix.join(BASE_DIR, clean));
   if (done.has(repoPath)) return done.get(repoPath);
