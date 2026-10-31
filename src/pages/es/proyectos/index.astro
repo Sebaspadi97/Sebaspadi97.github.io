@@ -3,7 +3,8 @@
 // punto dorado, filtros por pilar y herramienta, galería oscura y cierre.
 import Base from '../../../layouts/Base.astro';
 import ChurnSimulator from '../../../components/ChurnSimulator.astro';
-import { cases, pillars, toolFilters } from '../../../lib/contenido.js';
+import IndustryBadge from '../../../components/IndustryBadge.astro';
+import { cases, pillars, toolFilters, industries, industryFilters } from '../../../lib/contenido.js';
 import { link } from '../../../i18n/index.js';
 import { site } from '../../../data/site.js';
 import { dims, srcset } from '../../../lib/img.js';
@@ -68,6 +69,16 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
         <button type="button" class="chip" data-pillar-btn={v} aria-pressed={v === 'todos' ? 'true' : 'false'}>{l}</button>
       ))}
     </div>
+    {industryFilters.length > 1 && (
+      <div class="filter-row" role="group" aria-labelledby="f-ind">
+        <span id="f-ind" class="eyebrow filter-label">Industria</span>
+        {industryFilters.map((k) => (
+          <button type="button" class="chip chip--ind" data-ind-btn={k} aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true" set:html={industries[k].icon} />{industries[k].es}
+          </button>
+        ))}
+      </div>
+    )}
     <div class="filter-row" role="group" aria-labelledby="f-tool">
       <span id="f-tool" class="eyebrow filter-label">Herramienta</span>
       {toolFilters.map((tool) => (
@@ -80,9 +91,10 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
     <div class="container gallery-inner">
       <p class="visually-hidden" aria-live="polite" data-live></p>
 
-      <article class="featured" data-card data-pillar={featured.pillar} data-tools={featured.tools.join('|')}>
+      <article class="featured" data-card data-pillar={featured.pillar} data-industry={featured.industry || ''} data-tools={featured.tools.join('|')}>
         <div class="featured-text">
           <span class="eyebrow tone-mint">Destacado · {pillars[featured.pillar].es}</span>
+          <IndustryBadge industry={featured.industry} lang="es" variant="tag-dark" />
           <h2 class="featured-title"><a href={link(featured.key, 'es')}>{featured.es.title}</a></h2>
           <span class="featured-q">{featured.es.question}</span>
           <span class="finding">Hallazgo: {featured.es.finding}</span>
@@ -100,9 +112,10 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
 
       <ul class="cards">
         {rest.map((p, i) => (
-          <li class="rv" style={`--i:${i % 3}`} data-card data-pillar={p.pillar} data-tools={p.tools.join('|')}>
+          <li class="rv" style={`--i:${i % 3}`} data-card data-pillar={p.pillar} data-industry={p.industry || ''} data-tools={p.tools.join('|')}>
             <a class="card" href={link(p.key, 'es')}>
               <span class="thumb">
+                <IndustryBadge industry={p.industry} lang="es" variant="cover" />
                 <img src={p.thumb} srcset={srcset(p.thumb)} sizes="(max-width: 760px) calc(100vw - 80px), 400px" alt="" loading="lazy" decoding="async" width={dims(p.thumb)[0]} height={dims(p.thumb)[1]} />
               </span>
               <span class={`eyebrow tone-${pillars[p.pillar].tone}`}>{pillars[p.pillar].es}</span>
@@ -139,23 +152,27 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
     const cards = Array.from(document.querySelectorAll('[data-card]'));
     const pillarBtns = Array.from(root.querySelectorAll('[data-pillar-btn]'));
     const toolBtns = Array.from(root.querySelectorAll('[data-tool-btn]'));
+    const indBtns = Array.from(root.querySelectorAll('[data-ind-btn]'));
     const empty = document.querySelector('[data-empty]');
     const count = document.querySelector('[data-count]');
     const live = document.querySelector('[data-live]');
     let pillar = 'todos';
     let tool = null;
+    let industry = null;
 
     const apply = () => {
       let shown = 0;
       cards.forEach((card) => {
         const okPillar = pillar === 'todos' || card.dataset.pillar === pillar;
         const okTool = !tool || (card.dataset.tools || '').split('|').includes(tool);
-        const show = okPillar && okTool;
+        const okInd = !industry || card.dataset.industry === industry;
+        const show = okPillar && okTool && okInd;
         card.hidden = !show;
         if (show) shown++;
       });
       pillarBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pillarBtn === pillar)));
       toolBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.toolBtn === tool)));
+      indBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.indBtn === industry)));
       if (empty) empty.hidden = shown !== 0;
       const label = `${shown} ${shown === 1 ? 'proyecto' : 'proyectos'} · 3 pilares`;
       if (count) count.textContent = label;
@@ -164,6 +181,7 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
 
     pillarBtns.forEach((b) => b.addEventListener('click', () => { pillar = b.dataset.pillarBtn; apply(); }));
     toolBtns.forEach((b) => b.addEventListener('click', () => { tool = tool === b.dataset.toolBtn ? null : b.dataset.toolBtn; apply(); }));
+    indBtns.forEach((b) => b.addEventListener('click', () => { industry = industry === b.dataset.indBtn ? null : b.dataset.indBtn; apply(); }));
   }
 </script>
 
@@ -228,7 +246,9 @@ const pillarOptions = [['todos', 'Todos'], ['data', 'Data'], ['ml', 'Machine Lea
   }
   .card:hover { color: var(--white); border-color: var(--mint); transform: translateY(-4px); box-shadow: 0 28px 48px -32px rgba(0, 0, 0, 0.6); }
   @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }
-  .thumb { display: block; aspect-ratio: 16 / 10; border-radius: var(--radius-md); overflow: hidden; background: var(--white); }
+  .chip--ind { display: inline-flex; align-items: center; gap: 8px; padding-left: 12px; }
+  .chip--ind svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .thumb { position: relative; display: block; aspect-ratio: 16 / 10; border-radius: var(--radius-md); overflow: hidden; background: var(--white); }
   .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .6s var(--ease-out); }
   .card:hover .thumb img { transform: scale(1.035); }
   @media (prefers-reduced-motion: reduce) { .thumb img { transition: none; } .card:hover .thumb img { transform: none; } }

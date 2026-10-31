@@ -3,8 +3,15 @@
 // una por paso (pregunta → datos → hallazgo → decisión). Es la única sección fija del sitio.
 // Sin JavaScript o con movimiento reducido: los pasos se leen en lista y el dibujo muestra
 // la escena final (SVG de respaldo).
-const { lang = 'es', label = '', title = '', hint = '', fig = '', steps = [] } = Astro.props;
+import { link } from '../i18n/index.js';
+
+const { lang = 'es', label = '', title = '', hint = '', fig = '', steps = [], outputLabel = '', ticker = [] } = Astro.props;
 const es = lang === 'es';
+const seeCase = es ? 'Ver el caso' : 'See the case';
+const stepOf = (i) => (es ? `Paso ${i + 1} de ${steps.length}` : `Step ${i + 1} of ${steps.length}`);
+const hud = es ? { step: 'Paso', progress: 'avance' } : { step: 'Step', progress: 'progress' };
+// La cinta de palabras se repite para cubrir pantallas anchas.
+const tickerRun = Array.from({ length: 4 }, () => ticker).flat();
 const N = 40;
 
 let seed = 5;
@@ -53,6 +60,10 @@ const W = 640, H = 480;
               <text x={W * 0.94} y={H * 0.5} class="lbl lbl--gold">{words.decision}</text>
               {S3.map(([x, y], i) => <circle cx={x * W} cy={y * H} r={i === 39 ? 9 : 5.5} class={i === 39 ? 'g' : 'm'} />)}
             </svg>
+            <div class="stage-hud" aria-hidden="true">
+              <span><span data-hud-step>{steps.length}</span>/{steps.length}</span>
+              <span>{hud.progress} <span data-hud-pct>100</span> %</span>
+            </div>
             <canvas class="stage-canvas" aria-hidden="true"
               data-scenes={JSON.stringify(scenes)}
               data-code={JSON.stringify(code)}
@@ -65,17 +76,67 @@ const W = 640, H = 480;
         </div>
       </div>
 
-      <ol class="steps" data-names={JSON.stringify(names)}>
-        {steps.map((s, i) => (
-          <li class:list={['step', { 'is-last': i === steps.length - 1 }]}>
-            <span class="step-n" aria-hidden="true">{s.n}</span>
-            <h3 class="step-name">{s.name}</h3>
-            <p class="step-text">{s.text}</p>
-          </li>
-        ))}
-      </ol>
+      <div class="steps-wrap">
+        <span class="rail" aria-hidden="true"><span class="rail-fill" data-rail-fill></span></span>
+        <ol class="steps" data-names={JSON.stringify(names)}>
+          {steps.map((s, i) => (
+            <li class:list={['step', { 'is-last': i === steps.length - 1 }]}>
+              <span class="step-ghost" aria-hidden="true">{s.n}</span>
+              <span class="step-node" aria-hidden="true"></span>
+              <div class="step-head">
+                <span class="step-n" aria-hidden="true">{s.n}</span>
+                <span class="step-kicker">{stepOf(i)}</span>
+              </div>
+              <h3 class="step-name">{s.name}</h3>
+              <p class="step-text">{s.text}</p>
+              {s.lead && <p class="step-lead">{s.lead}</p>}
+              {s.result && (
+                <div class:list={['step-result', { 'step-result--gold': s.result.gold }]}>
+                  {s.result.quote ? (
+                    <p class="result-quote">«{s.result.quote}»</p>
+                  ) : (
+                    <p class="result-value">
+                      <span
+                        data-count={s.result.value}
+                        data-dec={s.result.decimals || 0}
+                        data-pre={s.result.prefix || ''}
+                        data-suf={s.result.suffix || ''}
+                      >{s.result.display}</span>
+                    </p>
+                  )}
+                  <p class="result-label">{s.result.label}</p>
+                  {s.result.key && <a class="result-link" href={link(s.result.key, lang)}>{seeCase} <span class="arr" aria-hidden="true">→</span></a>}
+                </div>
+              )}
+              {s.actions && (
+                <div class="step-out">
+                  <p class="step-out-label">{outputLabel}</p>
+                  <ul>
+                    {s.actions.map((a, k) => (
+                      <li style={`--k:${k}`}>
+                        <svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" /><path d="M6 10.4l2.6 2.6L14 7.6" /></svg>
+                        <span>{a}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   </div>
+
+  {tickerRun.length > 0 && (
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track" data-ticker>
+        {tickerRun.map((w, i) => (
+          <span class="ticker-word" data-w={i % ticker.length}>{w}<i class="ticker-dot"></i></span>
+        ))}
+      </div>
+    </div>
+  )}
 </section>
 
 <script>
@@ -94,6 +155,14 @@ const W = 640, H = 480;
     const names: string[] = JSON.parse(root.querySelector<HTMLElement>('.steps')!.dataset.names || '[]');
     const sceneName = root.querySelector<HTMLElement>('[data-scene-name]')!;
     const ticks = [...root.querySelectorAll('.ticks i')];
+    const ghosts = steps.map((el) => el.querySelector<HTMLElement>('.step-ghost'));
+    const railFill = root.querySelector<HTMLElement>('[data-rail-fill]');
+    const ticker = root.querySelector<HTMLElement>('[data-ticker]');
+    const tickWords = ticker ? [...ticker.querySelectorAll<HTMLElement>('.ticker-word')] : [];
+    const hudStep = root.querySelector<HTMLElement>('[data-hud-step]');
+    const hudPct = root.querySelector<HTMLElement>('[data-hud-pct]');
+    const counted = new Set<number>();
+    const locale = document.documentElement.lang === 'en' ? 'en-US' : 'es-CO';
     const last = SC.length - 1;
     let W = 0, H = 0, d = 1, lastStep = -1, visible = false, ticking = false;
 
@@ -141,6 +210,45 @@ const W = 640, H = 480;
         sceneName.textContent = names[s] || '';
         ticks.forEach((el, i) => el.classList.toggle('on', i <= s));
         steps.forEach((el, i) => el.classList.toggle('is-active', i === s));
+        tickWords.forEach((el) => el.classList.toggle('is-on', Number(el.dataset.w) === s));
+        if (hudStep) hudStep.textContent = String(s + 1);
+        countUp(s);
+      }
+    };
+
+    // Las cifras cuentan desde cero la primera vez que su paso se activa (el valor final ya está en el HTML).
+    const countUp = (i: number) => {
+      if (counted.has(i)) return;
+      counted.add(i);
+      const el = steps[i]?.querySelector<HTMLElement>('[data-count]');
+      if (!el) return;
+      const to = Number(el.dataset.count), dec = Number(el.dataset.dec || 0), pre = el.dataset.pre || '', suf = el.dataset.suf || '';
+      const fmt = (v: number) => pre + v.toLocaleString(locale, { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
+      const t0 = performance.now(), dur = 1100;
+      const step = (now: number) => {
+        const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = fmt(to * e);
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    // Decoración ligada al scroll: línea de avance, números gigantes con paralaje, cinta de palabras y lectura del lienzo.
+    const decorate = (t: number) => {
+      const vh = window.innerHeight;
+      if (railFill) railFill.style.transform = `scaleY(${(t / last).toFixed(4)})`;
+      if (hudPct) hudPct.textContent = String(Math.round((t / last) * 100));
+      steps.forEach((el, i) => {
+        const g = ghosts[i];
+        if (!g) return;
+        const r = el.getBoundingClientRect();
+        const off = (r.top + r.height / 2 - vh / 2) / vh;
+        g.style.transform = `translate3d(0, ${(off * 90).toFixed(1)}px, 0)`;
+      });
+      if (ticker) {
+        const r = root.getBoundingClientRect();
+        const p = (vh - r.top) / (r.height + vh);
+        ticker.style.transform = `translate3d(${(-p * 38).toFixed(2)}%, 0, 0)`;
       }
     };
 
@@ -151,17 +259,17 @@ const W = 640, H = 480;
       for (let i = 0; i < last; i++) if (anchor <= c[i + 1]) return i + (anchor - c[i]) / (c[i + 1] - c[i]);
       return last;
     };
-    const frame = () => { ticking = false; if (visible) draw(progress()); };
+    const frame = () => { ticking = false; if (visible) { const t = progress(); draw(t); decorate(t); } };
     new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) frame(); }, { rootMargin: '200px 0px' }).observe(root);
     window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, { passive: true });
     window.addEventListener('resize', () => { fit(); frame(); });
     fit();
-    draw(progress());
+    { const t = progress(); draw(t); decorate(t); }
   }
 </script>
 
 <style>
-  .method { background: var(--green-night); color: var(--on-dark); padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(48px, 6vw, 96px); }
+  .method { overflow-x: clip; background: var(--green-night); color: var(--on-dark); padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(48px, 6vw, 96px); }
   .method-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px; padding-bottom: clamp(32px, 4vw, 48px); }
   .method-title { margin-top: 18px; color: var(--white); font-weight: 800; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.05; letter-spacing: -0.025em; max-width: 18ch; text-wrap: balance; }
   .method-hint { font-size: 14px; color: var(--on-dark-muted); max-width: 30ch; text-align: right; }
@@ -207,24 +315,138 @@ const W = 640, H = 480;
   .ticks i { width: 22px; height: 4px; border-radius: 4px; background: rgba(140, 207, 173, 0.25); transition: background .3s ease; }
   .ticks i.on { background: var(--gold); }
 
-  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 28px; }
-  .step { display: flex; flex-direction: column; gap: 10px; }
+  .stage-hud {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    z-index: 1;
+    display: flex;
+    gap: 14px;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    color: var(--mint-strong);
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+  }
+  .stage-hud > span { padding: 4px 8px; border-radius: 6px; background: rgba(17, 41, 31, 0.6); border: 1px solid rgba(140, 207, 173, 0.2); }
+
+  /* Pasos: línea de avance a la izquierda y un nodo por paso */
+  .steps-wrap { position: relative; padding-left: 36px; }
+  .rail { position: absolute; left: 7px; top: 12px; bottom: 12px; width: 2px; border-radius: 2px; background: rgba(140, 207, 173, 0.16); overflow: hidden; }
+  .rail-fill { position: absolute; inset: 0; background: linear-gradient(var(--mint), var(--gold)); transform-origin: top; transform: scaleY(1); }
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 56px; }
+  .step { position: relative; display: flex; flex-direction: column; gap: 14px; }
+  .step-node {
+    position: absolute;
+    left: -36px;
+    top: clamp(22px, 2.6vw, 34px);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--green-night);
+    border: 2px solid var(--mint);
+  }
+  .step.is-last .step-node { border-color: var(--gold); background: var(--gold); }
+  .step-ghost {
+    position: absolute;
+    right: 0;
+    top: -0.18em;
+    z-index: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(140px, 17vw, 260px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgba(140, 207, 173, 0.06);
+    pointer-events: none;
+    user-select: none;
+  }
+  .step > :not(.step-ghost):not(.step-node) { position: relative; z-index: 1; }
+  .step-head { display: flex; align-items: baseline; gap: 16px; }
   .step-n { font-family: var(--font-display); font-weight: 800; font-size: clamp(48px, 6vw, 80px); line-height: 1; color: var(--mint); font-variant-numeric: tabular-nums; }
   .step.is-last .step-n { color: var(--gold); }
-  .step-name { color: var(--white); font-size: clamp(24px, 2.6vw, 34px); font-weight: 700; }
-  .step-text { font-size: 18px; max-width: 34ch; }
+  .step-kicker { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-dark-muted); }
+  .step-name { color: var(--white); font-size: clamp(26px, 2.8vw, 38px); font-weight: 800; letter-spacing: -0.015em; line-height: 1.1; }
+  .step-text { font-family: var(--font-display); font-weight: 600; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.4; color: var(--mint-strong); max-width: 32ch; }
+  .step-lead { font-size: 17px; line-height: 1.6; color: var(--on-dark); max-width: 44ch; }
+
+  /* Resultado: la cifra o la pregunta del caso */
+  .step-result {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 460px;
+    padding: 20px 22px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(140, 207, 173, 0.24);
+    background: linear-gradient(135deg, rgba(36, 91, 69, 0.55), rgba(24, 61, 50, 0.35));
+  }
+  .step-result--gold { border-color: rgba(214, 166, 79, 0.55); }
+  .result-value { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 4vw, 56px); line-height: 1; letter-spacing: -0.02em; color: var(--white); font-variant-numeric: tabular-nums; }
+  .step-result--gold .result-value { color: var(--gold); }
+  .result-quote { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px, 2vw, 26px); line-height: 1.3; color: var(--white); }
+  .result-label { font-size: 15px; line-height: 1.5; color: var(--on-dark); }
+  .result-link { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 32px; font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--mint-strong); text-decoration: none; }
+  .result-link:hover { color: var(--white); }
+
+  /* Entregables del paso */
+  .step-out { display: flex; flex-direction: column; gap: 10px; }
+  .step-out-label { font-family: var(--font-display); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-dark-muted); }
+  .step-out ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .step-out li { display: flex; align-items: flex-start; gap: 10px; font-size: 16px; line-height: 1.45; color: var(--on-dark); }
+  .tick { flex: none; width: 20px; height: 20px; margin-top: 1px; }
+  .tick circle { fill: rgba(140, 207, 173, 0.12); stroke: var(--mint); stroke-width: 1.4; }
+  .tick path { fill: none; stroke: var(--mint); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .step.is-last .tick circle { stroke: var(--gold); fill: rgba(214, 166, 79, 0.14); }
+  .step.is-last .tick path { stroke: var(--gold); }
+
+  /* Cinta de palabras que se desplaza con el scroll */
+  .ticker { overflow: hidden; margin-top: clamp(48px, 6vw, 88px); padding: 10px 0; border-top: 1px solid rgba(140, 207, 173, 0.14); border-bottom: 1px solid rgba(140, 207, 173, 0.14); }
+  .ticker-track { display: flex; width: max-content; will-change: transform; }
+  .ticker-word {
+    display: inline-flex;
+    align-items: center;
+    gap: clamp(20px, 2.4vw, 40px);
+    padding-right: clamp(20px, 2.4vw, 40px);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(48px, 8vw, 120px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--green-logo);
+    transition: color .5s var(--ease-out);
+    white-space: nowrap;
+  }
+  .ticker-word.is-on { color: var(--mint); }
+  .ticker-dot { width: 0.18em; height: 0.18em; border-radius: 50%; background: var(--gold); flex: none; }
 
   /* Con JavaScript y sin movimiento reducido: escenario fijo y pasos largos */
   .is-live .stage { position: sticky; top: calc(var(--header-h) + 24px); }
-  .is-live .step { min-height: 72vh; justify-content: center; }
-  .is-live .step .step-name { color: var(--on-dark); transition: color .4s var(--ease-out); }
-  .is-live .step .step-text { color: var(--on-dark-muted); transition: color .4s var(--ease-out); }
+  .is-live .step { min-height: 86vh; justify-content: center; }
+  .is-live .step:last-child { min-height: 90vh; }
+  .is-live .step-ghost { will-change: transform; }
+  .is-live .rail-fill { transform: scaleY(0); }
+  .is-live .step-name { color: var(--on-dark); transition: color .4s var(--ease-out); }
   .is-live .step.is-active .step-name { color: var(--white); }
-  .is-live .step.is-active .step-text { color: var(--on-dark); }
-  .is-live .step:last-child { min-height: 80vh; }
   .is-live .step-n { color: var(--green-logo); transition: color .4s var(--ease-out); }
   .is-live .step.is-active .step-n { color: var(--mint); }
   .is-live .step.is-active.is-last .step-n { color: var(--gold); }
+  .is-live .step-node { transform: scale(0.7); transition: transform .5s var(--ease-out), background-color .4s ease, box-shadow .4s ease; }
+  .is-live .step.is-active .step-node { transform: scale(1); background: var(--mint); box-shadow: 0 0 0 6px rgba(140, 207, 173, 0.16); }
+  .is-live .step.is-active.is-last .step-node { background: var(--gold); box-shadow: 0 0 0 6px rgba(214, 166, 79, 0.2); }
+  .is-live .step-ghost { color: rgba(140, 207, 173, 0.035); transition: color .6s ease; }
+  .is-live .step.is-active .step-ghost { color: rgba(140, 207, 173, 0.08); }
+  /* El contenido del paso entra al activarse (solo movimiento: los colores siempre cumplen contraste) */
+  .is-live .step-lead,
+  .is-live .step-result,
+  .is-live .step-out li { transform: translateY(14px); transition: transform .7s var(--ease-out); }
+  .is-live .step-result { transition-delay: 80ms; }
+  .is-live .step-out li { transition-delay: calc(160ms + var(--k, 0) * 90ms); }
+  .is-live .step.is-active .step-lead,
+  .is-live .step.is-active .step-result,
+  .is-live .step.is-active .step-out li { transform: none; }
+  .is-live .tick { transform: scale(0.6); transition: transform .45s var(--ease-out); transition-delay: calc(220ms + var(--k, 0) * 90ms); }
+  .is-live .step.is-active .tick { transform: scale(1); }
 
   @media (max-width: 900px) {
     .method-head { grid-template-columns: 1fr; }
@@ -232,7 +454,13 @@ const W = 640, H = 480;
     .scrolly { grid-template-columns: 1fr; gap: 32px; }
     .stage-plot { aspect-ratio: 16 / 10; }
     .is-live .stage { top: var(--header-h); z-index: 2; padding-top: 8px; background: var(--green-night); }
-    .is-live .step { min-height: 62vh; justify-content: flex-end; padding-bottom: 12vh; }
-    .is-live .step:last-child { min-height: 70vh; }
+    .is-live .step { min-height: 0; justify-content: flex-start; padding-top: 4vh; padding-bottom: 14vh; }
+    .is-live .step:last-child { min-height: 0; padding-bottom: 8vh; }
+    .steps { gap: 24px; }
+    .steps-wrap { padding-left: 28px; }
+    .step-node { left: -28px; width: 14px; height: 14px; }
+    .rail { left: 6px; }
+    .step-ghost { font-size: 132px; }
+    .stage-hud { top: 10px; right: 10px; font-size: 11px; }
   }
 </style>

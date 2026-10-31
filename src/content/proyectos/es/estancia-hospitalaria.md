@@ -4,6 +4,7 @@ pregunta: "¿Se puede estimar la estancia restante mejor que con el promedio his
 hallazgo: "el modelo reduce el error a 6,19 días, 6,4 % menos que la referencia histórica."
 descripcion: "Modelo que estima cuántos días de hospitalización le quedan a un paciente, con validación temporal y hoy en piloto institucional."
 pilar: "ml"
+industria: "salud"
 herramientas:
   - "Python"
   - "scikit-learn"

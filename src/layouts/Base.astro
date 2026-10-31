@@ -75,7 +75,7 @@ const showAlternates = alternates.length === 2;
   </head>
   <body>
     <a class="skip-link" href="#contenido">{t.skip}</a>
-    <Header lang={lang} active={active} theme={headerTheme} altHref={alternate(pageKey, lang === 'es' ? 'en' : 'es')} />
+    <Header lang={lang} active={active ?? (pageKey === 'home' ? 'home' : null)} theme={headerTheme} altHref={alternate(pageKey, lang === 'es' ? 'en' : 'es')} />
 
     {lang === 'es' && (
       <p class="lang-notice" id="lang-notice" lang="en" hidden>{spanishOnlyNotice} <a href="/en/">Back to the English home</a></p>

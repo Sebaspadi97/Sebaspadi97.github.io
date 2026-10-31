@@ -17,7 +17,7 @@ export const about = {
     storyTitle: 'Dos obsesiones y una herramienta.',
     story: [
       'Empecé diseñando páginas web y terminé estudiando ingeniería industrial. Esa mezcla me dejó dos obsesiones: que las cosas funcionen mejor y que la gente las entienda a la primera.',
-      'Con el tiempo descubrí que la mejor herramienta para ambas era la misma: los datos. Desde entonces he construido tableros, flujos de datos y modelos predictivos para áreas comerciales y operativas, y he liderado proyectos de extrapolación de mercado y análisis transaccional.',
+      'Con el tiempo descubrí que la mejor herramienta para ambas era la misma: los datos. Lo que más me apasiona es encontrar en ellos los patrones que llevan a respuestas: los que permiten resolver un problema o revelan soluciones que, sin el análisis, no se ven a simple vista. Desde entonces he construido tableros, flujos de datos y modelos predictivos para áreas comerciales y operativas, y he liderado proyectos de extrapolación de mercado y análisis transaccional.',
       'Hoy curso la Maestría en Ciencia de Datos y uso este Lab para experimentar en público: tomar una pregunta de negocio, buscar los datos y llegar hasta la decisión.',
     ],
     numbersLabel: 'En cifras',
@@ -101,7 +101,7 @@ export const about = {
     storyTitle: 'Two obsessions and one tool.',
     story: [
       'I started out designing websites and ended up studying industrial engineering. That mix left me with two obsessions: making things work better, and making sure people understand them the first time.',
-      "Along the way I found that the best tool for both was the same: data. Since then I've built dashboards, data pipelines and predictive models for sales and operations teams, and I've led market extrapolation and transaction analysis projects.",
+      "Along the way I found that the best tool for both was the same: data. What I love most is finding the patterns in it that lead to answers: the ones that solve a problem or reveal solutions you simply can't see without the analysis. Since then I've built dashboards, data pipelines and predictive models for sales and operations teams, and I've led market extrapolation and transaction analysis projects.",
       "Today I'm pursuing a master's in Data Science and I use this Lab to experiment in public: take a business question, find the data and follow it all the way to a decision.",
     ],
     numbersLabel: 'In numbers',

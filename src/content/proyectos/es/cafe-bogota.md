@@ -4,6 +4,7 @@ pregunta: "¿Qué localidades tienen clientes sin tanta competencia?"
 hallazgo: "solo Suba y Usaquén superan el promedio en adultos y en empresas por cada café."
 descripcion: "Inteligencia de ubicación con datos abiertos: dónde hay más demanda por cada punto de café en Bogotá."
 pilar: "mi"
+industria: "alimentos"
 herramientas:
   - "Python"
   - "pandas"

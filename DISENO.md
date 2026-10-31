@@ -48,7 +48,16 @@ contraste mínimo 4,5:1 en texto (3:1 en texto grande); el dorado no va como tex
 - **Hallazgo:** chip dorado `.finding`. **Chips de filtro:** `.chip` con `aria-pressed`.
 - **Zonas oscuras** para evidencia (método, galería de proyectos, decisión del caso, pie); **banda dorada** para el dato curioso.
 - **Tarjetas:** portada grande (16:10) con el gráfico real, hallazgo encima, elevación y zoom suave al pasar el cursor;
-  enlace extendido (`.stretched`) cuando toda la tarjeta lleva a un sitio.
+  enlace extendido (`.stretched`) cuando toda la tarjeta lleva a un sitio. La industria del proyecto va como cápsula
+  con ícono en la esquina superior izquierda de la portada (`IndustryBadge.astro`, variante `cover`).
+- **Menú en vidrio líquido (31 oct 2026):** cápsulas translúcidas con tinte de marca (`.glass`) que flotan sobre la página:
+  logo, barra con íconos (Inicio, Proyectos, Lab, Sobre mí, Contacto), idioma con ícono de globo y "Hablemos" con el
+  motivo de puntos. Una pastilla verde marca la página activa y sigue al cursor; el vidrio pasa a su versión oscura
+  sobre secciones oscuras (lo detecta el script del menú leyendo el fondo que hay debajo). En móvil la barra baja al
+  borde inferior como barra de pestañas. El menú es `position: fixed`: la primera sección de cada página reserva su
+  espacio con un borde superior transparente (regla en `global.css`), así su fondo sigue bajo el vidrio.
+- **Íconos:** de trazo, 24 × 24, `stroke-width` 1,7, puntas redondeadas, `currentColor`. Los del menú están en
+  `Header.astro`; los de industria, en `src/lib/industrias.js`.
 
 ### Movimiento
 
@@ -58,7 +67,11 @@ contraste mínimo 4,5:1 en texto (3:1 en texto grande); el dorado no va como tex
 - Una sola sección fija en todo el sitio: "El método" (`MethodScrolly.astro`). No agregar más secciones fijas.
 - Todo respeta `prefers-reduced-motion` (queda quieto en su estado final) y tiene respaldo sin JavaScript (SVG estático).
 - Contadores: el número final siempre está en el HTML; la animación solo lo presenta.
-- Nada que cambie la altura del menú al bajar (provoca saltos de diseño): el logo se reduce con `transform`.
+- Nada que cambie la altura del menú al bajar (provoca saltos de diseño).
+- "El método" (31 oct 2026): cada paso tiene bajada, una cifra real con contador (o la pregunta de un caso), entregables
+  con marcas que entran al activarse, número gigante con paralaje, línea de avance con nodos, lectura del lienzo
+  (paso y % de avance) y una cinta de palabras que se desplaza con el scroll y enciende el paso activo.
+  Los colores del texto siempre cumplen contraste; lo que se anima es solo el movimiento.
 
 ## 3. Estructura del código
 
@@ -66,7 +79,8 @@ contraste mínimo 4,5:1 en texto (3:1 en texto grande); el dorado no va como tex
 src/
   layouts/Base.astro          <head>, menú, aviso de idioma, pie y script de aparición (.rv)
   components/
-    Header.astro              menú fijo, avance de lectura, menú móvil
+    Header.astro              menú en vidrio líquido con íconos, avance de lectura, barra inferior en móvil
+    IndustryBadge.astro       ícono + nombre de la industria de un proyecto
     Footer.astro              eslogan grande + CTA, columnas, derechos (variante compacta en la 404)
     HomePage.astro            Inicio ES/EN (textos en src/data/home.js)
     LiveSample.astro          "Fig. 00 · Muestra en vivo" (lienzo + SVG de respaldo)
@@ -80,7 +94,8 @@ src/
   data/                       home.js, about.js, legal.js, site.js (textos fijos y datos generales)
   i18n/index.js               rutas, link(), textos comunes ES/EN
   lib/
-    contenido.js              lee las colecciones, registra rutas, pilares y categorías
+    contenido.js              lee las colecciones, registra rutas, pilares, industrias y categorías
+    industrias.js             industrias de los proyectos: nombre ES/EN e ícono de cada una
     markdown-plugins.mjs      secciones numeradas, figuras, cifras, tablas, simulador
     secciones.js, img.js, text.js
   styles/global.css           tokens y piezas compartidas; contenido.css para Markdown

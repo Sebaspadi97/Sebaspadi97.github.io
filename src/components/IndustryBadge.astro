@@ -1,0 +1,62 @@
+---
+// Identificador de industria: ícono de la marca + nombre del sector.
+// variant: "cover" (sobre la portada de una tarjeta), "tag" (en línea, fondo claro),
+// "tag-dark" (en línea, fondo oscuro).
+import { industries } from '../lib/industrias.js';
+
+const { industry, lang = 'es', variant = 'tag' } = Astro.props;
+const it = industry && industries[industry];
+---
+{it && (
+  <span class:list={['ind', `ind--${variant}`]}>
+    <span class="ind-ico" aria-hidden="true"><svg viewBox="0 0 24 24" set:html={it.icon} /></span>
+    <span class="ind-label"><span class="visually-hidden">{lang === 'es' ? 'Industria: ' : 'Industry: '}</span>{it[lang]}</span>
+  </span>
+)}
+
+<style>
+  .ind {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+  .ind-ico {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--green-deep);
+    color: var(--mint);
+  }
+  .ind-ico svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Sobre la portada: cápsula de vidrio claro en la esquina */
+  .ind--cover {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 2;
+    padding: 4px 12px 4px 4px;
+    border-radius: 999px;
+    color: var(--green-deep);
+    background: rgba(255, 255, 255, 0.86);
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    backdrop-filter: blur(10px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 6px 18px -8px rgba(17, 41, 31, 0.45);
+  }
+
+  .ind--tag { color: var(--green-deep); }
+  .ind--tag .ind-ico { width: 28px; height: 28px; }
+
+  .ind--tag-dark { color: var(--white); }
+  .ind--tag-dark .ind-ico { background: var(--green-night); color: var(--mint); box-shadow: inset 0 0 0 1px rgba(140, 207, 173, 0.35); }
+</style>

@@ -1,6 +1,6 @@
 // Lista pública de proyectos y artículos en JSON (/datos/proyectos.json).
 // La usa el generador del CV y sirve para revisar de un vistazo qué está publicado.
-import { cases, posts, pillars, categories } from '../../lib/contenido.js';
+import { cases, posts, pillars, categories, industries } from '../../lib/contenido.js';
 import { routes } from '../../i18n/index.js';
 
 export function GET({ site }) {
@@ -10,6 +10,8 @@ export function GET({ site }) {
       url: c.key,
       pilar: c.pillar,
       pilarNombre: pillars[c.pillar],
+      industria: c.industry || null,
+      industriaNombre: c.industry ? { es: industries[c.industry].es, en: industries[c.industry].en } : null,
       herramientas: c.tools,
       repo: c.repo,
       equipo: c.team,

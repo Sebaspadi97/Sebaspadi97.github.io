@@ -12,6 +12,7 @@ pregunta: "Pregunta de negocio, en una línea"
 hallazgo: "el hallazgo principal en una frase, con su cifra."
 descripcion: "Una o dos frases para buscadores y redes."
 pilar: data                        # data | ml | mi (Market Intelligence)
+industria: comercio                # comercio | salud | emprendimiento | alimentos | finanzas | industria | educacion | logistica
 herramientas: [Python, pandas]
 fecha: "nov 2026"                  # si se omite, se usa el mes en que se creó el repositorio
 portada: ../graficos/01_grafico_principal.png   # imagen de la tarjeta (ruta relativa a esta carpeta)

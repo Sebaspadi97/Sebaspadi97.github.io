@@ -4,6 +4,7 @@ pregunta: "¿En qué localidades y sectores nacen más empresas, y quiénes las 
 hallazgo: "Ciudad Bolívar crea empresas a más del doble del ritmo de Chapinero."
 descripcion: "Dónde y en qué nacen las empresas de Bogotá, con datos abiertos del primer trimestre de 2026."
 pilar: "data"
+industria: "emprendimiento"
 herramientas:
   - "Python"
   - "pandas"

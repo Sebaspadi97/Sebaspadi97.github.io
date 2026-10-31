@@ -5,6 +5,9 @@ import curiososJson from '../content/datos-curiosos.json';
 import { registerRoute } from '../i18n/index.js';
 import { sectionsOf } from './secciones.js';
 import { plain, readingMinutes } from './text.js';
+import { industries } from './industrias.js';
+
+export { industries };
 
 export const pillars = {
   data: { es: 'Data', en: 'Data', tone: 'mint' },
@@ -52,6 +55,7 @@ export const cases = esEntries.map((e) => {
     key: e.id,
     enSlug: en?.id,
     pillar: e.data.pilar,
+    industry: e.data.industria,
     featured: e.data.destacado,
     tools: e.data.herramientas,
     date: { es: e.data.fecha, en: en?.data.fecha || e.data.fecha },
@@ -81,6 +85,9 @@ export const toolFilters = (() => {
   cases.forEach((c) => c.tools.forEach((t) => count.set(t, (count.get(t) || 0) + 1)));
   return [...count].filter(([, n]) => n >= 2).sort((a, b) => b[1] - a[1]).map(([t]) => t);
 })();
+
+/** Industrias que se ofrecen como filtro: las que tiene al menos un proyecto, en el orden de src/lib/industrias.js. */
+export const industryFilters = Object.keys(industries).filter((k) => cases.some((c) => c.industry === k));
 
 /** Artículos del Lab: primero los que tienen fecha (más recientes arriba). */
 export const posts = (await getCollection('lab', visibles))

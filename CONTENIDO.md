@@ -84,6 +84,16 @@ En los proyectos, los títulos de la plantilla se reconocen solos: *La pregunta 
 
 El caso de abandono usa además un bloque `simulador` donde va el simulador interactivo.
 
+### Industria del proyecto
+
+Además del pilar, cada proyecto puede llevar `industria:` con una de estas claves:
+`comercio`, `salud`, `emprendimiento`, `alimentos`, `finanzas`, `industria`, `educacion`, `logistica`.
+La industria se muestra como un ícono con su nombre sobre la portada de la tarjeta (Inicio y Proyectos),
+junto al pilar en el encabezado del caso, y como filtro en Proyectos (aparece cuando hay al menos
+dos industrias distintas). Es opcional: si falta, el proyecto se publica igual, sin ícono.
+Para sumar una industria nueva hay que agregarla en `src/lib/industrias.js` (nombre en español
+e inglés e ícono) y en la lista del campo en `.pages.yml`.
+
 ## Qué queda fuera de los archivos de contenido
 
 - Textos de Inicio, Sobre mí y las páginas legales: `src/data/home.js`, `about.js`, `legal.js`.

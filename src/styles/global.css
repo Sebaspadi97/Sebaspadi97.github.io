@@ -305,3 +305,19 @@ a:hover .arr, button:hover .arr { transform: translateX(4px); }
 }
 .chip:hover { border-color: var(--green); }
 .chip[aria-pressed='true'] { background: var(--green); border-color: var(--green); color: var(--white); }
+
+/* ============================================================
+   Menú en vidrio líquido (31 oct 2026)
+   El menú flota sobre la página (position: fixed). La primera sección de cada página
+   reserva su espacio con un borde transparente, así su fondo (papel milimetrado u oscuro)
+   continúa bajo el vidrio y el contenido empieza donde antes.
+   ============================================================ */
+main > :first-child:not(:has(> .band:first-child)),
+main > :first-child > .band:first-child { border-top: var(--header-h) solid transparent; }
+.lang-notice:not([hidden]) { margin-top: var(--header-h); }
+.lang-notice:not([hidden]) + main > :first-child,
+.lang-notice:not([hidden]) + main > :first-child > .band:first-child { border-top-width: 0; }
+/* En móvil la barra de navegación va abajo: el pie se extiende para no quedar tapado */
+@media (max-width: 900px) {
+  body::after { content: ''; display: block; height: calc(88px + env(safe-area-inset-bottom)); background: var(--green-night); }
+}

@@ -49,6 +49,7 @@ export const ui = {
     menu: 'Menú',
     close: 'Cerrar',
     nav: [
+      { key: 'home', label: 'Inicio' },
       { key: 'projects', label: 'Proyectos' },
       { key: 'lab', label: 'Lab' },
       { key: 'about', label: 'Sobre mí' },
@@ -68,6 +69,7 @@ export const ui = {
     menu: 'Menu',
     close: 'Close',
     nav: [
+      { key: 'home', label: 'Home' },
       { key: 'projects', label: 'Projects' },
       { key: 'lab', label: 'Lab' },
       { key: 'about', label: 'About' },

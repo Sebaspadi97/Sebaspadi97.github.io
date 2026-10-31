@@ -7,6 +7,7 @@ import LiveSample from './LiveSample.astro';
 import MethodScrolly from './MethodScrolly.astro';
 import ChurnSimulator from './ChurnSimulator.astro';
 import LabCover from './LabCover.astro';
+import IndustryBadge from './IndustryBadge.astro';
 import { posts as labPosts, cases } from '../lib/contenido.js';
 import { home } from '../data/home.js';
 import { link, hasLang, ui } from '../i18n/index.js';
@@ -64,7 +65,7 @@ const quoteWords = c.manifesto.quote.split(' ');
 </section>
 
 <!-- El método -->
-<MethodScrolly lang={lang} fig={c.method.label} title={c.method.title} hint={c.method.hint} label={c.method.figure} steps={c.method.steps} />
+<MethodScrolly lang={lang} fig={c.method.label} title={c.method.title} hint={c.method.hint} label={c.method.figure} steps={c.method.steps} outputLabel={c.method.outputLabel} ticker={c.method.ticker} />
 
 <!-- Proyectos -->
 <section class="projects" aria-labelledby="projects-title">
@@ -86,7 +87,10 @@ const quoteWords = c.manifesto.quote.split(' ');
     <li class="rail-item rail-item--lg">
       <article class="pcard pcard--feat">
         <div class="feat-body">
-          <span class="ptag ptag--dark">{f.pillar}</span>
+          <span class="feat-tags">
+            <span class="ptag ptag--dark">{f.pillar}</span>
+            <IndustryBadge industry={caseOf(f.key)?.industry} lang={lang} variant="tag-dark" />
+          </span>
           <h3 class="pcard-title"><a href={link(f.key, lang)}>{f.title}</a></h3>
           <p class="pcard-q">{f.question}</p>
           <p class="finding finding--lg"><strong>{c.projects.findingLabel}:</strong> {f.finding}</p>
@@ -103,6 +107,7 @@ const quoteWords = c.manifesto.quote.split(' ');
         <li class="rail-item">
           <article class="pcard">
             <div class="pcard-cover">
+              <IndustryBadge industry={cs?.industry} lang={lang} variant="cover" />
               {cs?.thumb && <img src={cs.thumb} srcset={srcset(cs.thumb)} sizes="(max-width: 760px) 82vw, 560px" alt="" loading="lazy" decoding="async" width={dims(cs.thumb)[0]} height={dims(cs.thumb)[1]} />}
               <p class="finding finding--cover"><strong>{c.projects.findingLabel}:</strong> {p.finding}</p>
             </div>
@@ -396,6 +401,7 @@ const quoteWords = c.manifesto.quote.split(' ');
   .pcard--feat { background: var(--green-deep); border-color: var(--green-deep); color: var(--on-dark); }
   .pcard--feat:hover { border-color: var(--green-deep); }
   .feat-body, .feat-viz { min-width: 0; }
+  .feat-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
   .pcard--feat { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .feat-body { display: flex; flex-direction: column; gap: 12px; padding: 26px; }
   .feat-body .pcard-title { color: var(--white); }

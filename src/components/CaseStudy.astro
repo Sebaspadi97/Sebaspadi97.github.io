@@ -4,6 +4,7 @@
 // lateral, decisión en fondo oscuro y cierre con más proyectos.
 // El texto del caso viene del Markdown (src/content/proyectos/); cada "## Título" es una sección.
 import ChurnSimulator from './ChurnSimulator.astro';
+import IndustryBadge from './IndustryBadge.astro';
 import { cases, pillars } from '../lib/contenido.js';
 import { SIM_SLOT_RE } from '../lib/markdown-plugins.mjs';
 import { link, hasLang, ui } from '../i18n/index.js';
@@ -74,6 +75,7 @@ const inSpanish = (x) => lang === 'en' && !hasLang(x.key, 'en');
     </nav>
     <div class="case-meta">
       <span class="pillar-tag">{pillar}</span>
+      <IndustryBadge industry={item.industry} lang={lang} variant="tag" />
       <span>{c.date} · {minutes} {L.read}</span>
     </div>
     <h1 class="case-title">{c.title}</h1>

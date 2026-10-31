@@ -16,7 +16,7 @@ content:
       template: "{primary}.md"
       field: create
     view:
-      fields: [titulo, pilar, orden, publicar]
+      fields: [titulo, pilar, industria, orden, publicar]
       primary: titulo
       sort: [orden, titulo]
     fields:
@@ -33,6 +33,20 @@ content:
             - { name: data, label: Data }
             - { name: ml, label: Machine Learning }
             - { name: mi, label: Market Intelligence }
+      - name: industria
+        label: Industria o sector (ícono en la portada y filtro en Proyectos)
+        type: select
+        required: false
+        options:
+          values:
+            - { name: comercio, label: Comercio y e-commerce }
+            - { name: salud, label: Salud }
+            - { name: emprendimiento, label: Emprendimiento }
+            - { name: alimentos, label: Alimentos y bebidas }
+            - { name: finanzas, label: Servicios financieros }
+            - { name: industria, label: Industria y manufactura }
+            - { name: educacion, label: Educación }
+            - { name: logistica, label: Logística y transporte }
       - { name: herramientas, label: Herramientas, type: string, list: true, required: true }
       - { name: fecha, label: "Fecha (ej.: oct 2026)", type: string, required: true }
       - { name: repo, label: Repositorio en GitHub, type: string, required: true }

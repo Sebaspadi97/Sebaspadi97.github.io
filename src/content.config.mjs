@@ -8,6 +8,7 @@
 //   src/content/datos-curiosos.json     franja dorada del Lab (se lee en src/lib/contenido.js)
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { industryKeys } from './lib/industrias.js';
 
 const proyecto = z.object({
   titulo: z.string(),
@@ -15,6 +16,8 @@ const proyecto = z.object({
   hallazgo: z.string(),
   descripcion: z.string(),
   pilar: z.enum(['data', 'ml', 'mi']),
+  // Industria o sector del caso (claves en src/lib/industrias.js). Opcional para no frenar proyectos nuevos.
+  industria: z.enum(industryKeys).optional(),
   herramientas: z.array(z.string()).min(1),
   fecha: z.string(),
   repo: z.string().url(),

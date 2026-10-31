@@ -4,6 +4,7 @@ pregunta: "¿A quién conviene llamar antes de que deje de comprar?"
 hallazgo: "llamar al 15,5 % con mayor valor esperado gana; llamar a todos pierde dinero."
 descripcion: "Modelo de abandono con datos sintéticos que termina en una decisión económica: a quién contactar y con qué acción."
 pilar: "ml"
+industria: "comercio"
 herramientas:
   - "Python"
   - "scikit-learn"

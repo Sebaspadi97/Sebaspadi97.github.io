@@ -1,80 +1,123 @@
 ---
-// Menú editorial fijo: logo, enlaces en mayúsculas, página activa subrayada en dorado,
-// ES/EN y "Hablemos". Al bajar se compacta y una línea dorada muestra el avance de lectura.
+// Menú en vidrio líquido (31 oct 2026): cápsulas translúcidas con el tinte de la marca que flotan
+// sobre la página. Logo, barra de navegación con íconos, idioma y "Hablemos".
+// - Una pastilla verde marca la página activa y sigue al cursor entre opciones (escritorio).
+// - El vidrio cambia a su versión oscura cuando pasa sobre una sección oscura.
+// - En pantallas pequeñas la barra de navegación baja al borde inferior, como una barra de pestañas.
+// - Una línea dorada en el borde superior muestra el avance de lectura.
 import { ui, link } from '../i18n/index.js';
 
 const { lang = 'es', active = null, theme = 'light', altHref = '/' } = Astro.props;
 const t = ui[lang];
 const otherLang = lang === 'es' ? 'en' : 'es';
+const langName = lang === 'es' ? 'English' : 'Español';
+
+// Íconos de trazo (24 × 24), dibujados para la marca.
+const icons = {
+  home: '<path d="M4 10.5 12 4l8 6.5"/><path d="M6 9.2V20h12V9.2"/><path d="M10 20v-5.5h4V20"/>',
+  projects: '<rect x="3.5" y="6.5" width="17" height="13" rx="2.2"/><path d="M9 6.5V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v1.5"/><path d="M7.5 16v-2.5M12 16v-5M16.5 16v-3.5"/>',
+  lab: '<path d="M9.5 3.5h5"/><path d="M10.2 3.5v5.7L5 18.2A1.5 1.5 0 0 0 6.3 20.5h11.4a1.5 1.5 0 0 0 1.3-2.3l-5.2-9V3.5"/><path d="M7.4 14.5h9.2"/>',
+  about: '<circle cx="12" cy="8.5" r="3.8"/><path d="M4.8 20c.9-3.6 3.8-5.6 7.2-5.6s6.3 2 7.2 5.6"/>',
+  contact: '<rect x="3.5" y="5.5" width="17" height="13" rx="2.2"/><path d="m4.5 7 7.5 6 7.5-6"/>',
+  globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5Z"/>',
+};
 ---
-<header class:list={['site-header', `site-header--${theme}`]} data-header>
+<header class:list={['site-header', { 'is-dark': theme === 'dark' }]} data-header data-theme={theme}>
+  <span class="read-progress" aria-hidden="true"></span>
   <nav class="nav container" aria-label={t.navLabel}>
-    <a class="brand" href={link('home', lang)}>
-      <img
-        src={theme === 'dark' ? '/brand/logo-horizontal-negativo.svg' : '/brand/logo-horizontal.svg'}
-        alt={lang === 'es' ? 'Sebas Padilla Lab — Inicio' : 'Sebas Padilla Lab — Home'}
-        width="125"
-        height="46"
-      />
+    <a class="glass brand" href={link('home', lang)}>
+      <img class="logo logo--light" src="/brand/logo-horizontal.svg" alt={lang === 'es' ? 'Sebas Padilla Lab — Inicio' : 'Sebas Padilla Lab — Home'} width="125" height="46" />
+      <img class="logo logo--dark" src="/brand/logo-horizontal-negativo.svg" alt="" aria-hidden="true" width="125" height="46" />
     </a>
 
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-label-open={t.menu} data-label-close={t.close}>
-      <span class="nav-toggle-bars" aria-hidden="true"></span>
-      <span class="nav-toggle-text">{t.menu}</span>
-    </button>
-
-    <div class="nav-menu" id="nav-menu">
-      <ul class="nav-links">
+    <div class:list={['glass dock', { 'is-dark-glass': theme === 'dark' }]} data-dock>
+      <span class="dock-blob" aria-hidden="true"></span>
+      <ul class="dock-links">
         {t.nav.map((item) => (
           <li>
             <a
               href={link(item.key, lang)}
               aria-current={active === item.key ? 'page' : undefined}
-              class:list={['nav-link', { 'is-active': active === item.key }]}
-            >{item.label}</a>
+              class:list={['dock-link', { 'is-active': active === item.key }]}
+            >
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" set:html={icons[item.key]} />
+              <span class="dock-label">{item.label}</span>
+            </a>
           </li>
         ))}
       </ul>
+    </div>
 
-      <p class="nav-lang">
-        <span class="visually-hidden">{t.langLabel}: </span>
-        {lang === 'es'
-          ? <><span aria-current="true">ES</span> / <a href={altHref} hreflang={otherLang} lang={otherLang}>EN</a></>
-          : <><a href={altHref} hreflang={otherLang} lang={otherLang}>ES</a> / <span aria-current="true">EN</span></>}
-      </p>
-
-      <a class="pill nav-cta" href={link('contact', lang)}>{t.cta}</a>
+    <div class="nav-end">
+      <a class="glass lang" href={altHref} hreflang={otherLang} lang={otherLang} title={langName}>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" set:html={icons.globe} />
+        <span>{otherLang.toUpperCase()}</span><span class="visually-hidden"> · {langName}</span>
+      </a>
+      <a class="cta" href={link('contact', lang)}>
+        <span class="cta-ico" aria-hidden="true"><i></i><i></i><i></i><i class="g"></i></span>
+        <span>{t.cta}</span>
+      </a>
     </div>
   </nav>
-  <span class="read-progress" aria-hidden="true"></span>
 </header>
 
 <script>
-  const toggle = document.querySelector('.nav-toggle');
-  const menu = document.getElementById('nav-menu');
-  if (toggle && menu) {
-    const text = toggle.querySelector('.nav-toggle-text');
-    const setOpen = (open) => {
-      toggle.setAttribute('aria-expanded', String(open));
-      menu.classList.toggle('is-open', open);
-      if (text) text.textContent = open ? toggle.dataset.labelClose : toggle.dataset.labelOpen;
-      if (open) menu.querySelector('a')?.focus();
-    };
-    menu.addEventListener('click', (e) => {
-      if (e.target.closest('a') && toggle.getAttribute('aria-expanded') === 'true') setOpen(false);
-    });
-    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
-  }
-
-  // Menú compacto y avance de lectura (un solo manejador de scroll, con requestAnimationFrame)
-  const header = document.querySelector('[data-header]');
+  const header = document.querySelector<HTMLElement>('[data-header]');
   if (header) {
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const dock = header.querySelector<HTMLElement>('[data-dock]')!;
+    const blob = dock.querySelector<HTMLElement>('.dock-blob')!;
+    const links = [...dock.querySelectorAll<HTMLAnchorElement>('.dock-link')];
+    const current = links.find((a) => a.classList.contains('is-active')) || null;
+    const fixedDark = header.dataset.theme === 'dark';
+    const mobile = matchMedia('(max-width: 900px)');
+
+    // Pastilla que marca la página activa y se desliza hacia la opción que señala el cursor
+    const place = (a: HTMLElement | null, instant = false) => {
+      links.forEach((l) => l.classList.toggle('is-blob', l === a));
+      if (!a) { blob.style.opacity = '0'; return; }
+      if (instant) blob.style.transition = 'none';
+      blob.style.width = `${a.offsetWidth}px`;
+      blob.style.height = `${a.offsetHeight}px`;
+      blob.style.transform = `translate(${a.offsetLeft}px, ${a.offsetTop}px)`;
+      blob.style.opacity = '1';
+      if (instant) { void blob.offsetWidth; blob.style.transition = ''; }
+    };
+    dock.classList.add('has-blob');
+    place(current, true);
+    if (!reduce) {
+      links.forEach((a) => {
+        a.addEventListener('pointerenter', () => { if (!mobile.matches) place(a); });
+        a.addEventListener('focus', () => { if (!mobile.matches) place(a); });
+      });
+      dock.addEventListener('pointerleave', () => place(current));
+      dock.addEventListener('focusout', (e) => { if (!dock.contains(e.relatedTarget as Node)) place(current); });
+    }
+    window.addEventListener('resize', () => place(current, true));
+    document.fonts?.ready.then(() => place(current, true));
+
+    // ¿Qué hay debajo del vidrio? Si es una sección oscura, el vidrio pasa a su versión oscura.
+    const dark = new WeakMap<Element, boolean>();
+    const isDarkAt = (x: number, y: number) => {
+      for (const el of document.elementsFromPoint(x, y)) {
+        if (header.contains(el)) continue;
+        let node: Element | null = el;
+        while (node && node !== document.documentElement) {
+          if (dark.has(node)) return dark.get(node)!;
+          const c = getComputedStyle(node).backgroundColor.match(/[\d.]+/g);
+          if (c && (c.length < 4 || Number(c[3]) > 0.5)) {
+            const [r, g, b] = c.map(Number).map((v) => v / 255);
+            const v = 0.2126 * r + 0.7152 * g + 0.0722 * b < 0.35;
+            dark.set(node, v);
+            return v;
+          }
+          node = node.parentElement;
+        }
+        return false;
+      }
+      return false;
+    };
+
     let ticking = false;
     const update = () => {
       ticking = false;
@@ -82,187 +125,245 @@ const otherLang = lang === 'es' ? 'en' : 'es';
       header.classList.toggle('is-scrolled', y > 24);
       const max = document.documentElement.scrollHeight - window.innerHeight;
       header.style.setProperty('--p', max > 0 ? (y / max).toFixed(4) : '0');
+      const top = fixedDark || isDarkAt(window.innerWidth / 2, 36);
+      header.classList.toggle('is-dark', top);
+      dock.classList.toggle('is-dark-glass', mobile.matches ? isDarkAt(window.innerWidth / 2, window.innerHeight - 36) : top);
     };
     window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update);
     update();
   }
 </script>
 
 <style>
   .site-header {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    inset: 0 0 auto;
     z-index: 50;
-    border-bottom: 1px solid var(--gray-light);
-    background: rgba(248, 250, 247, 0.9);
-    -webkit-backdrop-filter: saturate(1.4) blur(12px);
-    backdrop-filter: saturate(1.4) blur(12px);
-    transition: box-shadow .25s ease;
+    height: var(--header-h);
+    pointer-events: none;
   }
-  .site-header.is-scrolled { box-shadow: 0 6px 24px -18px rgba(17, 41, 31, 0.5); }
   .read-progress {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -1px;
-    height: 2px;
+    top: 0;
+    height: 3px;
     background: var(--gold);
     transform-origin: left;
     transform: scaleX(var(--p, 0));
   }
-  .site-header--dark {
-    background: rgba(17, 41, 31, 0.92);
-    border-bottom: 1px solid var(--green);
-  }
-
   .nav {
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    min-height: var(--header-h);
+    gap: 12px;
   }
+  .nav > * { pointer-events: auto; }
 
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 0;
-    border-radius: 6px;
-  }
-  .brand img {
-    display: block;
-    height: 46px;
-    width: auto;
-    transform-origin: left center;
-    transition: transform .3s var(--ease-out);
-  }
-  /* Al bajar, el logo se reduce sin cambiar la altura del menú (no mueve el contenido) */
-  .is-scrolled .brand img { transform: scale(0.87); }
-  @media (prefers-reduced-motion: reduce) {
-    .nav, .brand img, .site-header { transition: none; }
-  }
-  @media (max-width: 480px) {
-    .brand img { height: 40px; }
-  }
-
-  .nav-menu {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 28px;
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 28px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .nav-link {
+  /* ---------- Vidrio líquido ---------- */
+  .glass {
+    --glass-text: var(--carbon);
     position: relative;
-    color: var(--carbon);
-    text-decoration: none;
-    padding: 10px 0;
+    isolation: isolate;
+    border-radius: 999px;
+    color: var(--glass-text);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(248, 250, 247, 0.56));
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 rgba(36, 91, 69, 0.1),
+      0 10px 30px -12px rgba(17, 41, 31, 0.3),
+      0 1px 3px rgba(17, 41, 31, 0.08);
+    transition: background .4s ease, border-color .4s ease, box-shadow .4s ease, color .4s ease;
   }
-  .nav-link::after {
+  /* Brillo del vidrio: un reflejo suave arriba a la izquierda */
+  .glass::before {
     content: '';
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 4px;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .3s var(--ease-out);
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(120% 90% at 22% -30%, rgba(255, 255, 255, 0.7), transparent 55%);
+    pointer-events: none;
   }
-  .nav-link:hover { color: var(--green); }
-  .nav-link:hover::after,
-  .nav-link.is-active::after { transform: scaleX(1); }
-  .nav-link.is-active { color: var(--green); }
-  .site-header--dark .nav-link { color: var(--gray-light); }
-  .site-header--dark .nav-link:hover,
-  .site-header--dark .nav-link.is-active { color: var(--mint); }
-
-  .nav-lang { margin: 0; color: var(--slate); }
-  .nav-lang a { color: var(--slate); }
-  .nav-lang a:hover { color: var(--green); }
-  .nav-lang [aria-current] { color: var(--carbon); }
-  .site-header--dark .nav-lang,
-  .site-header--dark .nav-lang a { color: var(--on-dark-muted); }
-  .site-header--dark .nav-lang [aria-current] { color: var(--white); }
-
-  .nav-cta {
-    background: var(--carbon);
-    color: var(--white);
-    min-height: 44px;
-    padding: 0 20px;
-    font-size: 14px;
-    letter-spacing: 0.06em;
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass { background: rgba(248, 250, 247, 0.97); }
   }
-  .nav-cta:hover { background: var(--green); color: var(--white); }
-  .site-header--dark .nav-cta { background: var(--mint); color: var(--green-night); }
-  .site-header--dark .nav-cta:hover { background: var(--white); }
+  .is-dark .glass:not(.dock),
+  .dock.is-dark-glass {
+    --glass-text: var(--gray-light);
+    background: linear-gradient(180deg, rgba(36, 91, 69, 0.62), rgba(17, 41, 31, 0.6));
+    border-color: rgba(163, 218, 190, 0.22);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.16),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+      0 12px 32px -12px rgba(0, 0, 0, 0.6);
+  }
+  .is-dark .glass:not(.dock)::before,
+  .dock.is-dark-glass::before { background: radial-gradient(120% 90% at 22% -30%, rgba(255, 255, 255, 0.16), transparent 55%); }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .is-dark .glass:not(.dock), .dock.is-dark-glass { background: rgba(17, 41, 31, 0.97); }
+  }
+  .is-scrolled .glass { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(36, 91, 69, 0.1), 0 14px 36px -12px rgba(17, 41, 31, 0.38), 0 1px 3px rgba(17, 41, 31, 0.08); }
 
-  /* Botón de menú en pantallas pequeñas */
-  .nav-toggle {
-    display: none;
+  /* ---------- Logo ---------- */
+  .brand { display: grid; place-items: center; height: 52px; padding: 0 18px 0 14px; }
+  .logo { grid-area: 1 / 1; height: 38px; width: auto; transition: opacity .4s ease; }
+  .logo--dark { opacity: 0; }
+  .is-dark .logo--light { opacity: 0; }
+  .is-dark .logo--dark { opacity: 1; }
+
+  /* ---------- Barra de navegación ---------- */
+  .dock { padding: 5px; }
+  .dock-links { position: relative; display: flex; gap: 2px; margin: 0; padding: 0; list-style: none; }
+  .dock-blob {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    z-index: 0;
+    border-radius: 999px;
+    background: var(--green);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 16px -8px rgba(17, 41, 31, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .45s var(--ease-out), width .45s var(--ease-out), opacity .3s ease;
+  }
+  .dock-link {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-    min-height: 44px;
+    gap: 8px;
+    min-height: 42px;
     padding: 0 16px;
     border-radius: 999px;
-    border: 1px solid var(--carbon);
-    background: transparent;
-    color: var(--carbon);
+    color: var(--glass-text);
     font-family: var(--font-display);
-    font-weight: 600;
     font-size: 14px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .3s ease, background-color .3s ease;
   }
-  .site-header--dark .nav-toggle { border-color: var(--mint); color: var(--white); }
-  .nav-toggle-bars,
-  .nav-toggle-bars::before,
-  .nav-toggle-bars::after {
-    display: block;
-    width: 16px;
-    height: 2px;
-    background: currentColor;
-    border-radius: 2px;
-    position: relative;
+  .dock-link:hover { color: var(--green); }
+  .is-dark-glass .dock-link:hover { color: var(--mint-strong); }
+  .dock-link.is-blob,
+  .dock-link.is-blob:hover { color: var(--white); }
+  .dock-link.is-blob .ico { color: var(--mint-strong); }
+  /* Sin JavaScript: la página activa lleva su propia pastilla */
+  .dock:not(.has-blob) .dock-link.is-active { background: var(--green); color: var(--white); }
+  .ico {
+    width: 18px;
+    height: 18px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform .35s var(--ease-out), color .3s ease;
   }
-  .nav-toggle-bars::before,
-  .nav-toggle-bars::after { content: ''; position: absolute; left: 0; }
-  .nav-toggle-bars::before { top: -5px; }
-  .nav-toggle-bars::after { top: 5px; }
+  .dock-link:hover .ico { transform: translateY(-1px) scale(1.08); }
 
+  /* ---------- Idioma y "Hablemos" ---------- */
+  .nav-end { display: flex; align-items: center; gap: 10px; }
+  .lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 52px;
+    padding: 0 16px 0 14px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+  .lang:hover { color: var(--green); }
+  .is-dark .lang:hover { color: var(--mint-strong); }
+  .lang:hover .ico { transform: rotate(-18deg); }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 52px;
+    padding: 0 22px 0 7px;
+    border-radius: 999px;
+    background: var(--green-deep);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 10px 26px -12px rgba(17, 41, 31, 0.6);
+    transition: background-color .3s ease, color .3s ease, transform .3s var(--ease-out);
+  }
+  .cta:hover { background: var(--green); color: var(--white); transform: translateY(-1px); }
+  .is-dark .cta { background: var(--mint); color: var(--green-night); }
+  .is-dark .cta:hover { background: var(--white); color: var(--green-night); }
+  .cta-ico { position: relative; width: 38px; height: 38px; border-radius: 50%; background: var(--green-night); flex: none; }
+  .cta-ico i { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--mint); transition: transform .45s var(--ease-out); }
+  .cta-ico i:nth-child(1) { left: 10px; top: 21px; }
+  .cta-ico i:nth-child(2) { left: 15px; top: 13px; }
+  .cta-ico i:nth-child(3) { left: 21px; top: 19px; }
+  .cta-ico i.g { left: 25px; top: 10px; width: 7px; height: 7px; background: var(--gold); }
+  /* Al pasar el cursor, los puntos se alinean hacia la decisión */
+  .cta:hover .cta-ico i:nth-child(1) { transform: translate(0, 3px); }
+  .cta:hover .cta-ico i:nth-child(2) { transform: translate(1px, 6px); }
+  .cta:hover .cta-ico i:nth-child(3) { transform: translate(1px, -2px); }
+  .cta:hover .cta-ico i.g { transform: translate(1px, 1px) scale(1.15); }
+
+  .dock-link:focus-visible, .lang:focus-visible, .cta:focus-visible, .brand:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glass, .dock-blob, .dock-link, .ico, .cta, .cta-ico i, .logo { transition: none; }
+    .dock-link:hover .ico, .lang:hover .ico, .cta:hover, .cta:hover .cta-ico i { transform: none; }
+  }
+
+  /* ---------- Pantallas medianas: etiquetas más compactas ---------- */
+  @media (max-width: 1180px) and (min-width: 901px) {
+    .dock-link { padding: 0 12px; gap: 6px; }
+    .cta { padding-right: 18px; }
+  }
+
+  /* ---------- Móvil: la navegación baja al borde inferior ---------- */
   @media (max-width: 900px) {
-    .nav-toggle { display: inline-flex; }
-    .nav-menu {
-      display: none;
-      flex-basis: 100%;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
-      padding: 12px 0 20px;
+    .brand { height: 48px; padding: 0 14px 0 12px; }
+    .logo { height: 34px; }
+    .lang { height: 48px; }
+    .cta { height: 48px; }
+    .dock {
+      position: fixed;
+      left: 50%;
+      bottom: calc(10px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      width: min(520px, calc(100vw - 20px));
+      padding: 6px;
+      border-radius: 26px;
     }
-    .nav-menu.is-open { display: flex; }
-    .nav-link::after { display: none; }
-    .nav-link.is-active { text-decoration: underline; text-decoration-color: var(--gold); text-decoration-thickness: 3px; text-underline-offset: 6px; }
-    .nav-links { flex-direction: column; gap: 4px; }
-    .nav-link { display: inline-block; font-size: 16px; padding: 8px 0; }
+    .dock::before { border-radius: 26px; }
+    .dock-links { justify-content: space-between; }
+    .dock-links li { flex: 1 1 0; min-width: 0; }
+    .dock-link {
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+      min-height: 52px;
+      padding: 4px 2px;
+      border-radius: 20px;
+      font-size: 11px;
+      letter-spacing: 0.01em;
+    }
+    .ico { width: 21px; height: 21px; }
+    .dock-blob { border-radius: 20px; left: 6px; top: 6px; }
+  }
+  @media (max-width: 600px) {
+    .cta { display: none; }
   }
 </style>
