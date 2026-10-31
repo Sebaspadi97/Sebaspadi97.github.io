@@ -162,7 +162,8 @@ const W = 640, H = 480;
     const hudStep = root.querySelector<HTMLElement>('[data-hud-step]');
     const hudPct = root.querySelector<HTMLElement>('[data-hud-pct]');
     const counted = new Set<number>();
-    const locale = document.documentElement.lang === 'en' ? 'en-US' : 'es-CO';
+    // de-DE agrupa con punto y usa coma decimal, igual que el español del sitio (37.053 · 3,9)
+    const locale = document.documentElement.lang === 'en' ? 'en-US' : 'de-DE';
     const last = SC.length - 1;
     let W = 0, H = 0, d = 1, lastStep = -1, visible = false, ticking = false;
 
@@ -224,10 +225,11 @@ const W = 640, H = 480;
       if (!el) return;
       const to = Number(el.dataset.count), dec = Number(el.dataset.dec || 0), pre = el.dataset.pre || '', suf = el.dataset.suf || '';
       const fmt = (v: number) => pre + v.toLocaleString(locale, { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
+      const final = el.textContent || '';
       const t0 = performance.now(), dur = 1100;
       const step = (now: number) => {
         const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
-        el.textContent = fmt(to * e);
+        el.textContent = k < 1 ? fmt(to * e) : final;
         if (k < 1) requestAnimationFrame(step);
       };
       requestAnimationFrame(step);
