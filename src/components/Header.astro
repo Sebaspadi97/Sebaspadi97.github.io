@@ -101,6 +101,11 @@ const icons = {
     const isDarkAt = (x: number, y: number) => {
       for (const el of document.elementsFromPoint(x, y)) {
         if (header.contains(el)) continue;
+        // Debajo del pie (franja inferior en móvil) solo está el cuerpo: es la continuación oscura del pie
+        if (el === document.body || el === document.documentElement) {
+          const foot = document.querySelector('footer');
+          return Boolean(foot && foot.getBoundingClientRect().bottom <= y + 1);
+        }
         let node: Element | null = el;
         while (node && node !== document.documentElement) {
           if (dark.has(node)) return dark.get(node)!;
