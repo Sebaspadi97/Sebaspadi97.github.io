@@ -97,7 +97,7 @@ const W = 640, H = 480;
                   ) : (
                     <p class="result-value">
                       <span
-                        data-count={s.result.value}
+                        data-mcount={s.result.value}
                         data-dec={s.result.decimals || 0}
                         data-pre={s.result.prefix || ''}
                         data-suf={s.result.suffix || ''}
@@ -221,9 +221,9 @@ const W = 640, H = 480;
     const countUp = (i: number) => {
       if (counted.has(i)) return;
       counted.add(i);
-      const el = steps[i]?.querySelector<HTMLElement>('[data-count]');
+      const el = steps[i]?.querySelector<HTMLElement>('[data-mcount]');
       if (!el) return;
-      const to = Number(el.dataset.count), dec = Number(el.dataset.dec || 0), pre = el.dataset.pre || '', suf = el.dataset.suf || '';
+      const to = Number(el.dataset.mcount), dec = Number(el.dataset.dec || 0), pre = el.dataset.pre || '', suf = el.dataset.suf || '';
       const fmt = (v: number) => pre + v.toLocaleString(locale, { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
       const final = el.textContent || '';
       const t0 = performance.now(), dur = 1100;
