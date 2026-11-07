@@ -1,3 +1,11 @@
+/* Fuentes de respaldo con las métricas de Montserrat y Open Sans (7 nov 2026).
+   Mientras llega la fuente web, el texto se dibuja con Arial/Liberation (o DejaVu en Linux) ajustada al mismo
+   ancho y alto, así el cambio de fuente no mueve el contenido (CLS 0). Valores medidos con texto real del sitio. */
+@font-face{font-family:'Montserrat Fallback';src:local('Arial Bold'),local('Arial-BoldMT'),local('Liberation Sans Bold'),local('LiberationSans-Bold'),local('Arimo Bold'),local('Helvetica Bold');font-weight:100 900;size-adjust:110.5%;ascent-override:87.8%;descent-override:22.6%;line-gap-override:0%}
+@font-face{font-family:'Montserrat Fallback DV';src:local('DejaVu Sans Bold'),local('DejaVuSans-Bold');font-weight:100 900;size-adjust:93%;ascent-override:104.3%;descent-override:26.9%;line-gap-override:0%}
+@font-face{font-family:'Open Sans Fallback';src:local('Arial'),local('ArialMT'),local('Liberation Sans'),local('LiberationSans'),local('Arimo'),local('Helvetica');font-weight:100 900;size-adjust:104.3%;ascent-override:102.6%;descent-override:27.8%;line-gap-override:0%}
+@font-face{font-family:'Open Sans Fallback DV';src:local('DejaVu Sans'),local('DejaVuSans');font-weight:100 900;size-adjust:92.2%;ascent-override:116.1%;descent-override:31.5%;line-gap-override:0%}
+
 /* ============================================================
    SP Lab — Sistema visual
    Paleta y tipografía del manual de marca (Fase 1) y del lienzo
@@ -29,8 +37,8 @@
   --gold-text: #8A6420;      /* dorado con contraste para texto sobre claro */
 
   /* Tipografía */
-  --font-display: 'Montserrat', system-ui, sans-serif;
-  --font-body: 'Open Sans', system-ui, sans-serif;
+  --font-display: 'Montserrat', 'Montserrat Fallback', 'Montserrat Fallback DV', system-ui, sans-serif;
+  --font-body: 'Open Sans', 'Open Sans Fallback', 'Open Sans Fallback DV', system-ui, sans-serif;
 
   /* Medidas */
   --container: 1280px;

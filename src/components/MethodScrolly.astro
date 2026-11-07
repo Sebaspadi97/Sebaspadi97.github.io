@@ -81,7 +81,7 @@ const W = 640, H = 480;
         <ol class="steps" data-names={JSON.stringify(names)}>
           {steps.map((s, i) => (
             <li class:list={['step', { 'is-last': i === steps.length - 1 }]}>
-              <span class="step-ghost" aria-hidden="true">{s.n}</span>
+              <span class="step-ghost" aria-hidden="true" data-n={s.n}></span>
               <div class="step-head">
                 <span class="step-node" aria-hidden="true"></span>
                 <span class="step-n" aria-hidden="true">{s.n}</span>
@@ -364,6 +364,8 @@ const W = 640, H = 480;
     pointer-events: none;
     user-select: none;
   }
+  /* El número va en un pseudoelemento: es decoración pura y no cuenta como texto (contraste) */
+  .step-ghost::before { content: attr(data-n); }
   .step > :not(.step-ghost) { position: relative; z-index: 1; }
   .step-head { display: flex; align-items: baseline; gap: 16px; }
   .step-n { font-family: var(--font-display); font-weight: 800; font-size: clamp(48px, 6vw, 80px); line-height: 1; color: var(--mint); font-variant-numeric: tabular-nums; }
