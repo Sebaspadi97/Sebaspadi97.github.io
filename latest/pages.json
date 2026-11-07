@@ -145,9 +145,31 @@
     "failed": [],
     "shifts": [
       {
-        "value": 0.007,
-        "t": 72,
+        "value": 0.051,
+        "t": 119,
         "sources": [
+          {
+            "node": "<div class=\"glass dock has-blob\" data-dock=\"\" data-astro-cid-3ef6ksr2=\"\"> <span class=\"dock-blob\" aria-hidden=\"true\" data-astro-cid-3ef6ksr2",
+            "prev": [
+              0,
+              106
+            ],
+            "curr": [
+              0,
+              106
+            ]
+          },
+          {
+            "node": "<span data-astro-cid-n45vofzs=\"\">Análisis · Datos curiosos · Experimentos · Notas</span>",
+            "prev": [
+              136,
+              21
+            ],
+            "curr": [
+              136,
+              21
+            ]
+          },
           {
             "node": "<a class=\"rss-link\" href=\"/es/lab/rss/\" data-astro-cid-n45vofzs=\"\">Suscribirse por RSS</a>",
             "prev": [
@@ -272,7 +294,7 @@
     "shifts": [
       {
         "value": 0.046,
-        "t": 194,
+        "t": 123,
         "sources": [
           {
             "node": "<section class=\"gallery\" aria-label=\"Proyectos\" data-astro-cid-gsn4ozra=\"\"> <div class=\"container gallery-inner\" data-astro-cid-gsn4ozra=\"\">",

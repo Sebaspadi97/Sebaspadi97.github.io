@@ -1,6 +1,6 @@
 {
   "base": "https://sebaspadi97.github.io",
-  "date": "2026-11-07T16:49:37.755Z",
+  "date": "2026-11-07T16:55:08.454Z",
   "pages": 21,
   "axeRules": {},
   "overflow": [],
@@ -26,8 +26,8 @@
       },
       "metrics": {
         "FCP": "1.2 s",
-        "LCP": "1.7 s",
-        "TBT": "30 ms",
+        "LCP": "1.8 s",
+        "TBT": "10 ms",
         "CLS": "0",
         "SI": "1.2 s",
         "weight": "Total size was 170 KiB"
@@ -36,15 +36,15 @@
     {
       "path": "/en/",
       "scores": {
-        "performance": 99,
+        "performance": 100,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
       "metrics": {
         "FCP": "1.2 s",
-        "LCP": "1.8 s",
-        "TBT": "10 ms",
+        "LCP": "1.7 s",
+        "TBT": "20 ms",
         "CLS": "0",
         "SI": "1.2 s",
         "weight": "Total size was 170 KiB"
@@ -77,7 +77,7 @@
       },
       "metrics": {
         "FCP": "1.1 s",
-        "LCP": "1.8 s",
+        "LCP": "1.7 s",
         "TBT": "0 ms",
         "CLS": "0",
         "SI": "1.1 s",
@@ -93,11 +93,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.0 s",
-        "LCP": "1.5 s",
+        "FCP": "1.1 s",
+        "LCP": "1.6 s",
         "TBT": "0 ms",
-        "CLS": "0",
-        "SI": "1.0 s",
+        "CLS": "0.001",
+        "SI": "1.1 s",
         "weight": "Total size was 133 KiB"
       }
     },
@@ -110,11 +110,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.2 s",
+        "FCP": "1.1 s",
         "LCP": "1.7 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.2 s",
+        "SI": "1.1 s",
         "weight": "Total size was 216 KiB"
       }
     },
@@ -127,11 +127,11 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.1 s",
+        "FCP": "1.0 s",
         "LCP": "1.7 s",
         "TBT": "0 ms",
         "CLS": "0.001",
-        "SI": "1.1 s",
+        "SI": "1.0 s",
         "weight": "Total size was 147 KiB"
       }
     },
