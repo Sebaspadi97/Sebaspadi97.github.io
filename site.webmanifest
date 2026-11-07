@@ -1,0 +1,13 @@
+{
+  "name": "Sebas Padilla Lab",
+  "short_name": "SP Lab",
+  "description": "De los datos a las decisiones.",
+  "start_url": "/es/",
+  "display": "browser",
+  "background_color": "#F8FAF7",
+  "theme_color": "#183D32",
+  "icons": [
+    { "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

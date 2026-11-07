@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lab · Sebas Padilla Lab</title>
+    <link>https://sebaspadi97.github.io/es/lab/</link>
+    <atom:link href="https://sebaspadi97.github.io/es/lab/rss.xml" rel="self" type="application/rss+xml" />
+    <description>Análisis cortos, datos curiosos y experimentos con modelos, con datos abiertos de Colombia.</description>
+    <language>es-co</language>
+    <item>
+      <title>Bogotá abre 17 bares al día</title>
+      <link>https://sebaspadi97.github.io/es/lab/bogota-abre-17-bares-al-dia/</link>
+      <guid isPermaLink="true">https://sebaspadi97.github.io/es/lab/bogota-abre-17-bares-al-dia/</guid>
+      <description>Los bares fueron la actividad con más empresas nuevas entre enero y marzo de 2026.</description>
+      <category>Datos curiosos</category>
+    </item>
+    <item>
+      <title>Dónde nacen las empresas de Bogotá, y quién las lidera</title>
+      <link>https://sebaspadi97.github.io/es/lab/donde-nacen-las-empresas-de-bogota/</link>
+      <guid isPermaLink="true">https://sebaspadi97.github.io/es/lab/donde-nacen-las-empresas-de-bogota/</guid>
+      <description>En tres meses nacieron 21.407 empresas. Las localidades del sur crean más, y cada vez más con mujeres al frente.</description>
+      <category>Análisis</category>
+    </item>
+    <item>
+      <title>¿Llamar a todos los clientes? El modelo dice que no</title>
+      <link>https://sebaspadi97.github.io/es/lab/llamar-a-todos-los-clientes/</link>
+      <guid isPermaLink="true">https://sebaspadi97.github.io/es/lab/llamar-a-todos-los-clientes/</guid>
+      <description>Con datos sintéticos, llamar a todos pierde dinero; llamar a quien vale la pena, gana.</description>
+      <category>Experimentos</category>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,199 @@
+{
+  "proyectos": [
+    {
+      "url": "abandono-de-clientes",
+      "pilar": "ml",
+      "pilarNombre": {
+        "es": "Machine Learning",
+        "en": "Machine Learning",
+        "tone": "mint"
+      },
+      "industria": "comercio",
+      "industriaNombre": {
+        "es": "Comercio y e-commerce",
+        "en": "Retail & e-commerce"
+      },
+      "herramientas": [
+        "Python",
+        "scikit-learn",
+        "pandas"
+      ],
+      "repo": "https://github.com/Sebaspadi97/customer-churn-retention",
+      "equipo": false,
+      "portada": "https://sebaspadi97.github.io/img/casos/abandono/03_curva_ganancia.webp",
+      "es": {
+        "titulo": "¿Qué clientes están por irse?",
+        "pregunta": "¿A quién conviene llamar antes de que deje de comprar?",
+        "hallazgo": "llamar al 15,5 % con mayor valor esperado gana; llamar a todos pierde dinero.",
+        "enlace": "https://sebaspadi97.github.io/es/proyectos/abandono-de-clientes/"
+      },
+      "en": {
+        "titulo": "Which customers are about to leave?",
+        "pregunta": "Who should you contact before they stop buying?",
+        "hallazgo": "contacting the top 15.5% by expected value wins; contacting everyone loses money.",
+        "enlace": "https://sebaspadi97.github.io/en/projects/customer-churn/"
+      }
+    },
+    {
+      "url": "estancia-hospitalaria",
+      "pilar": "ml",
+      "pilarNombre": {
+        "es": "Machine Learning",
+        "en": "Machine Learning",
+        "tone": "mint"
+      },
+      "industria": "salud",
+      "industriaNombre": {
+        "es": "Salud",
+        "en": "Healthcare"
+      },
+      "herramientas": [
+        "Python",
+        "scikit-learn",
+        "pandas"
+      ],
+      "repo": "https://github.com/Sebaspadi97/hospital-length-of-stay",
+      "equipo": true,
+      "portada": "https://sebaspadi97.github.io/img/casos/estancia/02_error_por_dias_restantes.webp",
+      "es": {
+        "titulo": "¿Cuántos días le quedan a un paciente en el hospital?",
+        "pregunta": "¿Se puede estimar la estancia restante mejor que con el promedio histórico?",
+        "hallazgo": "el modelo reduce el error a 6,19 días, 6,4 % menos que la referencia histórica.",
+        "lineaEquipo": "Trabajo en equipo con Alexandra Castro y Kevin Alejandro Paez.",
+        "enlace": "https://sebaspadi97.github.io/es/proyectos/estancia-hospitalaria/"
+      },
+      "en": {
+        "titulo": "How many days does a patient have left in hospital?",
+        "pregunta": "Can remaining length of stay be estimated better than with the historical average?",
+        "hallazgo": "the model cuts error to 6.19 days, 6.4% less than the historical baseline.",
+        "lineaEquipo": "Team project with Alexandra Castro and Kevin Alejandro Paez.",
+        "enlace": "https://sebaspadi97.github.io/en/projects/hospital-stay/"
+      }
+    },
+    {
+      "url": "emprendimiento-bogota",
+      "pilar": "data",
+      "pilarNombre": {
+        "es": "Data",
+        "en": "Data",
+        "tone": "mint"
+      },
+      "industria": "emprendimiento",
+      "industriaNombre": {
+        "es": "Emprendimiento",
+        "en": "Entrepreneurship"
+      },
+      "herramientas": [
+        "Python",
+        "pandas"
+      ],
+      "repo": "https://github.com/Sebaspadi97/bogota-business-births",
+      "equipo": false,
+      "portada": "https://sebaspadi97.github.io/img/casos/emprendimiento/01_tasa_creacion_localidad.webp",
+      "es": {
+        "titulo": "Radiografía del emprendimiento en Bogotá",
+        "pregunta": "¿En qué localidades y sectores nacen más empresas, y quiénes las lideran?",
+        "hallazgo": "Ciudad Bolívar crea empresas a más del doble del ritmo de Chapinero.",
+        "enlace": "https://sebaspadi97.github.io/es/proyectos/emprendimiento-bogota/"
+      },
+      "en": {
+        "titulo": "Where are Bogotá's new businesses born?",
+        "pregunta": "Which districts and sectors create the most businesses, and who leads them?",
+        "hallazgo": "Ciudad Bolívar creates businesses at more than twice the rate of Chapinero.",
+        "enlace": "https://sebaspadi97.github.io/en/projects/bogota-businesses/"
+      }
+    },
+    {
+      "url": "cafe-bogota",
+      "pilar": "mi",
+      "pilarNombre": {
+        "es": "Market Intelligence",
+        "en": "Market Intelligence",
+        "tone": "gold"
+      },
+      "industria": "alimentos",
+      "industriaNombre": {
+        "es": "Alimentos y bebidas",
+        "en": "Food & beverage"
+      },
+      "herramientas": [
+        "Python",
+        "pandas"
+      ],
+      "repo": "https://github.com/Sebaspadi97/bogota-coffee-location",
+      "equipo": false,
+      "portada": "https://sebaspadi97.github.io/img/casos/cafe/01_matriz_demanda_competencia.webp",
+      "es": {
+        "titulo": "¿Dónde abrir un café en Bogotá?",
+        "pregunta": "¿Qué localidades tienen clientes sin tanta competencia?",
+        "hallazgo": "solo Suba y Usaquén superan el promedio en adultos y en empresas por cada café.",
+        "enlace": "https://sebaspadi97.github.io/es/proyectos/cafe-bogota/"
+      },
+      "en": {
+        "titulo": "Where to open a coffee shop in Bogotá",
+        "pregunta": "Which districts have customers without too much competition?",
+        "hallazgo": "only Suba and Usaquén beat the city average on both adults and businesses per coffee shop.",
+        "enlace": null
+      }
+    },
+    {
+      "url": "nombre-corto-del-caso",
+      "pilar": "data",
+      "pilarNombre": {
+        "es": "Data",
+        "en": "Data",
+        "tone": "mint"
+      },
+      "industria": "comercio",
+      "industriaNombre": {
+        "es": "Comercio y e-commerce",
+        "en": "Retail & e-commerce"
+      },
+      "herramientas": [
+        "Python",
+        "pandas"
+      ],
+      "repo": "https://github.com/Sebaspadi97/Sebaspadi97.github.io",
+      "equipo": false,
+      "portada": "https://sebaspadi97.github.io/img/proyectos/nombre-corto-del-caso/01-grafico-principal.webp",
+      "es": {
+        "titulo": "¿Pregunta que responde el caso?",
+        "pregunta": "Pregunta de negocio, en una línea",
+        "hallazgo": "el hallazgo principal en una frase, con su cifra.",
+        "enlace": "https://sebaspadi97.github.io/es/proyectos/nombre-corto-del-caso/"
+      },
+      "en": {
+        "titulo": "Question the case answers?",
+        "pregunta": "Business question",
+        "hallazgo": "the main finding in one sentence.",
+        "enlace": "https://sebaspadi97.github.io/en/projects/short-case-name/"
+      }
+    }
+  ],
+  "lab": [
+    {
+      "url": "bogota-abre-17-bares-al-dia",
+      "categoria": "Dato curioso",
+      "titulo": "Bogotá abre 17 bares al día",
+      "bajada": "Los bares fueron la actividad con más empresas nuevas entre enero y marzo de 2026.",
+      "fecha": null,
+      "enlace": "https://sebaspadi97.github.io/es/lab/bogota-abre-17-bares-al-dia/"
+    },
+    {
+      "url": "donde-nacen-las-empresas-de-bogota",
+      "categoria": "Análisis",
+      "titulo": "Dónde nacen las empresas de Bogotá, y quién las lidera",
+      "bajada": "En tres meses nacieron 21.407 empresas. Las localidades del sur crean más, y cada vez más con mujeres al frente.",
+      "fecha": null,
+      "enlace": "https://sebaspadi97.github.io/es/lab/donde-nacen-las-empresas-de-bogota/"
+    },
+    {
+      "url": "llamar-a-todos-los-clientes",
+      "categoria": "Experimento",
+      "titulo": "¿Llamar a todos los clientes? El modelo dice que no",
+      "bajada": "Con datos sintéticos, llamar a todos pierde dinero; llamar a quien vale la pena, gana.",
+      "fecha": null,
+      "enlace": "https://sebaspadi97.github.io/es/lab/llamar-a-todos-los-clientes/"
+    }
+  ]
+}
