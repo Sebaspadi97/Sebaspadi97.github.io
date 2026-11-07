@@ -14,7 +14,69 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.045,
+        "t": 271,
+        "sources": [
+          {
+            "node": "<div class=\"glass dock has-blob\" data-dock=\"\" data-astro-cid-3ef6ksr2=\"\"> <span class=\"dock-blob\" aria-hidden=\"true\" data-astro-cid-3ef6ksr2",
+            "prev": [
+              0,
+              106
+            ],
+            "curr": [
+              0,
+              106
+            ]
+          },
+          {
+            "node": "<div class=\"nav-end\" data-astro-cid-3ef6ksr2=\"\"> <a class=\"glass lang\" href=\"/es/\" hreflang=\"es\" lang=\"es\" title=\"Español\" data-astro-cid-3e",
+            "prev": [
+              0,
+              99
+            ],
+            "curr": [
+              0,
+              99
+            ]
+          },
+          {
+            "node": "<section class=\"method\" aria-labelledby=\"method-title\" data-method=\"\" data-astro-cid-vnweamdt=\"\"> <div class=\"container\" data-astro-cid-vnwe",
+            "prev": [
+              0,
+              0
+            ],
+            "curr": [
+              886,
+              14
+            ]
+          },
+          {
+            "node": "<span class=\"proof-text\" data-astro-cid-jdovvxl7=\"\">Contacting only the 15.5% with the highest expected value beats contacting everyone (syn",
+            "prev": [
+              687,
+              63
+            ],
+            "curr": [
+              658,
+              63
+            ]
+          },
+          {
+            "node": "<div class=\"hero-text\" data-astro-cid-jdovvxl7=\"\"> <h1 id=\"hero-title\" class=\"hero-title\" data-astro-cid-jdovvxl7=\"\"> From data to <span cla",
+            "prev": [
+              287,
+              438
+            ],
+            "curr": [
+              271,
+              440
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -143,7 +205,25 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.007,
+        "t": 665,
+        "sources": [
+          {
+            "node": "<a class=\"rss-link\" href=\"/es/lab/rss/\" data-astro-cid-n45vofzs=\"\">Suscribirse por RSS</a>",
+            "prev": [
+              605,
+              43
+            ],
+            "curr": [
+              606,
+              43
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {
@@ -251,7 +331,47 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [],
+    "shifts": [
+      {
+        "value": 0.046,
+        "t": 283,
+        "sources": [
+          {
+            "node": "<section class=\"gallery\" aria-label=\"Proyectos\" data-astro-cid-gsn4ozra=\"\"> <div class=\"container gallery-inner\" data-astro-cid-gsn4ozra=\"\">",
+            "prev": [
+              605,
+              295
+            ],
+            "curr": [
+              805,
+              95
+            ]
+          },
+          {
+            "node": "<svg viewBox=\"0 0 24 24\" data-astro-cid-736eur2u=\"\"><path d=\"M5.5 8.5h13l-1.1 11.5H6.6Z\"></path><path d=\"M9 10.5V7a3 3 0 0 1 6 0v3.5\"></path",
+            "prev": [
+              759,
+              17
+            ],
+            "curr": [
+              0,
+              0
+            ]
+          },
+          {
+            "node": "<svg class=\"sim-bars\" viewBox=\"0 0 400 96\" aria-hidden=\"true\" data-bars=\"\" data-astro-cid-y7kfievv=\"\"> <line x1=\"200\" y1=\"4\" x2=\"200\" y2=\"92",
+            "prev": [
+              847,
+              53
+            ],
+            "curr": [
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ],
     "axe": []
   },
   {

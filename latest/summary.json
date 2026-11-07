@@ -1,6 +1,6 @@
 {
   "base": "https://sebaspadi97.github.io",
-  "date": "2026-10-28T22:53:51.746Z",
+  "date": "2026-11-07T16:38:01.530Z",
   "pages": 21,
   "axeRules": {},
   "overflow": [],
@@ -20,34 +20,34 @@
       "path": "/es/",
       "scores": {
         "performance": 100,
-        "accessibility": 100,
+        "accessibility": 96,
         "best-practices": 100,
         "seo": 100
       },
       "metrics": {
         "FCP": "1.2 s",
-        "LCP": "1.7 s",
+        "LCP": "1.6 s",
         "TBT": "0 ms",
-        "CLS": "0",
+        "CLS": "0.034",
         "SI": "1.2 s",
-        "weight": "Total size was 158 KiB"
+        "weight": "Total size was 170 KiB"
       }
     },
     {
       "path": "/en/",
       "scores": {
-        "performance": 100,
+        "performance": 99,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
       "metrics": {
         "FCP": "1.1 s",
-        "LCP": "1.7 s",
-        "TBT": "0 ms",
-        "CLS": "0",
+        "LCP": "1.9 s",
+        "TBT": "10 ms",
+        "CLS": "0.015",
         "SI": "1.1 s",
-        "weight": "Total size was 158 KiB"
+        "weight": "Total size was 169 KiB"
       }
     },
     {
@@ -59,12 +59,12 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.2 s",
-        "LCP": "1.7 s",
+        "FCP": "1.3 s",
+        "LCP": "1.4 s",
         "TBT": "0 ms",
         "CLS": "0",
-        "SI": "1.2 s",
-        "weight": "Total size was 149 KiB"
+        "SI": "1.3 s",
+        "weight": "Total size was 158 KiB"
       }
     },
     {
@@ -76,12 +76,12 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.2 s",
-        "LCP": "1.7 s",
+        "FCP": "1.1 s",
+        "LCP": "1.6 s",
         "TBT": "0 ms",
-        "CLS": "0",
-        "SI": "1.2 s",
-        "weight": "Total size was 152 KiB"
+        "CLS": "0.006",
+        "SI": "1.1 s",
+        "weight": "Total size was 159 KiB"
       }
     },
     {
@@ -94,28 +94,28 @@
       },
       "metrics": {
         "FCP": "1.1 s",
-        "LCP": "1.4 s",
+        "LCP": "1.1 s",
         "TBT": "0 ms",
-        "CLS": "0",
+        "CLS": "0.002",
         "SI": "1.1 s",
-        "weight": "Total size was 126 KiB"
+        "weight": "Total size was 133 KiB"
       }
     },
     {
       "path": "/es/lab/donde-nacen-las-empresas-de-bogota/",
       "scores": {
-        "performance": 100,
+        "performance": 99,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.0 s",
-        "LCP": "1.4 s",
+        "FCP": "1.1 s",
+        "LCP": "1.9 s",
         "TBT": "0 ms",
-        "CLS": "0",
-        "SI": "1.0 s",
-        "weight": "Total size was 208 KiB"
+        "CLS": "0.014",
+        "SI": "1.1 s",
+        "weight": "Total size was 216 KiB"
       }
     },
     {
@@ -127,29 +127,29 @@
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.1 s",
-        "LCP": "1.5 s",
+        "FCP": "1.0 s",
+        "LCP": "1.7 s",
         "TBT": "0 ms",
-        "CLS": "0",
-        "SI": "1.1 s",
-        "weight": "Total size was 140 KiB"
+        "CLS": "0.002",
+        "SI": "1.0 s",
+        "weight": "Total size was 147 KiB"
       }
     },
     {
       "path": "/es/contacto/",
       "scores": {
-        "performance": 100,
+        "performance": 92,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
       "metrics": {
-        "FCP": "1.0 s",
-        "LCP": "1.4 s",
+        "FCP": "1.1 s",
+        "LCP": "1.6 s",
         "TBT": "0 ms",
-        "CLS": "0",
-        "SI": "1.0 s",
-        "weight": "Total size was 107 KiB"
+        "CLS": "0.168",
+        "SI": "1.1 s",
+        "weight": "Total size was 115 KiB"
       }
     }
   ]
