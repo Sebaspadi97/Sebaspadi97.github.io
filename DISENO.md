@@ -12,6 +12,8 @@ Para agregar o editar proyectos y artículos ver [CONTENIDO.md](CONTENIDO.md).
   "I" en inglés (EE. UU.), cifras con su fuente. Sin promesas de impacto real cuando los datos son sintéticos.
 - **Logo:** monograma SP + "SEBAS / PADILLA / LAB". Archivos en `public/brand/` (horizontal, negativo, isotipo).
 - **Tipografía:** Montserrat 600/700/800 (títulos, etiquetas, botones) + Open Sans 400/600 (texto), alojadas con @fontsource.
+  Fuentes de respaldo con sus métricas (`Montserrat Fallback`, `Open Sans Fallback`, al inicio de `global.css`): si se
+  cambia una fuente o su peso principal, recalcular `size-adjust` y `ascent/descent-override` para mantener CLS 0.
 - **Motivo gráfico:** puntos verdes + **un punto dorado = la decisión**.
 
 ### Paleta (tokens en `src/styles/global.css`)
@@ -127,7 +129,8 @@ scripts/                      qa/, cv/, sync/, export/, simulador/
 - Nunca datos confidenciales del empleador; solo datos abiertos, sintéticos o resultados agregados con autorización.
 - Accesibilidad: foco dorado visible, áreas táctiles ≥ 24 px (ideal 44), `aria-pressed` en filtros, `aria-live` en resultados,
   textos alternativos en gráficos, un `h1` por página.
-- Rendimiento: imágenes WebP con versión `-700` y `srcset` (`src/lib/img.js`), fuentes precargadas, CSS en línea, CLS 0.
+- Rendimiento: imágenes WebP con versión `-700` y `srcset` (`src/lib/img.js`), fuentes precargadas y con respaldo ajustado a sus métricas, CSS en línea, CLS 0.
+  Texto puramente decorativo (números gigantes, marcas de agua) en pseudoelementos (`content: attr(data-n)`), no en el HTML.
 - No afirmar disponibilidad de dominios sin verificar.
 
 ## 6. Publicar y verificar
