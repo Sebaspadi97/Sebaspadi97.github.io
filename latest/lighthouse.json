@@ -3,28 +3,19 @@
     "path": "/es/",
     "scores": {
       "performance": 100,
-      "accessibility": 96,
+      "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "metrics": {
       "FCP": "1.2 s",
-      "LCP": "1.6 s",
-      "TBT": "0 ms",
-      "CLS": "0.034",
+      "LCP": "1.7 s",
+      "TBT": "30 ms",
+      "CLS": "0",
       "SI": "1.2 s",
       "weight": "Total size was 170 KiB"
     },
     "failing": [
-      {
-        "id": "color-contrast",
-        "title": "Background and foreground colors do not have a sufficient contrast ratio.",
-        "score": 0,
-        "value": "",
-        "items": [
-          "<span class=\"step-ghost\" aria-hidden=\"true\" data-astro-cid-vnweamdt=\"\" style=\"transform: translate3d(0px, 220.3px, 0px);\">"
-        ]
-      },
       {
         "id": "uses-long-cache-ttl",
         "title": "Serve static assets with an efficient cache policy",
@@ -33,8 +24,8 @@
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
         ]
       },
@@ -52,69 +43,24 @@
       {
         "node": {
           "type": "node",
-          "lhId": "page-0-P",
-          "path": "1,HTML,1,BODY,4,MAIN,1,SECTION,0,DIV,1,DIV,0,DIV,2,P",
-          "selector": "div.container > div.hero-grid > div.hero-text > p.hero-sub",
+          "lhId": "page-1-SPAN",
+          "path": "1,HTML,1,BODY,4,MAIN,1,SECTION,0,DIV,1,DIV,0,DIV,3,DIV,0,A,1,SPAN",
+          "selector": "div.hero-text > div.actions > a.pill > span.arr",
           "boundingRect": {
-            "top": 421,
-            "bottom": 540,
-            "left": 16,
-            "right": 396,
-            "width": 379,
-            "height": 119
+            "top": 585,
+            "bottom": 603,
+            "left": 274,
+            "right": 290,
+            "width": 17,
+            "height": 18
           },
-          "snippet": "<p class=\"hero-sub\" data-astro-cid-jdovvxl7=\"\">",
-          "nodeLabel": "Este es mi laboratorio. Aquí convierto datos en casos, modelos e investigacione…"
+          "snippet": "<span class=\"arr\" aria-hidden=\"true\" data-astro-cid-jdovvxl7=\"\">",
+          "nodeLabel": "→"
         },
-        "score": 0.032959642273196824,
+        "score": 0.000004766007862952605,
         "subItems": {
           "type": "subitems",
           "items": [
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
-              },
-              "cause": "Web font loaded"
-            }
-          ]
-        }
-      },
-      {
-        "node": {
-          "type": "node",
-          "lhId": "page-1-H1",
-          "path": "1,HTML,1,BODY,4,MAIN,1,SECTION,0,DIV,1,DIV,0,DIV,0,H1",
-          "selector": "div.container > div.hero-grid > div.hero-text > h1#hero-title",
-          "boundingRect": {
-            "top": 205,
-            "bottom": 292,
-            "left": 16,
-            "right": 396,
-            "width": 379,
-            "height": 86
-          },
-          "snippet": "<h1 id=\"hero-title\" class=\"hero-title\" data-astro-cid-jdovvxl7=\"\">",
-          "nodeLabel": "De los datos a las decisiones."
-        },
-        "score": 0.0015096329905902378,
-        "subItems": {
-          "type": "subitems",
-          "items": [
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
             {
               "extra": {
                 "type": "url",
@@ -125,7 +71,7 @@
             {
               "extra": {
                 "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
+                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
               },
               "cause": "Web font loaded"
             },
@@ -133,6 +79,13 @@
               "extra": {
                 "type": "url",
                 "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
+              },
+              "cause": "Web font loaded"
+            },
+            {
+              "extra": {
+                "type": "url",
+                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
               },
               "cause": "Web font loaded"
             }
@@ -150,12 +103,12 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.1 s",
-      "LCP": "1.9 s",
+      "FCP": "1.2 s",
+      "LCP": "1.8 s",
       "TBT": "10 ms",
-      "CLS": "0.015",
-      "SI": "1.1 s",
-      "weight": "Total size was 169 KiB"
+      "CLS": "0",
+      "SI": "1.2 s",
+      "weight": "Total size was 170 KiB"
     },
     "failing": [
       {
@@ -164,11 +117,11 @@
         "score": 0.5,
         "value": "8 resources found",
         "items": [
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
         ]
       },
       {
@@ -181,75 +134,22 @@
         ]
       }
     ],
-    "shiftDetails": [
-      {
-        "node": {
-          "type": "node",
-          "lhId": "page-1-DIV",
-          "path": "1,HTML,1,BODY,3,MAIN,1,SECTION,0,DIV,1,DIV,1,DIV",
-          "selector": "section.hero > div.container > div.hero-grid > div.hero-figure",
-          "boundingRect": {
-            "top": 680,
-            "bottom": 1191,
-            "left": 16,
-            "right": 396,
-            "width": 379,
-            "height": 511
-          },
-          "snippet": "<div class=\"hero-figure\" data-astro-cid-jdovvxl7=\"\">",
-          "nodeLabel": "FIG. 00 · LIVE SAMPLE\nN = 40 · HOVER OVER IT\nFINDING · FEATURED CASE\n+COP 2.8M\n…"
-        },
-        "score": 0.014739613030549307,
-        "subItems": {
-          "type": "subitems",
-          "items": [
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
-              },
-              "cause": "Web font loaded"
-            }
-          ]
-        }
-      }
-    ]
+    "shiftDetails": []
   },
   {
     "path": "/es/proyectos/",
     "scores": {
-      "performance": 100,
+      "performance": 99,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.3 s",
-      "LCP": "1.4 s",
+      "FCP": "1.2 s",
+      "LCP": "1.8 s",
       "TBT": "0 ms",
       "CLS": "0",
-      "SI": "1.3 s",
+      "SI": "1.2 s",
       "weight": "Total size was 158 KiB"
     },
     "failing": [
@@ -288,13 +188,20 @@
     },
     "metrics": {
       "FCP": "1.1 s",
-      "LCP": "1.6 s",
+      "LCP": "1.8 s",
       "TBT": "0 ms",
-      "CLS": "0.006",
+      "CLS": "0",
       "SI": "1.1 s",
-      "weight": "Total size was 159 KiB"
+      "weight": "Total size was 160 KiB"
     },
     "failing": [
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.84,
+        "value": "150 ms",
+        "items": []
+      },
       {
         "id": "uses-long-cache-ttl",
         "title": "Serve static assets with an efficient cache policy",
@@ -302,10 +209,10 @@
         "value": "7 resources found",
         "items": [
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
-          "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
+          "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
         ]
       },
       {
@@ -318,60 +225,7 @@
         ]
       }
     ],
-    "shiftDetails": [
-      {
-        "node": {
-          "type": "node",
-          "lhId": "page-1-DIV",
-          "path": "1,HTML,1,BODY,4,MAIN,0,ARTICLE,1,SECTION,0,DL,3,DIV",
-          "selector": "article.case > section.facts > dl.container > div",
-          "boundingRect": {
-            "top": 726,
-            "bottom": 798,
-            "left": 16,
-            "right": 396,
-            "width": 379,
-            "height": 72
-          },
-          "snippet": "<div data-astro-cid-zzz72t2a=\"\">",
-          "nodeLabel": "DATOS\nSintéticos: 20.000 clientes de TiendaLab, tienda en línea ficticia"
-        },
-        "score": 0.006263896048451996,
-        "subItems": {
-          "type": "subitems",
-          "items": [
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
-              },
-              "cause": "Web font loaded"
-            }
-          ]
-        }
-      }
-    ]
+    "shiftDetails": []
   },
   {
     "path": "/es/lab/",
@@ -382,11 +236,11 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.1 s",
-      "LCP": "1.1 s",
+      "FCP": "1.0 s",
+      "LCP": "1.5 s",
       "TBT": "0 ms",
-      "CLS": "0.002",
-      "SI": "1.1 s",
+      "CLS": "0",
+      "SI": "1.0 s",
       "weight": "Total size was 133 KiB"
     },
     "failing": [
@@ -413,75 +267,22 @@
         ]
       }
     ],
-    "shiftDetails": [
-      {
-        "node": {
-          "type": "node",
-          "lhId": "page-0-H1",
-          "path": "1,HTML,1,BODY,4,MAIN,0,DIV,0,SECTION,1,DIV,0,DIV,0,H1",
-          "selector": "section.container > div.head-grid > div.head-text > h1.head-title",
-          "boundingRect": {
-            "top": 223,
-            "bottom": 395,
-            "left": 16,
-            "right": 396,
-            "width": 379,
-            "height": 171
-          },
-          "snippet": "<h1 class=\"head-title\" data-astro-cid-n45vofzs=\"\">",
-          "nodeLabel": "Preguntas curiosas, respondidas con datos."
-        },
-        "score": 0.0020317874502541657,
-        "subItems": {
-          "type": "subitems",
-          "items": [
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
-              },
-              "cause": "Web font loaded"
-            }
-          ]
-        }
-      }
-    ]
+    "shiftDetails": []
   },
   {
     "path": "/es/lab/donde-nacen-las-empresas-de-bogota/",
     "scores": {
-      "performance": 99,
+      "performance": 100,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.1 s",
-      "LCP": "1.9 s",
+      "FCP": "1.2 s",
+      "LCP": "1.7 s",
       "TBT": "0 ms",
-      "CLS": "0.014",
-      "SI": "1.1 s",
+      "CLS": "0",
+      "SI": "1.2 s",
       "weight": "Total size was 216 KiB"
     },
     "failing": [
@@ -508,60 +309,7 @@
         ]
       }
     ],
-    "shiftDetails": [
-      {
-        "node": {
-          "type": "node",
-          "lhId": "page-1-DIV",
-          "path": "1,HTML,1,BODY,4,MAIN,0,DIV,0,HEADER,4,DIV",
-          "selector": "main#contenido > div.band > header.container > div.byline",
-          "boundingRect": {
-            "top": 491,
-            "bottom": 629,
-            "left": 16,
-            "right": 396,
-            "width": 379,
-            "height": 138
-          },
-          "snippet": "<div class=\"byline\" data-astro-cid-dfqqi6xc=\"\">",
-          "nodeLabel": "Sebas Padilla\n6 min de lectura\nCompartir en LinkedIn\nCopiar enlace"
-        },
-        "score": 0.013825464950584669,
-        "subItems": {
-          "type": "subitems",
-          "items": [
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
-              },
-              "cause": "Web font loaded"
-            }
-          ]
-        }
-      }
-    ]
+    "shiftDetails": []
   },
   {
     "path": "/es/sobre-mi/",
@@ -572,11 +320,11 @@
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.0 s",
+      "FCP": "1.1 s",
       "LCP": "1.7 s",
       "TBT": "0 ms",
-      "CLS": "0.002",
-      "SI": "1.0 s",
+      "CLS": "0.001",
+      "SI": "1.1 s",
       "weight": "Total size was 147 KiB"
     },
     "failing": [
@@ -589,15 +337,15 @@
           "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2",
           "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2",
-          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2"
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-600-normal.Cp4N6AwT.woff2",
+          "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
         ]
       },
       {
         "id": "unused-css-rules",
         "title": "Reduce unused CSS",
         "score": 0.5,
-        "value": "Potential savings of 11 KiB",
+        "value": "Potential savings of 12 KiB",
         "items": [
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
@@ -621,17 +369,10 @@
           "snippet": "<h1 class=\"hero-title\" data-astro-cid-63cywwwr=\"\">",
           "nodeLabel": "De la ingeniería industrial a la ciencia de datos."
         },
-        "score": 0.002049366527587868,
+        "score": 0.0008728339811186107,
         "subItems": {
           "type": "subitems",
           "items": [
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
             {
               "extra": {
                 "type": "url",
@@ -642,7 +383,7 @@
             {
               "extra": {
                 "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
+                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
               },
               "cause": "Web font loaded"
             },
@@ -650,6 +391,13 @@
               "extra": {
                 "type": "url",
                 "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
+              },
+              "cause": "Web font loaded"
+            },
+            {
+              "extra": {
+                "type": "url",
+                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
               },
               "cause": "Web font loaded"
             }
@@ -661,39 +409,20 @@
   {
     "path": "/es/contacto/",
     "scores": {
-      "performance": 92,
+      "performance": 100,
       "accessibility": 100,
       "best-practices": 100,
       "seo": 100
     },
     "metrics": {
-      "FCP": "1.1 s",
-      "LCP": "1.6 s",
+      "FCP": "1.0 s",
+      "LCP": "1.5 s",
       "TBT": "0 ms",
-      "CLS": "0.168",
-      "SI": "1.1 s",
+      "CLS": "0",
+      "SI": "1.0 s",
       "weight": "Total size was 115 KiB"
     },
     "failing": [
-      {
-        "id": "cumulative-layout-shift",
-        "title": "Cumulative Layout Shift",
-        "score": 0.7,
-        "value": "0.168",
-        "items": [
-          "{\"cumulativeLayoutShiftMainFrame\":0.1684313000777526,\"newEngineResultDiffered\":false}"
-        ]
-      },
-      {
-        "id": "layout-shifts",
-        "title": "Avoid large layout shifts",
-        "score": 0,
-        "value": "2 layout shifts found",
-        "items": [
-          "<svg class=\"head-figure\" viewBox=\"0 0 420 300\" aria-hidden=\"true\" data-astro-cid-qai6f6s5=\"\">",
-          "<p data-astro-cid-qai6f6s5=\"\">"
-        ]
-      },
       {
         "id": "uses-long-cache-ttl",
         "title": "Serve static assets with an efficient cache policy",
@@ -711,7 +440,7 @@
         "id": "unused-css-rules",
         "title": "Reduce unused CSS",
         "score": 0.5,
-        "value": "Potential savings of 12 KiB",
+        "value": "Potential savings of 13 KiB",
         "items": [
           "@font-face{font-family:Montserrat;font-style:normal;font-display:swap;font-weight:600; … } …"
         ]
@@ -721,28 +450,28 @@
       {
         "node": {
           "type": "node",
-          "lhId": "page-1-svg",
-          "path": "1,HTML,1,BODY,4,MAIN,0,DIV,0,SECTION,1,DIV,1,svg",
-          "selector": "div.band > section.container > div.head-grid > svg.head-figure",
+          "lhId": "page-0-H1",
+          "path": "1,HTML,1,BODY,4,MAIN,0,DIV,0,SECTION,1,DIV,0,DIV,0,H1",
+          "selector": "section.container > div.head-grid > div.head-text > h1.head-title",
           "boundingRect": {
-            "top": 441,
-            "bottom": 711,
+            "top": 202,
+            "bottom": 288,
             "left": 16,
             "right": 396,
             "width": 379,
-            "height": 271
+            "height": 86
           },
-          "snippet": "<svg class=\"head-figure\" viewBox=\"0 0 420 300\" aria-hidden=\"true\" data-astro-cid-qai6f6s5=\"\">",
-          "nodeLabel": "div.band > section.container > div.head-grid > svg.head-figure"
+          "snippet": "<h1 class=\"head-title\" data-astro-cid-qai6f6s5=\"\">",
+          "nodeLabel": "Cuéntame qué necesitas decidir."
         },
-        "score": 0.16809887606855867,
+        "score": 0.000393876506959726,
         "subItems": {
           "type": "subitems",
           "items": [
             {
               "extra": {
                 "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
+                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
               },
               "cause": "Web font loaded"
             },
@@ -756,59 +485,14 @@
             {
               "extra": {
                 "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
+                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
               },
               "cause": "Web font loaded"
-            }
-          ]
-        }
-      },
-      {
-        "node": {
-          "type": "node",
-          "lhId": "page-2-P",
-          "path": "1,HTML,1,BODY,4,MAIN,1,SECTION,0,UL,0,LI,1,P",
-          "selector": "section.container > ul.who-grid > li.who-card > p",
-          "boundingRect": {
-            "top": 820,
-            "bottom": 899,
-            "left": 41,
-            "right": 371,
-            "width": 329,
-            "height": 79
-          },
-          "snippet": "<p data-astro-cid-qai6f6s5=\"\">",
-          "nodeLabel": "Mi trayectoria y mi CV están en Sobre mí. Escríbeme con el rol y te respondo co…"
-        },
-        "score": 0.00033242400919390866,
-        "subItems": {
-          "type": "subitems",
-          "items": [
+            },
             {
               "extra": {
                 "type": "url",
                 "value": "https://sebaspadi97.github.io/_astro/open-sans-latin-400-normal.Bk63H6sG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-800-normal.axpkC1rd.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-600-normal.UVxSCcoG.woff2"
-              },
-              "cause": "Web font loaded"
-            },
-            {
-              "extra": {
-                "type": "url",
-                "value": "https://sebaspadi97.github.io/_astro/montserrat-latin-700-normal.BdjcYUrC.woff2"
               },
               "cause": "Web font loaded"
             }

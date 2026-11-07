@@ -14,69 +14,7 @@
     "small": [],
     "consoleErrors": [],
     "failed": [],
-    "shifts": [
-      {
-        "value": 0.045,
-        "t": 271,
-        "sources": [
-          {
-            "node": "<div class=\"glass dock has-blob\" data-dock=\"\" data-astro-cid-3ef6ksr2=\"\"> <span class=\"dock-blob\" aria-hidden=\"true\" data-astro-cid-3ef6ksr2",
-            "prev": [
-              0,
-              106
-            ],
-            "curr": [
-              0,
-              106
-            ]
-          },
-          {
-            "node": "<div class=\"nav-end\" data-astro-cid-3ef6ksr2=\"\"> <a class=\"glass lang\" href=\"/es/\" hreflang=\"es\" lang=\"es\" title=\"Español\" data-astro-cid-3e",
-            "prev": [
-              0,
-              99
-            ],
-            "curr": [
-              0,
-              99
-            ]
-          },
-          {
-            "node": "<section class=\"method\" aria-labelledby=\"method-title\" data-method=\"\" data-astro-cid-vnweamdt=\"\"> <div class=\"container\" data-astro-cid-vnwe",
-            "prev": [
-              0,
-              0
-            ],
-            "curr": [
-              886,
-              14
-            ]
-          },
-          {
-            "node": "<span class=\"proof-text\" data-astro-cid-jdovvxl7=\"\">Contacting only the 15.5% with the highest expected value beats contacting everyone (syn",
-            "prev": [
-              687,
-              63
-            ],
-            "curr": [
-              658,
-              63
-            ]
-          },
-          {
-            "node": "<div class=\"hero-text\" data-astro-cid-jdovvxl7=\"\"> <h1 id=\"hero-title\" class=\"hero-title\" data-astro-cid-jdovvxl7=\"\"> From data to <span cla",
-            "prev": [
-              287,
-              438
-            ],
-            "curr": [
-              271,
-              440
-            ]
-          }
-        ]
-      }
-    ],
+    "shifts": [],
     "axe": []
   },
   {
@@ -208,7 +146,7 @@
     "shifts": [
       {
         "value": 0.007,
-        "t": 665,
+        "t": 72,
         "sources": [
           {
             "node": "<a class=\"rss-link\" href=\"/es/lab/rss/\" data-astro-cid-n45vofzs=\"\">Suscribirse por RSS</a>",
@@ -334,7 +272,7 @@
     "shifts": [
       {
         "value": 0.046,
-        "t": 283,
+        "t": 194,
         "sources": [
           {
             "node": "<section class=\"gallery\" aria-label=\"Proyectos\" data-astro-cid-gsn4ozra=\"\"> <div class=\"container gallery-inner\" data-astro-cid-gsn4ozra=\"\">",
